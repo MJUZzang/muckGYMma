@@ -2,6 +2,7 @@ package mju.paygo.food.infrastructure;
 
 import mju.paygo.food.domain.FoodLensManager;
 import mju.paygo.food.infrastructure.dto.FoodAnalyzeResponse;
+import mju.paygo.food.infrastructure.dto.FoodSearchResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,8 +21,11 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Component
 public class FoodLensManagerImpl implements FoodLensManager {
 
-    @Value("${food.api-url}")
-    private String url;
+    @Value("${food.predict-url}")
+    private String predictUrl;
+
+    @Value("${food.search-url}")
+    private String searchUrl;
 
     @Value("${food.authorization}")
     private String authorization;
@@ -52,7 +56,6 @@ public class FoodLensManagerImpl implements FoodLensManager {
 
     @Override
     public FoodAnalyzeResponse predict(final MultipartFile file) {
-
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = createFoodLensHeaders();
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
@@ -63,7 +66,7 @@ public class FoodLensManagerImpl implements FoodLensManager {
 
         HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
         ResponseEntity<FoodAnalyzeResponse> result = restTemplate.exchange(
-                url,
+                predictUrl,
                 HttpMethod.POST,
                 entity,
                 FoodAnalyzeResponse.class
@@ -87,5 +90,23 @@ public class FoodLensManagerImpl implements FoodLensManager {
         headers.set("User-agent", userAgent);
 
         return headers;
+    }
+
+    @Override
+    public FoodSearchResponse searchFoodInFoodLens(final Long foodId) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = createFoodLensHeaders();
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        HttpEntity<MultiValueMap<String, Object>> entity = new HttpEntity<>(body, headers);
+
+        ResponseEntity<FoodSearchResponse> responseEntity = restTemplate.exchange(
+                searchUrl + foodId,
+                HttpMethod.GET,
+                entity,
+                FoodSearchResponse.class
+        );
+
+        return responseEntity.getBody();
     }
 }
