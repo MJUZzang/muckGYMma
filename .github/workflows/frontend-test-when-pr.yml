@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - develop-fe
+    paths:
+      - 'projects/fe/**'
   workflow_dispatch: 
 
 permissions:
@@ -29,10 +31,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+          cache-dependency-path: projects/fe/package-lock.json
 
       - name: Install dependencies
         run: npm install
 
       - name: Run tests
         run: npm test
-
