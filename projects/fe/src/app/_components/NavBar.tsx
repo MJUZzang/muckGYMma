@@ -1,11 +1,28 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "@/app/_images/Home";
 import Analytics from "@/app/_images/Analytics";
 import Camera from "../_images/Camera";
 import AccountCircle from "../_images/AccountCircle";
 
 const NavBar = () => {
+    useEffect(() => {
+        const darkMode =
+            localStorage.theme === "dark" ||
+            (!("theme" in localStorage) &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches);
+                
+        if (darkMode) {
+            document.documentElement.classList.add("dark");
+            localStorage.theme = "dark";
+        } else {
+            localStorage.theme = "light";
+            document.documentElement.classList.remove("dark");
+        }
+    }, []);
+
     return (
         <div className="w-full flex border-t-[1px] h-[70px] justify-evenly items-center">
             <Link href="/home" className="flex flex-col items-center">
