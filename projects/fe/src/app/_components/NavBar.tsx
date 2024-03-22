@@ -16,7 +16,7 @@ const NavBar = () => {
                 <p className="text-xs">Workout</p>
             </Link>
 
-            <Link href="/community" className="flex flex-col items-center basis-1/5">
+            <Link href="/community/following" className="flex flex-col items-center basis-1/5">
                 <Forum className="dark:fill-white" />
                 <p className="text-xs">Community</p>
             </Link>
