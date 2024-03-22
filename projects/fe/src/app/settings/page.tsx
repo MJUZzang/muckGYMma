@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import ArrowBack from "@/app/_components/ArrowBack";
 import ArrowDown from "../_components/ArrowDown";
+import ToggleSwitch from "../_components/ToggleSwitch";
 
 const Settings = () => {
     const [darkMode, setDarkMode] = useState(
@@ -61,9 +62,7 @@ const Settings = () => {
                 <div className="pl-10 text-black dark:text-white">
                     <div className="py-3 flex flex-row justify-between items-center ">
                         <p>다크 모드</p>
-                        <div
-                            className="bg-stone-900 w-[50px] h-[29px] rounded-full transition-colors
-                            dark:bg-blue-950"
+                        <ToggleSwitch
                             onClick={() => {
                                 setDarkMode(!darkMode);
                                 if (darkMode) {
@@ -78,12 +77,7 @@ const Settings = () => {
                                     localStorage.theme = "dark";
                                 }
                             }}
-                        >
-                            <div
-                                className="h-[24px] w-[24px] bg-white rounded-full relative left-[3px] transition-transform translate-y-[2px]
-                                dark:translate-x-[21px]"
-                            />
-                        </div>
+                        />
                     </div>
                     <div className="py-3 flex flex-row justify-between items-center ">
                         <p>언어</p>
