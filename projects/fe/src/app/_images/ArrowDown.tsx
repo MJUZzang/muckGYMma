@@ -1,10 +1,10 @@
 import React from "react";
 
-interface AnalyticsProps {
+interface ArrowDownProps {
     className?: string;
 }
 
-const Analytics: React.FC<AnalyticsProps> = (props) => {
+const ArrowDown: React.FC<ArrowDownProps> = (props) => {
     return (
         <svg
             className={props.className}
@@ -13,9 +13,9 @@ const Analytics: React.FC<AnalyticsProps> = (props) => {
             viewBox="0 -960 960 960"
             width="24"
         >
-            <path d="M640-160v-280h160v280H640Zm-240 0v-640h160v640H400Zm-240 0v-440h160v440H160Z" />
+            <path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z" />
         </svg>
     );
 };
 
-export default Analytics;
+export default ArrowDown;

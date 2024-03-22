@@ -1,10 +1,10 @@
 import React from "react";
 
-interface AnalyticsProps {
+interface NavigateNextProps {
     className?: string;
 }
 
-const Analytics: React.FC<AnalyticsProps> = (props) => {
+const NavigateNext:React.FC<NavigateNextProps> = (props) => {
     return (
         <svg
             className={props.className}
@@ -13,9 +13,9 @@ const Analytics: React.FC<AnalyticsProps> = (props) => {
             viewBox="0 -960 960 960"
             width="24"
         >
-            <path d="M640-160v-280h160v280H640Zm-240 0v-640h160v640H400Zm-240 0v-440h160v440H160Z" />
+            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
         </svg>
     );
 };
 
-export default Analytics;
+export default NavigateNext;

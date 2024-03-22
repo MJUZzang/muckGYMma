@@ -1,10 +1,10 @@
 import React from "react";
 
-interface AnalyticsProps {
+interface ArrowBackProps {
     className?: string;
 }
 
-const Analytics: React.FC<AnalyticsProps> = (props) => {
+const ArrowBack: React.FC<ArrowBackProps> = (props) => {
     return (
         <svg
             className={props.className}
@@ -13,9 +13,9 @@ const Analytics: React.FC<AnalyticsProps> = (props) => {
             viewBox="0 -960 960 960"
             width="24"
         >
-            <path d="M640-160v-280h160v280H640Zm-240 0v-640h160v640H400Zm-240 0v-440h160v440H160Z" />
+            <path d="M640-80 240-480l400-400 71 71-329 329 329 329-71 71Z" />
         </svg>
     );
 };
 
-export default Analytics;
+export default ArrowBack;
