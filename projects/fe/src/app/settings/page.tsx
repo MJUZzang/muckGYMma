@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ArrowBack from "@/app/_components/ArrowBack";
-import ArrowDown from "../_components/ArrowDown";
-import ToggleSwitch from "../_components/ToggleSwitch";
+import ArrowBack from "@/app/_images/ArrowBack";
+import ArrowDown from "@/app/_images/ArrowDown";
+import ToggleSwitch from "@/app/_components/ToggleSwitch";
 
 const Settings = () => {
     const [darkMode, setDarkMode] = useState(
