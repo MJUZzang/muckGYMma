@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/app/_styles/globals.css";
 import NavBar from "@/app/_components/NavBar";
+import DarkMode from "@/app/_components/DarkMode";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
             <body className={`flex flex-col h-screen ${inter.className}`}>
                 <div className="h-full">{children}</div>
                 <NavBar />
+                <DarkMode />
             </body>
         </html>
     );
