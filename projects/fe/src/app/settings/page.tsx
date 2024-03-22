@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import ArrowBack from "@/app/_images/ArrowBack";
 import ArrowDown from "@/app/_images/ArrowDown";
 import ToggleSwitch from "@/app/_components/ToggleSwitch";
+import SettingsGroup from "./_components/SettingsGroup";
+import SettingElement from "./_components/SettingElement";
 
 const Settings = () => {
     const [darkMode, setDarkMode] = useState(
@@ -23,45 +25,34 @@ const Settings = () => {
     }, [darkMode]);
 
     return (
-        <div className="absolute w-screen h-screen overflow-y-auto bg-[#ffffff] dark:bg-[#050505]">
-            <div className="fixed w-full text-center py-2">
+        <main className="absolute w-screen h-screen overflow-y-auto bg-[#ffffff] dark:bg-[#050505]">
+            <header className="fixed w-full text-center py-2">
                 <ArrowBack className="absolute dark:fill-white left-2" />
                 <p className="text-black dark:text-white">Settings</p>
-            </div>
+            </header>
+            {/* Spacer */}
             <div className="w-[1px] h-[50px]" />
 
             <div className="px-3">
-                <p className="pt-7 pb-3 text-black dark:text-white">내 정보</p>
-                <div className="pl-10 text-black dark:text-white">
-                    <div className="py-3 flex flex-row justify-between items-center ">
-                        <p>이메일</p>
-                        <div className="flex flex-row items-center">
-                            <p>jeheecheon@gmail.com</p>
-                            <ArrowDown className="dark:fill-white" />
-                        </div>
-                    </div>
-                    <div className="py-3 flex flex-row justify-between items-center ">
-                        <p>체중</p>
-                        <div className="flex flex-row items-center">
-                            <p>63kg</p>
-                            <ArrowDown className="dark:fill-white" />
-                        </div>
-                    </div>
-                    <div className="py-3 flex flex-row justify-between items-center ">
-                        <p>신장</p>
-                        <div className="flex flex-row items-center">
-                            <p>170cm</p>
-                            <ArrowDown className="dark:fill-white" />
-                        </div>
-                    </div>
-                </div>
+                <SettingsGroup title="계정">
+                    <SettingElement title="이메일">
+                        <p>jeheecheon@gmail.com</p>
+                        <ArrowDown className="dark:fill-white" />
+                    </SettingElement>
 
-                <p className="pt-7 pb-3 text-black dark:text-white">
-                    디스플레이
-                </p>
-                <div className="pl-10 text-black dark:text-white">
-                    <div className="py-3 flex flex-row justify-between items-center ">
-                        <p>다크 모드</p>
+                    <SettingElement title="체중">
+                        <p>63kg</p>
+                        <ArrowDown className="dark:fill-white" />
+                    </SettingElement>
+
+                    <SettingElement title="신장">
+                        <p>170cm</p>
+                        <ArrowDown className="dark:fill-white" />
+                    </SettingElement>
+                </SettingsGroup>
+
+                <SettingsGroup title="디스플레이">
+                    <SettingElement title="다크 모드">
                         <ToggleSwitch
                             onClick={() => {
                                 setDarkMode(!darkMode);
@@ -78,17 +69,15 @@ const Settings = () => {
                                 }
                             }}
                         />
-                    </div>
-                    <div className="py-3 flex flex-row justify-between items-center ">
-                        <p>언어</p>
-                        <div className="flex flex-row items-center">
-                            <p>한국어</p>
-                            <ArrowDown className="dark:fill-white" />
-                        </div>
-                    </div>
-                </div>
+                    </SettingElement>
+
+                    <SettingElement title="언어">
+                        <p>한국어</p>
+                        <ArrowDown className="dark:fill-white" />
+                    </SettingElement>
+                </SettingsGroup>
             </div>
-        </div>
+        </main>
     );
 };
 
