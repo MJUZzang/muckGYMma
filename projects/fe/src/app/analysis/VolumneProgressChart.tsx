@@ -5,7 +5,7 @@ import ReactApexChart from "react-apexcharts";
 
 const VolumneProgressChart = () => {
     return (
-        <div>
+        <div className="border-2 rounded-lg">
             <ReactApexChart
                 options={{
                     chart: {
