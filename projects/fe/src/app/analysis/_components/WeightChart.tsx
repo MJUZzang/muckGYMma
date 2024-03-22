@@ -10,7 +10,7 @@ interface WeightChartProps {
 const WeightChart:React.FC<WeightChartProps> = (props) => {
     return (
         <ReactApexChart
-            className={props.className}
+            className={`w-full ${props.className}`}
             options={{
                 chart: {
                     height: 350,

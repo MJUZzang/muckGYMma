@@ -10,7 +10,7 @@ const GraphGroup = () => {
 
     return (
         <>
-            <div className="p-2 flex flex-col items-center border-2 mx-2">
+            <div className="flex flex-col items-center border-2 pt-5 rounded-lg">
                 <div className="flex justify-center rounded-full border-2 w-fit text-base">
                     <span
                         className={`py-1 px-3 rounded-full

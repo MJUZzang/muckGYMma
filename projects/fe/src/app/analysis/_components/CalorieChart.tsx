@@ -7,10 +7,10 @@ interface WeightChartProps {
     className?: string;
 }
 
-const CalorieChart:React.FC<WeightChartProps> = (props) => {
+const CalorieChart: React.FC<WeightChartProps> = (props) => {
     return (
         <ReactApexChart
-            className={props.className}
+            className={`w-full ${props.className}`}
             options={{
                 chart: {
                     height: 350,
@@ -81,7 +81,7 @@ const CalorieChart:React.FC<WeightChartProps> = (props) => {
                 {
                     name: "High - 2013",
                     data: [1163, 1161, 1162, 1165, 1166, 1166, 1167],
-                }
+                },
             ]}
             type="line"
             height={350}
