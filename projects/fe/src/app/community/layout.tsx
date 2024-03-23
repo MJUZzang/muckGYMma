@@ -3,6 +3,7 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import HeaderTop from "@/app/_components/HeaderTop";
 
 interface CommunityLayoutProps {
     children?: React.ReactNode;
@@ -13,10 +14,7 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
 
     return (
         <>
-            <div
-                className="fixed px-3 py-1 w-full flex flex-col items-center border-b-2 text-2xl
-                bg-white dark:bg-black z-10"
-            >
+            <HeaderTop className="flex-col">
                 <div className="flex justify-start w-full">
                     <p>Community</p>
                     <div></div>
@@ -59,8 +57,8 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
                         </li>
                     </ul>
                 </nav>
-            </div>
-
+            </HeaderTop>
+            
             {/* Spacer for Header */}
             <div className="w-[1px] h-[70px]" />
 

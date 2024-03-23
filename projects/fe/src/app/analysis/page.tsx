@@ -1,4 +1,4 @@
-import HeaderBar from "@/app/_components/HeaderBar";
+import HeaderTop from "../_components/HeaderTop";
 import GraphGroup from "./_components/GraphGroup";
 import HeatMap from "./_components/HeatMap";
 import StrengthWeaknessesChart from "./_components/StrengthWeaknessesChart";
@@ -8,9 +8,9 @@ const Analysis = () => {
     return (
         <>
             {/* Header */}
-            <HeaderBar>
+            <HeaderTop>
                 <p>Analysis</p>
-            </HeaderBar>
+            </HeaderTop>
 
             {/* Spacer for Header */}
             <div className="w-[1px] h-[50px]" />
