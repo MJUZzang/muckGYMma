@@ -2,6 +2,8 @@ import React from "react";
 
 import KakaoSymbol from "@/app/sign-in/_images/KakaoSymbol";
 import GoogleSymbol from "@/app/sign-in/_images/GoogleSymbol";
+import GoogleLoginButton from "./_components/GoogleLoginButton";
+import KakaoLoginButton from "./_components/KakaoLoginButton";
 
 const page = () => {
     return (
@@ -21,19 +23,8 @@ const page = () => {
             </div>
             <div className="h-1/2 flex flex-col justify-between">
                 <div className="space-y-4">
-                    <div className="bg-[#FEE500] text-sm font-[500] px-4 w-full flex items-center rounded-[5px] py-2">
-                        <KakaoSymbol />
-                        <p className="w-full text-center text-black/85">
-                            Continue with Kakao
-                        </p>
-                    </div>
-
-                    <div className="bg-[#FEFEFE] text-sm font-[500] px-4 w-full flex items-center rounded-[4px] py-2">
-                        <GoogleSymbol />
-                        <p className="w-full text-center text-black/85">
-                            Continue with Google
-                        </p>
-                    </div>
+                    <KakaoLoginButton />
+                    <GoogleLoginButton />
                 </div>
 
                 <div className="text-gray-400 flex flex-col items-center gap-2 text-xs mb-6">
