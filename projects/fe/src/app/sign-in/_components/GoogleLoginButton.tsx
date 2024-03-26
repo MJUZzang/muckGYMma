@@ -8,7 +8,7 @@ import GoogleSymbol from "@/app/sign-in/_images/GoogleSymbol";
 import { googleLoginUrl } from "@/app/sign-in/_utils/login";
 
 interface GoogleLoginButtonProps {
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = (props) => {

@@ -17,7 +17,7 @@ const page = () => {
                         Get personalized plan in 1 min.
                     </p>
                 </div>
-                
+
                 <div className="h-1/2 flex flex-col justify-between">
                     <div className="space-y-4">
                         <KakaoLoginButton />
@@ -26,10 +26,10 @@ const page = () => {
 
                     <div className="text-gray-400 flex flex-col items-center gap-2 text-xs mb-6">
                         <p>By logging in, you agree to the terms below.</p>
-                        <div className="flex justify-center gap-10 underline underline-offset-2">
-                            <p>Privacy Policy</p>
-                            <p>Terms of Use</p>
-                        </div>
+                        <ul className="flex justify-center gap-10 underline underline-offset-2">
+                            <button className="cursor-pointer">Privacy Policy</button>
+                            <button className="cursor-pointer">Terms of Use</button>
+                        </ul>
                     </div>
                 </div>
             </div>
