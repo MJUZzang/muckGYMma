@@ -3,6 +3,7 @@ import Muscle from "@/app/_images/Muscle";
 import NavigateNext from "@/app/_images/NavigateNext";
 import Swimming from "@/app/_images/Swimming";
 import Football from "@/app/_images/Football";
+import Tags from "@/app/workout/_components/Tags";
 
 interface TaskProps {
     className?: string;
@@ -10,19 +11,21 @@ interface TaskProps {
     level: string;
     duration: number;
     workoutCnt: number;
+    dueDate: Date;
 }
 
-const Task:React.FC<TaskProps> = ({
+const Task: React.FC<TaskProps> = ({
     className,
     type,
     level,
     duration,
-    workoutCnt
+    workoutCnt,
+    dueDate,
 }) => {
     return (
         <div
-            className={`border-2 border-xl border-gray-700 rounded-lg py-1 px-2
-            flex justify-between items-center gap-2 ${className}`}
+            className={`py-2 px-2 rounded-xl paper-shadow
+            flex justify-between gap-2 ${className}`}
         >
             <div>
                 {type === "health" && <Muscle />}
@@ -38,12 +41,19 @@ const Task:React.FC<TaskProps> = ({
                         {type === "football" && `Football`}
                     </p>
                     <p className="text-gray-500 text-xs">Level: {level}</p>
-                </div>
+                    <p className="text-gray-500 text-xs">
+                        {duration} mins required to finish
+                    </p>
 
-                <p>{duration} mins</p>
+                    <Tags time={dueDate} className="mt-2" />
+                </div>
             </div>
 
-            <NavigateNext width={35} hight={35} />
+            <NavigateNext
+                width={35}
+                hight={35}
+                className="fill-orange1 my-auto"
+            />
         </div>
     );
 };

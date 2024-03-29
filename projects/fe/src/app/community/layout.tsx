@@ -5,6 +5,21 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import HeaderTop from "@/app/_components/HeaderTop";
 
+const links = [
+    {
+        name: "Following",
+        href: "/community/following",
+    },
+    {
+        name: "Hot",
+        href: "/community/hot",
+    },
+    {
+        name: "Club",
+        href: "/community/club",
+    },
+];
+
 interface CommunityLayoutProps {
     children?: React.ReactNode;
 }
@@ -22,39 +37,19 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
 
                 <nav className="w-full">
                     <ul className="w-full flex justify-start gap-3 text-sm">
-                        <li>
-                            <Link
-                                className={`${
-                                    pathname === "/community/following" &&
-                                    "border-b-[3px]"
-                                } pb-1 border-b-green-600`}
-                                href="/community/following"
-                            >
-                                Following
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                className={`${
-                                    pathname === "/community/hot" &&
-                                    "border-b-[3px]"
-                                } pb-1 border-b-green-600`}
-                                href="/community/hot"
-                            >
-                                Hot
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                className={`${
-                                    pathname === "/community/club" &&
-                                    "border-b-[3px]"
-                                } pb-1 border-b-green-600`}
-                                href="/community/club"
-                            >
-                                Club
-                            </Link>
-                        </li>
+                        {links.map((link, index) => (
+                            <li key={index}>
+                                <Link
+                                    className={`${
+                                        pathname === link.href &&
+                                        "border-b-[3px]"
+                                    } pb-1 border-b-green-600`}
+                                    href={link.href}
+                                >
+                                    {link.name}
+                                </Link>
+                            </li>
+                        ))}
                     </ul>
                 </nav>
             </HeaderTop>

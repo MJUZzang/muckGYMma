@@ -18,7 +18,8 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`flex flex-col h-screen ${inter.className}`}>
+            <body className={`flex flex-col h-screen 
+                bg-white dark:bg-[#161616] ${inter.className} dark:text-white`}>
                 <div className="h-full overflow-y-auto">{children}</div>
                 <NavBar />
                 <DarkMode />

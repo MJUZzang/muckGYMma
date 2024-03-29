@@ -2,54 +2,50 @@
 
 import Link from "next/link";
 import React from "react";
-import Analytics from "@/app/_images/Analytics";
+import Analysis from "@/app/_images/Analytics";
 import Camera from "@/app/_images/Camera";
 import AccountCircle from "@/app/_images/AccountCircle";
 import Workout from "@/app/_images/Workout";
 import Forum from "@/app/_images/Forum";
 
-const links = [
-    {
-        href: "/workout",
-        Icon: Workout,
-        text: "Workout",
-    },
-    {
-        href: "/community/following",
-        Icon: Forum,
-        text: "Community",
-    },
-    {
-        href: "/food",
-        Icon: Camera,
-        text: "Add Image",
-    },
-    {
-        href: "/analysis",
-        Icon: Analytics,
-        text: "Analysis",
-    },
-    {
-        href: "/profile/me",
-        Icon: AccountCircle,
-        text: "My",
-    },
-];
-
 const NavBar = () => {
     return (
-        <div className="w-full flex border-t-[1px] h-[70px] justify-between items-center">
-            {links.map(({ href, Icon, text }) => (
-                <Link
-                    key={href}
-                    href={href}
-                    className="flex flex-col items-center justify-between basis-1/5"
-                >
-                    <Icon className="dark:fill-white" />
-                    <p className="text-xs">{text}</p>
-                </Link>
-            ))}
-            
+        <div className="w-full flex border-t-[0.1px] border-t-gray-200 h-[70px] justify-between items-center">
+            <Link
+                href="/workout/todos"
+                className="flex flex-col items-center justify-between basis-1/5"
+            >
+                <Workout className="dark:fill-white" />
+                <p className="text-[10px]">Home</p>
+            </Link>
+
+            <Link
+                href="/community/following"
+                className="flex flex-col items-center justify-between basis-1/5"
+            >
+                <Forum className="dark:fill-white" />
+                <p className="text-[10px]">Community</p>
+            </Link>
+
+            <div className="bg-orange1 p-3 rounded-full relative bottom-5 cursor-pointer">
+                <Camera className="fill-white dark:fill-black"/>
+            </div>
+
+            <Link
+                href="/analysis"
+                className="flex flex-col items-center justify-between basis-1/5"
+            >
+                <Analysis className="dark:fill-white" />
+                <p className="text-[10px]">Analysis</p>
+            </Link>
+
+            <Link
+                href="/profile/me"
+                className="flex flex-col items-center justify-between basis-1/5"
+            >
+                <AccountCircle className="dark:fill-white" />
+                <p className="text-[10px]">My</p>
+            </Link>
         </div>
     );
 };
