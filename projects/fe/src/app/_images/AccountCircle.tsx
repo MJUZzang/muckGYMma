@@ -2,6 +2,7 @@ import React from "react";
 
 interface AccountCircleProps {
     className?: string;
+    isActive?: boolean;
 }
 
 const AccountCircle: React.FC<AccountCircleProps> = (props) => {

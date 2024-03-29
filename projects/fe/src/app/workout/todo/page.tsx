@@ -1,5 +1,6 @@
 import React from "react";
 import Task from "@/app/workout/_components/Task";
+import Workout from "../_images/Workout";
 
 const dummyList = [
     {
@@ -42,6 +43,9 @@ const dummyList = [
 const page = () => {
     return (
         <>
+            <Workout 
+            className="mt-7 mb-10"
+            />
             <p className="text-gray-800">3 Remanining Tasks</p>
             <p className="text-left text-xs">
                 1h 55mins required to clear all the tasks
