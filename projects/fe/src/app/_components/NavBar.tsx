@@ -8,39 +8,48 @@ import AccountCircle from "@/app/_images/AccountCircle";
 import Workout from "@/app/_images/Workout";
 import Forum from "@/app/_images/Forum";
 
+const links = [
+    {
+        href: "/workout",
+        Icon: Workout,
+        text: "Workout",
+    },
+    {
+        href: "/community/following",
+        Icon: Forum,
+        text: "Community",
+    },
+    {
+        href: "/food",
+        Icon: Camera,
+        text: "Add Image",
+    },
+    {
+        href: "/analysis",
+        Icon: Analytics,
+        text: "Analysis",
+    },
+    {
+        href: "/profile/me",
+        Icon: AccountCircle,
+        text: "My",
+    },
+];
+
 const NavBar = () => {
     return (
         <div className="w-full flex border-t-[1px] h-[70px] justify-between items-center">
-            <Link href="/workout" className="flex flex-col items-center basis-1/5">
-                <Workout className="dark:fill-white" />
-                <p className="text-xs">Workout</p>
-            </Link>
-
-            <Link href="/community/following" className="flex flex-col items-center basis-1/5">
-                <Forum className="dark:fill-white" />
-                <p className="text-xs">Community</p>
-            </Link>
-
-            <Link href="/food" className="flex flex-col items-center basis-1/5">
-                <Camera className="dark:fill-white" />
-                <p className="text-xs">Add Image</p>
-            </Link>
-
-            <Link
-                href="/analysis"
-                className="flex flex-col items-center basis-1/5"
-            >
-                <Analytics className="dark:fill-white" />
-                <p className="text-xs">Analysis</p>
-            </Link>
-
-            <Link
-                href="/profile/me"
-                className="flex flex-col items-center basis-1/5"
-            >
-                <AccountCircle className="dark:fill-white" />
-                <p className="text-xs">My</p>
-            </Link>
+            {links.map(({ href, Icon, text }) => (
+                <Link
+                    key={href}
+                    href={href}
+                    className="flex flex-col items-center basis-1/5"
+                >
+                    <Icon className="dark:fill-white" />
+                    <p className="text-xs">{text}</p>
+                </Link>
+            ))}
+            
         </div>
     );
 };
