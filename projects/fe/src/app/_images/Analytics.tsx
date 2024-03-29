@@ -8,9 +8,9 @@ const Analytics: React.FC<AnalyticsProps> = (props) => {
     return (
         <svg
             className={`${props.className}`}
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
+            width="29"
+            height="29"
+            viewBox="0 0 29 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >

@@ -43,7 +43,7 @@ const NavBar = () => {
                 <Link
                     key={href}
                     href={href}
-                    className="flex flex-col items-center basis-1/5"
+                    className="flex flex-col items-center justify-between basis-1/5"
                 >
                     <Icon className="dark:fill-white" />
                     <p className="text-xs">{text}</p>
