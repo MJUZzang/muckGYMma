@@ -27,8 +27,8 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
         <>
             <HeaderTop className="flex-col pb-2 space-y-2 shadow">
                 <div className="flex flex-col w-full">
-                    <p className="text-orange1">Exercise</p>
-                    <div className="text-gray-500 text-sm">
+                    <p className="text-orange1 text-left">Exercise</p>
+                    <div className="text-gray-500 text-sm text-left">
                         Pick up a task and start excercing
                     </div>
                 </div>
