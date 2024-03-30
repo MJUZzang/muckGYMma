@@ -8,7 +8,7 @@ import { kakaoLoginUrl } from "@/app/sign-in/_utils/login";
 
 
 interface KakaoLoginButtonProps {
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const KakaoLoginButton: React.FC<KakaoLoginButtonProps> = (props) => {
