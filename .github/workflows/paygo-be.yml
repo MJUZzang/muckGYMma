@@ -25,7 +25,7 @@ jobs:
         run: |
           docker login -u devholic24 -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t paygo-be .
-          docker tag 스프링 프로젝트 이름 devholic24/paygo-be
+          docker tag paygo-be devholic24/paygo-be
           docker push devholic24/paygo-be
 
       - name: Get timestamp
