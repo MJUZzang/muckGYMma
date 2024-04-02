@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 public enum OAuthPlatform {
 
-    KAKAO("kakao"),
-    GOOGLE("google");
+    KAKAO("KAKAO"),
+    GOOGLE("GOOGLE");
 
     private final String name;
 
