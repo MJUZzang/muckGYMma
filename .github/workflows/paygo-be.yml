@@ -7,6 +7,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./projects/paygo-be
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -19,7 +22,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: ../gradlew build -x test
+        run: ./gradlew build -x test
 
       - name: Docker build and push to Docker hub
         run: |
