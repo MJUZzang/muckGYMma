@@ -1,12 +1,12 @@
-import GraphGroup from "./_components/GraphGroup";
-import HeatMap from "./_components/HeatMap";
-import StrengthWeaknessesChart from "./_components/StrengthWeaknessesChart";
-import VolumneProgressChart from "./VolumneProgressChart";
+// import GraphGroup from "./_components/GraphGroup";
+// import HeatMap from "./_components/HeatMap";
+// import StrengthWeaknessesChart from "./_components/StrengthWeaknessesChart";
+// import VolumneProgressChart from "./VolumneProgressChart";
 
 const Analysis = () => {
     return (
         <>
-            <div className="px-3 max-w-[780px] mx-auto">
+            {/* <div className="px-3 max-w-[780px] mx-auto">
                 <div className="w-full">
                     <p>7-Day Summary</p>
                     <GraphGroup />
@@ -26,7 +26,7 @@ const Analysis = () => {
                     <p className="mt-10">Volumne Progress</p>
                     <VolumneProgressChart />
                 </div>
-            </div>
+            </div> */}
         </>
     );
 };
