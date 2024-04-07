@@ -1,4 +1,4 @@
 .idea/
 *.yml
-
+!fe-cicd.yml
 .vscode/
