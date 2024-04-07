@@ -43,7 +43,7 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                                 }`}
                         >
                             <Link
-                                className="w-full h-full inline-block"
+                                className="py-2 w-full h-full inline-block"
                                 href={link.href}
                             >
                                 {link.name}

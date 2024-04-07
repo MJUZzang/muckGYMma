@@ -1,0 +1,62 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: CI/CD
+
+on:
+  push:
+    branches: "develop-fe"
+    paths: [".github/workflows/**", "projects/**"]
+  workflow_dispatch:
+
+jobs:
+  stop-docker:
+    if: |
+      github.event_name == 'push' ||
+      github.event_name == 'workflow_dispatch'
+    runs-on: [self-hosted]
+    steps:
+      - name: Stop docker
+        run: sudo docker rm -f muckgymma-fe
+
+  build:
+    if: |
+      github.event_name == 'push' && github.ref == 'refs/heads/develop-fe' || 
+      github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./projects/fe
+    strategy:
+      matrix:
+        node-version: [18.13.0]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: projects/fe/package-lock.json
+      - name: Login to docker hub
+        run: docker login -u devholic24 -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build docker image
+        run: docker build -t devholic24/paygo-fe .
+      - name: Publish image to docker hub
+        run: docker push devholic24/paygo-fe:latest
+
+  deploy:
+    if: |
+      github.event_name == 'push' && github.ref == 'refs/heads/develop-fe' || 
+      github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: [self-hosted]
+    steps:
+      - name: Login to docker hub
+        run: sudo docker login -u devholic24 -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Pull image from docker hubx
+        run: sudo docker pull devholic24/paygo-fe:latest
+      - name: Delete old container
+        run: sudo docker rm -f muckgymma-fe
+      - name: Run docker container
+        run: sudo docker run -d -p 3000:3000 --name muckgymma-fe devholic24/paygo-fe
