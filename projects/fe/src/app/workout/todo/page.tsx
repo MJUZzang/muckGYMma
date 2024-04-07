@@ -44,15 +44,12 @@ const dummyList = [
 const page = () => {
     return (
         <>
-            <Workout className="mt-7 mb-10" />
-            {/* <PersonalTraining className="mt-7 mb-10" /> */}
-
-            <p className="text-gray-800">3 Remanining Tasks</p>
-            <p className="text-left text-xs">
+            <p className="text-fluorescent font-bold mt-10">3 Remanining Tasks</p>
+            <p className="text-left text-xs text-white">
                 1h 55mins required to clear all the tasks
             </p>
 
-            <div className="space-y-3 mt-3 bg-white mb-6">
+            <div className="space-y-2 mt-3 mb-6">
                 {dummyList.map((task, index) => (
                     <Task
                         key={index}

@@ -2,7 +2,7 @@ import React from "react";
 
 const Football = () => {
     return (
-        <div className="bg-[#FCEEE5] p-2 rounded-md">
+        <div className="bg-[#FCEEE5] p-2 rounded-full">
             <svg
                 width="29"
                 height="29"

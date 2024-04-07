@@ -5,7 +5,7 @@ interface MuscleProps {
 }
 const Muscle: React.FC<MuscleProps> = (props) => {
     return (
-        <div className="bg-[#FFE7E9] p-2 rounded-md">
+        <div className="bg-[#FFE7E9] p-2 rounded-full">
             <svg
                 className={`${props.className}`}
                 width="29"

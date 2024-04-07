@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Tag from "./Tag";
+import Tag from "@/app/workout/_components/Tag";
 
 interface TagsProps {
     className?: string;
@@ -48,7 +48,7 @@ const Tags: React.FC<TagsProps> = (props) => {
     }, []);
 
     return (
-        <div className={`flex space-x-2 ${props.className}`}>
+        <>
             <Tag isUrgent={false}>
                 {leftDays > 0
                     ? leftDays + "day"
@@ -61,7 +61,7 @@ const Tags: React.FC<TagsProps> = (props) => {
                     : "0sec"}
             </Tag>
             <Tag className={`${leftDays !== 0 && "hidden"}`} isUrgent={leftDays === 0}>Urgent</Tag>
-        </div>
+        </>
     );
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 
 const Swimming = () => {
     return (
-        <div className="bg-[#ECEEF1] p-2 rounded-md">
+        <div className="bg-[#ECEEF1] p-2 rounded-full">
             <svg
                 width="29"
                 height="29"
