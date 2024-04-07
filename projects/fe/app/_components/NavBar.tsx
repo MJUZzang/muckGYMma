@@ -60,7 +60,7 @@ const NavBar = () => {
             </Link>
 
             <Link
-                href="/profile/me"
+                href="/community/following"
                 className="flex flex-col items-center justify-between basis-1/5"
             >
                 <AccountCircle
