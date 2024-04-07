@@ -7,10 +7,10 @@ const Analysis = () => {
     return (
         <>
             <div className="max-w-[780px] mx-auto text-white space-y-10 pb-7">
-                <SummaryGraphs />
+                {/* <SummaryGraphs />
                 <HeatMap />
                 <StrengthWeaknessesChart />
-                <VolumneProgressChart />
+                <VolumneProgressChart /> */}
             </div>
         </>
     );

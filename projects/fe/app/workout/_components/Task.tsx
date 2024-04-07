@@ -31,7 +31,7 @@ const Task: React.FC<TaskProps> = ({
             setTimeLeft(CaclLeftTime(dueDate));
         }, 1000);
         return () => clearInterval(interval);
-    }, []);
+    }, [dueDate]);
 
     return (
         <div

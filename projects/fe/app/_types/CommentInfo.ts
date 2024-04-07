@@ -1,4 +1,4 @@
-import type UserInfo from "@/app/_types/UserInfo";
+import type UserInfo from "@/_types/UserInfo";
 
 export default interface CommentInfo {
     id: number;
