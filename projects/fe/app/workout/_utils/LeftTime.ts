@@ -1,6 +1,8 @@
 export const CaclLeftTime = (dueDate: Date) => {
-    const now = new Date().getTime();
-    const distance = dueDate.getTime() - now;
+    const currentDate = new Date(); // 현재 로컬 시간
+    const utcCurrent = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate()));
+
+    const distance = dueDate.getTime() - utcCurrent.getTime();
 
     const leftDays = Math.floor(distance / (1000 * 60 * 60 * 24));
 

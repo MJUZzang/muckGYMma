@@ -1,41 +1,43 @@
 import React from "react";
 import Task from "@/workout/_components/Task";
 
+const currentDate = new Date(); // 현재 로컬 시간
+
 const dummyList = [
     {
         type: "health",
         level: "Intermediate",
         duration: 45,
         workoutCnt: 3,
-        dueDate: new Date(new Date().getTime() + 30 * 60000),
+        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
     },
     {
         type: "swimming",
         level: "Beginner",
         duration: 20,
         workoutCnt: 1,
-        dueDate: new Date(new Date().getTime() + 30 * 60000),
+        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
     },
     {
         type: "football",
         level: "Beginner",
         duration: 60,
         workoutCnt: 1,
-        dueDate: new Date(new Date().getTime() + 3 * 30 * 60000),
+        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
     },
     {
         type: "football",
         level: "Beginner",
         duration: 60,
         workoutCnt: 1,
-        dueDate: new Date(new Date().getTime() + 25 * 60 * 60000),
+        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
     },
     {
         type: "football",
         level: "Beginner",
         duration: 60,
         workoutCnt: 1,
-        dueDate: new Date(new Date().getTime() + 55 * 60 * 60000),
+        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
     },
 ];
 
