@@ -5,7 +5,7 @@ import KakaoLoginButton from "./_components/KakaoLoginButton";
 
 const page = () => {
     return (
-        <main className="absolute w-screen h-screen overflow-y-auto bg-[#212121] dark:bg-[#050505]">
+        <main className="absolute w-screen h-screen overflow-y-auto bg-[#212121] dark:bg-[#050505] z-10">
             <div className="px-4 max-w-[500px] w-full h-full mx-auto">
                 <div className="h-1/2 flex flex-col justify-end">
                     <div className="italic font-extrabold text-2xl text-white">
