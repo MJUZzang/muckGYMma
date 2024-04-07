@@ -9,7 +9,7 @@ const Analysis = () => {
             {/* <div className="px-3 max-w-[780px] mx-auto">
                 <div className="w-full">
                     <p>7-Day Summary</p>
-                    <GraphGroup />
+                <GraphGroup />
                 </div>
 
                 <div>

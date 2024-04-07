@@ -2,14 +2,14 @@ const kakaoClientId = "0221112a190a270857db8f30a55b3145";
 const kakaoRedirectUri =
     process.env.NODE_ENV === "development"
         ? "https://muckgymma.p-e.kr/sign-in/oauth/kakao"
-        : "https://localhost:3000/sign-in/oauth/kakao";
+        : "https://muckgymma.p-e.kr/sign-in/oauth/kakao";
 
 const googleClientId =
     "17323196341-4nme1rs6chphmp86r9lgfnlp1inbj4cp.apps.googleusercontent.com";
 const googleRedirectUri =
     process.env.NODE_ENV === "development"
-        ? "https://localhost:3000/sign-in/oauth/google"
-        : "https://localhost:3000/sign-in/oauth/google";
+        ? "https://muckgymma.p-e.kr/sign-in/oauth/google"
+        : "https://muckgymma.p-e.kr/sign-in/oauth/google";
 
 const googleScope = "email profile";
 
