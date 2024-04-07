@@ -14,7 +14,11 @@ export async function GET(
     console.log("code", code);
     console.log('provider', provider);
 
-    fetch('http://localhost:8080/api/login', {
+    const url = process.env.NODE_ENV === "development"
+        ? 'http://localhost:8080/api/login'
+        : 'https://muckgymma.p-e.kr/api/login';
+
+    fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
