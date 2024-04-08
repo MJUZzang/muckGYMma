@@ -58,14 +58,25 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
             {/* Spacer for Header */}
             {/* <div className="w-[1px] h-[70px]" /> */}
 
-            <div className="flex items-center mb-3 border-b-[1px] border-b-gray-600">
-                <LogoAndTitle />
-            </div>
-
-            <div className="flex mx-auto p-[2px]">
-                <div className="">following</div>
-                <div>hot</div>
-                <div>club</div>
+            <div className="flex flex-col mb-3 border-b-[1px] border-b-gray-700">
+                <div className="flex items-center">
+                    <LogoAndTitle />
+                </div>
+                <div className="flex">
+                    {links.map((link, index) => (
+                        <Link
+                            key={index}
+                            className={`${
+                                pathname === link.href
+                                    ? "border-b-fluorescent border-b-[3px]"
+                                    : "hover:border-b-gray-300 hover:border-b-[3px]"
+                            } w-[90px] text-center text-gray-300 hover:text-gray-100`}
+                            href={link.href}
+                        >
+                            {link.name}
+                        </Link>
+                    ))}
+                </div>
             </div>
 
             {props.children}

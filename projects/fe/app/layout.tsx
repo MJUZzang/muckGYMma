@@ -20,7 +20,7 @@ export default function RootLayout({
         <html lang="en">
             <body
                 className={`flex flex-col h-screen 
-                default-bg dark:bg-[#161616] ${inter.className} dark:text-white `}
+                default-bg ${inter.className} dark:text-white `}
             >
                 <div className="h-full overflow-y-auto">{children}</div>
                 <NavBar />

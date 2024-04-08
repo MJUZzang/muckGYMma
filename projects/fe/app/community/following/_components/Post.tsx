@@ -11,8 +11,8 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ postInfo }) => {
     return (
-        <div className="backdrop-blur-lg rounded-lg">
-            <div className="mx-3 flex flex-col py-3">
+        <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg">
+            <div className="mx-1 flex flex-col py-3">
                 {/* 유저 정보 */}
                 <div className="flex">
                     <Image
@@ -29,9 +29,6 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                         </p>
                     </div>
                 </div>
-
-                {/* 포스트 내용 */}
-                <p className="mt-2 text-gray-100">{postInfo.content}</p>
             </div>
 
             {/* 포스트 이미지 */}
@@ -41,16 +38,21 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 className="w-full rounded-t-lg"
             />
 
-            {/* 포스트 정보 */}
-            <div className="flex justify-between text-sm text-gray-500 mx-3 py-2">
-                <p>{postInfo.likes} liked</p>
-                <p>{postInfo.comments} comments</p>
-            </div>
+            {/* 포스트 내용 */}
+            <p className="mt-2 text-gray-100">{postInfo.content}</p>
 
-            <div className="flex justify-between border-t-2 mx-2 py-2">
-                <Like className="basis-1/3" />
-                <Comment className="basis-1/3" />
-                <SpoonKnife className="basis-1/3" />
+            <div className="flex justify-between border-b-2 border-b-white/60 mt-1 pl-1 pr-3">
+                {/* 포스트 정보 */}
+                <div className="flex justify-end gap-4 text-sm text-gray-300 py-2">
+                    <p>{postInfo.likes} liked</p>
+                    <p>{postInfo.comments} comments</p>
+                </div>
+
+                <div className="flex py-1 gap-3">
+                    <Like className="fill-white" />
+                    <Comment className="fill-white" />
+                    <SpoonKnife className="fill-white" />
+                </div>
             </div>
         </div>
     );

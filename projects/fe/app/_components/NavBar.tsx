@@ -60,13 +60,13 @@ const NavBar = () => {
             </Link>
 
             <Link
-                href="/community/following"
+                href="/profile"
                 className="flex flex-col items-center justify-between basis-1/5"
             >
                 <AccountCircle
-                    isActive={pathname === "/profile/me"}
+                    isActive={pathname === "/profile"}
                     className={`${
-                        pathname === "/profile/me"
+                        pathname === "/profile"
                             ? "fill-fluorescent"
                             : "fill-gray-200"
                     }`}

@@ -18,12 +18,8 @@ const Follwing = () => {
     };
 
     return (
-        <div className="">
-            <div className="">
-                <p className="mx-3 text-white/50">Suggested Posts</p>
-            </div>
-
-            <div className="flex flex-col gap-5 pt-3">
+        <>
+            <div className="flex flex-col items-center pt-3">
                 <Post postInfo={dummyPost} />
                 <Post postInfo={dummyPost} />
                 <Post postInfo={dummyPost} />
@@ -37,7 +33,7 @@ const Follwing = () => {
                 <Post postInfo={dummyPost} />
                 <Post postInfo={dummyPost} />
             </div>
-        </div>
+        </>
     );
 };
 
