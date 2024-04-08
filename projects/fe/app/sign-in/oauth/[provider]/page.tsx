@@ -31,7 +31,7 @@ const Page = () => {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [params.provider, searchParams, router]);
     return null;
 };
 
