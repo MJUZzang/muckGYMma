@@ -24,7 +24,7 @@ const Task: React.FC<TaskProps> = ({
     workoutCnt,
     dueDate,
 }) => {
-    const [timeLeft, setTimeLeft] = useState(CaclLeftTime(dueDate));
+    const [timeLeft, setTimeLeft] = useState('');
 
     useEffect(() => {
         const interval = setInterval(() => {
