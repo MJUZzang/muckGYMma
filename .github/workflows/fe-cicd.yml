@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  stop-docker:
+  stop-docker-delete-images:
     if: |
       github.event_name == 'push' ||
       github.event_name == 'workflow_dispatch'
@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Stop docker
         run: sudo docker rm -f muckgymma-fe
+      - name: Remove images
+        run: sudo docker rmi $(sudo docker images -q)
 
   build:
     if: |
