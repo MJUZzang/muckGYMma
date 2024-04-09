@@ -1,10 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import dynamic from "next/dynamic";
-const ReactApexChart = dynamic(() => import("react-apexcharts"), {
-    ssr: false,
-});
+const ReactApexChart = dynamic(() => import("react-apexcharts"));
 
 interface WeightChartProps {
     className?: string;
@@ -13,7 +11,7 @@ interface WeightChartProps {
 const TimeChart: React.FC<WeightChartProps> = (props) => {
     return (
         <>
-            {typeof window !== "undefined" && (
+            <Suspense fallback={<div>Loading...</div>}>
                 <ReactApexChart
                     className={`w-full ${props.className}`}
                     options={{
@@ -89,9 +87,10 @@ const TimeChart: React.FC<WeightChartProps> = (props) => {
                         },
                     ]}
                     type="line"
+                    width="100%"
                     height={350}
                 />
-            )}
+            </Suspense>
         </>
     );
 };

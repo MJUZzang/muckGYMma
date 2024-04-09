@@ -59,12 +59,16 @@ const SummaryGraphs = () => {
                                 selectedGraph !== "Weight" && "hidden"
                             }`}
                         />
-                        {/* <CalorieChart
-                    className={`${selectedGraph !== "Calorie" && "hidden"}`}
-                />
-                <TimeChart
-                    className={`${selectedGraph !== "Time" && "hidden"}`}
-                /> */}
+                        <CalorieChart
+                            className={`${
+                                selectedGraph !== "Calorie" && "hidden"
+                            }`}
+                        />
+                        <TimeChart
+                            className={`${
+                                selectedGraph !== "Time" && "hidden"
+                            }`}
+                        />
                     </>
                 )}
             </div>
