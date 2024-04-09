@@ -44,6 +44,7 @@ public class AuthController {
         cookie.setSecure(true);
         cookie.setMaxAge(Integer.parseInt(expiration));
         cookie.setHttpOnly(true);
+        cookie.setDomain("muckgymma.kro.kr");
 
         return cookie;
     }
