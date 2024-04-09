@@ -11,7 +11,7 @@ const Page = () => {
 
     useEffect(() => {
         const code = searchParams.get("code");
-        const provider = params.provider;
+        const provider = (params.provider as string).toUpperCase();
 
         fetch(`${backendUrl}/api/login`, {
             method: "POST",
