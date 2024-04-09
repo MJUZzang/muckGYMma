@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "https://muckgymma.kro.kr", allowedHeaders = "GET, POST, PUT, DELETE, HEAD, OPTIONS, PATCH")
+@CrossOrigin(origins = "https://muckgymma.kro.kr", allowedHeaders = {"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"})
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
