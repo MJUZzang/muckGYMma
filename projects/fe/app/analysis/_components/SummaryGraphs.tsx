@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import WeightChart from "@/analysis/_components/WeightChart";
-import CalorieChart from "./CalorieChart";
-import TimeChart from "./TimeGraph";
+import CalorieChart from "@/analysis/_components/CalorieChart";
+import TimeChart from "@/analysis/_components/TimeGraph";
 
 const SummaryGraphs = () => {
     const [selectedGraph, setSelectedGraph] = useState("Weight");

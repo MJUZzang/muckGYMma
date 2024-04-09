@@ -5,7 +5,7 @@ import Muscle from "@/_images/Muscle";
 import NavigateNext from "@/_images/NavigateNext";
 import Swimming from "@/_images/Swimming";
 import Football from "@/_images/Football";
-import { CaclLeftTime } from "../_utils/LeftTime";
+import { CaclLeftTime } from "@/workout/_utils/LeftTime";
 
 interface TaskProps {
     className?: string;

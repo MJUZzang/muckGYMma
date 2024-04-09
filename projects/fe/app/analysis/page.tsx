@@ -1,7 +1,7 @@
-import SummaryGraphs from "./_components/SummaryGraphs";
-import HeatMap from "./_components/HeatMap";
-import StrengthWeaknessesChart from "./_components/StrengthWeaknessesChart";
-import VolumneProgressChart from "./VolumneProgressChart";
+import SummaryGraphs from "@/analysis/_components/SummaryGraphs";
+import HeatMap from "@/analysis/_components/HeatMap";
+import StrengthWeaknessesChart from "@/analysis/_components/StrengthWeaknessesChart";
+import VolumneProgressChart from "@/analysis/VolumneProgressChart";
 
 const Analysis = () => {
     return (

@@ -1,7 +1,7 @@
 import React from "react";
 
-import GoogleLoginButton from "./_components/GoogleLoginButton";
-import KakaoLoginButton from "./_components/KakaoLoginButton";
+import GoogleLoginButton from "@/sign-in/_components/GoogleLoginButton";
+import KakaoLoginButton from "@/sign-in/_components/KakaoLoginButton";
 
 const page = () => {
     return (
