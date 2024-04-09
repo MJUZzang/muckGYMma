@@ -1,12 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import WeightChart from "@/analysis/_components/WeightChart";
 import CalorieChart from "@/analysis/_components/CalorieChart";
 import TimeChart from "@/analysis/_components/TimeGraph";
 
 const SummaryGraphs = () => {
     const [selectedGraph, setSelectedGraph] = useState("Weight");
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     return (
         <>
@@ -47,15 +52,21 @@ const SummaryGraphs = () => {
                     </span>
                 </div>
 
-                <WeightChart
-                    className={`${selectedGraph !== "Weight" && "hidden"}`}
-                />
-                <CalorieChart
+                {isClient && (
+                    <>
+                        <WeightChart
+                            className={`${
+                                selectedGraph !== "Weight" && "hidden"
+                            }`}
+                        />
+                        {/* <CalorieChart
                     className={`${selectedGraph !== "Calorie" && "hidden"}`}
                 />
                 <TimeChart
                     className={`${selectedGraph !== "Time" && "hidden"}`}
-                />
+                /> */}
+                    </>
+                )}
             </div>
         </>
     );
