@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
-import static mju.paygo.member.ui.auth.interceptor.HttpMethod.OPTIONS;
+import static mju.paygo.member.ui.auth.interceptor.HttpMethod.ANY;
 
 @RequiredArgsConstructor
 @Configuration
@@ -30,12 +30,12 @@ public class AuthConfig implements WebMvcConfigurer {
 
     private HandlerInterceptor parseMemberIdFromTokenInterceptor() {
         return new PathMatcherInterceptor(parseMemberIdFromTokenInterceptor)
-                .excludePathPattern("/**", OPTIONS);
+                .excludePathPattern("/**", ANY);
     }
 
     private HandlerInterceptor loginValidCheckerInterceptor() {
         return new PathMatcherInterceptor(loginValidCheckerInterceptor)
-                .excludePathPattern("/**", OPTIONS);
+                .excludePathPattern("/**", ANY);
     }
 
     @Override
