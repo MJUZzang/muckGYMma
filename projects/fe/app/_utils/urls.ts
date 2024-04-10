@@ -1,5 +1,5 @@
 export const backendUrlDev = "http://localhost:8080";
-export const backendUrlProd = "https://api.muckgymma.kro.kr";
+export const backendUrlProd = "https://muckgymma.kro.kr";
 export const backendUrl =
     process.env.NODE_ENV === "development" ? backendUrlDev : backendUrlProd;
 
