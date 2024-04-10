@@ -12,6 +12,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry
                 .addMapping("/**")
                 .allowedHeaders("*")
+                .allowCredentials(true)
+                .maxAge(3600)
                 .allowedOrigins("https://muckgymma.kro.kr")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH");
     }
