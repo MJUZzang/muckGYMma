@@ -17,7 +17,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "https://muckgymma.kro.kr", allowedHeaders = {"GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS", "PATCH"})
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
+import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
+import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
+
+@CrossOrigin(
+        origins = "https://muckgymma.kro.kr",
+        methods = {GET, POST, OPTIONS, HEAD, PUT, PATCH, DELETE},
+        allowCredentials = "true")
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
