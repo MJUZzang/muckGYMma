@@ -28,7 +28,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 @CrossOrigin(
         origins = "https://muckgymma.kro.kr",
         methods = {GET, POST, OPTIONS, HEAD, PUT, PATCH, DELETE},
-        allowCredentials = "true")
+        allowCredentials = "true",
+        maxAge = 3600,
+        allowedHeaders = "*")
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
