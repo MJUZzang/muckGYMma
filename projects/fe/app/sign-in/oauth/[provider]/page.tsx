@@ -22,7 +22,11 @@ const Page = () => {
         })
             .then((res) => {
                 if (res.ok) {
-                    console.log("Logged in successfully");
+                    const cookies = res.headers.get("Set-Cookie");
+                    if (cookies) {
+                        document.cookie = cookies;
+                        console.log("Logged in successfully");
+                    }
                     router.push("/");
                 } else {
                     throw new Error("Failed to login");
