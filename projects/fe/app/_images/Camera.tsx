@@ -18,7 +18,7 @@ const Camera: React.FC<CameraProps> = (props) => {
         if (e.currentTarget.files) {
             const file = e.currentTarget.files[0];
             const formData = new FormData();
-            formData.append('image', file)
+            formData.append('file', file)
 
             fetch(`${backendUrl}/api/food/predict`, {
                 method: "POST",
