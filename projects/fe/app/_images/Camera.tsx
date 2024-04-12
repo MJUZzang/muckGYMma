@@ -15,11 +15,15 @@ const Camera: React.FC<CameraProps> = (props) => {
     }
 
     function handleUpload(e: FormEvent<HTMLInputElement>) {
-        if (e.currentTarget.files)
+        if (e.currentTarget.files) {
+            const file = e.currentTarget.files[0];
+            const formData = new FormData();
+            formData.append('image', file)
+
             fetch(`${backendUrl}/api/food/predict`, {
                 method: "POST",
                 body: JSON.stringify({
-                    file: e.currentTarget.files[0]
+                    file: formData,
                 }),
             })
                 .then((res) => {
@@ -31,7 +35,7 @@ const Camera: React.FC<CameraProps> = (props) => {
                 })
                 .then((data) => console.log(data))
                 .catch((err) => console.error(err));
-        else {
+        } else {
             console.error("No file selected.");
         }
     }
