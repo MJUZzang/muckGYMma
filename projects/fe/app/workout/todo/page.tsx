@@ -9,42 +9,85 @@ const dummyList = [
         level: "Intermediate",
         duration: 45,
         workoutCnt: 3,
-        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
     },
     {
         type: "swimming",
         level: "Beginner",
         duration: 20,
         workoutCnt: 1,
-        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
     },
     {
         type: "football",
         level: "Beginner",
         duration: 60,
         workoutCnt: 1,
-        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
     },
     {
         type: "football",
         level: "Beginner",
         duration: 60,
         workoutCnt: 1,
-        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
     },
     {
         type: "football",
         level: "Beginner",
         duration: 60,
         workoutCnt: 1,
-        dueDate: new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate() + 3))
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
+    },
+    {
+        type: "football",
+        level: "Beginner",
+        duration: 60,
+        workoutCnt: 1,
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
     },
 ];
 
 const page = () => {
     return (
-        <>
-            <p className="text-fluorescent font-bold mt-10">
+        <div className="h-full">
+            <p className="text-fluorescent font-bold mt-3">
                 3 Remanining Tasks
             </p>
             <p className="text-left text-xs text-white">
@@ -63,7 +106,7 @@ const page = () => {
                     />
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 

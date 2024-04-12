@@ -5,17 +5,17 @@ const layout: React.FC<{
     children: React.ReactNode;
 }> = (props) => {
     return (
-        <>
+        <div className="h-full">
             {/* Header */}
-            <div className="flex items-center p-3">
+            <div className="flex items-center">
                 <LogoAndTitle />
             </div>
 
-            <div className="px-3 space-y-4">
+            <div className="px-3 space-y-4 h-full overflow-y-auto">
                 <p className="text-white text-3xl font-bold">Analysis</p>
                 {props.children}
             </div>
-        </>
+        </div>
     );
 };
 

@@ -6,7 +6,7 @@ import exampleImage from "@/_images/pooh.jpg";
 
 const Page = () => {
     return (
-        <>
+        <div className="h-full overflow-y-auto ">
             <div className="flex items-center justify-between border-b-[1px] border-b-gray-800">
                 <div className="flex items-center">
                     <LogoAndTitle />
@@ -78,7 +78,7 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

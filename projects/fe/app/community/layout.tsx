@@ -29,7 +29,7 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
     const pathname = usePathname();
 
     return (
-        <>
+        <div className="h-full">
             {/* <HeaderTop className="flex-col">
                 <div className="flex justify-start w-full">
                     <p>Community</p>
@@ -58,7 +58,7 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
             {/* Spacer for Header */}
             {/* <div className="w-[1px] h-[70px]" /> */}
 
-            <div className="flex flex-col mb-3 border-b-[1px] border-b-gray-700">
+            <div className="flex flex-col border-b-[1px] border-b-gray-700">
                 <div className="flex items-center">
                     <LogoAndTitle />
                 </div>
@@ -79,8 +79,8 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
                 </div>
             </div>
 
-            {props.children}
-        </>
+            <div className="h-full">{props.children}</div>
+        </div>
     );
 };
 
