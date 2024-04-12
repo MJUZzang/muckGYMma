@@ -1,7 +1,7 @@
 package mju.paygo.food.application;
 
 import lombok.RequiredArgsConstructor;
-import mju.paygo.food.infrastructure.FoodLensManagerImpl;
+import mju.paygo.food.domain.FoodLensManager;
 import mju.paygo.food.infrastructure.dto.FoodAnalyzeResponse;
 import mju.paygo.food.infrastructure.dto.FoodSearchResponse;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FoodService {
 
-    private final FoodLensManagerImpl foodLensManager;
+    private final FoodLensManager foodLensManager;
 
     public FoodAnalyzeResponse predictFood(final MultipartFile file) {
         return foodLensManager.predict(file);
