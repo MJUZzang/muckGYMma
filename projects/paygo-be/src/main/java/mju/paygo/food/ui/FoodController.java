@@ -23,7 +23,8 @@ public class FoodController {
 
     @PostMapping("/predict")
     public ResponseEntity<FoodAnalyzeResponse> predictFood(@RequestParam("file") final MultipartFile file) {
-        FoodAnalyzeResponse response = foodService.predictFood(file);
+        Long userId = 1L;
+        FoodAnalyzeResponse response = foodService.predictFood(file, userId);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
