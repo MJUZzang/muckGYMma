@@ -30,7 +30,7 @@ const Settings = () => {
     }, [darkMode]);
 
     return (
-        <main className="absolute w-screen h-screen overflow-y-auto bg-[#ffffff] dark:bg-[#050505]">
+        <main className="absolute w-screen h-screen bg-[#ffffff] dark:bg-[#050505]">
             <header className="fixed w-full text-center py-2">
                 <ArrowBack className="absolute dark:fill-white left-2" />
                 <p className="text-black dark:text-white">Settings</p>

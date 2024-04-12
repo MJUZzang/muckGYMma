@@ -82,6 +82,71 @@ const dummyList = [
             )
         ),
     },
+    {
+        type: "football",
+        level: "Beginner",
+        duration: 60,
+        workoutCnt: 1,
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
+    },
+    {
+        type: "football",
+        level: "Beginner",
+        duration: 60,
+        workoutCnt: 1,
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
+    },
+    {
+        type: "football",
+        level: "Beginner",
+        duration: 60,
+        workoutCnt: 1,
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
+    },
+    {
+        type: "football",
+        level: "Beginner",
+        duration: 60,
+        workoutCnt: 1,
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
+    },
+    {
+        type: "football",
+        level: "Beginner",
+        duration: 60,
+        workoutCnt: 1,
+        dueDate: new Date(
+            Date.UTC(
+                currentDate.getUTCFullYear(),
+                currentDate.getUTCMonth(),
+                currentDate.getUTCDate() + 3
+            )
+        ),
+    },
 ];
 
 const page = () => {

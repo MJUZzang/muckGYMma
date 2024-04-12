@@ -6,7 +6,7 @@ import exampleImage from "@/_images/pooh.jpg";
 
 const Page = () => {
     return (
-        <div className="h-full overflow-y-auto ">
+        <>
             <div className="flex items-center justify-between border-b-[1px] border-b-gray-800">
                 <div className="flex items-center">
                     <LogoAndTitle />
@@ -26,10 +26,10 @@ const Page = () => {
                         <p className="text-xl">jeheecheon</p>
 
                         <div className="flex gap-4">
-                            <div className="px-4 py-1 bg-[#363636] rounded-md">
+                            <div className="px-4 py-1 bg-[#363636] rounded-md text-nowrap">
                                 Edit profile
                             </div>
-                            <div className="px-4 py-1 bg-[#363636] rounded-md">
+                            <div className="px-4 py-1 bg-[#363636] rounded-md text-nowrap">
                                 View archive
                             </div>
                         </div>
@@ -78,7 +78,7 @@ const Page = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

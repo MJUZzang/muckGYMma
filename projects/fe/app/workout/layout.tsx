@@ -53,7 +53,7 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                 </ul>
             </nav>
 
-            <div className="px-4 h-full overflow-y-scroll">{props.children}</div>
+            <div className="px-4 h-full">{props.children}</div>
         </div>
     );
 };
