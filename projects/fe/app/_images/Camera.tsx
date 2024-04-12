@@ -18,7 +18,9 @@ const Camera: React.FC<CameraProps> = (props) => {
         if (e.currentTarget.files)
             fetch(`${backendUrl}/api/food/predict`, {
                 method: "POST",
-                body: e.currentTarget.files[0],
+                body: JSON.stringify({
+                    file: e.currentTarget.files[0]
+                }),
             })
                 .then((res) => {
                     if (res.ok) {
