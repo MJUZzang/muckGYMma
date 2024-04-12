@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect } from "react";
+import { backendUrl } from "@/_utils/urls";
+import React, { FormEvent } from "react";
 
 interface CameraProps {
     className?: string;
@@ -9,16 +10,28 @@ interface CameraProps {
 const Camera: React.FC<CameraProps> = (props) => {
     const inputRef = React.createRef<HTMLInputElement>();
 
-    useEffect(() => {
-        console.log("asd");
-    }, []);
-
     function handleClicked() {
         inputRef.current?.click();
     }
 
-    function handleUpload() {
-        
+    function handleUpload(e: FormEvent<HTMLInputElement>) {
+        if (e.currentTarget.files)
+            fetch(`${backendUrl}/api/food/predict`, {
+                method: "POST",
+                body: e.currentTarget.files[0],
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw new Error("Error occured while uploading image.");
+                    }
+                })
+                .then((data) => console.log(data))
+                .catch((err) => console.error(err));
+        else {
+            console.error("No file selected.");
+        }
     }
 
     return (
