@@ -22,9 +22,7 @@ const Camera: React.FC<CameraProps> = (props) => {
 
             fetch(`${backendUrl}/api/food/predict`, {
                 method: "POST",
-                body: JSON.stringify({
-                    file: formData,
-                }),
+                body: formData,
             })
                 .then((res) => {
                     if (res.ok) {
