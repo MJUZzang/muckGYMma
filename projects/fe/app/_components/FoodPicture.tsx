@@ -4,8 +4,8 @@ import Camera from "@/_images/Camera";
 import { backendUrl } from "@/_utils/urls";
 import React, { FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { useAppDispatch } from "../../lib/hooks";
-import { setPredict } from "../../lib/slices/predictSlice";
+import { useAppDispatch } from "@/../lib/hooks";
+import { setPredict } from "@/../lib/slices/predictSlice";
 
 interface Props {
     className?: string;

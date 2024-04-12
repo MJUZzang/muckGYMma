@@ -25,9 +25,9 @@ export default function RootLayout({
             >
                 <StoreProvider>
                     <div className="h-full overflow-y-auto">{children}</div>
+                    <NavBar />
+                    <DarkMode />
                 </StoreProvider>
-                <NavBar />
-                <DarkMode />
             </body>
         </html>
     );
