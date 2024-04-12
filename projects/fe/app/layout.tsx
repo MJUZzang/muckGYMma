@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "@/_styles/globals.css";
 import NavBar from "@/_components/NavBar";
 import DarkMode from "@/_components/DarkMode";
+import StoreProvider from "./_components/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,9 @@ export default function RootLayout({
                 className={`flex flex-col h-screen 
                 default-bg ${inter.className} dark:text-white `}
             >
-                <div className="h-full overflow-y-auto">{children}</div>
+                <StoreProvider>
+                    <div className="h-full overflow-y-auto">{children}</div>
+                </StoreProvider>
                 <NavBar />
                 <DarkMode />
             </body>

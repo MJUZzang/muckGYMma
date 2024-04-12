@@ -3,11 +3,11 @@
 import Link from "next/link";
 import React from "react";
 import Analysis from "@/_images/Analytics";
-import Camera from "@/_images/Camera";
 import AccountCircle from "@/_images/AccountCircle";
 import Workout from "@/_images/Workout";
 import Forum from "@/_images/Forum";
 import { usePathname } from "next/navigation";
+import FoodPicture from "@/_components/FoodPicture";
 
 const NavBar = () => {
     const pathname = usePathname();
@@ -42,7 +42,7 @@ const NavBar = () => {
             </Link>
 
             <div className="bg-fluorescent p-3 rounded-full relative bottom-5 cursor-pointer">
-                <Camera className="fill-gray-900" />
+                <FoodPicture className="fill-gray-900" />
             </div>
 
             <Link
