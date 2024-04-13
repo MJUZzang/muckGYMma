@@ -56,7 +56,8 @@ function ConfirmModal({
     };
 
     return (
-        selectedPredict && (
+        selectedPredict !== null &&
+        selectedPredict !== undefined && (
             <div
                 className={`absolute w-full px-[8vw] top-[40vh] transition-all duration-500
                     ${isModalOpen ? "opacity-100 z-[50]" : "opacity-0"}`}
