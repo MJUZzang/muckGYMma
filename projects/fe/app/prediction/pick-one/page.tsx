@@ -102,15 +102,19 @@ export default function Page() {
             return;
         }
 
-        const id = predict.predictlist[selectedPredict].foodlist[0].id;
-        fetch(`${backendUrl}/api/food/pick/${id}`, {
+        const foodIdList: number[] = [];
+        predict.predictlist[selectedPredict].foodlist.forEach((food) => {
+            foodIdList.push(food.id);
+        });
+
+        fetch(`${backendUrl}/api/food/pick`, {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                imageUrl: predict.fileUrl,
+                id: foodIdList,
             }),
         })
             .then((res) => {
@@ -165,12 +169,12 @@ export default function Page() {
                             <p className="block backdrop-blur-lg text-center text-xl text-fluorescent">
                                 {idx + 1}번
                             </p>
-                            <p>정확도: {item.possibility}</p>
+                            <p>정확도: {item.possibility}%</p>
                             <div>
                                 {item.foodlist.map((food) => (
                                     <div key={food.id}>
                                         <p>{food.foodname}</p>
-                                        <p>{food.manufacturer}</p>
+                                        {/* <p>{food.manufacturer}</p> */}
                                     </div>
                                 ))}
                             </div>

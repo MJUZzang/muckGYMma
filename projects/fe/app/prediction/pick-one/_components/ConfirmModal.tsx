@@ -27,7 +27,7 @@ function ConfirmModal({
                         className="bg-fluorescent px-5 py-2 rounded-lg font-bold"
                         onClick={(e) => {
                             e.stopPropagation();
-e.stopPropagation();
+                            e.stopPropagation();
                             onOkClicked();
                         }}
                     >
