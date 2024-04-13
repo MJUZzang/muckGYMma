@@ -103,7 +103,7 @@ export default function Page() {
         }
 
         const id = predict.predictlist[selectedPredict].foodlist[0].id;
-        fetch(`${backendUrl}/api/pick/${id}`, {
+        fetch(`${backendUrl}/api/food/pick/${id}`, {
             method: "POST",
             credentials: "include",
             headers: {
