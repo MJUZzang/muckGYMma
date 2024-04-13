@@ -24,10 +24,8 @@ export default function RootLayout({
                 default-bg ${inter.className} dark:text-white `}
             >
                 <StoreProvider>
-                    <div className="pb-[85px]">{children}</div>
-                    <div className="max-h-[100dvh] h-full">
-                        <NavBar />
-                    </div>
+                    {children}
+                    <NavBar />
                     <DarkMode />
                 </StoreProvider>
             </body>

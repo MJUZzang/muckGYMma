@@ -24,7 +24,7 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
     const pathname = usePathname();
 
     return (
-        <div className="h-full">
+        <>
             <div className="flex items-center">
                 <LogoAndTitle />
             </div>
@@ -53,8 +53,8 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                 </ul>
             </nav>
 
-            <div className="px-4 h-full">{props.children}</div>
-        </div>
+            <div className="px-4">{props.children}</div>
+        </>
     );
 };
 

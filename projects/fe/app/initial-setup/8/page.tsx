@@ -32,7 +32,7 @@ function Page() {
 
     return (
         <div className="text-white/90 h-full flex flex-col">
-            <p className="mt-5 text-xl">운동 경혐이 얼마나 되시나요?</p>
+            <p className="mt-5 text-xl">운동 경험이 얼마나 되시나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다
             </p>

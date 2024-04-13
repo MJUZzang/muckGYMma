@@ -27,7 +27,7 @@ function Page() {
     const router = useRouter();
 
     return (
-        <div className="text-white/90 h-full flex flex-col">
+        <div className="text-white/90 flex flex-col h-full mt-auto">
             <p className="mt-5 text-xl">운동을 얼마나 잘하시나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 구성을 위한 질문이며 공유되지 않습니다

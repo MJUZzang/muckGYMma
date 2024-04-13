@@ -159,7 +159,7 @@ const page = () => {
                 1h 55mins required to clear all the tasks
             </p>
 
-            <div className="space-y-2 mt-3 mb-6">
+            <div className="space-y-2 mt-3 mb-6 h-full">
                 {dummyList.map((task, index) => (
                     <Task
                         key={index}

@@ -77,9 +77,18 @@ function InitialSetupLayout({
         setPageInfo(pages[parseInt(pathname.split("/")?.[2]) - 1]);
     }, [pathname]);
 
+    useEffect(() => {
+        document.documentElement.classList.add("overflow-hidden");
+        // document.body.classList.add("overflow-y-hidden");
+        return () => {
+            document.documentElement.classList.remove("overflow-hidden");
+            // document.body.classList.remove("overflow-y-hidden");
+        };
+    }, []);
+
     return (
-        <div className="absolute w-full max-h-[100vh] h-[100vh] z-[30] default-bg px-5 pb-[85px]">
-            <div className="mt-3">
+        <div className="default-bg px-5 flex flex-col h-full max-h-[100dvh] py-4">
+            <div className="">
                 {pageInfo.order !== 0 && (
                     <ArrowBack
                         className="fill-white/80 absolute"

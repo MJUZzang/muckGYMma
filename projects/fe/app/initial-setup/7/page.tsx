@@ -48,7 +48,7 @@ function Page() {
                             focus:outline-1 focus:outline-fluorescent-lightest"
                         />
                         <p className="relative text-red z-[50] right-3 bottom-[27px]">
-                            kg
+                            cm
                         </p>
                     </div>
                 </label>
