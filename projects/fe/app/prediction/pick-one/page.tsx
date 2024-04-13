@@ -92,8 +92,8 @@ export default function Page() {
     const [selectedPredict, setSelectedPredict] = useState<number>(0);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    // const predict = useAppSelector(selectPredict);
-    const predict = dummyData;
+    const predict = useAppSelector(selectPredict);
+    // const predict = dummyData;
 
     function handleOkClicked() {
         setIsModalOpen(false);
