@@ -5,7 +5,7 @@ import { backendUrl } from "@/_utils/urls";
 import React, { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setPredict } from "@/../lib/slices/predictSlice";
+import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
 
 interface Props {
     className?: string;
@@ -33,10 +33,16 @@ function FoodPicture(props: Props) {
                         throw new Error("Error occured while uploading image.");
                     }
                 })
-                .then((data) => {
-                    console.log(data);
+                .then((data: PredictState) => {
+                    if (!data.predictlist) {
+                        throw new Error("No prediction data found.");
+                    }
+
+                    for (let predict of data.predictlist) {
+                        predict.possibility = parseFloat(predict.possibility.toFixed(5));
+                    }
                     dispatch(setPredict(data));
-                    router.push(`/prediction`);
+                    router.push(`/prediction/pick-one`);
                 })
                 .catch((err) => console.error(err));
         } else {

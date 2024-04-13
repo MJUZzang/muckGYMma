@@ -16,12 +16,15 @@ export interface PredictList {
 
 // Define a type for the slice state
 export interface PredictState {
-    fileUrl?: string;
+    fileUrl: string;
     predictlist?: PredictList[];
 }
 
 // Define the initial state using that type
-const initialState: PredictState = {};
+const initialState: PredictState = {
+    fileUrl: "",
+    predictlist: [],
+};
 
 export const predictSlice = createSlice({
     name: "predict",
