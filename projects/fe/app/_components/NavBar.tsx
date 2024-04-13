@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Analysis from "@/_images/Analytics";
 import AccountCircle from "@/_images/AccountCircle";
 import Workout from "@/_images/Workout";
@@ -9,11 +9,27 @@ import Forum from "@/_images/Forum";
 import { usePathname } from "next/navigation";
 import FoodPicture from "@/_components/FoodPicture";
 
+const excepts = ["/initial-setup"];
+
 const NavBar = () => {
     const pathname = usePathname();
+    const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        let temp = true;
+        for (const except of excepts) {
+            if (pathname.includes(except)) {
+                temp = false;
+                break;
+            }
+        }
+        if (isVisible !== temp)
+            setIsVisible(temp);
+    }, [pathname])
 
     return (
-        <div className="fixed default-bg bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[60px] justify-between items-center">
+        <div className={`fixed default-bg bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[60px] justify-between items-center 
+        ${!isVisible && "invisible"}`}>
             <Link
                 href="/workout/todo"
                 className="flex flex-col items-center justify-between basis-1/5"

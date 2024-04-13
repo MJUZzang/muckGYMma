@@ -2,11 +2,13 @@ import React from "react";
 
 interface ArrowBackProps {
     className?: string;
+    onClick?: () => void;
 }
 
 const ArrowBack: React.FC<ArrowBackProps> = (props) => {
     return (
         <svg
+            onClick={props.onClick}
             className={props.className}
             xmlns="http://www.w3.org/2000/svg"
             height="24"
