@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useAppSelector } from "@/../lib/hooks";
-import { selectPredict } from "@/../lib/slices/predictSlice";
+import { PredictState, selectPredict } from "@/../lib/slices/predictSlice";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import ConfirmModal from "./_components/ConfirmModal";
@@ -88,10 +88,10 @@ import ConfirmModal from "./_components/ConfirmModal";
 
 export default function Page() {
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
-    const [selectedPredict, setSelectedPredict] = useState<number>(0);
+    const [selectedPredict, setSelectedPredict] = useState<number | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-    const predict = useAppSelector(selectPredict);
+    const predict: PredictState = useAppSelector(selectPredict);
     // const predict = dummyData;
 
     return (
