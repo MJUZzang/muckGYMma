@@ -115,6 +115,7 @@ export default function Page() {
             },
             body: JSON.stringify({
                 id: foodIdList,
+                imageUrl: predict.fileUrl
             }),
         })
             .then((res) => {
