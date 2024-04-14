@@ -20,7 +20,7 @@ public record FoodPickResponse(
         return new FoodPickResponse(
                 meal.getId(),
                 foodLensIds,
-                meal.getFoodName(),
+                meal.getMealName(),
                 meal.getNutrient().getKcal(),
                 meal.getNutrient().getCarbo(),
                 meal.getNutrient().getFat(),
