@@ -30,7 +30,7 @@ function ConfirmModal({
             return;
         }
 
-        fetch(`${backendUrl}/api/food/pick`, {
+        fetch(`${backendUrl}/api/foods/pick`, {
             method: "POST",
             credentials: "include",
             headers: {

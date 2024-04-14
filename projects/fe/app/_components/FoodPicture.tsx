@@ -22,7 +22,7 @@ function FoodPicture(props: Props) {
             const formData = new FormData();
             formData.append("file", file);
 
-            fetch(`${backendUrl}/api/food/predict`, {
+            fetch(`${backendUrl}/api/foods/predict`, {
                 method: "POST",
                 credentials: "include",
                 body: formData,
