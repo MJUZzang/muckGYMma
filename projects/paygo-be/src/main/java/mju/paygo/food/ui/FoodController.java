@@ -7,6 +7,7 @@ import mju.paygo.food.infrastructure.dto.FoodAnalyzeResponse;
 import mju.paygo.food.infrastructure.dto.FoodSearchResponse;
 import mju.paygo.food.infrastructure.dto.FoodPickResponse;
 import mju.paygo.food.ui.dto.FoodPickRequest;
+import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,9 @@ public class FoodController {
     private final FoodService foodService;
 
     @PostMapping("/predict")
-    public ResponseEntity<FoodAnalyzeResponse> predictFood(@RequestParam("file") final MultipartFile file) {
-        Long userId = 1L;
-        FoodAnalyzeResponse response = foodService.predictFood(file, userId);
+    public ResponseEntity<FoodAnalyzeResponse> predictFood(@RequestParam("file") final MultipartFile file,
+                                                           @AuthMember final Long memberId) {
+        FoodAnalyzeResponse response = foodService.predictFood(file, memberId);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
@@ -36,9 +37,9 @@ public class FoodController {
 
     @PostMapping("pick/{foodLensId}")
     public ResponseEntity<FoodPickResponse> pickFood(@PathVariable final Long foodLensId,
-                                                     @RequestBody @Valid final FoodPickRequest request) {
-        Long userId = 1L;
-        FoodPickResponse response = foodService.pickFood(foodLensId, userId, request.imageUrl());
+                                                     @RequestBody @Valid final FoodPickRequest request,
+                                                     @AuthMember final Long memberId) {
+        FoodPickResponse response = foodService.pickFood(foodLensId, memberId, request.imageUrl());
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(response);
