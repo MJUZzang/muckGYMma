@@ -1,6 +1,6 @@
 package mju.paygo.member.ui.auth.support.auth;
 
-import mju.paygo.member.exception.exceptions.auth.OAuthPlatformNotFountException;
+import mju.paygo.member.exception.exceptions.auth.OAuthPlatformNotFoundException;
 
 import java.util.Arrays;
 
@@ -20,6 +20,6 @@ public enum OAuthPlatform {
         return Arrays.stream(values())
                 .filter(platform -> name.equals(platform.name))
                 .findFirst()
-                .orElseThrow(OAuthPlatformNotFountException::new);
+                .orElseThrow(OAuthPlatformNotFoundException::new);
     }
 }
