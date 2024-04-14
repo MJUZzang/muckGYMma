@@ -37,7 +37,7 @@ public class MemberExceptionHandler {
             UnsupportedTokenException.class
     })
     public ResponseEntity<ExceptionResponse> handleAuthException(final Exception e) {
-        return getBadRequest(e);
+        return getUnAuthorized(e);
     }
 
     private ResponseEntity<ExceptionResponse> getBadRequest(final Exception e) {
@@ -47,6 +47,11 @@ public class MemberExceptionHandler {
 
     private ResponseEntity<ExceptionResponse> getNotFound(final Exception e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ExceptionResponse(e.getMessage()));
+    }
+
+    private ResponseEntity<ExceptionResponse> getUnAuthorized(final Exception e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(new ExceptionResponse(e.getMessage()));
     }
 }
