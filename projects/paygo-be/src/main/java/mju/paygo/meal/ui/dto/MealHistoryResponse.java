@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 public record MealHistoryResponse(
         Long id,
+        String name,
         BigDecimal kcal,
         BigDecimal carbo,
         BigDecimal protein,
@@ -22,6 +23,7 @@ public record MealHistoryResponse(
     public static MealHistoryResponse from(final Meal meal) {
         return new MealHistoryResponse(
                 meal.getId(),
+                meal.getMealName(),
                 meal.getNutrient().getKcal(),
                 meal.getNutrient().getCarbo(),
                 meal.getNutrient().getProtein(),

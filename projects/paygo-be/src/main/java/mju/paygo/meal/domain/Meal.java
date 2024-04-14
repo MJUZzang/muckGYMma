@@ -29,7 +29,7 @@ public class Meal extends BaseEntity {
     private Nutrient nutrient;
 
     @Column(nullable = false)
-    private String foodName;
+    private String mealName;
 
     @Column(nullable = false)
     private String imageUrl;
@@ -40,15 +40,15 @@ public class Meal extends BaseEntity {
     @Column(nullable = false)
     private Boolean posted = false;
 
-    private Meal(final Long memberId, final Nutrient nutrient, final String foodName, final String imageUrl) {
+    private Meal(final Long memberId, final Nutrient nutrient, final String mealName, final String imageUrl) {
         this.memberId = memberId;
         this.nutrient = nutrient;
-        this.foodName = foodName;
+        this.mealName = mealName;
         this.imageUrl = imageUrl;
     }
 
-    public static Meal of(final Long memberId, final Nutrient nutrient, final String foodName, final String imageUrl) {
-        return new Meal(memberId, nutrient, foodName, imageUrl);
+    public static Meal of(final Long memberId, final Nutrient nutrient, final String mealName, final String imageUrl) {
+        return new Meal(memberId, nutrient, mealName, imageUrl);
     }
 
     public void clearExercise() {
