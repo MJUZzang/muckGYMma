@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { MouseEventHandler, useEffect, useState } from "react";
 import { PredictState } from "@/../lib/slices/predictSlice";
 import { backendUrl } from "@/_utils/urls";
 
@@ -20,6 +20,10 @@ function ConfirmModal({
     selectedPredict,
 }: Props) {
     const [foodsSelected, setFoodsSelected] = useState<number[]>([]);
+
+    useEffect(() => {
+        setFoodsSelected([]);
+    }, [isModalOpen])
 
     const handleOkClicked: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
