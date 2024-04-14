@@ -5,6 +5,7 @@ import mju.paygo.meal.domain.Meal;
 import mju.paygo.meal.domain.MealRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -21,5 +22,10 @@ public class MealRepositoryImpl implements MealRepository {
     @Override
     public Optional<Meal> findById(final Long foodId) {
         return mealJpaRepository.findById(foodId);
+    }
+
+    @Override
+    public List<Meal> findAllByMemberId(final Long memberId) {
+        return mealJpaRepository.findAllByMemberId(memberId);
     }
 }
