@@ -11,26 +11,11 @@ import mju.paygo.member.ui.auth.support.auth.OAuthAuthority;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
-import static org.springframework.web.bind.annotation.RequestMethod.OPTIONS;
-import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
-
-@CrossOrigin(
-        origins = "https://muckgymma.kro.kr",
-        methods = {GET, POST, OPTIONS, HEAD, PUT, PATCH, DELETE},
-        allowCredentials = "true",
-        maxAge = 3600,
-        allowedHeaders = "*")
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
