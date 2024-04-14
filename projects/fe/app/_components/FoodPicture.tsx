@@ -24,6 +24,7 @@ function FoodPicture(props: Props) {
 
             fetch(`${backendUrl}/api/food/predict`, {
                 method: "POST",
+                credentials: "include",
                 body: formData,
             })
                 .then((res) => {
