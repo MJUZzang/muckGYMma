@@ -4,6 +4,7 @@ import "@/_styles/globals.css";
 import NavBar from "@/_components/NavBar";
 import DarkMode from "@/_components/DarkMode";
 import StoreProvider from "./_components/StoreProvider";
+import InitialLoad from "./_components/InitialLoad";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,11 +24,13 @@ export default function RootLayout({
                 className={`flex flex-col h-screen 
                 default-bg ${inter.className} dark:text-white `}
             >
-                <StoreProvider>
-                    {children}
-                    <NavBar />
-                    <DarkMode />
-                </StoreProvider>
+                <InitialLoad>
+                    <StoreProvider>
+                        {children}
+                        <NavBar />
+                        <DarkMode />
+                    </StoreProvider>
+                </InitialLoad>
             </body>
         </html>
     );

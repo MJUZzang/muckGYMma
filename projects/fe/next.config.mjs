@@ -2,7 +2,14 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ["muckgymma.s3.ap-northeast-2.amazonaws.com"],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "muckgymma.s3.ap-northeast-2.amazonaws.com",
+                port: '',
+                pathname: ''
+            }
+        ]
     },
     async redirects() {
         return [
