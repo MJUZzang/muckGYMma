@@ -17,13 +17,17 @@ function InitialLoad(props: Props) {
             fetch(`${backendUrl}/api/login/check`, {
                 method: "GET",
                 credentials: "include",
-            }).then((res) => {
-                if (res.ok) {
+            })
+                .then((res) => {
                     setLoading(false);
-                } else {
-                    router.push("/sign-in");
-                }
-            });
+                    if (!res.ok) {
+                        router.push("/sign-in");
+                    }
+                })
+                .catch((err) => {
+                    setLoading(false);
+                    console.error(err);
+                });
         } else {
             setLoading(false);
         }
