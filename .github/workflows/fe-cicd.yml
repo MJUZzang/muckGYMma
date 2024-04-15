@@ -19,7 +19,7 @@ jobs:
       - name: Stop docker
         run: sudo docker rm -f muckgymma-fe
       - name: Remove images
-        run: sudo docker rmi $(sudo docker images -q)
+        run: sudo docker rmi -f $(sudo docker images -q)
 
   build:
     if: |
