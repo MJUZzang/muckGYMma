@@ -15,7 +15,7 @@ function InitialLoad(props: Props) {
     useEffect(() => {
         if (process.env.NODE_ENV !== "development") {
             fetch(`${backendUrl}/api/login/check`, {
-                method: "POST",
+                method: "GET",
                 credentials: "include",
             }).then((res) => {
                 if (res.ok) {
