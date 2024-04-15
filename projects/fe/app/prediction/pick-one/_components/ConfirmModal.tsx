@@ -1,6 +1,12 @@
 import React, { MouseEventHandler, useEffect, useState } from "react";
-import { PredictState } from "@/../lib/slices/predictSlice";
+import {
+    PredictResult,
+    PredictState,
+    setPredictResult,
+} from "@/../lib/slices/predictSlice";
 import { backendUrl } from "@/_utils/urls";
+import { useAppDispatch } from "../../../../lib/hooks";
+import { useRouter } from "next/navigation";
 
 interface Props {
     title: string;
@@ -20,10 +26,12 @@ function ConfirmModal({
     selectedPredict,
 }: Props) {
     const [foodsSelected, setFoodsSelected] = useState<number[]>([]);
+    const dispatch = useAppDispatch();
+    const router = useRouter();
 
     useEffect(() => {
         setFoodsSelected([]);
-    }, [isModalOpen])
+    }, [isModalOpen]);
 
     const handleOkClicked: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
@@ -53,8 +61,10 @@ function ConfirmModal({
                     console.error("fail");
                 }
             })
-            .then((data) => {
+            .then((data: PredictResult) => {
                 console.log(data);
+                dispatch(setPredictResult(data));
+                router.push("/prediction/result")
             })
             .catch((err) => console.error(err));
     };

@@ -1,5 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
+import type { RootState } from "@/../lib/store";
+
+export interface PredictResult {
+    carbo?: number;
+    fat?: number;
+    foodLnesId?: number[];
+    foodName?: string;
+    gram?: number;
+    id?: number;
+    kcal?: number;
+    protein?: number;
+    sodium?: number;
+}
 
 export interface FoodList {
     id: number;
@@ -18,12 +30,14 @@ export interface PredictList {
 export interface PredictState {
     fileUrl: string;
     predictlist?: PredictList[];
+    predictresult?: PredictResult;
 }
 
 // Define the initial state using that type
 const initialState: PredictState = {
     fileUrl: "",
     predictlist: [],
+    predictresult: {},
 };
 
 export const predictSlice = createSlice({
@@ -35,10 +49,13 @@ export const predictSlice = createSlice({
             state.fileUrl = action.payload.fileUrl;
             state.predictlist = action.payload.predictlist;
         },
+        setPredictResult: (state, action: PayloadAction<PredictResult>) => {
+            state.predictresult = action.payload;
+        },
     },
 });
 
-export const { setPredict } = predictSlice.actions;
+export const { setPredict, setPredictResult } = predictSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectPredict = (state: RootState) => state.predict;
