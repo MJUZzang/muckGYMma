@@ -1,8 +1,10 @@
 "use client";
 
 import { backendUrl } from "@/_utils/urls";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+
+const excepts = ["/sign-in"];
 
 interface Props {
     children: React.ReactNode;
@@ -11,25 +13,36 @@ interface Props {
 function InitialLoad(props: Props) {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
+    const pathname = usePathname();
 
     useEffect(() => {
-        if (process.env.NODE_ENV !== "development") {
-            fetch(`${backendUrl}/api/login/check`, {
-                method: "GET",
-                credentials: "include",
-            })
-                .then((res) => {
-                    setLoading(false);
-                    if (!res.ok) {
-                        router.push("/sign-in");
-                    }
+        let shouldBeExcepted = false;
+        for (const except of excepts) {
+            if (pathname.startsWith(except)) {
+                shouldBeExcepted = true;
+                break;
+            }
+        }
+
+        if (!shouldBeExcepted) {
+            if (process.env.NODE_ENV !== "development") {
+                fetch(`${backendUrl}/api/login/check`, {
+                    method: "GET",
+                    credentials: "include",
                 })
-                .catch((err) => {
-                    setLoading(false);
-                    console.error(err);
-                });
-        } else {
-            setLoading(false);
+                    .then((res) => {
+                        setLoading(false);
+                        if (!res.ok) {
+                            router.push("/sign-in");
+                        }
+                    })
+                    .catch((err) => {
+                        setLoading(false);
+                        console.error(err);
+                    });
+            } else {
+                setLoading(false);
+            }
         }
     }, []);
 
