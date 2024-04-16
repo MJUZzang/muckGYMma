@@ -24,7 +24,9 @@ function InitialLoad(props: Props) {
             }
         }
 
-        if (!shouldBeExcepted) {
+        if (shouldBeExcepted) {
+            setLoading(false);
+        } else {
             if (process.env.NODE_ENV !== "development") {
                 fetch(`${backendUrl}/api/login/check`, {
                     method: "GET",

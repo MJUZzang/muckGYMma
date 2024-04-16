@@ -3,8 +3,8 @@ import { Inter } from "next/font/google";
 import "@/_styles/globals.css";
 import NavBar from "@/_components/NavBar";
 import DarkMode from "@/_components/DarkMode";
-import StoreProvider from "./_components/StoreProvider";
-import InitialLoad from "./_components/InitialLoad";
+import StoreProvider from "@/_components/StoreProvider";
+import InitialLoad from "@/_components/InitialLoad";
 
 const inter = Inter({ subsets: ["latin"] });
 

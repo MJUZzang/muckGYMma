@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import ForwardButton from "../_components/ForwardButton";
+import ForwardButton from "@/initial-setup/_components/ForwardButton";
 
 function Page() {
     const [selectedGender, setSelectedGender] = useState<number | null>(null);

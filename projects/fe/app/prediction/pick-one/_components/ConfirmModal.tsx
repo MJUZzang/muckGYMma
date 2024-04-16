@@ -5,7 +5,7 @@ import {
     setPredictResult,
 } from "@/../lib/slices/predictSlice";
 import { backendUrl } from "@/_utils/urls";
-import { useAppDispatch } from "../../../../lib/hooks";
+import { useAppDispatch } from "@/../lib/hooks";
 import { useRouter } from "next/navigation";
 
 interface Props {

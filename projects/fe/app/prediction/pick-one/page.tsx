@@ -5,7 +5,7 @@ import { useAppSelector } from "@/../lib/hooks";
 import { PredictState, selectPredict } from "@/../lib/slices/predictSlice";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import ConfirmModal from "./_components/ConfirmModal";
+import ConfirmModal from "@/prediction/pick-one/_components/ConfirmModal";
 
 // const dummyData = {
 //     predictlist: [

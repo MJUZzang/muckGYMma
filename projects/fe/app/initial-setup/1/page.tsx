@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import Welcome from "@/initial-setup/1/_images/Welcome";
-import ForwardButton from "../_components/ForwardButton";
+import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useRouter } from "next/navigation";
 
 const welcomingWords =

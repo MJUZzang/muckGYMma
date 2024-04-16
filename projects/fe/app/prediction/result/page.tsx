@@ -2,9 +2,21 @@
 
 import React from "react";
 import { useAppSelector } from "@/../lib/hooks";
-import { selectPredict } from "@/../lib/slices/predictSlice";
+import { PredictResult, selectPredict } from "@/../lib/slices/predictSlice";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+
+const dummyData: PredictResult = {
+    id: 6,
+    foodLensId: [779],
+    foodName: "제육볶음",
+    kcal: 186.19,
+    carbo: 12.83,
+    fat: 9.04,
+    gram: 120.7,
+    sodium: 466.86,
+    protein: 13.8,
+};
 
 function Page() {
     const predict = useAppSelector(selectPredict);

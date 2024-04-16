@@ -4,7 +4,7 @@ import type { RootState } from "@/../lib/store";
 export interface PredictResult {
     carbo?: number;
     fat?: number;
-    foodLnesId?: number[];
+    foodLensId?: number[];
     foodName?: string;
     gram?: number;
     id?: number;

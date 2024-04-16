@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ForwardButton from "../_components/ForwardButton";
+import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import ShyCat from "@/initial-setup/2/_images/ShyCat";
 import { useRouter } from "next/navigation";
 

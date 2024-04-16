@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import ForwardButton from "../_components/ForwardButton";
+import ForwardButton from "@/initial-setup/_components/ForwardButton";
 
 const sports = [
     "축구",
