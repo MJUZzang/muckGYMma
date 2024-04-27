@@ -4,6 +4,7 @@ import React from "react";
 import Like from "@/community/following/_images/Like";
 import Comment from "@/community/following/_images/Comment";
 import SpoonKnife from "@/community/following/_images/SpoonKnife";
+import CommentsSection from "@/community/following/_components/CommentsSection";
 
 interface PostProps {
     postInfo: PostInfo;
@@ -42,16 +43,18 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             <p className="mt-2 text-gray-100">{postInfo.content}</p>
 
             <div className="flex justify-between border-b-2 border-b-white/60 mt-1 pl-1 pr-3">
+                <div className="flex py-1 gap-3">
+                    <Like className="fill-white" />
+                    <CommentsSection>
+                        <Comment className="fill-white" />
+                    </CommentsSection>
+                    <SpoonKnife className="fill-white" />
+                </div>
+
                 {/* 포스트 정보 */}
                 <div className="flex justify-end gap-4 text-sm text-gray-300 py-2">
                     <p>{postInfo.likes} liked</p>
                     <p>{postInfo.comments} comments</p>
-                </div>
-
-                <div className="flex py-1 gap-3">
-                    <Like className="fill-white" />
-                    <Comment className="fill-white" />
-                    <SpoonKnife className="fill-white" />
                 </div>
             </div>
         </div>
