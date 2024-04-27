@@ -45,17 +45,23 @@ export const predictSlice = createSlice({
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
+        setFileUrl: (state, action: PayloadAction<string>) => {
+            state.fileUrl = action.payload;
+        },
+
         setPredict: (state, action: PayloadAction<PredictState>) => {
             state.fileUrl = action.payload.fileUrl;
             state.predictlist = action.payload.predictlist;
         },
+
         setPredictResult: (state, action: PayloadAction<PredictResult>) => {
             state.predictresult = action.payload;
         },
     },
 });
 
-export const { setPredict, setPredictResult } = predictSlice.actions;
+export const { setFileUrl, setPredict, setPredictResult } =
+    predictSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectPredict = (state: RootState) => state.predict;

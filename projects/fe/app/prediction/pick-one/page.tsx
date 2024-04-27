@@ -1,84 +1,84 @@
 "use client";
 
-import React, { useState } from "react";
-import { useAppSelector } from "@/../lib/hooks";
-import { PredictState, selectPredict } from "@/../lib/slices/predictSlice";
+import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
+import { PredictState, selectPredict, setPredict } from "@/../lib/slices/predictSlice";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import ConfirmModal from "@/prediction/pick-one/_components/ConfirmModal";
 
-// const dummyData = {
-//     predictlist: [
-//         {
-//             keyname: "roasted_pork_belly",
-//             foodlist: [
-//                 {
-//                     id: 690,
-//                     foodname: "돼지삼겹살(구운것)",
-//                     manufacturer: "",
-//                     predict_key: "roasted_pork_belly",
-//                 },
-//             ],
-//             possibility: 99.98961687088013,
-//         },
-//         {
-//             keyname: "smoked_pork_belly",
-//             foodlist: [
-//                 {
-//                     id: 11116,
-//                     foodname: "훈제삼겹살",
-//                     manufacturer: "",
-//                     predict_key: "smoked_pork_belly",
-//                 },
-//             ],
-//             possibility: 0.005348741251509637,
-//         },
-//         {
-//             keyname: "bossam",
-//             foodlist: [
-//                 {
-//                     id: 820,
-//                     foodname: "돼지고기보쌈(사태)",
-//                     manufacturer: "",
-//                     predict_key: "bossam",
-//                 },
-//                 {
-//                     id: 821,
-//                     foodname: "돼지고기보쌈(삼겹살)",
-//                     manufacturer: "",
-//                     predict_key: "bossam",
-//                 },
-//             ],
-//             possibility: 0.0026325657017878257,
-//         },
-//         {
-//             keyname: "steak_rice",
-//             foodlist: [
-//                 {
-//                     id: 80,
-//                     foodname: "스테이크덮밥",
-//                     manufacturer: "",
-//                     predict_key: "steak_rice",
-//                 },
-//             ],
-//             possibility: 0.0006327998562483117,
-//         },
-//         {
-//             keyname: "five_spice_sliced_pork",
-//             foodlist: [
-//                 {
-//                     id: 894,
-//                     foodname: "오향장육",
-//                     manufacturer: "",
-//                     predict_key: "five_spice_sliced_pork",
-//                 },
-//             ],
-//             possibility: 0.00041311200220661703,
-//         },
-//     ],
-//     fileUrl:
-//         "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/1_%25EC%2582%25BC%25EA%25B2%25B9%25EC%2582%25B4.jpg",
-// };
+const dummyData = {
+    predictlist: [
+        {
+            keyname: "roasted_pork_belly",
+            foodlist: [
+                {
+                    id: 690,
+                    foodname: "돼지삼겹살(구운것)",
+                    manufacturer: "",
+                    predict_key: "roasted_pork_belly",
+                },
+            ],
+            possibility: 99.98961,
+        },
+        {
+            keyname: "smoked_pork_belly",
+            foodlist: [
+                {
+                    id: 11116,
+                    foodname: "훈제삼겹살",
+                    manufacturer: "",
+                    predict_key: "smoked_pork_belly",
+                },
+            ],
+            possibility: 0.00534,
+        },
+        {
+            keyname: "bossam",
+            foodlist: [
+                {
+                    id: 820,
+                    foodname: "돼지고기보쌈(사태)",
+                    manufacturer: "",
+                    predict_key: "bossam",
+                },
+                {
+                    id: 821,
+                    foodname: "돼지고기보쌈(삼겹살)",
+                    manufacturer: "",
+                    predict_key: "bossam",
+                },
+            ],
+            possibility: 0.00263,
+        },
+        {
+            keyname: "steak_rice",
+            foodlist: [
+                {
+                    id: 80,
+                    foodname: "스테이크덮밥",
+                    manufacturer: "",
+                    predict_key: "steak_rice",
+                },
+            ],
+            possibility: 0.00063,
+        },
+        {
+            keyname: "five_spice_sliced_pork",
+            foodlist: [
+                {
+                    id: 894,
+                    foodname: "오향장육",
+                    manufacturer: "",
+                    predict_key: "five_spice_sliced_pork",
+                },
+            ],
+            possibility: 0.00041,
+        },
+    ],
+    fileUrl:
+        "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/1_%25EC%2582%25BC%25EA%25B2%25B9%25EC%2582%25B4.jpg",
+};
 
 // if (dummyData.predictlist) {
 //     for (let predict of dummyData.predictlist) {
@@ -87,12 +87,17 @@ import ConfirmModal from "@/prediction/pick-one/_components/ConfirmModal";
 // }
 
 export default function Page() {
+    const dispatch = useAppDispatch();
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
     const [selectedPredict, setSelectedPredict] = useState<number | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
     const predict: PredictState = useAppSelector(selectPredict);
-    // const predict = dummyData;
+
+    useEffect(() => {
+        if (process.env.NODE_ENV === "development") {
+            dispatch(setPredict(dummyData));
+        }
+    })
 
     return (
         <div className="h-full" onClick={() => setIsModalOpen(false)}>
