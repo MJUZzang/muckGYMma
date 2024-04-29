@@ -9,9 +9,10 @@ import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
 
 interface Props {
     className?: string;
+    size?: number;
 }
 
-function FoodPicture(props: Props) {
+function FoodPicture({ className, size = 29 }: Props) {
     const inputRef = React.createRef<HTMLInputElement>();
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -40,7 +41,9 @@ function FoodPicture(props: Props) {
                     }
 
                     for (let predict of data.predictlist) {
-                        predict.possibility = parseFloat(predict.possibility.toFixed(5));
+                        predict.possibility = parseFloat(
+                            predict.possibility.toFixed(5)
+                        );
                     }
                     dispatch(setPredict(data));
                     router.push(`/prediction/pick-one`);
@@ -63,8 +66,8 @@ function FoodPicture(props: Props) {
                 type="file"
                 onInput={handleUpload}
             />
-            <div onClick={handleClicked} className={`${props.className}`}>
-                <Camera />
+            <div onClick={handleClicked} className={`${className}`}>
+                <Camera size={size} />
             </div>
         </>
     );

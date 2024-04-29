@@ -32,7 +32,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 </div>
             </div>
 
-            {/* 포스트 이미지 */}
+            {/* 포스트 이미지 */}   
             <Image
                 src={postInfo.image}
                 alt="Post image"
