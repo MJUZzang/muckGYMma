@@ -83,13 +83,13 @@ const NavBar = () => {
                     </Link>
 
                     <Link
-                        href="/profile"
+                        href="/profile/posts"
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <AccountCircle
-                            isActive={pathname === "/profile"}
+                            isActive={pathname === "/profile/posts"}
                             className={`${
-                                pathname === "/profile"
+                                pathname === "/profile/posts"
                                     ? "fill-fluorescent"
                                     : "fill-gray-200"
                             }`}
