@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import LogoAndTitle from "@/_components/LogoAndTitle";
 import Settings from "@/profile/_images/Settings";
@@ -8,8 +10,16 @@ import Hash from "@/profile/_components/Hash";
 import Grid from "@/profile/_components/Grid";
 import ForkKnife from "@/profile/_components/ForkKnife";
 import Analytics from "@/profile/_components/Analytics";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-const Page = () => {
+const Page = ({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) => {
+    const pathname = usePathname();
+
     return (
         <>
             <div className="flex items-center justify-between mx-5 mt-2 mb-4">
@@ -33,7 +43,7 @@ const Page = () => {
             </div>
 
             {/* posts & uploded food images & analytics page */}
-            <div className="max-w-[935px] mx-auto">
+            <div className="w-full max-w-[935px] mx-auto">
                 <div className="flex gap-5 mx-4 mt-3 items-center">
                     <div className="w-fit">
                         <div
@@ -102,18 +112,42 @@ const Page = () => {
                 </div>
 
                 <div className="flex justify-between items-center mt-3">
-                    <Grid className="w-full" color="white" size={33} />
-                    <ForkKnife className="w-full relative top-1" size={33} />
-                    <Analytics className="w-full" color="white" size={33} />
+                    <Link className="w-full" href="/profile/posts">
+                        <Grid
+                            className="w-full"
+                            color={`${
+                                pathname.includes("/profile/posts")
+                                    ? "white"
+                                    : "#aaaaaa"
+                            }`}
+                            size={33}
+                        />
+                    </Link>
+                    <Link className="w-full" href="/profile/food">
+                        <ForkKnife
+                            className="w-full relative top-1"
+                            color={`${
+                                pathname.includes("/profile/food")
+                                    ? "white"
+                                    : "#aaaaaa"
+                            }`}
+                            size={33}
+                        />
+                    </Link>
+                    <Link className="w-full" href={`/profile/analytics`}>
+                        <Analytics
+                            className="w-full"
+                            color={`${
+                                pathname.includes("/profile/analytics")
+                                    ? "white"
+                                    : "#aaaaaa"
+                            }`}
+                            size={33}
+                        />
+                    </Link>
                 </div>
 
-                <div className="grid grid-cols-3 gap-1 md:gap-3">
-                    {Array.from({ length: 16 }).map((_, i) => (
-                        <div key={i} className="aspect-square overflow-clip">
-                            <Image src={exampleImage} alt="avatar" />
-                        </div>
-                    ))}
-                </div>
+                {children}
             </div>
         </>
     );
