@@ -1,12 +1,12 @@
 import React from "react";
 
-interface Props {
+interface HashProps {
     className?: string;
     size?: number;
     strokeColor?: string;
 }
 
-function Hash({ className, size = 24, strokeColor }: Props) {
+function Hash({ className, size = 24, strokeColor }: HashProps) {
     return (
         <svg
             width={size}

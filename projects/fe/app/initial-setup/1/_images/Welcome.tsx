@@ -1,10 +1,10 @@
 import React from "react";
 
-interface Props {
+interface WelcomeProps {
     className?: string;
 }
 
-function Welcome(props: Props) {
+function Welcome(props: WelcomeProps) {
     return (
         <svg
             className={props.className}

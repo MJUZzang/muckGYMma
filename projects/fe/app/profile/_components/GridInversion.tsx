@@ -1,12 +1,12 @@
 import React from "react";
 
-interface Props {
+interface GridInversionProps {
     className?: string;
     size?: number;
     color?: string;
 }
 
-function GridInversion({ size = 24, className, color }: Props) {
+function GridInversion({ size = 24, className, color }: GridInversionProps) {
     return (
         <svg
             width="39"

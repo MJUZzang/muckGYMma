@@ -3,18 +3,19 @@
 import Link from "next/link";
 import React from "react";
 
-interface Props {
+interface ForwardButtonProps {
     title: string;
     href?: string;
     className?: string;
     onClick?: () => void;
 }
+
 function ForwardButton({
     href = "",
     onClick = () => {},
     className = "",
     title = "",
-}: Props) {
+}: ForwardButtonProps) {
     return (
         <Link
             href={href}

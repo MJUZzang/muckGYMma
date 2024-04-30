@@ -1,12 +1,12 @@
 import React from "react";
 
-interface Props {
+interface ForkKnifeProps {
     className?: string;
     size?: number;
     color?: string;
 }
 
-function ForkKnife({ className, size = 24, color }: Props) {
+function ForkKnife({ className, size = 24, color }: ForkKnifeProps) {
     return (
         <svg
             width={size}

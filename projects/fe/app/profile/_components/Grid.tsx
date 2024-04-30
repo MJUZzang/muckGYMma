@@ -1,12 +1,12 @@
 import React from "react";
 
-interface Props {
+interface GridProps {
     className?: string;
     size?: number;
     color?: string;
 }
 
-function Grid({ size = 24, className, color }: Props) {
+function Grid({ size = 24, className, color }: GridProps) {
     return (
         <svg
             width={size}

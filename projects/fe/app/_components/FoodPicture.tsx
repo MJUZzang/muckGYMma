@@ -7,12 +7,12 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
 import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
 
-interface Props {
+interface FoodPictureProps {
     className?: string;
     size?: number;
 }
 
-function FoodPicture({ className, size = 29 }: Props) {
+function FoodPicture({ className, size = 29 }: FoodPictureProps) {
     const inputRef = React.createRef<HTMLInputElement>();
     const router = useRouter();
     const dispatch = useAppDispatch();

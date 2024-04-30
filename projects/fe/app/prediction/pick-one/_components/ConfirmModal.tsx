@@ -8,7 +8,7 @@ import { backendUrl } from "@/_utils/urls";
 import { useAppDispatch } from "@/../lib/hooks";
 import { useRouter } from "next/navigation";
 
-interface Props {
+interface ConfirmModalProps {
     title: string;
     onOkClicked: () => void;
     onCancelClicked: () => void;
@@ -24,7 +24,7 @@ function ConfirmModal({
     isModalOpen,
     predict,
     selectedPredict,
-}: Props) {
+}: ConfirmModalProps) {
     const [foodsSelected, setFoodsSelected] = useState<number[]>([]);
     const dispatch = useAppDispatch();
     const router = useRouter();

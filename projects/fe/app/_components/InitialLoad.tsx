@@ -6,11 +6,11 @@ import React, { useEffect, useState } from "react";
 
 const excepts = ["/sign-in"];
 
-interface Props {
+interface InitialLoadProps {
     children: React.ReactNode;
 }
 
-function InitialLoad(props: Props) {
+function InitialLoad(props: InitialLoadProps) {
     const router = useRouter();
     const [loading, setLoading] = useState(true);
     const pathname = usePathname();

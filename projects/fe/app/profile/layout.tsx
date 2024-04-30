@@ -112,9 +112,16 @@ const Page = ({
                 </div>
 
                 <div className="flex justify-between items-center mt-3">
-                    <Link className="w-full" href="/profile/posts">
+                    <Link
+                        className={`w-full transition duration-200 border-b-2 ${
+                            pathname.includes("profile/posts")
+                                ? "border-b-white"
+                                : "border-b-white/0"
+                        }`}
+                        href="/profile/posts"
+                    >
                         <Grid
-                            className="w-full"
+                            className={`w-full`}
                             color={`${
                                 pathname.includes("/profile/posts")
                                     ? "white"
@@ -123,7 +130,14 @@ const Page = ({
                             size={33}
                         />
                     </Link>
-                    <Link className="w-full" href="/profile/food">
+                    <Link
+                        className={`w-full border-b-2 ${
+                            pathname.includes("profile/food")
+                                ? "border-b-white"
+                                : "border-b-white/0"
+                        }`}
+                        href="/profile/food"
+                    >
                         <ForkKnife
                             className="w-full relative top-1"
                             color={`${
@@ -134,7 +148,14 @@ const Page = ({
                             size={33}
                         />
                     </Link>
-                    <Link className="w-full" href={`/profile/analytics`}>
+                    <Link
+                        className={`w-full border-b-2 ${
+                            pathname.includes("profile/analytics")
+                                ? "border-b-white"
+                                : "border-b-white/0"
+                        }`}
+                        href={`/profile/analytics`}
+                    >
                         <Analytics
                             className="w-full"
                             color={`${

@@ -1,12 +1,12 @@
 import React from "react";
 
-interface Props {
+interface AnalyticsProps {
     className?: string;
     size?: number;
     color?: string;
 }
 
-function Analytics({ className, size = 24, color }: Props) {
+function Analytics({ className, size = 24, color }: AnalyticsProps) {
     return (
         <svg
             width={size}
