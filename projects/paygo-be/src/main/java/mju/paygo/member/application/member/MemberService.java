@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import mju.paygo.global.event.Events;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
+import mju.paygo.member.exception.exceptions.member.MemberNotFoundException;
 import mju.paygo.physicalprofile.application.event.PhysicalProfileCreatedEvent;
 import mju.paygo.physicalprofile.domain.dto.PhysicalProfileCreateRequest;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,11 @@ public class MemberService {
     @Transactional
     public void writePhysicalProfile(final Long memberId, final PhysicalProfileCreateRequest request) {
         Events.raise(new PhysicalProfileCreatedEvent(memberId, request));
+    }
+
+    @Transactional(readOnly = true)
+    public Member findById(final Long memberId) {
+        return memberRepository.findById(memberId)
+                .orElseThrow(MemberNotFoundException::new);
     }
 }
