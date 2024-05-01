@@ -5,6 +5,8 @@ import mju.paygo.physicalprofile.domain.PhysicalProfile;
 import mju.paygo.physicalprofile.domain.PhysicalProfileRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Repository
 public class PhysicalProfileRepositoryImpl implements PhysicalProfileRepository {
@@ -19,5 +21,10 @@ public class PhysicalProfileRepositoryImpl implements PhysicalProfileRepository 
     @Override
     public boolean isExistByMemberId(final Long memberId) {
         return physicalProfileJpaRepository.existsByMemberId(memberId);
+    }
+
+    @Override
+    public Optional<PhysicalProfile> findByMemberId(final Long memberId) {
+        return physicalProfileJpaRepository.findByMemberId(memberId);
     }
 }

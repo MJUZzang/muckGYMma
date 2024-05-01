@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mju.paygo.physicalprofile.domain.dto.PhysicalProfileCreateRequest;
+import mju.paygo.physicalprofile.domain.dto.PhysicalProfileEditRequest;
 import mju.paygo.physicalprofile.domain.vo.Birth;
 import mju.paygo.physicalprofile.domain.vo.Gender;
 
@@ -57,5 +58,12 @@ public class PhysicalProfile {
         Gender gender = Gender.findByName(request.gender());
         Birth birth = Birth.from(request.birth());
         return new PhysicalProfile(memberId, gender, birth, request.weight(), request.height());
+    }
+
+    public void edit(final PhysicalProfileEditRequest request) {
+        this.gender = (request.gender() != null) ? Gender.findByName(request.gender()) : this.gender;
+        this.birth = (request.birth() != null) ? Birth.from(request.birth()) : this.birth;
+        this.weight = (request.weight() != null) ? request.weight() : this.weight;
+        this.height = (request.height() != null) ? request.height() : this.height;
     }
 }

@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import mju.paygo.physicalprofile.domain.PhysicalProfile;
 import mju.paygo.physicalprofile.domain.PhysicalProfileRepository;
 import mju.paygo.physicalprofile.domain.dto.PhysicalProfileCreateRequest;
+import mju.paygo.physicalprofile.domain.dto.PhysicalProfileEditRequest;
+import mju.paygo.physicalprofile.exception.exceptions.PhysicalProfileNotFoundException;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -19,5 +21,11 @@ public class PhysicalProfileService {
         if (!physicalProfileRepository.isExistByMemberId(memberId)) {
             physicalProfileRepository.save(physicalProfile);
         }
+    }
+
+    public void editPhysicalProfile(final Long memberId, final PhysicalProfileEditRequest request) {
+        PhysicalProfile physicalProfile = physicalProfileRepository.findByMemberId(memberId)
+                .orElseThrow(PhysicalProfileNotFoundException::new);
+        physicalProfile.edit(request);
     }
 }

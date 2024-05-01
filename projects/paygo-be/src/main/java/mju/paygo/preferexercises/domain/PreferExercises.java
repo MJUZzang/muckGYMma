@@ -53,4 +53,13 @@ public class PreferExercises {
             throw new ExerciseDuplicateException();
         }
     }
+
+    public void edit(final List<String> exercisesName) {
+        List<Exercise> exercises = exercisesName.stream()
+                .map(Exercise::findByName)
+                .toList();
+        validateIsNotDuplicate(exercises);
+
+        this.exercises = exercises;
+    }
 }

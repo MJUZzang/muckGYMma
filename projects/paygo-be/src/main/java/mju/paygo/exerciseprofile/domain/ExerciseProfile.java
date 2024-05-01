@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mju.paygo.exerciseprofile.domain.dto.ExerciseProfileCreateRequest;
+import mju.paygo.exerciseprofile.domain.dto.ExerciseProfileEditRequest;
 import mju.paygo.exerciseprofile.domain.vo.Experience;
 import mju.paygo.exerciseprofile.domain.vo.Frequency;
 import mju.paygo.exerciseprofile.domain.vo.Goal;
@@ -62,5 +63,12 @@ public class ExerciseProfile {
        Frequency frequency = Frequency.findByName(request.frequency());
 
        return new ExerciseProfile(memberId, level, goal, experience, frequency);
+    }
+
+    public void edit(final ExerciseProfileEditRequest request) {
+        this.level = (request.level() != null) ? Level.findByName(request.level()) : this.level;
+        this.goal = (request.goal() != null) ? Goal.findByName(request.goal()) : this.goal;
+        this.experience = (request.experience() != null) ? Experience.findByName(request.experience()) : this.experience;
+        this.frequency = (request.frequency() != null) ? Frequency.findByName(request.frequency()) : this.frequency;
     }
 }

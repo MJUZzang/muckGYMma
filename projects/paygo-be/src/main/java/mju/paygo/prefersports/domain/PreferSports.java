@@ -53,4 +53,13 @@ public class PreferSports {
             throw new SportsDuplicateException();
         }
     }
+
+    public void edit(final List<String> sportsName) {
+        List<Sports> sports = sportsName.stream()
+                .map(Sports::findByName)
+                .toList();
+        validateIsNotDuplicate(sports);
+
+        this.sports = sports;
+    }
 }

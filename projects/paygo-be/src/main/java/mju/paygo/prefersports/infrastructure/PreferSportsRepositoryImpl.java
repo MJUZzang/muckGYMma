@@ -5,6 +5,8 @@ import mju.paygo.prefersports.domain.PreferSports;
 import mju.paygo.prefersports.domain.PreferSportsRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Repository
 public class PreferSportsRepositoryImpl implements PreferSportsRepository {
@@ -19,5 +21,10 @@ public class PreferSportsRepositoryImpl implements PreferSportsRepository {
     @Override
     public boolean isExistByMemberId(final Long memberId) {
         return preferSportsJpaRepository.existsByMemberId(memberId);
+    }
+
+    @Override
+    public Optional<PreferSports> findByMemberId(final Long memberId) {
+        return preferSportsJpaRepository.findByMemberId(memberId);
     }
 }

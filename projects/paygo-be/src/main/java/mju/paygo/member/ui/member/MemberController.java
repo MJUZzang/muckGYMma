@@ -5,10 +5,12 @@ import lombok.RequiredArgsConstructor;
 import mju.paygo.member.application.member.MemberService;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
+import mju.paygo.member.ui.member.dto.MemberEditRequest;
 import mju.paygo.member.ui.member.dto.MemberInitializeRequest;
 import mju.paygo.member.ui.member.dto.MemberInitializeResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +34,11 @@ public class MemberController {
         Member member = memberService.findById(memberId);
         return ResponseEntity.ok()
                 .body(new MemberInitializeResponse(member.isInitialized()));
+    }
+
+    @PatchMapping("/setup")
+    public ResponseEntity<Void> editSetting(@AuthMember final Long memberId, @RequestBody @Valid final MemberEditRequest request) {
+        memberService.editSetting(memberId, request);
+        return ResponseEntity.ok().build();
     }
 }
