@@ -1,6 +1,8 @@
 package mju.paygo.member.application.member;
 
 import lombok.RequiredArgsConstructor;
+import mju.paygo.exerciseprofile.application.event.ExerciseProfileCreatedEvent;
+import mju.paygo.exerciseprofile.domain.dto.ExerciseProfileCreateRequest;
 import mju.paygo.global.event.Events;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
@@ -29,9 +31,10 @@ public class MemberService {
     }
 
     public void writeInitializeSetting(final Long memberId, final MemberInitializeRequest request) {
-       writePhysicalProfile(memberId, request.physical());
+       writePhysicalProfile(memberId, request.physicalSetting());
        writePreferSports(memberId, request.sports());
        writePreferExercises(memberId, request.exercises());
+       writeExerciseProfile(memberId, request.exerciseSetting());
     }
 
     private void writePhysicalProfile(final Long memberId, final PhysicalProfileCreateRequest request) {
@@ -44,6 +47,10 @@ public class MemberService {
 
     private void writePreferExercises(final Long memberId, final List<String> exercisesName) {
         Events.raise(new PreferExercisesWroteEvent(memberId, exercisesName));
+    }
+
+    private void writeExerciseProfile(final Long memberId, final ExerciseProfileCreateRequest request) {
+        Events.raise(new ExerciseProfileCreatedEvent(memberId, request));
     }
 
     @Transactional(readOnly = true)
