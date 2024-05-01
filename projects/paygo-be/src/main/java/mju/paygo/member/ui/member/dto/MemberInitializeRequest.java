@@ -12,6 +12,9 @@ public record MemberInitializeRequest(
         PhysicalProfileCreateRequest physical,
 
         @NotNull(message = "선호하는 스포츠가 필요합니다.")
-        List<String> sports
+        List<String> sports,
+
+        @NotNull(message = "선호하는 운동이 필요합니다.")
+        List<String> exercises
 ) {
 }

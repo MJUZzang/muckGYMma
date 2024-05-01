@@ -8,6 +8,7 @@ import mju.paygo.member.exception.exceptions.member.MemberNotFoundException;
 import mju.paygo.member.ui.member.dto.MemberInitializeRequest;
 import mju.paygo.physicalprofile.application.event.PhysicalProfileCreatedEvent;
 import mju.paygo.physicalprofile.domain.dto.PhysicalProfileCreateRequest;
+import mju.paygo.preferexercises.application.event.PreferExercisesWroteEvent;
 import mju.paygo.prefersports.application.event.PreferSportsWroteEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,7 @@ public class MemberService {
     public void writeInitializeSetting(final Long memberId, final MemberInitializeRequest request) {
        writePhysicalProfile(memberId, request.physical());
        writePreferSports(memberId, request.sports());
+       writePreferExercises(memberId, request.exercises());
     }
 
     private void writePhysicalProfile(final Long memberId, final PhysicalProfileCreateRequest request) {
@@ -38,6 +40,10 @@ public class MemberService {
 
     private void writePreferSports(final Long memberId, final List<String> sportsName) {
         Events.raise(new PreferSportsWroteEvent(memberId, sportsName));
+    }
+
+    private void writePreferExercises(final Long memberId, final List<String> exercisesName) {
+        Events.raise(new PreferExercisesWroteEvent(memberId, exercisesName));
     }
 
     @Transactional(readOnly = true)
