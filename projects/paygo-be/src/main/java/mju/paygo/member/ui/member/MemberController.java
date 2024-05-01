@@ -23,7 +23,7 @@ public class MemberController {
 
     @PostMapping("/setup")
     public ResponseEntity<Void> initialize(@AuthMember final Long memberId, @RequestBody @Valid final MemberInitializeRequest request) {
-        memberService.writePhysicalProfile(memberId, request.physical());
+        memberService.writeInitializeSetting(memberId, request);
         return ResponseEntity.ok().build();
     }
 
