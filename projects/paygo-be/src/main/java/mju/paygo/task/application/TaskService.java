@@ -112,7 +112,7 @@ public class TaskService {
         builder.append("스포츠: ").append(Sports.collectAllNames()).append("\n");
         builder.append("운동: ").append(Exercise.collectAllNames()).append("\n");
         builder.append("위에 주어진 스포츠, 운동 목록에 대해 전부 시간 (스포츠), 무게 & 조합 (운동)을 구해야 한다. 선호 운동, 선호 스포츠에 대해서만 구하면 안 된다.").append("\n");
-        builder.append("예상 답변은 아래와 같이 JSON 형식으로 나와야 한다. (기타 표현은 나오면 안 된다. JSON만 뱉어야 한다.").append("\n");
+        builder.append("예상 답변은 아래와 같이 JSON 형식으로 나와야 한다. (기타 표현은 나오면 안 된다. JSON만 뱉어야 한다.)").append("\n");
         builder.append("{\n" +
                 "    \"exercise\" : {\n" +
                 "        \"prefer_exercise\" : {\n" +
