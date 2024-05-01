@@ -1,0 +1,18 @@
+package mju.paygo.physicalprofile.infrastructure;
+
+import lombok.RequiredArgsConstructor;
+import mju.paygo.physicalprofile.domain.PhysicalProfile;
+import mju.paygo.physicalprofile.domain.PhysicalProfileRepository;
+import org.springframework.stereotype.Repository;
+
+@RequiredArgsConstructor
+@Repository
+public class PhysicalProfileRepositoryImpl implements PhysicalProfileRepository {
+
+    private final PhysicalProfileJpaRepository physicalProfileJpaRepository;
+
+    @Override
+    public void save(final PhysicalProfile physicalProfile) {
+        physicalProfileJpaRepository.save(physicalProfile);
+    }
+}
