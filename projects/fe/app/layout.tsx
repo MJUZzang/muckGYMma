@@ -22,7 +22,7 @@ export default function RootLayout({
         <html lang="en">
             <body
                 className={`flex flex-col h-screen 
-                default-bg ${inter.className} dark:text-white `}
+                bg-default ${inter.className} dark:text-white `}
             >
                 <InitialLoad>
                     <StoreProvider>

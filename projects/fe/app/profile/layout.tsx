@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import LogoAndTitle from "@/_components/LogoAndTitle";
 import Settings from "@/profile/_images/Settings";
 import Image from "next/image";
@@ -22,22 +22,31 @@ const Page = ({
 
     return (
         <>
-            <div className="flex items-center justify-between mx-5 mt-2 mb-4">
-                {/* User name */}
-                <div className="flex items-center gap-1">
-                    <Hash strokeColor="#cccccc" size={21} />
-                    <p className="text-[#dddddd] text-lg font-bold">
-                        jeheecheon
-                    </p>
-                </div>
+            <div>
+                <div className="mx-auto max-w-[935px] flex items-center justify-between px-3 mt-2 lg:mt-4 mb-4">
+                    {/* User name */}
+                    <div className="flex items-center gap-1">
+                        <Hash strokeColor="#cccccc" size={21} />
+                        <p className="text-[#dddddd] text-lg md:text-xl lg:text-2xl font-bold">
+                            jeheecheon
+                        </p>
+                    </div>
 
-                <div className="flex gap-5 items-center">
-                    <FoodPicture className="fill-white" size={23} />
+                    <div className="flex gap-5 items-center">
+                        <FoodPicture
+                            className="fill-white cursor-pointer lg:hidden"
+                            size={23}
+                        />
+                        <FoodPicture
+                            className="fill-white cursor-pointer hidden lg:block"
+                            size={30}
+                        />
 
-                    <div className="w-[27px] gap-[4.5px] flex flex-col">
-                        <div className="w-full h-[2.5px] bg-white rounded-full" />
-                        <div className="w-full h-[2.5px] bg-white rounded-full" />
-                        <div className="w-full h-[2.5px] bg-white rounded-full" />
+                        <div className="w-[27px] lg:w-[33px] gap-[4.5px] flex flex-col cursor-pointer">
+                            <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
+                            <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
+                            <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,9 +56,9 @@ const Page = ({
                 <div className="flex gap-5 mx-4 mt-3 items-center">
                     <div className="w-fit">
                         <div
-                            className="inline-block overflow-clip rounded-full w-[68px] h-[68px]
-                            lg:w-[140px] lg:h-[140px]
-                                border-2 border-gray-600"
+                            className="inline-block overflow-clip rounded-full 
+                            w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px] lg:w-[200px] lg:h-[200px]
+                            border-2 border-gray-600"
                         >
                             <Image
                                 src={exampleImage}
@@ -89,20 +98,6 @@ const Page = ({
                             </div>
                         </div>
                     </div>
-
-                    {/* 
-                    <div className="flex flex-col text-white gap-3">
-                        <p className="text-xl">jeheecheon</p>
-
-                        <div className="flex gap-4">
-                            <div className="px-4 py-1 bg-[#363636] rounded-md text-nowrap">
-                                Edit profile
-                            </div>
-                            <div className="px-4 py-1 bg-[#363636] rounded-md text-nowrap">
-                                View archive
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
 
                 <div className="mx-4 mt-5">
@@ -131,7 +126,7 @@ const Page = ({
                         />
                     </Link>
                     <Link
-                        className={`w-full border-b-2 ${
+                        className={`w-full transition duration-200 border-b-2 ${
                             pathname.includes("profile/food")
                                 ? "border-b-white"
                                 : "border-b-white/0"
@@ -149,7 +144,7 @@ const Page = ({
                         />
                     </Link>
                     <Link
-                        className={`w-full border-b-2 ${
+                        className={`w-full transition duration-200 border-b-2 ${
                             pathname.includes("profile/analytics")
                                 ? "border-b-white"
                                 : "border-b-white/0"

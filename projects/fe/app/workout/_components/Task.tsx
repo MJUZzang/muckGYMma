@@ -7,6 +7,14 @@ import Swimming from "@/_images/Swimming";
 import Football from "@/_images/Football";
 import { CaclLeftTime } from "@/workout/_utils/LeftTime";
 
+import { Dosis, Jua } from "next/font/google";
+
+const dosis = Dosis({ subsets: ["latin"] });
+const jua = Jua({
+    subsets: ["latin"],
+    weight: "400",
+});
+
 interface TaskProps {
     className?: string;
     type: string;
@@ -14,6 +22,17 @@ interface TaskProps {
     duration: number;
     workoutCnt: number;
     dueDate: Date;
+}
+
+function GetIcon(type: string) {
+    switch (type) {
+        case "health":
+            return <Muscle />;
+        case "swimming":
+            return <Swimming />;
+        case "football":
+            return <Football />;
+    }
 }
 
 const Task: React.FC<TaskProps> = ({
@@ -24,7 +43,7 @@ const Task: React.FC<TaskProps> = ({
     workoutCnt,
     dueDate,
 }) => {
-    const [timeLeft, setTimeLeft] = useState('');
+    const [timeLeft, setTimeLeft] = useState("");
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -35,15 +54,11 @@ const Task: React.FC<TaskProps> = ({
 
     return (
         <div
-            className={`py-2 px-2 rounded-3xl backdrop-blur-xl bg-white/10 cursor-pointer
+            className={`py-2 pl-2 pr-5 rounded-[2rem] backdrop-blur-xl cursor-pointer
             hover:bg-white/20
             flex justify-between items-center gap-2 ${className}`}
         >
-            <div>
-                {type === "health" && <Muscle />}
-                {type === "swimming" && <Swimming />}
-                {type === "football" && <Football />}
-            </div>
+            <div>{GetIcon(type)}</div>
 
             <div className="basis-full flex justify-between items-center">
                 <div className="flex flex-col justify-center">
@@ -57,11 +72,16 @@ const Task: React.FC<TaskProps> = ({
                 </div>
             </div>
 
-            <NavigateNext
+            <div className="">
+                <p className={`text-white/90 ${dosis.className}`}>950</p>
+                <p className={`text-white/90 ${jua.className}`}>kcal</p>
+            </div>
+            
+            {/* <NavigateNext
                 width={35}
                 hight={35}
                 className="fill-fluorescent my-auto"
-            />
+            /> */}
         </div>
     );
 };

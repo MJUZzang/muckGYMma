@@ -6,18 +6,22 @@ import Link from "next/link";
 import HeaderTop from "@/_components/HeaderTop";
 import LogoAndTitle from "@/_components/LogoAndTitle";
 
+import { Jua, Dosis } from "next/font/google";
+
+const jua = Jua({
+    subsets: ["latin"],
+    weight: "400",
+});
+const dosis = Dosis({ subsets: ["latin"] });
+
 const links = [
     {
-        name: "Following",
+        name: "following",
         href: "/community/following",
     },
     {
-        name: "Hot",
+        name: "hot",
         href: "/community/hot",
-    },
-    {
-        name: "Club",
-        href: "/community/club",
     },
 ];
 
@@ -29,40 +33,12 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
     const pathname = usePathname();
 
     return (
-        <div className="h-full">
-            {/* <HeaderTop className="flex-col">
-                <div className="flex justify-start w-full">
-                    <p>Community</p>
-                    <div></div>
-                </div>
-
-                <nav className="w-full">
-                    <ul className="w-full flex justify-start gap-3 text-sm">
-                        {links.map((link, index) => (
-                            <li key={index}>
-                                <Link
-                                    className={`${
-                                        pathname === link.href &&
-                                        "border-b-[3px]"
-                                    } pb-1 border-b-green-600`}
-                                    href={link.href}
-                                >
-                                    {link.name}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
-            </HeaderTop> */}
-
-            {/* Spacer for Header */}
-            {/* <div className="w-[1px] h-[70px]" /> */}
-
+        <div className="">
             <div className="flex flex-col border-b-[1px] border-b-gray-700">
-                <div className="flex items-center">
+                <div className="flex items-center max-w-[935px] mx-auto w-full">
                     <LogoAndTitle />
                 </div>
-                <div className="flex">
+                <div className="flex max-w-[935px] mx-auto w-full">
                     {links.map((link, index) => (
                         <Link
                             key={index}

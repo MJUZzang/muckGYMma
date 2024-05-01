@@ -35,7 +35,7 @@ const NavBar = () => {
                 }`}
             >
                 <div
-                    className={`fixed default-bg bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[60px] justify-between items-center`}
+                    className={`fixed bg-default bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[60px] justify-between items-center`}
                 >
                     <Link
                         href="/workout/todo"

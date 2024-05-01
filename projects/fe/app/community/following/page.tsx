@@ -5,7 +5,7 @@ import exampleImage from "@/_images/pooh.jpg";
 const Follwing = () => {
     const dummyPost = {
         comments: 0,
-        content: "Hello World",
+        content: "Hello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello world",
         hasLiked: false,
         id: 1,
         image: exampleImage,
@@ -19,13 +19,7 @@ const Follwing = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center pt-3 pb-6 h-full">
-                <Post postInfo={dummyPost} />
-                <Post postInfo={dummyPost} />
-                <Post postInfo={dummyPost} />
-                <Post postInfo={dummyPost} />
-                <Post postInfo={dummyPost} />
-                <Post postInfo={dummyPost} />
+            <div className="flex flex-col items-center pt-3 pb-6 h-full gap-3">
                 <Post postInfo={dummyPost} />
                 <Post postInfo={dummyPost} />
                 <Post postInfo={dummyPost} />

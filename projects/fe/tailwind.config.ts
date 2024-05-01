@@ -52,7 +52,9 @@ const config = {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
                 },
-                fluorescent: "#dfff32",
+                
+                "default": "#0B1416",
+                "fluorescent": "#dfff32",
                 "fluorescent-light": "#f4ff8c",
                 "fluorescent-lighter": "#eaff5e",
                 "fluorescent-lightest": "#f5ff9e",
@@ -60,7 +62,7 @@ const config = {
                 "fluorescent-darker": "#7fff00",
                 "fluorescent-darkest": "#4dff00",
 
-                purple: "#7310f8",
+                "purple": "#7310f8",
                 "purple-light": "#a44eff",
                 "purple-lighter": "#c97aff",
                 "purple-lightest": "#e2aaff",
@@ -82,10 +84,15 @@ const config = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: "0" },
                 },
+                "spin-180": {
+                    from: { rotate: "0deg" },
+                    to: { rotate: "180deg" },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+                "spin-180": "spin-180 0.6s ease-in-out",
             },
         },
     },

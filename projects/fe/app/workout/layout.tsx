@@ -24,12 +24,12 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
     const pathname = usePathname();
 
     return (
-        <>
+        <div className="max-w-[935px] mx-auto w-full">
             <div className="flex items-center">
                 <LogoAndTitle />
             </div>
 
-            <nav className="w-full px-3 space-y-5 mt-1">
+            {/* <nav className="w-full px-3 space-y-5 mt-1">
                 <p className="text-white text-3xl font-bold">Task list</p>
                 <ul className="flex justify-center text-sm rounded-lg bg-[#202020]">
                     {links.map((link, index) => (
@@ -51,10 +51,10 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                         </li>
                     ))}
                 </ul>
-            </nav>
+            </nav> */}
 
-            <div className="px-4">{props.children}</div>
-        </>
+            <div className="px-4 w-full">{props.children}</div>
+        </div>
     );
 };
 
