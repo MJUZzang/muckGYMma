@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PhysicalProfileJpaRepository extends JpaRepository<PhysicalProfile, Long> {
 
     PhysicalProfile save(final PhysicalProfile physicalProfile);
+    boolean existsByMemberId(final Long memberId);
 }

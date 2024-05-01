@@ -16,6 +16,8 @@ public class PreferSportsService {
     private final PreferSportsRepository preferSportsRepository;
 
     public void create(final Long memberId, final List<String> sportsName) {
-        preferSportsRepository.save(PreferSports.of(memberId, sportsName));
+        if (!preferSportsRepository.isExistByMemberId(memberId)) {
+            preferSportsRepository.save(PreferSports.of(memberId, sportsName));
+        }
     }
 }

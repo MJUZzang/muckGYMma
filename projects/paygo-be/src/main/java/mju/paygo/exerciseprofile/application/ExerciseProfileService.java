@@ -16,6 +16,8 @@ public class ExerciseProfileService {
 
     public void writeExerciseProfile(final Long memberId, final ExerciseProfileCreateRequest request) {
         ExerciseProfile exerciseProfile = ExerciseProfile.of(memberId, request);
-        exerciseProfileRepository.save(exerciseProfile);
+        if (!exerciseProfileRepository.existedByMemberId(memberId)) {
+            exerciseProfileRepository.save(exerciseProfile);
+        }
     }
 }

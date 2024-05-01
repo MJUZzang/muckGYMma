@@ -15,4 +15,9 @@ public class PhysicalProfileRepositoryImpl implements PhysicalProfileRepository 
     public void save(final PhysicalProfile physicalProfile) {
         physicalProfileJpaRepository.save(physicalProfile);
     }
+
+    @Override
+    public boolean isExistByMemberId(final Long memberId) {
+        return physicalProfileJpaRepository.existsByMemberId(memberId);
+    }
 }

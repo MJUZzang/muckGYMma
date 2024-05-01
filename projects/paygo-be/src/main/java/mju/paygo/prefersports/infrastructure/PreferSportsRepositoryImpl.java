@@ -15,4 +15,9 @@ public class PreferSportsRepositoryImpl implements PreferSportsRepository {
     public void save(final PreferSports preferSports) {
         preferSportsJpaRepository.save(preferSports);
     }
+
+    @Override
+    public boolean isExistByMemberId(final Long memberId) {
+        return preferSportsJpaRepository.existsByMemberId(memberId);
+    }
 }

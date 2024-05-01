@@ -15,4 +15,9 @@ public class ExerciseProfileRepositoryImpl implements ExerciseProfileRepository 
     public void save(final ExerciseProfile exerciseProfile) {
         exerciseProfileJpaRepository.save(exerciseProfile);
     }
+
+    @Override
+    public boolean existedByMemberId(final Long memberId) {
+        return exerciseProfileJpaRepository.existsByMemberId(memberId);
+    }
 }

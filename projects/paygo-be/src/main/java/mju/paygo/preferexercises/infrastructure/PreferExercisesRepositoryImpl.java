@@ -15,4 +15,9 @@ public class PreferExercisesRepositoryImpl implements PreferExercisesRepository 
     public void save(final PreferExercises preferExercises) {
         preferExercisesJpaRepository.save(preferExercises);
     }
+
+    @Override
+    public boolean isExistByMemberId(final Long memberId) {
+        return preferExercisesJpaRepository.existsByMemberId(memberId);
+    }
 }

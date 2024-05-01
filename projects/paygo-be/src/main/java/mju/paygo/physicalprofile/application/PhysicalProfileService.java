@@ -16,6 +16,8 @@ public class PhysicalProfileService {
 
     public void writePhysicalProfile(final Long memberId, final PhysicalProfileCreateRequest request) {
         PhysicalProfile physicalProfile = PhysicalProfile.from(memberId, request);
-        physicalProfileRepository.save(physicalProfile);
+        if (!physicalProfileRepository.isExistByMemberId(memberId)) {
+            physicalProfileRepository.save(physicalProfile);
+        }
     }
 }

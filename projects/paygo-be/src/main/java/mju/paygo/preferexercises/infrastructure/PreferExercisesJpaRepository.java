@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PreferExercisesJpaRepository extends JpaRepository<PreferExercises, Long> {
 
     PreferExercises save(final PreferExercises preferExercises);
+    boolean existsByMemberId(final Long memberId);
 }
