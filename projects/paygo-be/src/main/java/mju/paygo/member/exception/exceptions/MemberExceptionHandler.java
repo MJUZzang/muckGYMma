@@ -9,6 +9,7 @@ import mju.paygo.member.exception.exceptions.auth.SignatureInvalidException;
 import mju.paygo.member.exception.exceptions.auth.TokenFormInvalidException;
 import mju.paygo.member.exception.exceptions.auth.TokenInvalidException;
 import mju.paygo.member.exception.exceptions.auth.UnsupportedTokenException;
+import mju.paygo.member.exception.exceptions.member.MemberNotInitializedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,6 +27,11 @@ public class MemberExceptionHandler {
     @ExceptionHandler(OAuthPlatformNotFoundException.class)
     public ResponseEntity<ExceptionResponse> handleOAuthPlatformNotFoundException(final OAuthPlatformNotFoundException e) {
         return getNotFound(e);
+    }
+
+    @ExceptionHandler(MemberNotInitializedException.class)
+    public ResponseEntity<ExceptionResponse> handleMemberNotInitializedException(final MemberNotInitializedException e) {
+        return getBadRequest(e);
     }
 
     @ExceptionHandler(value = {
