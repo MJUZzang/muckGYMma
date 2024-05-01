@@ -52,9 +52,9 @@ const config = {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
                 },
-                
-                "default": "#0B1416",
-                "fluorescent": "#dfff32",
+
+                default: "#0B1416",
+                fluorescent: "#dfff32",
                 "fluorescent-light": "#f4ff8c",
                 "fluorescent-lighter": "#eaff5e",
                 "fluorescent-lightest": "#f5ff9e",
@@ -62,7 +62,7 @@ const config = {
                 "fluorescent-darker": "#7fff00",
                 "fluorescent-darkest": "#4dff00",
 
-                "purple": "#7310f8",
+                purple: "#7310f8",
                 "purple-light": "#a44eff",
                 "purple-lighter": "#c97aff",
                 "purple-lightest": "#e2aaff",
@@ -88,11 +88,24 @@ const config = {
                     from: { rotate: "0deg" },
                     to: { rotate: "180deg" },
                 },
+                "show-task": {
+                    from: {
+                        opacity: "0",
+                        filter: "blur(5px)",
+                        transform: "translateX(-100%)",
+                    },
+                    to: {
+                        opacity: "1",
+                        filter: "blur(0)",
+                        transform: "translateX(0)",
+                    },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 "spin-180": "spin-180 0.6s ease-in-out",
+                "show-task": "show-task 0.6s ease-in-out forwards",
             },
         },
     },

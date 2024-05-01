@@ -90,7 +90,7 @@ const Page = ({
                             </div>
                             <div className="w-full flex flex-col items-center">
                                 <p>6</p>
-                                <p className="font-semibold">최장</p>
+                                <p className="font-semibold">최장연속</p>
                             </div>
                             <div className="w-full flex flex-col items-center">
                                 <p>6</p>

@@ -38,13 +38,13 @@ const NavBar = () => {
                     className={`fixed bg-default bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[60px] justify-between items-center`}
                 >
                     <Link
-                        href="/workout/todo"
+                        href="/workout"
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <Workout
                             isActive={pathname.includes("/workout")}
                             className={`${
-                                pathname === "/workout/todo"
+                                pathname === "/workout"
                                     ? "fill-fluorescent"
                                     : "fill-gray-200"
                             }`}
@@ -87,9 +87,9 @@ const NavBar = () => {
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <AccountCircle
-                            isActive={pathname === "/profile/posts"}
+                            isActive={pathname.includes("/profile/")}
                             className={`${
-                                pathname === "/profile/posts"
+                                pathname.includes("/profile/")
                                     ? "fill-fluorescent"
                                     : "fill-gray-200"
                             }`}
