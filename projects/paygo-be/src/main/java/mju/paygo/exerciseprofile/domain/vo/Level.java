@@ -1,9 +1,11 @@
 package mju.paygo.exerciseprofile.domain.vo;
 
+import lombok.Getter;
 import mju.paygo.exerciseprofile.exception.exceptions.LevelNotFoundException;
 
 import java.util.Arrays;
 
+@Getter
 public enum Level {
 
     NEWBIE("입문자"),

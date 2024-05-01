@@ -62,4 +62,11 @@ public class PreferExercises {
 
         this.exercises = exercises;
     }
+
+    public String getExercises() {
+        List<String> exercisesNames = exercises.stream()
+                .map(Exercise::getName)
+                .toList();
+        return String.join(",", exercisesNames);
+    }
 }
