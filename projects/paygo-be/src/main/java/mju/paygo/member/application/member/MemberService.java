@@ -35,6 +35,9 @@ public class MemberService {
        writePreferSports(memberId, request.sports());
        writePreferExercises(memberId, request.exercises());
        writeExerciseProfile(memberId, request.exerciseSetting());
+
+       Member member = findById(memberId);
+       member.clearInitialize();
     }
 
     private void writePhysicalProfile(final Long memberId, final PhysicalProfileCreateRequest request) {
