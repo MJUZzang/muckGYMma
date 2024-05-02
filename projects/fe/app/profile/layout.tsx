@@ -145,16 +145,16 @@ const Page = ({
                     </Link>
                     <Link
                         className={`w-full transition duration-200 border-b-2 ${
-                            pathname.includes("profile/analytics")
+                            pathname.includes("profile/completed")
                                 ? "border-b-white"
                                 : "border-b-white/0"
                         }`}
-                        href={`/profile/analytics`}
+                        href={`/profile/completed`}
                     >
                         <Analytics
                             className="w-full"
                             color={`${
-                                pathname.includes("/profile/analytics")
+                                pathname.includes("/profile/completed")
                                     ? "white"
                                     : "#aaaaaa"
                             }`}

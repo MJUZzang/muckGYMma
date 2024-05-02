@@ -32,9 +32,9 @@ interface WorkoutLayoutProps {
 const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
     return (
         <div className="max-w-[935px] mx-auto w-full">
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
                 <LogoAndTitle />
-            </div>
+            </div> */}
 
             <div className="px-4 w-full">
                 <div className="mt-3">

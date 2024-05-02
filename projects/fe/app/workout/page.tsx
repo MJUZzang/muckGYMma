@@ -118,7 +118,6 @@ const Page = () => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    console.log("Intersecting");
                     entry.target.classList.add("animate-show-task");
                 }
             });
