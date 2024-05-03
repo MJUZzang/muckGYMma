@@ -1,24 +1,29 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+
+import withPWAInit from "@ducanh2912/next-pwa";
+
+const withPWA = withPWAInit({
+    dest: "public",
+});
+
+export default withPWA({
     reactStrictMode: true,
     images: {
         remotePatterns: [
             {
                 protocol: "https",
                 hostname: "muckgymma.s3.ap-northeast-2.amazonaws.com",
-                port: '',
-            }
-        ]
+                port: "",
+            },
+        ],
     },
     async redirects() {
         return [
             {
                 source: "/",
-                destination: "/workout/todo",
+                destination: "/workout",
                 permanent: true,
             },
         ];
     },
-};
-
-export default nextConfig;
+});
