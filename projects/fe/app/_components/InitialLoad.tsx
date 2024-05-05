@@ -27,10 +27,10 @@ function InitialLoad(props: InitialLoadProps) {
             })
                 .then((res) => {
                     if (res.ok) {
-                        console.log("222")
+                        console.log("222");
                         checkHasEnteredInitialInfo();
                     } else {
-                        console.log("333")
+                        console.log("333");
                         setLoading(false);
                         router.push("/sign-in");
                     }
@@ -56,19 +56,19 @@ function InitialLoad(props: InitialLoadProps) {
             })
                 .then((res) => {
                     if (res.ok) {
-                        console.log("444")
+                        console.log("444");
                         return res.json();
                     } else {
-                        console.log("555")
+                        console.log("555");
                         throw new Error("Sever responsded with an error");
                     }
                 })
                 .then((data) => {
                     setLoading(false);
-                    console.log("666")
+                    console.log("666");
 
                     if (!data.initialized) {
-                        console.log("777")
+                        console.log("777");
                         router.push("/initial-setup/1");
                     }
                 })
@@ -81,7 +81,7 @@ function InitialLoad(props: InitialLoadProps) {
         }
     }
 
-    useEffect(() => {
+    // useEffect(() => {
         let shouldBeExcepted = false;
         for (const except of excepts) {
             if (pathname.startsWith(except)) {
@@ -96,7 +96,7 @@ function InitialLoad(props: InitialLoadProps) {
             console.log("111");
             checkIsLogedIn();
         }
-    }, []);
+    // }, []);
 
     return (
         <>
