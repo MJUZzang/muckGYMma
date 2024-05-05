@@ -36,8 +36,19 @@ public class Member {
     @Column(nullable = false)
     private MemberRole memberRole;
 
+    @Column(nullable = false)
+    private Boolean initialized;
+
     public boolean isAdmin() {
         return this.memberRole.isAdministrator();
+    }
+
+    public void clearInitialize() {
+        this.initialized = true;
+    }
+
+    public boolean isInitialized() {
+        return this.initialized;
     }
 
     public static Member createWithOAuthLogin(final String email,
@@ -46,6 +57,7 @@ public class Member {
                 .email(email)
                 .nickname(nickname)
                 .memberRole(MemberRole.MEMBER)
+                .initialized(false)
                 .build();
     }
 }
