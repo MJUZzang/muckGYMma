@@ -15,18 +15,19 @@ function InitialLoad(props: InitialLoadProps) {
     const [loading, setLoading] = useState(true);
     const pathname = usePathname();
 
-    function checkIsLogined() {
+    function checkIsLogedIn() {
         if (process.env.NODE_ENV !== "development") {
             fetch(`${backendUrl}/api/login/check`, {
                 method: "GET",
                 credentials: "include",
+                cache: "no-store"
             })
                 .then((res) => {
-                    setLoading(false);
-                    if (!res.ok) {
-                        router.push("/sign-in");
-                    } else {
+                    if (res.ok) {
                         checkHasEnteredInitialInfo();
+                    } else {
+                        setLoading(false);
+                        router.push("/sign-in");
                     }
                 })
                 .catch((err) => {
@@ -43,16 +44,19 @@ function InitialLoad(props: InitialLoadProps) {
             fetch(`${backendUrl}/api/member/initialized`, {
                 method: "GET",
                 credentials: "include",
+                cache: "no-store"
             })
                 .then((res) => {
-                    if (!res.ok) {
-                        throw new Error("Sever responsded with an error");
-                    } else {
+                    if (res.ok) {
                         return res.json();
+                    } else {
+                        throw new Error("Sever responsded with an error");
                     }
                 })
                 .then((data) => {
-                    if (!data.initialized) {
+                    if (data.initialized) {
+                        setLoading(false);
+                    } else {
                         router.push("/initial-setup/1");
                     }
                 })
@@ -77,7 +81,7 @@ function InitialLoad(props: InitialLoadProps) {
         if (shouldBeExcepted) {
             setLoading(false);
         } else {
-            checkIsLogined();
+            checkIsLogedIn();
         }
     }, []);
 

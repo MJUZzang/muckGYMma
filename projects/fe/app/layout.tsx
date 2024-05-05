@@ -76,9 +76,8 @@ export const metadata: Metadata = {
                 url: "/safari-pinned-tab.svg",
                 href: "/safari-pinned-tab.svg",
                 color: "#5bbad5",
-            
             },
-            
+
             //  splash screens
             {
                 rel: "apple-touch-startup-image",
@@ -149,13 +148,13 @@ export default function RootLayout({
                 className={`flex flex-col h-screen 
                 bg-default ${inter.className} dark:text-white `}
             >
-                <InitialLoad>
-                    <StoreProvider>
+                <StoreProvider>
+                    <InitialLoad>
                         {children}
                         <NavBar />
                         <DarkMode />
-                    </StoreProvider>
-                </InitialLoad>
+                    </InitialLoad>
+                </StoreProvider>
             </body>
         </html>
     );
