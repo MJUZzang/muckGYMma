@@ -3,6 +3,8 @@
 import { backendUrl } from "@/_utils/urls";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
+import { selectIsLoading, setIsLoading } from "@/../lib/slices/loadingSlice";
 
 const excepts = ["/sign-in", "/initial-setup"];
 
@@ -12,8 +14,10 @@ interface InitialLoadProps {
 
 function InitialLoad(props: InitialLoadProps) {
     const router = useRouter();
-    const [loading, setLoading] = useState(true);
     const pathname = usePathname();
+    const dispatch = useAppDispatch();
+
+    const isLoading = useAppSelector(selectIsLoading);
 
     function checkIsLogedIn() {
         if (process.env.NODE_ENV !== "development") {
@@ -21,67 +25,23 @@ function InitialLoad(props: InitialLoadProps) {
                 method: "GET",
                 credentials: "include",
                 cache: "no-store",
-                next: {
-                    revalidate: 0,
-                },
             })
                 .then((res) => {
-                    if (res.ok) {
-                        console.log("222");
-                        checkHasEnteredInitialInfo();
-                    } else {
-                        console.log("333");
-                        setLoading(false);
+                    if (!res.ok) {
+                        dispatch(setIsLoading(false));
                         router.push("/sign-in");
                     }
                 })
                 .catch((err) => {
-                    setLoading(false);
+                    dispatch(setIsLoading(false));
                     console.error(err);
                 });
         } else {
-            setLoading(false);
+            dispatch(setIsLoading(false));
         }
     }
 
-    function checkHasEnteredInitialInfo() {
-        if (process.env.NODE_ENV !== "development") {
-            fetch(`${backendUrl}/api/member/initialized`, {
-                method: "GET",
-                credentials: "include",
-                cache: "no-store",
-                next: {
-                    revalidate: 0,
-                },
-            })
-                .then((res) => {
-                    if (res.ok) {
-                        console.log("444");
-                        return res.json();
-                    } else {
-                        console.log("555");
-                        throw new Error("Sever responsded with an error");
-                    }
-                })
-                .then((data) => {
-                    setLoading(false);
-                    console.log("666");
-
-                    if (!data.initialized) {
-                        console.log("777");
-                        router.push("/initial-setup/1");
-                    }
-                })
-                .catch((err) => {
-                    setLoading(false);
-                    console.error(err);
-                });
-        } else {
-            setLoading(false);
-        }
-    }
-
-    // useEffect(() => {
+    useEffect(() => {
         let shouldBeExcepted = false;
         for (const except of excepts) {
             if (pathname.startsWith(except)) {
@@ -91,16 +51,15 @@ function InitialLoad(props: InitialLoadProps) {
         }
 
         if (shouldBeExcepted) {
-            setLoading(false);
+            dispatch(setIsLoading(false));
         } else {
-            console.log("111");
             checkIsLogedIn();
         }
-    // }, []);
+    }, []);
 
     return (
         <>
-            {loading ? (
+            {isLoading ? (
                 <div className="flex flex-col items-center justify-center h-full max-h-[100dvh] animate-pulse">
                     <div
                         className="w-[40px] h-[40px] rounded-full border-t-stone-200 border-t-4 border-4 border-stone-400 

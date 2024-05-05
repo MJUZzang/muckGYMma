@@ -148,13 +148,13 @@ export default function RootLayout({
                 className={`flex flex-col h-screen 
                 bg-default ${inter.className} dark:text-white `}
             >
-                <InitialLoad>
-                    <StoreProvider>
+                <StoreProvider>
+                    <InitialLoad>
                         {children}
                         <NavBar />
                         <DarkMode />
-                    </StoreProvider>
-                </InitialLoad>
+                    </InitialLoad>
+                </StoreProvider>
             </body>
         </html>
     );

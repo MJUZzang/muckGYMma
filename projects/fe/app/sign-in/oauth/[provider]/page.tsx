@@ -27,7 +27,7 @@ const Page = () => {
                         document.cookie = cookies;
                         console.log("Logged in successfully");
                     }
-                    router.push("/");
+                    router.push("/sign-in/initial-info");
                 } else {
                     throw new Error("Failed to login");
                 }
