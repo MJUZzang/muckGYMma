@@ -20,7 +20,7 @@ function InitialLoad(props: InitialLoadProps) {
             fetch(`${backendUrl}/api/login/check`, {
                 method: "GET",
                 credentials: "include",
-                cache: "no-store"
+                cache: "no-store",
             })
                 .then((res) => {
                     if (res.ok) {
@@ -44,7 +44,7 @@ function InitialLoad(props: InitialLoadProps) {
             fetch(`${backendUrl}/api/member/initialized`, {
                 method: "GET",
                 credentials: "include",
-                cache: "no-store"
+                cache: "no-store",
             })
                 .then((res) => {
                     if (res.ok) {
@@ -54,9 +54,8 @@ function InitialLoad(props: InitialLoadProps) {
                     }
                 })
                 .then((data) => {
-                    if (data.initialized) {
-                        setLoading(false);
-                    } else {
+                    setLoading(false);
+                    if (!data.initialized) {
                         router.push("/initial-setup/1");
                     }
                 })

@@ -24,6 +24,11 @@ export default withPWA({
                 destination: "/workout",
                 permanent: true,
             },
+            // {
+            //     source: "/api/:path*",
+            //     destination: "https://localhost:8080/api/:path*",
+            //     permanent: false,
+            // }
         ];
     },
 });
