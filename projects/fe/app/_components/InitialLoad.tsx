@@ -4,7 +4,6 @@ import { backendUrl } from "@/_utils/urls";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
-import { selectIsLoading, setIsLoading } from "@/../lib/slices/loadingSlice";
 
 const excepts = ["/sign-in", "/initial-setup"];
 
@@ -15,9 +14,8 @@ interface InitialLoadProps {
 function InitialLoad(props: InitialLoadProps) {
     const router = useRouter();
     const pathname = usePathname();
-    const dispatch = useAppDispatch();
 
-    const isLoading = useAppSelector(selectIsLoading);
+    const [isLoading, setIsLoading] = useState(true);
 
     function checkIsLogedIn() {
         if (process.env.NODE_ENV !== "development") {
@@ -28,16 +26,16 @@ function InitialLoad(props: InitialLoadProps) {
             })
                 .then((res) => {
                     if (!res.ok) {
-                        dispatch(setIsLoading(false));
+                        setIsLoading(false);
                         router.push("/sign-in");
                     }
                 })
                 .catch((err) => {
-                    dispatch(setIsLoading(false));
+                    setIsLoading(false);
                     console.error(err);
                 });
         } else {
-            dispatch(setIsLoading(false));
+            setIsLoading(false);
         }
     }
 
@@ -51,7 +49,7 @@ function InitialLoad(props: InitialLoadProps) {
         }
 
         if (shouldBeExcepted) {
-            dispatch(setIsLoading(false));
+            setIsLoading(false);
         } else {
             checkIsLogedIn();
         }

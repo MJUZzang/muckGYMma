@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import predictReducer from "./slices/predictSlice";
-import loadingReducer from "./slices/loadingSlice";
+import predictReducer from "@/../lib/slices/predictSlice";
+// import loadingReducer from "./slices/loadingSlice";
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             predict: predictReducer,
-            loading: loadingReducer,
+            // loading: loadingReducer,
         },
     });
 };

@@ -1,13 +1,10 @@
 "use client";
 
 import { backendUrl } from "@/_utils/urls";
-import { useAppDispatch } from "@/../lib/hooks";
-import { setIsLoading } from "@/../lib/slices/loadingSlice";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 function Page() {
-    const dispatch = useAppDispatch();
     const router = useRouter();
 
     function checkHasEnteredInitialInfo() {
@@ -25,8 +22,6 @@ function Page() {
                     }
                 })
                 .then((data) => {
-                    dispatch(setIsLoading(false));
-
                     if (data.status) {
                         router.push("/");
                     } else {
@@ -34,11 +29,8 @@ function Page() {
                     }
                 })
                 .catch((err) => {
-                    dispatch(setIsLoading(false));
                     console.error(err);
                 });
-        } else {
-            dispatch(setIsLoading(false));
         }
     }
 
