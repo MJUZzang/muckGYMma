@@ -27,10 +27,10 @@ function Page() {
                 .then((data) => {
                     dispatch(setIsLoading(false));
 
-                    if (data.initialized) {
-                        router.push("/initial-setup/1");
-                    } else {
+                    if (data.status) {
                         router.push("/");
+                    } else {
+                        router.push("/initial-setup/1");
                     }
                 })
                 .catch((err) => {
