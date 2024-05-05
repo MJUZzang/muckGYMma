@@ -21,6 +21,9 @@ function InitialLoad(props: InitialLoadProps) {
                 method: "GET",
                 credentials: "include",
                 cache: "no-store",
+                next: {
+                    revalidate: 0
+                }
             })
                 .then((res) => {
                     if (res.ok) {
@@ -45,6 +48,9 @@ function InitialLoad(props: InitialLoadProps) {
                 method: "GET",
                 credentials: "include",
                 cache: "no-store",
+                next: {
+                    revalidate: 0
+                }
             })
                 .then((res) => {
                     if (res.ok) {
@@ -76,6 +82,8 @@ function InitialLoad(props: InitialLoadProps) {
                 break;
             }
         }
+
+        console.log("asdasd");
 
         if (shouldBeExcepted) {
             setLoading(false);
