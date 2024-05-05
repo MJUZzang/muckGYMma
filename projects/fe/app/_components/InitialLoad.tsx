@@ -15,6 +15,49 @@ function InitialLoad(props: InitialLoadProps) {
     const [loading, setLoading] = useState(true);
     const pathname = usePathname();
 
+    function checkIsLogined() {
+        if (process.env.NODE_ENV !== "development") {
+            fetch(`${backendUrl}/api/login/check`, {
+                method: "GET",
+                credentials: "include",
+            })
+                .then((res) => {
+                    setLoading(false);
+                    if (!res.ok) {
+                        router.push("/sign-in");
+                    } else {
+                        checkHasEnteredInitialInfo();
+                    }
+                })
+                .catch((err) => {
+                    setLoading(false);
+                    console.error(err);
+                });
+        } else {
+            setLoading(false);
+        }
+    }
+
+    function checkHasEnteredInitialInfo() {
+        if (process.env.NODE_ENV !== "development") {
+            fetch(`${backendUrl}/api/member/initialized`, {
+                method: "GET",
+                credentials: "include",
+            })
+                .then((res) => {
+                    if (!res.ok) {
+                        router.push("/initial-info/1");
+                    }
+                })
+                .catch((err) => {
+                    setLoading(false);
+                    console.error(err);
+                });
+        } else {
+            setLoading(false);
+        }
+    }
+
     useEffect(() => {
         let shouldBeExcepted = false;
         for (const except of excepts) {
@@ -27,24 +70,7 @@ function InitialLoad(props: InitialLoadProps) {
         if (shouldBeExcepted) {
             setLoading(false);
         } else {
-            if (process.env.NODE_ENV !== "development") {
-                fetch(`${backendUrl}/api/login/check`, {
-                    method: "GET",
-                    credentials: "include",
-                })
-                    .then((res) => {
-                        setLoading(false);
-                        if (!res.ok) {
-                            router.push("/sign-in");
-                        }
-                    })
-                    .catch((err) => {
-                        setLoading(false);
-                        console.error(err);
-                    });
-            } else {
-                setLoading(false);
-            }
+            checkIsLogined();
         }
     }, []);
 

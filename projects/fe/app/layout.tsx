@@ -8,10 +8,10 @@ import InitialLoad from "@/_components/InitialLoad";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const APP_NAME = "PWA App";
-const APP_DEFAULT_TITLE = "My Awesome PWA App";
-const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = "Best PWA app in the world!";
+const APP_NAME = "먹짐마";
+const APP_DEFAULT_TITLE = "먹짐마";
+const APP_TITLE_TEMPLATE = "%s - 다이어트&식단관리";
+const APP_DESCRIPTION = "최고의 피트니스 앱";
 
 export const metadata: Metadata = {
     applicationName: APP_NAME,
@@ -135,7 +135,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-    themeColor: "#FFFFFF",
+    themeColor: "#0B1416",
 };
 
 export default function RootLayout({
