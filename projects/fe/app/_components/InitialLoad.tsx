@@ -45,6 +45,7 @@ function InitialLoad(props: InitialLoadProps) {
                 credentials: "include",
             })
                 .then((res) => {
+                    console.log(res.status)
                     if (!res.ok) {
                         router.push("/initial-info/1");
                     }
