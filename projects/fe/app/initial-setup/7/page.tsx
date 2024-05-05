@@ -3,10 +3,18 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
+import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
+import {
+    selectInitialInfo,
+    setBirthDate,
+    setHeight,
+    setWeight,
+} from "@/../lib/slices/initialInfoSlice";
 
 function Page() {
-    const [selectedGender, setSelectedGender] = useState<number | null>(null);
     const router = useRouter();
+    const dispatch = useAppDispatch();
+    const initialInfo = useAppSelector(selectInitialInfo);
 
     return (
         <div className="text-white/90 h-full flex flex-col">
@@ -22,6 +30,13 @@ function Page() {
                     생년월일
                     <input
                         type="date"
+                        onInput={(e) => {
+                            dispatch(
+                                setBirthDate(
+                                    e.currentTarget.value.replace(/-/g, ".")
+                                )
+                            );
+                        }}
                         className="bg-white/15 rounded-lg py-1 pr-3 w-[150px] text-center
                         focus:outline-1 focus:outline-fluorescent-lightest"
                     />
@@ -31,6 +46,11 @@ function Page() {
                     <div className="flex flex-col items-end">
                         <input
                             type="number"
+                            onInput={(e) => {
+                                dispatch(
+                                    setWeight(parseInt(e.currentTarget.value))
+                                );
+                            }}
                             className="bg-white/15 rounded-lg py-1 pr-3 w-[110px] text-center
                             focus:outline-1 focus:outline-fluorescent-lightest"
                         />
@@ -44,6 +64,11 @@ function Page() {
                     <div className="flex flex-col items-end">
                         <input
                             type="number"
+                            onInput={(e) => {
+                                dispatch(
+                                    setHeight(parseInt(e.currentTarget.value))
+                                );
+                            }}
                             className="bg-white/15 rounded-lg py-1 pr-3 w-[110px] text-center
                             focus:outline-1 focus:outline-fluorescent-lightest"
                         />
@@ -57,11 +82,25 @@ function Page() {
             <ForwardButton
                 onClick={() => {
                     setTimeout(() => {
-                        router.push("/initial-setup/8");
+                        if (
+                            initialInfo.physicalSetting.birth ||
+                            initialInfo.physicalSetting.weight ||
+                            initialInfo.physicalSetting.height
+                        ) {
+                            router.push("/initial-setup/8");
+                        }
+                        else {
+                            alert("모든 정보를 입력해주세요");
+                        }
                     }, 500);
                 }}
                 title="다음"
-                className="mt-auto"
+                className={`mt-auto ${
+                    (!initialInfo.physicalSetting.birth ||
+                    !initialInfo.physicalSetting.weight ||
+                    !initialInfo.physicalSetting.height) &&
+                        "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
+                }`}
             />
         </div>
     );

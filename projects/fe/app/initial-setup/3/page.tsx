@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/../lib/hooks";
+import { setLevel } from "@/../lib/slices/initialInfoSlice";
 
 const levels = [
     {
@@ -25,6 +27,7 @@ const levels = [
 function Page() {
     const [selectedLevel, setSelectedLevel] = useState<number | null>(null);
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     return (
         <div className="text-white/90 flex flex-col h-full mt-auto">
@@ -46,12 +49,13 @@ function Page() {
                         }`}
                         onClick={() => {
                             setSelectedLevel(idx);
+                            dispatch(setLevel(level.title));
                             setTimeout(() => {
                                 router.push("/initial-setup/4");
-                            }, 700);
+                            }, 500);
                         }}
                     >
-                        <p className="">{level.title}</p>
+                        <p>{level.title}</p>
                         <p className="text-xs">{level.description}</p>
                     </div>
                 ))}

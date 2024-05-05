@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/../lib/hooks";
+import { setFrequency } from "@/../lib/slices/initialInfoSlice";
 
 const selection = [
     {
@@ -33,6 +35,7 @@ const selection = [
 function Page() {
     const [selectedFrequency, setSelectedFrequency] = useState<number | null>(null);
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     return (
         <div className="text-white/90 h-full flex flex-col">
@@ -52,9 +55,10 @@ function Page() {
                          }`}
                         onClick={() => {
                             setSelectedFrequency(idx);
+                            dispatch(setFrequency(item.title));
                             setTimeout(() => {
                                 router.push("/initial-setup/5");
-                            }, 700);
+                            }, 500);
                         }}
                     >
                         {item.title}

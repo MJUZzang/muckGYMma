@@ -4,13 +4,16 @@ import React, { useEffect, useState } from "react";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import ShyCat from "@/initial-setup/2/_images/ShyCat";
 import { useRouter } from "next/navigation";
+import { selectInitialInfo } from "../../../lib/slices/initialInfoSlice";
+import { useAppSelector } from "../../../lib/hooks";
+import { backendUrl } from "@/_utils/urls";
 
-const words =
-    "초기 설정을 마쳤어요! 건강한 습관을 만들기 위해 함께 노력해요!";
+const words = "초기 설정을 마쳤어요! 건강한 습관을 만들기 위해 함께 노력해요!";
 
 function Page() {
     const [text, setText] = useState<string>("");
     const router = useRouter();
+    const initialInfo = useAppSelector(selectInitialInfo);
 
     useEffect(() => {
         let i = 0;
@@ -42,6 +45,24 @@ function Page() {
                 <ForwardButton
                     title="알겠어!"
                     onClick={() => {
+                        console.log(initialInfo);
+
+                        fetch(`${backendUrl}/api/member/setup`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(initialInfo),
+                        })
+                            .then((res) => {
+                                if (!res.ok) {
+                                    throw new Error("Failed to set up");
+                                }
+                            })
+                            .catch((err) => {
+                                console.error(err);
+                            });
+
                         setTimeout(() => {
                             router.push("/");
                         }, 500);

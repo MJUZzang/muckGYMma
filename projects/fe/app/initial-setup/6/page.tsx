@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/../lib/hooks";
+import { setGender } from "@/../lib/slices/initialInfoSlice";
 
 const genders = [
     {
@@ -21,6 +23,7 @@ const genders = [
 function Page() {
     const [selectedGender, setSelectedGender] = useState<number | null>(null);
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     return (
         <div className="text-white/90 h-full flex flex-col">
@@ -42,9 +45,10 @@ function Page() {
                         }`}
                         onClick={() => {
                             setSelectedGender(idx);
+                            dispatch(setGender(gender.title));
                             setTimeout(() => {
                                 router.push("/initial-setup/7");
-                            }, 700);
+                            }, 500);
                         }}
                     >
                         <p className="">{gender.title}</p>

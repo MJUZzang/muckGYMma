@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/../lib/hooks";
+import { setGoal } from "@/../lib/slices/initialInfoSlice";
 
 const goals = [
     {
@@ -21,6 +23,7 @@ const goals = [
 function Page() {
     const [selectedGoal, setSelectedGoal] = useState<number | null>(null);
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     return (
         <div className="text-white/90 h-full flex flex-col">
@@ -40,9 +43,10 @@ function Page() {
                         }`}
                         onClick={() => {
                             setSelectedGoal(idx)
+                            dispatch(setGoal(goal.title));
                             setTimeout(() => {
                                 router.push("/initial-setup/6");
-                            }, 700);
+                            }, 500);
                         }}
                     >
                         <p className="">{goal.title}</p>

@@ -91,7 +91,7 @@ function InitialSetupLayout({
             <div className="">
                 {pageInfo.order !== 0 && (
                     <ArrowBack
-                        className="fill-white/80 absolute"
+                        className="fill-white/80 absolute cursor-pointer"
                         onClick={() => router.back()}
                     />
                 )}

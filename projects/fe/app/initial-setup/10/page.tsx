@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
+import { useAppDispatch } from "@/../lib/hooks";
+import { setExercises } from "@/../lib/slices/initialInfoSlice";
 
 const workouts = [
     "벤치프레스",
@@ -24,12 +26,11 @@ const workouts = [
 function Page() {
     const [selectedWorkouts, setSelectedWorkouts] = useState<string[]>([]);
     const router = useRouter();
+    const dispatch = useAppDispatch();
 
     return (
         <div className="text-white/90 h-full flex flex-col">
-            <p className="mt-5 text-xl text-pretty">
-                자주하는 운동이 있나요?
-            </p>
+            <p className="mt-5 text-xl text-pretty">자주하는 운동이 있나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다
             </p>
@@ -44,11 +45,14 @@ function Page() {
                                     selectedWorkouts.filter((s) => s !== sport)
                                 );
                             } else {
-                                setSelectedWorkouts([...selectedWorkouts, sport]);
+                                setSelectedWorkouts([
+                                    ...selectedWorkouts,
+                                    sport,
+                                ]);
                             }
                         }}
                         className={`px-2 py-1 rounded-full font-bold 
-                        transition-all 
+                        transition-all cursor-pointer
                         ${
                             selectedWorkouts.includes(sport)
                                 ? "bg-fluorescent text-black"
@@ -62,12 +66,17 @@ function Page() {
 
             <ForwardButton
                 onClick={() => {
-                    setTimeout(() => {
-                        router.push("/initial-setup/11");
-                    }, 500);
+                    if (selectedWorkouts.length === 0) {
+                        alert("하나 이상 선택해주세요");
+                    } else {
+                        dispatch(setExercises(selectedWorkouts));
+                        setTimeout(() => {
+                            router.push("/initial-setup/11");
+                        }, 500);
+                    }
                 }}
                 title="다음"
-                className="mt-10"
+                className={`mt-10 ${selectedWorkouts.length === 0 && "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"}`}
             />
         </div>
     );

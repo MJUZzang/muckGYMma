@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/../lib/hooks";
+import { setExperience } from "../../../lib/slices/initialInfoSlice";
 
 const selection = [
     {
@@ -29,7 +31,7 @@ const selection = [
 function Page() {
     const [selectedExp, setSelectedExp] = useState<number | null>(null);
     const router = useRouter();
-
+    const dispatch = useAppDispatch();
     return (
         <div className="text-white/90 h-full flex flex-col">
             <p className="mt-5 text-xl">운동 경험이 얼마나 되시나요?</p>
@@ -50,9 +52,10 @@ function Page() {
                         }`}
                         onClick={() => {
                             setSelectedExp(idx);
+                            dispatch(setExperience(exp.title));
                             setTimeout(() => {
                                 router.push("/initial-setup/9");
-                            }, 700);
+                            }, 500);
                         }}
                     >
                         <p className="">{exp.title}</p>

@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
+import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
+import { selectInitialInfo, setSports } from "@/../lib/slices/initialInfoSlice";
 
 const sports = [
     "축구",
@@ -35,6 +37,8 @@ const sports = [
 function Page() {
     const [selectedSports, setSelectedSports] = useState<string[]>([]);
     const router = useRouter();
+    const dispatch = useAppDispatch();
+    const initialInfo = useAppSelector(selectInitialInfo);
 
     return (
         <div className="text-white/90 h-full flex flex-col">
@@ -59,7 +63,7 @@ function Page() {
                             }
                         }}
                         className={`px-2 py-1 rounded-full font-bold 
-                        transition-all 
+                        transition-all cursor-pointer
                         ${
                             selectedSports.includes(sport)
                                 ? "bg-fluorescent text-black"
@@ -73,12 +77,20 @@ function Page() {
 
             <ForwardButton
                 onClick={() => {
-                    setTimeout(() => {
-                        router.push("/initial-setup/10");
-                    }, 500);
+                    if (selectedSports.length === 0) {
+                        alert("하나 이상의 스포츠를 선택해주세요");
+                    } else {
+                        dispatch(setSports(selectedSports));
+                        setTimeout(() => {
+                            router.push("/initial-setup/10");
+                        }, 500);
+                    }
                 }}
                 title="다음"
-                className="mt-10"
+                className={`mt-10 ${
+                    selectedSports.length === 0 &&
+                    "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
+                }`}
             />
         </div>
     );
