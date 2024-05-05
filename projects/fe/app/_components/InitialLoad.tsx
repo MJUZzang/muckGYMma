@@ -25,8 +25,8 @@ function InitialLoad(props: InitialLoadProps) {
                 cache: "no-store",
             })
                 .then((res) => {
+                    setIsLoading(false);
                     if (!res.ok) {
-                        setIsLoading(false);
                         router.push("/sign-in");
                     }
                 })
