@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch } from "@/../lib/hooks";
 import { setExercises } from "@/../lib/slices/initialInfoSlice";
+import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 const workouts = [
     "벤치프레스",
@@ -27,6 +28,7 @@ function Page() {
     const [selectedWorkouts, setSelectedWorkouts] = useState<string[]>([]);
     const router = useRouter();
     const dispatch = useAppDispatch();
+    const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="text-white/90 h-full flex flex-col">
@@ -76,7 +78,15 @@ function Page() {
                     }
                 }}
                 title="다음"
-                className={`mt-10 ${selectedWorkouts.length === 0 && "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"}`}
+                className={`mt-10 ${
+                    selectedWorkouts.length === 0 &&
+                    "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
+                }`}
+            />
+
+            <ConfirmModal
+                isVisible={isModelOpen}
+                onClose={() => setIsModalOpen(false)}
             />
         </div>
     );

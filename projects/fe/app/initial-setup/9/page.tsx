@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
 import { selectInitialInfo, setSports } from "@/../lib/slices/initialInfoSlice";
+import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 const sports = [
     "축구",
@@ -39,6 +40,7 @@ function Page() {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const initialInfo = useAppSelector(selectInitialInfo);
+    const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="text-white/90 h-full flex flex-col">
@@ -91,6 +93,11 @@ function Page() {
                     selectedSports.length === 0 &&
                     "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
                 }`}
+            />
+
+            <ConfirmModal
+                isVisible={isModelOpen}
+                onClose={() => setIsModalOpen(false)}
             />
         </div>
     );

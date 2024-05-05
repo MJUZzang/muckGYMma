@@ -10,11 +10,13 @@ import {
     setHeight,
     setWeight,
 } from "@/../lib/slices/initialInfoSlice";
+import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 function Page() {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const initialInfo = useAppSelector(selectInitialInfo);
+    const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
         <div className="text-white/90 h-full flex flex-col">
@@ -88,20 +90,21 @@ function Page() {
                             initialInfo.physicalSetting.height
                         ) {
                             router.push("/initial-setup/8");
-                        }
-                        else {
-                            alert("모든 정보를 입력해주세요");
+                        } else {
+                            setIsModalOpen(true);
                         }
                     }, 500);
                 }}
                 title="다음"
                 className={`mt-auto ${
                     (!initialInfo.physicalSetting.birth ||
-                    !initialInfo.physicalSetting.weight ||
-                    !initialInfo.physicalSetting.height) &&
+                        !initialInfo.physicalSetting.weight ||
+                        !initialInfo.physicalSetting.height) &&
                         "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
                 }`}
             />
+
+            <ConfirmModal isVisible={isModelOpen} onClose={() => setIsModalOpen(false)} />
         </div>
     );
 }
