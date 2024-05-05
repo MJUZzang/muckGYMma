@@ -4,7 +4,7 @@ import { backendUrl } from "@/_utils/urls";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const excepts = ["/sign-in"];
+const excepts = ["/sign-in", "/initial-setup"];
 
 interface InitialLoadProps {
     children: React.ReactNode;
@@ -46,14 +46,14 @@ function InitialLoad(props: InitialLoadProps) {
             })
                 .then((res) => {
                     if (!res.ok) {
-                        throw new Error("Not initialized");
+                        throw new Error("Sever responsded with an error");
                     } else {
                         return res.json();
                     }
                 })
                 .then((data) => {
                     if (!data.initialized) {
-                        router.push("/initial-info/1");
+                        router.push("/initial-setup/1");
                     }
                 })
                 .catch((err) => {
