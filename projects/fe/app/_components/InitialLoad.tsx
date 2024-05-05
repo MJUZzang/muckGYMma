@@ -45,8 +45,14 @@ function InitialLoad(props: InitialLoadProps) {
                 credentials: "include",
             })
                 .then((res) => {
-                    console.log(res.status)
                     if (!res.ok) {
+                        throw new Error("Not initialized");
+                    } else {
+                        return res.json();
+                    }
+                })
+                .then((data) => {
+                    if (!data.initialized) {
                         router.push("/initial-info/1");
                     }
                 })
