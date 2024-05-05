@@ -2,18 +2,31 @@ import React from "react";
 
 interface LikeProps {
     className?: string;
+    isLiked: boolean;
+    onClick: () => void;
 }
 
-const Like: React.FC<LikeProps> = (props) => {
+const Like: React.FC<LikeProps> = ({
+    isLiked,
+    onClick,
+    className
+}) => {
     return (
         <svg
-            className={props.className}
+            width={25}
+            height={24}
+            viewBox="0 0 25 24"
+            fill={`${isLiked ? "#FF0000" : "none"}`}
             xmlns="http://www.w3.org/2000/svg"
-            height="24"
-            viewBox="0 -960 960 960"
-            width="24"
+            onClick={onClick}
         >
-            <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z" />
+            <path
+                d="M12.6356 20.81C12.2956 20.93 11.7356 20.93 11.3956 20.81C8.49563 19.82 2.01562 15.69 2.01562 8.68998C2.01562 5.59998 4.50563 3.09998 7.57562 3.09998C9.39562 3.09998 11.0056 3.97998 12.0156 5.33998C13.0256 3.97998 14.6456 3.09998 16.4556 3.09998C19.5256 3.09998 22.0156 5.59998 22.0156 8.68998C22.0156 15.69 15.5356 19.82 12.6356 20.81Z"
+                stroke={`${isLiked ? "#FF0000" : "white"}`}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
         </svg>
     );
 };

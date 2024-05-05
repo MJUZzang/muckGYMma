@@ -22,12 +22,18 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ postInfo }) => {
-    const [truncatedContent, setTruncatedContent] = useState<string>(postInfo.content.slice(0, 80) + "...");
-    const [showFullContent, setShowFullContent] = useState<boolean>(postInfo.content.length <= 80);
-
+    const [truncatedContent, setTruncatedContent] = useState<string>(
+        postInfo.content.slice(0, 80) + "..."
+    );
+    const [showFullContent, setShowFullContent] = useState<boolean>(
+        postInfo.content.length <= 80
+    );
+    const [isLiked, setIsLiked] = useState<boolean>(false);
     const postRef = useRef<HTMLDivElement>(null);
     const [height, setHeight] = React.useState<number>(
-        document.documentElement.clientWidth > 470 ? 470 : document.documentElement.clientWidth
+        document.documentElement.clientWidth > 470
+            ? 470
+            : document.documentElement.clientWidth
     );
 
     useEffect(() => {
@@ -84,7 +90,10 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             {/* 포스트 액션 */}
             <div className="flex justify-between mt-1 pl-1 pr-3">
                 <div className="flex py-1 gap-3">
-                    <Like className="fill-white" />
+                    <Like
+                        onClick={() => setIsLiked(!isLiked)}
+                        isLiked={isLiked}
+                    />
                     <CommentsSection>
                         <Comment className="fill-white" />
                     </CommentsSection>

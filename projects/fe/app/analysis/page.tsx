@@ -9,8 +9,8 @@ const Analysis = () => {
             <div className="max-w-[780px] mx-auto text-white space-y-10 pb-7">
                 <SummaryGraphs />
                 <HeatMap />
-                <StrengthWeaknessesChart />
-                <VolumneProgressChart />
+                {/* <StrengthWeaknessesChart />
+                <VolumneProgressChart /> */}
             </div>
         </>
     );
