@@ -27,6 +27,7 @@ function CommentsSection({
     children: React.ReactNode;
 }>) {
     const [text, setText] = useState("");
+    const [isLiked, setIsLiked] = useState<boolean>(false);
 
     return (
         <Drawer closeThreshold={0.9}>
@@ -78,7 +79,12 @@ function CommentsSection({
                                             코멘트 내용에 뭘 넣을까여
                                         </p>
                                         <div className="flex flex-col items-center">
-                                            <Like className="fill-white/60" />
+                                            <Like
+                                                onClick={() =>
+                                                    setIsLiked(!isLiked)
+                                                }
+                                                isLiked={isLiked}
+                                            />
                                             <p className="text-white/80 text-[12px]">
                                                 2,462
                                             </p>
