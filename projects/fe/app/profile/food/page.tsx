@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Jua } from "next/font/google";
 
 import NavigateNext from "@/_images/NavigateNext";
+import Link from "next/link";
 
 const jua = Jua({
     subsets: ["latin"],
@@ -18,9 +19,17 @@ function Page() {
             {Array(10)
                 .fill(0)
                 .map((_, i) => (
-                    <div key={i} className="px-1 flex gap-2 hover:bg-white/10 transition duration-200">
+                    <Link
+                        key={i}
+                        href="/food-info"
+                        className="px-1 flex gap-2 hover:bg-white/10 transition duration-200 "
+                    >
                         <div className="w-[75px] h-[75px] overflow-clip rounded-3xl shrink-0">
-                            <Image src={exampleImage} alt="Pooh" className="h-full" />
+                            <Image
+                                src={exampleImage}
+                                alt="Pooh"
+                                className="h-full"
+                            />
                         </div>
 
                         <div className={`${jua.className} py-1 w-full`}>
@@ -32,14 +41,18 @@ function Page() {
                         </div>
 
                         <div className="flex items-center justify-center">
-                            <p className={`text-black/85 bg-fluorescent border-[1px] text-xs border-black/20 px-2 py-1 rounded-3xl font-mono font-semibold`}>posted</p>
+                            <p
+                                className={`text-black/85 bg-fluorescent border-[1px] text-xs border-black/20 px-2 py-1 rounded-3xl font-mono font-semibold`}
+                            >
+                                posted
+                            </p>
                             <NavigateNext
                                 hight={34}
                                 width={34}
                                 className="fill-white/90"
                             />
                         </div>
-                    </div>
+                    </Link>
                 ))}
         </div>
     );

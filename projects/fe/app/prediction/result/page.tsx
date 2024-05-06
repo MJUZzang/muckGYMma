@@ -36,7 +36,11 @@ function Page() {
     useEffect(() => {
         if (process.env.NODE_ENV === "development") {
             dispatch(setFileUrl(dummyPredictResult.fileUrl));
-            dispatch(setPredictResult(dummyPredictResult.predictresult as PredictResult));
+            dispatch(
+                setPredictResult(
+                    dummyPredictResult.predictresult as PredictResult
+                )
+            );
         }
     });
 

@@ -58,7 +58,7 @@ function InitialLoad(props: InitialLoadProps) {
     return (
         <>
             {isLoading ? (
-                <div className="flex flex-col items-center justify-center h-full max-h-[100dvh] animate-pulse">
+                <div className="flex flex-col items-center justify-center h-[100dvh] animate-pulse">
                     <div
                         className="w-[40px] h-[40px] rounded-full border-t-stone-200 border-t-4 border-4 border-stone-400 
                         animate-spin"

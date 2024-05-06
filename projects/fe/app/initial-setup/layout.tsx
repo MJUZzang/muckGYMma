@@ -87,8 +87,8 @@ function InitialSetupLayout({
     }, []);
 
     return (
-        <div className="bg-default px-5 flex flex-col h-full max-h-[100dvh] py-4">
-            <div className="">
+        <div className="bg-default px-5 flex flex-col h-[100dvh] py-4">
+            <div>
                 {pageInfo.order !== 0 && (
                     <ArrowBack
                         className="fill-white/80 absolute cursor-pointer"
