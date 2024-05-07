@@ -133,7 +133,7 @@ const Page = () => {
     return (
         <div className="space-y-3 mt-3 mb-6 h-full">
             {dummyList.map((task, index) => (
-                <Link key={index} className="block" href="/plan-info/todo">
+                <Link key={index} className="block" href="/plan-info">
                     <Task
                         type={task.type}
                         level={task.level}

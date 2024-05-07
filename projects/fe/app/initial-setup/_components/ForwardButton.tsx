@@ -1,5 +1,6 @@
 "use client";
 
+import Button from "@/_components/Button";
 import Link from "next/link";
 import React from "react";
 
@@ -17,14 +18,8 @@ function ForwardButton({
     title = "",
 }: ForwardButtonProps) {
     return (
-        <Link
-            href={href}
-            onClick={onClick}
-            className={`inline-block text-center w-full bg-fluorescent rounded-lg py-2 font-semibold text-black 
-            active:scale-90 transition-all 
-            ${className}`}
-        >
-            {title}
+        <Link href={href} onClick={onClick} className="mt-auto">
+            <Button className={`${className}`}>{title}</Button>
         </Link>
     );
 }

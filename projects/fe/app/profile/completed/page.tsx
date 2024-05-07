@@ -9,7 +9,7 @@ function Page() {
                 {Array.from({ length: 5 }).map((_, i) => (
                     <Link
                         key={i}
-                        href="/plan-info/completed"
+                        href="/plan-info"
                         className="pl-2 pr-4 py-2 flex items-center gap-2 border-b-white/10 border-b-[1px] hover:bg-white/10 transition duration-200"
                     >
                         <Muscle />

@@ -96,15 +96,18 @@ function Page() {
                     }, 500);
                 }}
                 title="다음"
-                className={`mt-auto ${
+                className={`${
                     (!initialInfo.physicalSetting.birth ||
                         !initialInfo.physicalSetting.weight ||
                         !initialInfo.physicalSetting.height) &&
-                        "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
+                    "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
                 }`}
             />
 
-            <ConfirmModal isVisible={isModelOpen} onClose={() => setIsModalOpen(false)} />
+            <ConfirmModal
+                isVisible={isModelOpen}
+                onClose={() => setIsModalOpen(false)}
+            />
         </div>
     );
 }
