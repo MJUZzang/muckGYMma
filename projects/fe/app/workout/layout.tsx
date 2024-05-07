@@ -14,17 +14,6 @@ const jua = Jua({
 const notoSans = Noto_Sans({ subsets: ["latin"] });
 const notnSerifJP = Noto_Serif_JP({ subsets: ["latin"], weight: "900" });
 
-const links = [
-    {
-        name: "To do",
-        href: "/workout/todo",
-    },
-    {
-        name: "Completed",
-        href: "/workout/completed",
-    },
-];
-
 interface WorkoutLayoutProps {
     children: React.ReactNode;
 }
@@ -32,10 +21,6 @@ interface WorkoutLayoutProps {
 const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
     return (
         <div className="max-w-[935px] mx-auto w-full">
-            {/* <div className="flex items-center">
-                <LogoAndTitle />
-            </div> */}
-
             <div className="px-4 w-full">
                 <div className="mt-3">
                     <div className="flex justify-between">

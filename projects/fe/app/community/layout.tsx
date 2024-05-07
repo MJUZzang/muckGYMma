@@ -33,7 +33,7 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
     const pathname = usePathname();
 
     return (
-        <div className="">
+        <>
             <div className="flex flex-col border-b-[1px] border-b-gray-700">
                 <div className="flex items-center max-w-[935px] mx-auto w-full">
                     <LogoAndTitle />
@@ -56,7 +56,7 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
             </div>
 
             <div className="h-full">{props.children}</div>
-        </div>
+        </>
     );
 };
 

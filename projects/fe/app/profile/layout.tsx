@@ -22,31 +22,29 @@ const Page = ({
 
     return (
         <>
-            <div>
-                <div className="mx-auto max-w-[935px] flex items-center justify-between px-3 mt-2 lg:mt-4 mb-4">
-                    {/* User name */}
-                    <div className="flex items-center gap-1">
-                        <Hash strokeColor="#cccccc" size={21} />
-                        <p className="text-[#dddddd] text-lg md:text-xl lg:text-2xl font-bold">
-                            jeheecheon
-                        </p>
-                    </div>
+            <div className="mx-auto max-w-[935px] flex items-center justify-between px-3 mt-2 lg:mt-4 mb-4">
+                {/* User name */}
+                <div className="flex items-center gap-1">
+                    <Hash strokeColor="#cccccc" size={21} />
+                    <p className="text-[#dddddd] text-lg md:text-xl lg:text-2xl font-bold">
+                        jeheecheon
+                    </p>
+                </div>
 
-                    <div className="flex gap-5 items-center">
-                        <FoodPicture
-                            className="fill-white cursor-pointer lg:hidden"
-                            size={23}
-                        />
-                        <FoodPicture
-                            className="fill-white cursor-pointer hidden lg:block"
-                            size={30}
-                        />
+                <div className="flex gap-5 items-center">
+                    <FoodPicture
+                        className="fill-white cursor-pointer lg:hidden"
+                        size={23}
+                    />
+                    <FoodPicture
+                        className="fill-white cursor-pointer hidden lg:block"
+                        size={30}
+                    />
 
-                        <div className="w-[27px] lg:w-[33px] gap-[4.5px] flex flex-col cursor-pointer">
-                            <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
-                            <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
-                            <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
-                        </div>
+                    <div className="w-[27px] lg:w-[33px] gap-[4.5px] flex flex-col cursor-pointer">
+                        <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
+                        <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
+                        <div className="w-full h-[2.5px] lg:h-[3px] bg-white rounded-full" />
                     </div>
                 </div>
             </div>

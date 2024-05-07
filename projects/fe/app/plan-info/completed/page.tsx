@@ -3,6 +3,11 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
+interface PlanInfoProps {
+    className?: string;
+    
+}
+
 function PlanInfo() {
     const router = useRouter();
 

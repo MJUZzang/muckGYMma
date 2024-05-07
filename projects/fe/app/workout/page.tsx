@@ -2,6 +2,7 @@
 
 import React, { useEffect } from "react";
 import Task from "@/workout/_components/Task";
+import Link from "next/link";
 
 const currentDate = new Date(); // 현재 로컬 시간
 
@@ -130,11 +131,10 @@ const Page = () => {
     }, []);
 
     return (
-        <div>
-            <div className="space-y-3 mt-3 mb-6 h-full">
-                {dummyList.map((task, index) => (
+        <div className="space-y-3 mt-3 mb-6 h-full">
+            {dummyList.map((task, index) => (
+                <Link key={index} className="block" href="/plan-info/todo">
                     <Task
-                        key={index}
                         type={task.type}
                         level={task.level}
                         duration={task.duration}
@@ -145,8 +145,8 @@ const Page = () => {
                             index
                         )} ${GetZIndex(index)}`}
                     />
-                ))}
-            </div>
+                </Link>
+            ))}
         </div>
     );
 };
