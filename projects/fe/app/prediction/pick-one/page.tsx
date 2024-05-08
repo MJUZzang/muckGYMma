@@ -100,7 +100,7 @@ export default function Page() {
     })
 
     return (
-        <div className="h-full" onClick={() => setIsModalOpen(false)}>
+        <div className="h-full animate-page-enter" onClick={() => setIsModalOpen(false)}>
             <ConfirmModal
                 title="섭취한 음식을 선택해주세요"
                 onOkClicked={() => setIsModalOpen(false)}

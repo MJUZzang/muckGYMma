@@ -46,7 +46,7 @@ function Page() {
 
     return (
         <>
-            <div className="h-full">
+            <div className="h-full animate-page-enter">
                 <p className="block mb-2 text-center text-white/90 mx-auto text-2xl">
                     분석 완료!
                 </p>

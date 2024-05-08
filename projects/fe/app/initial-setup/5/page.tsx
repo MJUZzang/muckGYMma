@@ -26,7 +26,7 @@ function Page() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="text-white/90 h-full flex flex-col">
+        <div className="text-white/90 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl">운동 목적이 무엇인가요?</p>
             <p className="mt-2 text-xs">운동 플랜 생성에 사용되며 공유되지 않습니다</p>
 

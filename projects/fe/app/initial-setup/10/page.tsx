@@ -31,7 +31,7 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="text-white/90 h-full flex flex-col">
+        <div className="text-white/90 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl text-pretty">자주하는 운동이 있나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다

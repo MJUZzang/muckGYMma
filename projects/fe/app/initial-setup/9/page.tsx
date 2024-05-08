@@ -43,7 +43,7 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="text-white/90 h-full flex flex-col">
+        <div className="text-white/90 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl text-pretty">
                 자주 즐기는 스포츠가 있나요?
             </p>

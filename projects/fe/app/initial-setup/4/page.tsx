@@ -38,7 +38,7 @@ function Page() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="text-white/90 h-full flex flex-col">
+        <div className="text-white/90 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl">운동을 매주 얼마나 자주 하시나요?</p>
             <p className="mt-2 text-xs">이후에도 변경하실 수 있습니다</p>
 

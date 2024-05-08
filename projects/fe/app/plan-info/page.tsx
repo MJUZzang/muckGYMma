@@ -18,7 +18,7 @@ function PlanInfo() {
     }, []);
 
     return (
-        <div className={`h-[100dvh] flex flex-col mx-3`}>
+        <div className={`h-[100dvh] flex flex-col mx-3 animate-page-enter`}>
             {/* 엑스 버튼 */}
             <div
                 className="cursor-pointer mt-5"

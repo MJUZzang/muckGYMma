@@ -43,7 +43,7 @@ function FoodInfo() {
         }
     });
     return (
-        <div className="flex flex-col h-[100dvh]">
+        <div className="flex flex-col h-[100dvh] animate-page-enter">
             {/* 엑스 버튼 */}
             <div
                 className="cursor-pointer ml-3 pt-5"

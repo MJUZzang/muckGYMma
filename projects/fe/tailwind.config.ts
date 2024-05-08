@@ -1,3 +1,4 @@
+import { transform } from "next/dist/build/swc";
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -100,12 +101,23 @@ const config = {
                         transform: "translateX(0)",
                     },
                 },
+                "page-enter": {
+                    from: { transform: "translateX(100%)", opacity: "0"},
+                    to: { transform: "translateX(0)", opacity: "1"},
+                },
+                "custom-pulse": {
+                    "0%": { opacity: "0"},
+                    "50%": { opacity: "1"},
+                    "100%": { opacity: "0"},
+                }
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 "spin-180": "spin-180 0.6s ease-in-out",
                 "show-task": "show-task 0.6s ease-in-out forwards",
+                "page-enter": "page-enter 0.6s ease-in-out forwards",
+                "custom-pulse": "custom-pulse 1s ease-in-out infinite",
             },
         },
     },
