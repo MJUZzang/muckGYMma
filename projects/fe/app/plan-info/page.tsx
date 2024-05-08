@@ -6,6 +6,7 @@ import { dummyPlanInfo } from "@/_types/Plan";
 
 import React, { useEffect, useState } from "react";
 import Button from "@/_components/Button";
+import Link from "next/link";
 
 function PlanInfo() {
     const router = useRouter();
@@ -68,7 +69,9 @@ function PlanInfo() {
                 </div>
             </div>
 
-            <Button className="mt-auto mb-3">플랜 시작하기</Button>
+            <Link href="/plan" className="mt-auto mb-3">
+                <Button>플랜 시작하기</Button>
+            </Link>
         </div>
     );
 }

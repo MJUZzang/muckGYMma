@@ -12,6 +12,9 @@ import {
 
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import CheckMark from "@/_images/CheckMark";
+import Button from "@/_components/Button";
+import RestTimer from "./_components/RestTimer";
 
 function formatTime(seconds: number) {
     const hrs = Math.floor(seconds / 3600);
@@ -25,7 +28,10 @@ function Page() {
     const router = useRouter();
     const [timer, setTimer] = useState(0);
     const [planInfo, setPlanInfo] = useState<PlanInfoType>(emptyPlanInfo);
-    const [nowSelected, setNowSelected] = useState(2);
+    const [nowSelected, setNowSelected] = useState(1);
+
+    const restTimerButtonRef = React.createRef<HTMLDivElement>();
+    const [restTime, setRestTime] = useState(0);
 
     useEffect(() => {
         if (process.env.NODE_ENV === "development") {
@@ -40,17 +46,17 @@ function Page() {
 
     function GetPlanStyle(order: number) {
         if (order === nowSelected) {
-            return "bg-stone-800 border-2 border-fluorescent text-white";
+            return "bg-slate-700 border-2 border-fluorescent/50 text-white";
         }
         if (order < nowSelected) {
             return "bg-fluorescent/20 text-fluorescent/50";
         } else {
-            return "bg-slate-800 text-white/50";
+            return "bg-slate-700 text-white/50";
         }
     }
 
     return (
-        <div className="my-3 mx-2">
+        <div className="py-3 mx-2 flex flex-col min-h-[100dvh]">
             <div className="grid grid-cols-3">
                 <ArrowBack
                     className="fill-white/80 cursor-pointer my-auto"
@@ -88,9 +94,9 @@ function Page() {
             <p className="text-white/60 text-sm">1 / 6</p>
 
             {/* Workout name */}
-            <p className="text-white/90 text-xl mt-3">데드리프트</p>
+            <p className="text-white/90 text-2xl mt-3">데드리프트</p>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 mt-3">
                 {dummyPlanInfo.plans.map((plan, index) => (
                     <div
                         key={plan.order}
@@ -99,8 +105,46 @@ function Page() {
                     >
                         <p className={`w-full text-left`}>{plan.order} 세트</p>
                         <p className={`w-full text-center`}>{plan.rep} 회</p>
+                        <div
+                            className={`w-full ${
+                                plan.order >= nowSelected && "invisible"
+                            }`}
+                        >
+                            <CheckMark className="ml-auto " color="#dfff32" />
+                        </div>
                     </div>
                 ))}
+            </div>
+
+            <div className="flex gap-3 mt-auto">
+                <RestTimer time={restTime} setTime={setRestTime}>
+                    <Button
+                        ref={restTimerButtonRef}
+                        className="px-3 bg-slate-500 text-fluorescent"
+                        onClick={() => {
+                            const savedRestTime =
+                                localStorage.getItem("restTime");
+                            if (savedRestTime) {
+                                const parsedRestTime = parseInt(savedRestTime);
+                                setRestTime(parsedRestTime);
+                            } else {
+                                setRestTime(30);
+                            }
+                        }}
+                    >
+                        휴식 타이머
+                    </Button>
+                </RestTimer>
+                <Button
+                    onClick={() => {
+                        if (planInfo.plans.length >= nowSelected) {
+                            setNowSelected(nowSelected + 1);
+                        }
+                        restTimerButtonRef.current?.click();
+                    }}
+                >
+                    세트 완료
+                </Button>
             </div>
         </div>
     );

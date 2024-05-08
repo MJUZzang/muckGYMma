@@ -9,7 +9,7 @@ import Forum from "@/_images/Forum";
 import { usePathname } from "next/navigation";
 import FoodPicture from "@/_components/FoodPicture";
 
-const excepts = ["/initial-setup", "/plan-info", "/food-info"];
+const excepts = ["/initial-setup", "/plan-info", "/food-info", "/plan"];
 
 const NavBar = () => {
     const pathname = usePathname();
