@@ -85,7 +85,7 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
             }}
         >
             <DrawerTrigger>{children}</DrawerTrigger>
-            <DrawerContent className="h-[75dvh] bg-[#181818] border-none focus:outline-none">
+            <DrawerContent className="h-[85dvh] bg-[#181818] border-none focus:outline-none">
                 <DrawerHeader>
                     <DrawerTitle className="text-white/90 ">
                         <p className="text-xl">휴식 타이머</p>
@@ -97,7 +97,7 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
                 </DrawerHeader>
                 x
                 <div className="h-full flex flex-col pb-4">
-                    <div className="ml-3 flex gap-2 text-white/90 text-lg overflow-y-auto">
+                    <div className="ml-3 flex gap-2 text-white/90 text-base md:text-lg overflow-y-auto">
                         {times.map((time, i) => (
                             <div
                                 key={i}
@@ -136,14 +136,14 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
                             }}
                         >
                             <div
-                                className="text-[70px] m-2 text-white/90 flex justify-center items-center w-[55vw] h-[55vw]
+                                className="text-[54px] md:text-[70px] m-2 text-white/90 flex justify-center items-center w-[30dvh] h-[30dvh]
                                     bg-black rounded-full"
                             >
                                 {times[selectedTime] && formatSeconds(time)}
                             </div>
                         </div>
 
-                        <div className="flex justify-center gap-10 text-white/90 text-2xl mt-4">
+                        <div className="flex justify-center gap-10 text-white/90 text-base md:text-2xl mt-4">
                             <div
                                 className="bg-slate-800/80 px-6 py-3 rounded-2xl"
                                 onClick={() => setTime(time - 10)}
@@ -161,7 +161,7 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
 
                     <div className="mx-4 mt-auto">
                         <Button
-                            className={`text-2xl py-3 w-fit ${
+                            className={`text-base md:text-2xl py-3 w-fit ${
                                 time === 0
                                     ? "bg-slate-800 text-white/90"
                                     : "bg-fluorescent"
