@@ -22,7 +22,7 @@ import mju.paygo.prefersports.domain.PreferSports;
 import mju.paygo.prefersports.domain.PreferSportsRepository;
 import mju.paygo.prefersports.domain.vo.Sports;
 import mju.paygo.prefersports.exception.exceptions.PreferSportsNotFoundException;
-import org.springframework.ai.openai.OpenAiChatClient;
+import org.springframework.ai.chat.ChatClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +37,7 @@ public class TaskService {
     private final PhysicalProfileRepository physicalProfileRepository;
     private final ExerciseProfileRepository exerciseProfileRepository;
     private final MealRepository mealRepository;
-    private final OpenAiChatClient chatClient;
+    private final ChatClient chatClient;
 
     public String questionExercises(final Long memberId, final Long mealId) {
         Member member = findMemberById(memberId);
