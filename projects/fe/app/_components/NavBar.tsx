@@ -35,7 +35,7 @@ const NavBar = () => {
                 }`}
             >
                 <div
-                    className={`fixed bg-default bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[60px] pb-3 justify-between items-center`}
+                    className={`fixed bg-white/90 bottom-0 w-full flex border-t-[0.1px] h-[60px] pb-3 justify-between items-center`}
                 >
                     <Link
                         href="/workout"
@@ -45,8 +45,8 @@ const NavBar = () => {
                             isActive={pathname.includes("/workout")}
                             className={`${
                                 pathname === "/workout"
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200"
+                                    ? "fill-turkish"
+                                    : "fill-gray-500"
                             }`}
                         />
                     </Link>
@@ -58,14 +58,14 @@ const NavBar = () => {
                         <Analysis
                             className={`${
                                 pathname === "/analysis"
-                                    ? "fill-fluorescent stroke-fluorescent"
-                                    : "fill-none stroke-gray-200"
+                                    ? "fill-turkish stroke-turkish"
+                                    : "fill-none stroke-gray-400"
                             }`}
                         />
                     </Link>
 
-                    <div className="bg-fluorescent p-3 rounded-full relative bottom-5 cursor-pointer">
-                        <FoodPicture className="fill-gray-900" />
+                    <div className="bg-turkish-dark p-3 rounded-full relative bottom-5 cursor-pointer">
+                        <FoodPicture className="fill-turkish-lighter" />
                     </div>
 
                     <Link
@@ -76,8 +76,8 @@ const NavBar = () => {
                             isActive={pathname === "/community/following"}
                             className={`${
                                 pathname === "/community/following"
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200"
+                                    ? "fill-turkish"
+                                    : "fill-gray-400"
                             }`}
                         />
                     </Link>
@@ -90,8 +90,8 @@ const NavBar = () => {
                             isActive={pathname.includes("/profile/")}
                             className={`${
                                 pathname.includes("/profile/")
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200"
+                                    ? "fill-turkish"
+                                    : "fill-gray-400"
                             }`}
                         />
                     </Link>

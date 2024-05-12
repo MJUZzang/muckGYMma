@@ -12,12 +12,12 @@ function ConfirmModal({ isVisible, onClose }: ConfirmModalProps) {
                 !isVisible && "hidden"
             }`}
         >
-            <div className="mx-auto w-[50vw] bg-stone-900 border-white p-2 rounded-3xl">
-                <p className="text-white/90">
+            <div className="flex flex-col justify-center items-center bg-white/15 mx-auto w-[45vw] h-[30vw] bg-stone-900 border-white p-2 rounded-3xl text-center">
+                <p className="text-white/90 mb-10 text-xl">
                     모든 정보를 올바르게 입력해주세요.
                 </p>
                 <button
-                    className="px-4 py-2 rounded-full border-2"
+                    className="px-4 py-2 bg-fluorescent w-[35vw] text-black/90 rounded-full border-none "
                     onClick={() => onClose()}
                 >
                     확인

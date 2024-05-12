@@ -102,9 +102,12 @@ const dummyList = [
 
 function GetBgColor(index: number) {
     const remain = index % 3;
-    if (remain === 0) return "bg-[#13231d]";
-    if (remain === 1) return "bg-white/45";
-    return "bg-fluorescent/20";
+    //if (remain === 0) return "bg-[#13231d]";
+    if (remain === 0) return "bg-turkish-light";
+    //if (remain === 1) return "bg-white/45";
+    if (remain === 2) return "bg-turkish-light";
+    //return "bg-fluorescent/20";
+    return "bg-turkish-light";
 }
 
 function GetZIndex(index: number) {
