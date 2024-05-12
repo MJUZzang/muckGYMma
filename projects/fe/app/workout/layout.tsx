@@ -58,7 +58,7 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
 
                 <div className="relative bottom-[50px] flex mt-5 lg:mt-[60px]  gap-3 justify-center items-end">
                     <div
-                        className="bg-fluorescent px-6 pt-3 pb-5 rounded-3xl rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] 
+                        className="bg-turkish-dark px-6 pt-3 pb-5 rounded-3xl rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] 
                         relative top-10 hover:animate-pulse"
                     >
                         <div className="mx-auto w-fit">
@@ -91,11 +91,11 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                         </div>
                     </div>
 
-                    <div className="bg-white px-4 py-5 pb-8 rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] hover:animate-pulse">
+                    <div className="bg-turkish-lighter px-4 py-5 pb-8 rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] hover:animate-pulse">
                         <div className="w-fit mx-auto">
                             <div className="w-fit">
                                 <div
-                                    className={`bg-fluorescent w-[40px] h-[40px] flex justify-center items-center rounded-full 
+                                    className={`bg-turkish w-[40px] h-[40px] flex justify-center items-center rounded-full 
                                     ${notnSerifJP.className} font-extrabold text-lg`}
                                 >
                                     !

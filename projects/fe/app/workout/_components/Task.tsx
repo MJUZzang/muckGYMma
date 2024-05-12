@@ -29,22 +29,27 @@ function GetIcon(type: string) {
 function GetTagDesign(type: number) {
     switch (type) {
         case 0:
-            return "bg-fluorescent text-black";
+            //return "bg-fluorescent text-black";
+            return "bg-turkish-dark text-black/80";
         case 1:
-            return "bg-black/60 text-white";
+            //return "bg-black/60 text-white";
+            return "bg-turkish-dark text-black/80";
         case 2:
-            return "bg-white text-black";
+            //return "bg-white text-black";
+            return "bg-turkish-dark text-black/80";
     }
 }
 
 function GetTextColor(designType: number) {
     switch (designType) {
         case 0:
-            return "text-white/90";
+            //return "text-white/90";
+            return "text-black/80";
         case 1:
             return "text-black/80";
         case 2:
-            return "text-fluorescent";
+            //return "text-fluorescent";
+            return "text-black/80";
     }
 }
 

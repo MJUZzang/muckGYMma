@@ -35,7 +35,7 @@ const NavBar = () => {
                 }`}
             >
                 <div
-                    className={`fixed bg-default bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[65px] pb-4 justify-between items-center`}
+                    className={`fixed bg-white/90 bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[65px] pb-4 justify-between items-center`}
                 >
                     <Link
                         href="/workout"
@@ -45,11 +45,11 @@ const NavBar = () => {
                             isActive={pathname.includes("/workout")}
                             className={`${
                                 pathname === "/workout"
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200"
+                                    ? "fill-turkish"
+                                    : "fill-gray-500"
                             }`}
                         />
-                        <p className="text-white/90 text-[0.6rem]">운동</p>
+                        <p className="text-black/90/90 text-[0.6rem]">운동</p>
                     </Link>
 
                     <Link
@@ -59,15 +59,15 @@ const NavBar = () => {
                         <Analysis
                             className={`${
                                 pathname === "/analysis"
-                                    ? "fill-fluorescent stroke-fluorescent"
-                                    : "fill-none stroke-gray-200"
+                                    ? "fill-turkish stroke-turkish"
+                                    : "fill-none stroke-gray-400"
                             }`}
                         />
-                        <p className="text-white/90 text-[0.6rem]">그래프</p>
+                        <p className="text-black/90/90 text-[0.6rem]">그래프</p>
                     </Link>
 
-                    <div className="bg-fluorescent p-3 rounded-full relative bottom-5 cursor-pointer">
-                        <FoodPicture className="fill-gray-900" />
+                    <div className="bg-turkish-dark p-3 rounded-full relative bottom-5 cursor-pointer">
+                        <FoodPicture className="fill-turkish-lighter" />
                     </div>
 
                     <Link
@@ -78,11 +78,11 @@ const NavBar = () => {
                             isActive={pathname === "/community/following"}
                             className={`${
                                 pathname === "/community/following"
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200"
+                                    ? "fill-turkish"
+                                    : "fill-gray-400"
                             }`}
                         />
-                        <p className="text-white/90 text-[0.6rem]">커뮤니티</p>
+                        <p className="text-black/90/90 text-[0.6rem]">커뮤니티</p>
                     </Link>
 
                     <Link
@@ -93,11 +93,11 @@ const NavBar = () => {
                             isActive={pathname.includes("/profile/")}
                             className={`${
                                 pathname.includes("/profile/")
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200/75"
+                                    ? "fill-turkish"
+                                    : "fill-gray-400"
                             }`}
                         />
-                        <p className="text-white/90 text-[0.6rem]">프로필</p>
+                        <p className="text-black/90/90 text-[0.6rem]">프로필</p>
                     </Link>
                 </div>
             </div>

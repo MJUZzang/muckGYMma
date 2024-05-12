@@ -70,6 +70,12 @@ const config = {
                 "purple-dark": "#4b00b7",
                 "purple-darker": "#2e0080",
                 "purple-darkest": "#1a0054",
+
+                turkish: "#CBF1F5",
+                "turkish-light": "#E3FDFD",
+                "turkish-lighter": "#F0FAF9",
+                "turkish-dark": "#A6E3E9",
+                "turkish-darker": "#71C9CE",
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -102,14 +108,14 @@ const config = {
                     },
                 },
                 "page-enter": {
-                    from: { transform: "translateX(100%)", opacity: "0"},
-                    to: { transform: "translateX(0)", opacity: "1"},
+                    from: { transform: "translateX(100%)", opacity: "0" },
+                    to: { transform: "translateX(0)", opacity: "1" },
                 },
                 "custom-pulse": {
-                    "0%": { opacity: "0"},
-                    "50%": { opacity: "1"},
-                    "100%": { opacity: "0"},
-                }
+                    "0%": { opacity: "0" },
+                    "50%": { opacity: "1" },
+                    "100%": { opacity: "0" },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
