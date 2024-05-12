@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import CheckMark from "@/_images/CheckMark";
 import Button from "@/_components/Button";
 import RestTimer from "./_components/RestTimer";
+import Play from "@/_images/Play";
 
 function formatTime(seconds: number) {
     const hrs = Math.floor(seconds / 3600);
@@ -26,7 +27,11 @@ function formatTime(seconds: number) {
 
 function Page() {
     const router = useRouter();
-    const [timer, setTimer] = useState(0);
+
+    const [timerTime, setTimerTime] = useState(0);
+    const [timerIntervalId, setTimerIntervalId] =
+        useState<NodeJS.Timeout | null>(null);
+
     const [planInfo, setPlanInfo] = useState<PlanInfoType>(emptyPlanInfo);
     const [nowSelected, setNowSelected] = useState(1);
 
@@ -38,11 +43,12 @@ function Page() {
             setPlanInfo(dummyPlanInfo);
         }
 
-        const interval = setInterval(() => {
-            setTimer((prev) => prev + 1);
-        }, 1000);
-        return () => clearInterval(interval);
-    });
+        return () => {
+            if (timerIntervalId !== null) {
+                clearInterval(timerIntervalId);
+            }
+        };
+    }, []);
 
     function GetPlanStyle(order: number) {
         if (order === nowSelected) {
@@ -67,15 +73,29 @@ function Page() {
                 <div
                     className="flex items-center justify-between gap-2 mx-auto w-[119px] h-[35px] my-auto
                             rounded-full border-fluorescent border-[1.5px] px-2"
+                    onClick={() => {
+                        if (timerIntervalId === null) {
+                            const intervalId = setInterval(() => {
+                                setTimerTime((prev) => prev + 1);
+                            }, 1000);
+                            setTimerIntervalId(intervalId);
+                        } else {
+                            setTimerIntervalId(null);
+                            clearInterval(timerIntervalId);
+                        }
+                    }}
                 >
                     {/* Dot */}
                     <div className="rounded-full w-[5px] h-[5px] animate-custom-pulse bg-fluorescent" />
 
                     {/* Timer */}
-                    <p className="text-white/90 text-sm">{formatTime(timer)}</p>
+                    <p className="text-white/90 text-sm">
+                        {formatTime(timerTime)}
+                    </p>
 
                     {/* Pause image */}
-                    <Pause />
+                    <Pause className={`${timerIntervalId === null && "hidden"}`} />
+                    <Play className={`${timerIntervalId !== null && "hidden"}`} />
                 </div>
 
                 {/* Avatar */}

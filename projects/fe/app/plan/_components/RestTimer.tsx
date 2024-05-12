@@ -97,11 +97,11 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
                 </DrawerHeader>
                 x
                 <div className="h-full flex flex-col pb-4">
-                    <div className="ml-3 flex gap-2 text-white/90 text-base md:text-lg overflow-y-auto">
+                    <div className="ml-3 flex gap-2 text-white/90 text-base md:text-lg overflow-y-auto pb-2">
                         {times.map((time, i) => (
                             <div
                                 key={i}
-                                className={`rounded-full  backdrop-blur-xl px-5 py-3 ${
+                                className={`rounded-full  backdrop-blur-xl px-3 md:px-5 py-1 md:py-3 ${
                                     selectedTime === i
                                         ? "bg-black/80 border-[1.5px] border-fluorescent text-fluorescent"
                                         : "bg-slate-800/80"

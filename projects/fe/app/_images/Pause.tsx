@@ -1,11 +1,16 @@
 import React from "react";
 
-function Pause() {
+interface PauseProps {
+    className?: string;
+}
+
+function Pause({ className }: PauseProps) {
     return (
         <svg
             width={18}
             height={17}
             viewBox="0 0 25 24"
+            className={`${className}`}
             fill="white"
             xmlns="http://www.w3.org/2000/svg"
         >
