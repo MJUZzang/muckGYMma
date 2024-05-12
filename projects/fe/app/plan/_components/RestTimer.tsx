@@ -10,12 +10,7 @@ import {
     DrawerTrigger,
 } from "@/_components/shadcn/ui/drawer";
 import React, { useEffect, useState } from "react";
-
-function formatSeconds(seconds: number) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
-}
+import { formatTime } from "@/plan/_utils/time";
 
 const times = [
     {
@@ -98,7 +93,7 @@ function RestTimer({
                 <DrawerHeader>
                     <DrawerTitle className="text-white/90 ">
                         <p className="text-xl">휴식 타이머</p>
-                        {/* <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424] " /> */}
+                        {/* <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424]" /> */}
                     </DrawerTitle>
                     {/* <DrawerDescription>
                         This action cannot be undone.
@@ -148,7 +143,7 @@ function RestTimer({
                                 className="text-[54px] md:text-[70px] m-2 text-white/90 flex justify-center items-center w-[30dvh] h-[30dvh]
                                     bg-black rounded-full"
                             >
-                                {formatSeconds(time)}
+                                {formatTime(time)}
                             </div>
                         </div>
 

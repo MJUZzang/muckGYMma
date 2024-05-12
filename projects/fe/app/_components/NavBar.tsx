@@ -28,14 +28,14 @@ const NavBar = () => {
 
     return (
         <>
-            <div className={`pb-[85px] ${!isVisible && "hidden"}`} />
+            <div className={`pb-[95px] ${!isVisible && "hidden"}`} />
             <div
                 className={`absolute max-h-[100dvh] h-full ${
                     !isVisible && "hidden"
                 }`}
             >
                 <div
-                    className={`fixed bg-default bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[60px] pb-3 justify-between items-center`}
+                    className={`fixed bg-default bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[65px] pb-4 justify-between items-center`}
                 >
                     <Link
                         href="/workout"
@@ -49,6 +49,7 @@ const NavBar = () => {
                                     : "fill-gray-200"
                             }`}
                         />
+                        <p className="text-white/90 text-[0.6rem]">운동</p>
                     </Link>
 
                     <Link
@@ -62,6 +63,7 @@ const NavBar = () => {
                                     : "fill-none stroke-gray-200"
                             }`}
                         />
+                        <p className="text-white/90 text-[0.6rem]">그래프</p>
                     </Link>
 
                     <div className="bg-fluorescent p-3 rounded-full relative bottom-5 cursor-pointer">
@@ -80,6 +82,7 @@ const NavBar = () => {
                                     : "fill-gray-200"
                             }`}
                         />
+                        <p className="text-white/90 text-[0.6rem]">커뮤니티</p>
                     </Link>
 
                     <Link
@@ -91,9 +94,10 @@ const NavBar = () => {
                             className={`${
                                 pathname.includes("/profile/")
                                     ? "fill-fluorescent"
-                                    : "fill-gray-200"
+                                    : "fill-gray-200/75"
                             }`}
                         />
+                        <p className="text-white/90 text-[0.6rem]">프로필</p>
                     </Link>
                 </div>
             </div>

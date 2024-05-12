@@ -12,6 +12,7 @@ import {
     setSelectedWorkout,
 } from "@/../lib/slices/planInfoSlice";
 import CheckMark from "@/_images/CheckMark";
+import { formatTimeInKor } from "@/plan/_utils/time";
 
 function PlanInfo() {
     const router = useRouter();
@@ -89,11 +90,15 @@ function PlanInfo() {
                             <div className="w-full text-right pr-4">
                                 <p className="text-white">{workout.kcal}kcal</p>
                                 <p
-                                    className={`text-white ${
+                                    className={`text-white text-sm ${
                                         !workout.isCompleted && "invisible"
                                     }`}
                                 >
-                                    {workout.completionTime}
+                                    {workout.isCompleted &&
+                                        workout.completionTime &&
+                                        `${formatTimeInKor(
+                                            workout.completionTime
+                                        )} 소요`}
                                 </p>
                             </div>
                             <div>
