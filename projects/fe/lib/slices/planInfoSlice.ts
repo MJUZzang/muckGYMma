@@ -14,9 +14,13 @@ const initialState: PlanInfoState =
               selectedWorkout: 1,
           }
         : {
-              ...emptyPlanInfo,
-              selectedWorkout: 0,
+              ...dummyPlanInfo,
+              selectedWorkout: 1,
           };
+// : {
+//       ...emptyPlanInfo,
+//       selectedWorkout: 0,
+//   };
 
 export const planInfoSlice = createSlice({
     name: "planInfo",
@@ -30,13 +34,19 @@ export const planInfoSlice = createSlice({
         markWorkoutAsCompleted: (state, action: PayloadAction<number>) => {
             state.workouts[action.payload].isCompleted = true;
         },
-        setCompletionTime: (state, action: PayloadAction<{
-            workoutIndex: number;
-            completionTime: number;
-        }>) => {
+        setCompletionTime: (
+            state,
+            action: PayloadAction<{
+                workoutIndex: number;
+                completionTime: number;
+            }>
+        ) => {
             state.workouts = state.workouts.map((workout, index) =>
                 index === action.payload.workoutIndex
-                    ? { ...workout, completionTime: action.payload.completionTime }
+                    ? {
+                          ...workout,
+                          completionTime: action.payload.completionTime,
+                      }
                     : workout
             );
         },
