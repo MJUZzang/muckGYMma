@@ -16,11 +16,9 @@ import mju.paygo.physicalprofile.domain.PhysicalProfileRepository;
 import mju.paygo.physicalprofile.exception.exceptions.PhysicalProfileNotFoundException;
 import mju.paygo.preferexercises.domain.PreferExercises;
 import mju.paygo.preferexercises.domain.PreferExercisesRepository;
-import mju.paygo.preferexercises.domain.vo.Exercise;
 import mju.paygo.preferexercises.exception.exceptions.PreferExerciseNotFoundException;
 import mju.paygo.prefersports.domain.PreferSports;
 import mju.paygo.prefersports.domain.PreferSportsRepository;
-import mju.paygo.prefersports.domain.vo.Sports;
 import mju.paygo.prefersports.exception.exceptions.PreferSportsNotFoundException;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.stereotype.Service;
@@ -50,8 +48,7 @@ public class TaskService {
         ExerciseProfile exerciseProfile = findExerciseProfile(memberId);
         Meal meal = findMealById(mealId);
 
-        String prompt = generateQuestionPrompt(member, preferSports, preferExercises, physicalProfile, exerciseProfile, meal);
-        // System.out.println("prompt = " + prompt);
+        String prompt = generateQuestionPrompt(preferSports, preferExercises, physicalProfile, exerciseProfile, meal);
         return chatClient.call(prompt);
     }
 
@@ -86,7 +83,6 @@ public class TaskService {
     }
 
     private String generateQuestionPrompt(
-            final Member member,
             final PreferSports preferSports,
             final PreferExercises preferExercises,
             final PhysicalProfile physicalProfile,
@@ -105,47 +101,30 @@ public class TaskService {
         builder.append("운동 빈도: ").append(exerciseProfile.getFrequency().getName()).append("\n");
         builder.append("선호 운동 (무게와 횟수 조합으로 나타내야 함 - 5kg 10번 등): ").append(preferExercises.getExercises()).append("\n");
         builder.append("선호 스포츠 (시간으로 나타내야 함 - 1시간 등): ").append(preferSports.getSports()).append("\n");
-        builder.append("식사 정보는 아래와 같다.").append("\n");
-        builder.append("식사 조합: ").append(meal.getMealName()).append("\n");
-        builder.append("식사 조합의 칼로리: ").append(meal.getNutrient().getKcal()).append("\n");
-        builder.append("주어진 회원 정보와 식사 정보를 토대로, 아래의 스포츠와 운동이 각각 몇 시간 (스포츠), 얼마의 무게 & 조합 (운동)으로 칼로리를 뺄 수 있을지 계산하라.").append("\n");
-        builder.append("스포츠: ").append(Sports.collectAllNames()).append("\n");
-        builder.append("운동: ").append(Exercise.collectAllNames()).append("\n");
-        builder.append("위에 주어진 스포츠, 운동 목록에 대해 전부 시간 (스포츠), 무게 & 조합 (운동)을 구해야 한다. 선호 운동, 선호 스포츠에 대해서만 구하면 안 된다.").append("\n");
-        builder.append("예상 답변은 아래와 같이 JSON 형식으로 나와야 한다. (기타 표현은 나오면 안 된다. JSON만 뱉어야 한다.)").append("\n");
-        builder.append("{\n" +
-                "    \"exercise\" : {\n" +
-                "        \"prefer_exercise\" : {\n" +
-                "            \"플랭크\" : {\n" +
-                "                \"weight\" : 0,\n" +
-                "                \"minute\" : 10\n" +
-                "            },\n" +
-                "           ...\n" +
-                "        }\n" +
-                "        \"벤치프레스\" : {\n" +
-                "            \"weight\" : 5,\n" +
-                "            \"minute\" : 30\n" +
-                "        },\n" +
-                "        ...\n" +
-                "    },\n" +
-                "    \"sports\" : {\n" +
-                "       \"prefer_sports\" : {\n" +
-                "           \"야구\" : {\n" +
-                "               \"minute\" : 20\n" +
-                "           },\n" +
-                "          ...\n" +
-                "       }\n" +
-                "        \"축구\" : {\n" +
-                "            \"minute\" : 90\n" +
-                "        }\n" +
-                "        ...\n" +
-                "    }\n" +
-                "}").append("\n");
-        builder.append("운동 종류 (exercise)는 weight (중량, kg), minute (분)으로 나타내줘야 한다.").append("\n");
-        builder.append("스포츠 종류 (sports)는 minute (분)으로만 나타내줘야 한다.").append("\n");
-        builder.append("주의해야 할 것은, 위의 JSON처럼 표현할 때 운동 종류 중 선호 운동은 prefer_exercise 안에, 선호 스포츠는 prefer_sports 안에만 담겨지도록 표현해야 한다.").append("\n");
-        builder.append("따라서 prefer_exercise 안에 있는 내역이 exercise 안에도 나오거나, prefer_sports 안에 있는 내역이 sports 안에도 나오면 안 된다. 그 반대도 안 된다.").append("\n");
-        builder.append("반드시 prefer_exercise 안에는 선호 운동만, prefer_sports 안에는 선호 스포츠로 제공된 것만 담겨지도록 해야 한다. 선호 운동으로 암 컬이 없는데 암 컬이 선호 운동에 들어가는 등의 오류를 범하면 안된다. (선호 스포츠도 마찬가지이다.)").append("\n");
+        builder.append("빼야 할 칼로리: ").append(meal.getNutrient().getKcal()).append("\n");
+        builder.append("위 회원 정보와 목표 칼로리를 토대로, 아래 json 포맷으로 답변을 해줘. json 답변 이외의 답변은 하지 말아줘.").append("\n");
+        builder.append("추가 요구사항은 다음과 같아.").append("\n");
+        builder.append("1. 유저 정보와 유저의 운동 경력을 참고하여 운동 플랜을 만들 것.").append("\n");
+        builder.append("2. 최소 3개~최대 5개의 플랜들을 만들어 줄 것.").append("\n");
+        builder.append("3. 목표 칼로리를 충분히 소비할 수 있는 플랜을 구성할 것.").append("\n");
+        builder.append("4. 목표 칼로리가 너무 높고 사용자의 운동 경험으로 운동 플랜을 충분히 해낼 수 없다고 판단되면, 운동플랜의 강도를 조금 낮추어 구성해줄 것.").append("\n");
+        builder.append("5. 유저의 선호 운동들과 비슷한 난이도를 가진 헬스 운동을 너가 유도리 있게 추가하는 것을 허락한다.").append("\n");
+        builder.append("6. 유저가 선정한 선호 스포츠 이외의 스포츠는 추천하지 말 것. 유저는 선정한 스포츠만 할 수 있음").append("\n");
+        builder.append("7. 선정한 스포츠가 계절에 맞지 않는 종목이라면 제외할 것.").append("\n");
+        builder.append("8. 스포츠 플랜을 하나 이상 꼭 포함해줄 것.").append("\n");
+        builder.append("9. 스포츠 플랜 안에는 하나의 스포츠 종목만으로 구성할 것.").append("\n");
+        builder.append("10. Plan interface의 필드명 중 \"type\" 필드의 값은 \"스포츠\" 또는 \"헬스\"로만 구설할 것.").append("\n");
+        builder.append("interface Workout {\n")
+                .append("\tname: string;\n")
+                .append("\trepeatation: number;\n")
+                .append("\tweight?: number;\n")
+                .append("\tset: number;\n")
+                .append("\ttime?: number;\n")
+                .append("}\n\n")
+                .append("interface Plan {\n")
+                .append("\ttype: string;\n")
+                .append("\tworkouts: Workout[] | Workout;\n")
+                .append("}");
         return builder.toString();
     }
 }
