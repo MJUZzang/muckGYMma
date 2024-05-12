@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setLevel } from "@/../lib/slices/initialInfoSlice";
+import { setLevel } from "../../../lib/slices/initialInfoSlice";
 
 const levels = [
     {

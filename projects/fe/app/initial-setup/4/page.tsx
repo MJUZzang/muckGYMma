@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setFrequency } from "@/../lib/slices/initialInfoSlice";
+import { setFrequency } from "../../../lib/slices/initialInfoSlice";
 
 const selection = [
     {
@@ -33,7 +33,9 @@ const selection = [
 ];
 
 function Page() {
-    const [selectedFrequency, setSelectedFrequency] = useState<number | null>(null);
+    const [selectedFrequency, setSelectedFrequency] = useState<number | null>(
+        null
+    );
     const router = useRouter();
     const dispatch = useAppDispatch();
 

@@ -48,9 +48,15 @@ interface RestTimerProps {
     children: React.ReactNode;
     time: number;
     setTime: React.Dispatch<React.SetStateAction<number>>;
+    onClose: () => void;
 }
 
-function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
+function RestTimer({
+    children,
+    setTime,
+    time,
+    onClose = () => {},
+}: Readonly<RestTimerProps>) {
     const timeIndex =
         localStorage.getItem("timeIndex") !== "" &&
         localStorage.getItem("timeIndex") !== null
@@ -62,7 +68,9 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
     const [isRunning, setIsRunning] = useState(false);
 
     useEffect(() => {
-        setTime(times[selectedTime].value);
+        if (selectedTime !== -1) {
+            setTime(times[selectedTime].value);
+        }
     }, []);
 
     useEffect(() => {
@@ -82,6 +90,7 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
             closeThreshold={0.9}
             onClose={() => {
                 setTime(0);
+                onClose();
             }}
         >
             <DrawerTrigger>{children}</DrawerTrigger>
@@ -101,9 +110,9 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
                         {times.map((time, i) => (
                             <div
                                 key={i}
-                                className={`rounded-full  backdrop-blur-xl px-3 md:px-5 py-1 md:py-3 ${
+                                className={`rounded-full  backdrop-blur-xl px-3 md:px-5 mt-1 py-1 md:py-3 ${
                                     selectedTime === i
-                                        ? "bg-black/80 border-[1.5px] border-fluorescent text-fluorescent"
+                                        ? "bg-black/80 ring-[1.5px] ring-fluorescent text-fluorescent"
                                         : "bg-slate-800/80"
                                 }`}
                                 onClick={() => {
@@ -139,20 +148,48 @@ function RestTimer({ children, setTime, time }: Readonly<RestTimerProps>) {
                                 className="text-[54px] md:text-[70px] m-2 text-white/90 flex justify-center items-center w-[30dvh] h-[30dvh]
                                     bg-black rounded-full"
                             >
-                                {times[selectedTime] && formatSeconds(time)}
+                                {formatSeconds(time)}
                             </div>
                         </div>
 
                         <div className="flex justify-center gap-10 text-white/90 text-base md:text-2xl mt-4">
                             <div
                                 className="bg-slate-800/80 px-6 py-3 rounded-2xl"
-                                onClick={() => setTime(time - 10)}
+                                onClick={() => {
+                                    localStorage.setItem(
+                                        "restTime",
+                                        (time - 10).toString()
+                                    );
+                                    localStorage.setItem("timeIndex", "-1");
+
+                                    const changedTime = time - 10;
+                                    setTime(changedTime);
+                                    setSelectedTime(
+                                        changedTime % 30 === 0
+                                            ? changedTime / 30 - 1
+                                            : -1
+                                    );
+                                }}
                             >
                                 -10초
                             </div>
                             <div
                                 className="bg-slate-800/80 px-6 py-3 rounded-2xl"
-                                onClick={() => setTime(time + 10)}
+                                onClick={() => {
+                                    localStorage.setItem(
+                                        "restTime",
+                                        (time + 10).toString()
+                                    );
+                                    localStorage.setItem("timeIndex", "-1");
+
+                                    const changedTime = time + 10;
+                                    setTime(changedTime);
+                                    setSelectedTime(
+                                        changedTime % 30 === 0
+                                            ? changedTime / 30 - 1
+                                            : -1
+                                    );
+                                }}
                             >
                                 +10초
                             </div>

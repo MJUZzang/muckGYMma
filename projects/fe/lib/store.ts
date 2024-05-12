@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import predictReducer from "@/../lib/slices/predictSlice";
 import initialInfoReducer from "@/../lib/slices/initialInfoSlice";
+import planInfoReducer from "@/../lib/slices/planInfoSlice";
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
             predict: predictReducer,
             initialInfo: initialInfoReducer,
+            planInfo: planInfoReducer,
         },
     });
 };

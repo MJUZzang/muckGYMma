@@ -1,80 +1,75 @@
-export interface Exercise {
+export interface Workout {
     name: string;
     set: number;
-    rep: number;
+    repeatation: number;
     kcal: number;
-    completedAt: string;
-    isCompleted: boolean;
-    order: number;
+    weight?: number;
+    time?: number;
+    completionTime?: number;
+    isCompleted?: boolean;
 }
 
 export interface PlanInfo {
-    plans: Exercise[];
-    name: string;
-    isCompleted: boolean;
-    completedAt: string;
+    workouts: Workout[];
+    type: string;
+    isCompleted?: boolean;
+    completedAt?: string;
     kcal: number;
 }
 
 export const emptyPlanInfo: PlanInfo = {
-    plans: [],
-    name: "",
+    workouts: [],
+    type: "",
     isCompleted: false,
     completedAt: "",
     kcal: 0,
-
 };
 
 export const dummyPlanInfo: PlanInfo = {
-    plans: [
+    workouts: [
         {
             name: "벤치프레스",
             set: 5,
-            rep: 12,
+            repeatation: 12,
             kcal: 113,
-            completedAt: "2021-06-01",
-            order: 1,
-            isCompleted: false,
+            weight: 60,
+            completionTime: 180,
+            isCompleted: true,
         },
         {
             name: "데드리프트",
             set: 5,
-            rep: 12,
+            repeatation: 12,
             kcal: 113,
-            completedAt: "2021-06-01",
-            order: 2,
+            weight: 60,
             isCompleted: false,
         },
         {
             name: "레터럴레이즈",
             set: 5,
-            rep: 12,
+            repeatation: 12,
             kcal: 113,
-            completedAt: "2021-06-01",
-            order: 3,
+            weight: 60,
             isCompleted: false,
         },
         {
             name: "풀업",
-            set: 5,
-            rep: 12,
+            set: 2,
+            repeatation: 12,
             kcal: 113,
-            completedAt: "2021-06-01",
-            order: 4,
             isCompleted: false,
         },
         {
             name: "숄더프레스",
             set: 5,
-            rep: 12,
+            repeatation: 12,
             kcal: 113,
-            completedAt: "2021-06-01",
-            order: 5,
+            weight: 60,
             isCompleted: false,
         },
     ],
-    isCompleted: false,
-    name: "헬스",
+    type: "헬스",
     kcal: 565,
+    isCompleted: false,
     completedAt: "2021-06-01",
 };

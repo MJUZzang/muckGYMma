@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setGoal } from "@/../lib/slices/initialInfoSlice";
+import { setGoal } from "../../../lib/slices/initialInfoSlice";
 
 const goals = [
     {
@@ -28,7 +28,9 @@ function Page() {
     return (
         <div className="text-white/90 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl">운동 목적이 무엇인가요?</p>
-            <p className="mt-2 text-xs">운동 플랜 생성에 사용되며 공유되지 않습니다</p>
+            <p className="mt-2 text-xs">
+                운동 플랜 생성에 사용되며 공유되지 않습니다
+            </p>
 
             <div className="mt-auto space-y-3">
                 {goals.map((goal, idx) => (
@@ -42,7 +44,7 @@ function Page() {
                                 : "bg-white/15"
                         }`}
                         onClick={() => {
-                            setSelectedGoal(idx)
+                            setSelectedGoal(idx);
                             dispatch(setGoal(goal.title));
                             setTimeout(() => {
                                 router.push("/initial-setup/6");

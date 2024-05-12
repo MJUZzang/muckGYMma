@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
-import { selectInitialInfo, setSports } from "@/../lib/slices/initialInfoSlice";
+import {
+    selectInitialInfo,
+    setSports,
+} from "../../../lib/slices/initialInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 const sports = [

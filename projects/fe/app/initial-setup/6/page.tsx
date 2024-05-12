@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setGender } from "@/../lib/slices/initialInfoSlice";
+import { setGender } from "../../../lib/slices/initialInfoSlice";
 
 const genders = [
     {

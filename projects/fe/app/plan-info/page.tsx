@@ -1,22 +1,38 @@
 "use client";
 
-import { PlanInfo as PlanInfoType, emptyPlanInfo } from "@/_types/Plan";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { dummyPlanInfo } from "@/_types/Plan";
-
-import React, { useEffect, useState } from "react";
-import Button from "@/_components/Button";
 import Link from "next/link";
+
+import Button from "@/_components/Button";
+import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
+import {
+    selectPlanInfo,
+    selectSelectedWorkout,
+    setSelectedWorkout,
+} from "@/../lib/slices/planInfoSlice";
+import CheckMark from "@/_images/CheckMark";
 
 function PlanInfo() {
     const router = useRouter();
-    const [planInfo, setPlanInfo] = useState<PlanInfoType>(emptyPlanInfo);
+
+    const dispatch = useAppDispatch();
+    const planInfo = useAppSelector(selectPlanInfo);
+    const selectedWorkout = useAppSelector(selectSelectedWorkout);
 
     useEffect(() => {
-        if (process.env.NODE_ENV === "development") {
-            setPlanInfo(dummyPlanInfo);
-        }
+        return () => {};
     }, []);
+
+    function GetWorkoutStyle(index: number) {
+        if (planInfo.workouts[index].isCompleted) {
+            return "bg-fluorescent/10";
+        }
+        if (index === selectedWorkout) {
+            return "bg-fluorescent/20 ring-2 ring-fluorescent/50";
+        }
+        return "bg-white/10";
+    }
 
     return (
         <div className={`flex flex-col mx-3 animate-page-enter min-h-[100dvh]`}>
@@ -24,7 +40,7 @@ function PlanInfo() {
             <div
                 className="cursor-pointer mt-5"
                 onClick={() => {
-                    router.back();
+                    router.push("/");
                 }}
             >
                 <div className="space-y-[5px]">
@@ -38,31 +54,55 @@ function PlanInfo() {
                     {/* 운동 아이콘 */}
                     <div className="w-[80px] h-[80px] bg-white rounded-full" />
                     <div>
-                        <p className="text-white/90">{planInfo.name}</p>
+                        <p className="text-white/90">{planInfo.type}</p>
                         <p className="text-white/90">{planInfo.kcal} kcal</p>
-                        <p className="text-white/90">
-                            완료일: {planInfo.completedAt}
+                        <p
+                            className={`text-white/90 ${
+                                !planInfo.isCompleted && "invisible"
+                            }`}
+                        >
+                            {planInfo.completedAt &&
+                                `완료일: ${planInfo.completedAt}`}
                         </p>
                     </div>
                 </div>
 
                 <div className="space-y-3 mt-4">
-                    {dummyPlanInfo.plans.map((plan, index) => (
+                    {planInfo.workouts.map((workout, index) => (
                         <div
                             key={index}
-                            className="flex justify-between items-center bg-white/10 p-3 rounded-lg"
+                            className={`flex justify-between items-center p-3 rounded-lg ${GetWorkoutStyle(
+                                index
+                            )}`}
+                            onClick={() => {
+                                if (!workout.isCompleted) {
+                                    dispatch(setSelectedWorkout(index));
+                                }
+                            }}
                         >
-                            <div>
-                                <p className="text-white">{plan.name}</p>
+                            <div className="w-fit text-nowrap">
+                                <p className="text-white">{workout.name}</p>
                                 <p className="text-white/70">
-                                    {plan.set}set {plan.rep}rep
+                                    {workout.set}set {workout.repeatation}rep
+                                </p>
+                            </div>
+                            <div className="w-full text-right pr-4">
+                                <p className="text-white">{workout.kcal}kcal</p>
+                                <p
+                                    className={`text-white ${
+                                        !workout.isCompleted && "invisible"
+                                    }`}
+                                >
+                                    {workout.completionTime}
                                 </p>
                             </div>
                             <div>
-                                <p className="text-white">{plan.kcal}kcal</p>
-                                <p className="text-white/70">
-                                    {plan.completedAt}
-                                </p>
+                                <CheckMark
+                                    className={`text-white/70 ${
+                                        !workout.isCompleted && "invisible"
+                                    }`}
+                                    color="#dfff32"
+                                />
                             </div>
                         </div>
                     ))}
@@ -70,7 +110,16 @@ function PlanInfo() {
             </div>
 
             <Link href="/plan" className="mt-auto mb-3">
-                <Button>플랜 시작하기</Button>
+                <Button
+                    className={`${
+                        !(
+                            selectedWorkout &&
+                            !planInfo.workouts[selectedWorkout].isCompleted
+                        ) && "bg-fluorescent/20 text-white/30"
+                    }`}
+                >
+                    운동 시작
+                </Button>
             </Link>
         </div>
     );

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setExercises } from "@/../lib/slices/initialInfoSlice";
+import { setExercises } from "../../../lib/slices/initialInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 const workouts = [

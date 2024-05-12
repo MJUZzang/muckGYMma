@@ -145,11 +145,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`max-h-[100dvh] bg-default ${inter.className} dark:text-white `}
+                className={`max-h-[100dvh] bg-default ${inter.className} dark:text-white`}
             >
                 <StoreProvider>
                     <InitialLoad>
-                        {children}
+                        <div className="overflow-hidden">{children}</div>
                         <NavBar />
                         <DarkMode />
                     </InitialLoad>

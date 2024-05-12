@@ -4,18 +4,21 @@ import ArrowBack from "@/_images/ArrowBack";
 import Pause from "@/_images/Pause";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
-import {
-    PlanInfo as PlanInfoType,
-    dummyPlanInfo,
-    emptyPlanInfo,
-} from "@/_types/Plan";
 
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import CheckMark from "@/_images/CheckMark";
 import Button from "@/_components/Button";
-import RestTimer from "./_components/RestTimer";
+import RestTimer from "@/plan/_components/RestTimer";
 import Play from "@/_images/Play";
+import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
+import {
+    markWorkoutAsCompleted,
+    selectPlanInfo,
+    selectSelectedWorkout,
+    setCompletionTime,
+    setSelectedWorkout,
+} from "@/../lib/slices/planInfoSlice";
 
 function formatTime(seconds: number) {
     const hrs = Math.floor(seconds / 3600);
@@ -32,16 +35,21 @@ function Page() {
     const [timerIntervalId, setTimerIntervalId] =
         useState<NodeJS.Timeout | null>(null);
 
-    const [planInfo, setPlanInfo] = useState<PlanInfoType>(emptyPlanInfo);
-    const [nowSelected, setNowSelected] = useState(1);
+    const dispatch = useAppDispatch();
+    const planInfo = useAppSelector(selectPlanInfo);
+    const selectedWorkout = useAppSelector(selectSelectedWorkout);
+    const workout = useAppSelector(selectPlanInfo).workouts[selectedWorkout];
+
+    const [selectedSet, setSelectedSet] = useState(0);
 
     const restTimerButtonRef = React.createRef<HTMLDivElement>();
     const [restTime, setRestTime] = useState(0);
 
     useEffect(() => {
-        if (process.env.NODE_ENV === "development") {
-            setPlanInfo(dummyPlanInfo);
-        }
+        const id = setInterval(() => {
+            setTimerTime((prev) => prev + 1);
+        }, 1000);
+        setTimerIntervalId(id);
 
         return () => {
             if (timerIntervalId !== null) {
@@ -51,10 +59,10 @@ function Page() {
     }, []);
 
     function GetPlanStyle(order: number) {
-        if (order === nowSelected) {
+        if (order === selectedSet) {
             return "bg-slate-700 border-2 border-fluorescent/50 text-white";
         }
-        if (order < nowSelected) {
+        if (order < selectedSet) {
             return "bg-fluorescent/20 text-fluorescent/50";
         } else {
             return "bg-slate-700 text-white/50";
@@ -62,7 +70,7 @@ function Page() {
     }
 
     return (
-        <div className="py-3 mx-2 flex flex-col min-h-[100dvh]">
+        <div className="py-3 mx-2 flex flex-col min-h-[100dvh] animate-page-enter">
             <div className="grid grid-cols-3">
                 <ArrowBack
                     className="fill-white/80 cursor-pointer my-auto"
@@ -94,8 +102,12 @@ function Page() {
                     </p>
 
                     {/* Pause image */}
-                    <Pause className={`${timerIntervalId === null && "hidden"}`} />
-                    <Play className={`${timerIntervalId !== null && "hidden"}`} />
+                    <Pause
+                        className={`${timerIntervalId === null && "hidden"}`}
+                    />
+                    <Play
+                        className={`${timerIntervalId !== null && "hidden"}`}
+                    />
                 </div>
 
                 {/* Avatar */}
@@ -114,20 +126,33 @@ function Page() {
             <p className="text-white/60 text-sm">1 / 6</p>
 
             {/* Workout name */}
-            <p className="text-white/90 text-2xl mt-3">데드리프트</p>
+            <p className="text-white/90 text-2xl mt-3">{workout.name}</p>
 
             <div className="flex flex-col gap-2 mt-3">
-                {dummyPlanInfo.plans.map((plan, index) => (
+                {Array.from({ length: workout.set }).map((set, idx) => (
                     <div
-                        key={plan.order}
+                        key={idx}
                         className={`grid grid-cols-3 py-4 px-3 rounded-xl
-                        ${GetPlanStyle(plan.order)}`}
+                        ${GetPlanStyle(idx)}`}
                     >
-                        <p className={`w-full text-left`}>{plan.order} 세트</p>
-                        <p className={`w-full text-center`}>{plan.rep} 회</p>
+                        <p className={`w-full text-left my-auto`}>
+                            {idx + 1} 세트
+                        </p>
+
+                        <div>
+                            <p className={`w-full text-right`}>
+                                {workout.repeatation} 회
+                            </p>
+                            {workout.weight && (
+                                <p className={`w-full text-right`}>
+                                    {workout.weight} kg
+                                </p>
+                            )}
+                        </div>
+
                         <div
                             className={`w-full ${
-                                plan.order >= nowSelected && "invisible"
+                                idx >= selectedSet && "invisible"
                             }`}
                         >
                             <CheckMark className="ml-auto " color="#dfff32" />
@@ -137,7 +162,31 @@ function Page() {
             </div>
 
             <div className="flex gap-3 mt-auto">
-                <RestTimer time={restTime} setTime={setRestTime}>
+                <RestTimer
+                    key={workout.name}
+                    time={restTime}
+                    setTime={setRestTime}
+                    onClose={() => {
+                        // 모든 세트 완료시 /plan-info 페이지로 이동
+                        if (selectedSet === workout.set) {
+                            dispatch(markWorkoutAsCompleted(selectedWorkout));
+                            dispatch(setCompletionTime({ workoutIndex: selectedWorkout, completionTime: timerTime }));
+
+                            // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
+                            for (let i = 0; i < planInfo.workouts.length; i++) {
+                                if (
+                                    !planInfo.workouts[i].isCompleted &&
+                                    i !== selectedWorkout
+                                ) {
+                                    dispatch(setSelectedWorkout(i));
+                                    break;
+                                }
+                            }
+
+                            router.push("/plan-info");
+                        }
+                    }}
+                >
                     <Button
                         ref={restTimerButtonRef}
                         className="px-3 bg-slate-500 text-fluorescent"
@@ -157,8 +206,8 @@ function Page() {
                 </RestTimer>
                 <Button
                     onClick={() => {
-                        if (planInfo.plans.length >= nowSelected) {
-                            setNowSelected(nowSelected + 1);
+                        if (workout.set > selectedSet) {
+                            setSelectedSet(selectedSet + 1);
                         }
                         restTimerButtonRef.current?.click();
                     }}

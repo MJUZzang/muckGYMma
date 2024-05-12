@@ -9,7 +9,7 @@ import {
     setBirthDate,
     setHeight,
     setWeight,
-} from "@/../lib/slices/initialInfoSlice";
+} from "../../../lib/slices/initialInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 function Page() {
