@@ -63,7 +63,7 @@ function Page() {
             return "bg-slate-700 border-2 border-fluorescent/50 text-white";
         }
         if (order < selectedSet) {
-            return "bg-fluorescent/20 text-fluorescent/50";
+            return "bg-fluorescent/20 text-fluorescent/80";
         } else {
             return "bg-slate-700 text-white/50";
         }
@@ -80,7 +80,7 @@ function Page() {
                 {/* Timer */}
                 <div
                     className="flex items-center justify-between gap-2 mx-auto w-[119px] h-[35px] my-auto
-                            rounded-full border-fluorescent border-[1.5px] px-2"
+                        rounded-full border-fluorescent border-[1.5px] px-2"
                     onClick={() => {
                         if (timerIntervalId === null) {
                             const intervalId = setInterval(() => {
@@ -132,7 +132,7 @@ function Page() {
                 {Array.from({ length: workout.set }).map((set, idx) => (
                     <div
                         key={idx}
-                        className={`grid grid-cols-3 py-4 px-3 rounded-xl
+                        className={`grid grid-cols-3 py-4 px-3 rounded-xl transition-all duration-1000
                         ${GetPlanStyle(idx)}`}
                     >
                         <p className={`w-full text-left my-auto`}>
@@ -151,8 +151,8 @@ function Page() {
                         </div>
 
                         <div
-                            className={`w-full ${
-                                idx >= selectedSet && "invisible"
+                            className={`w-full my-auto transition-opacity duration-1000 ${
+                                idx >= selectedSet && "opacity-0"
                             }`}
                         >
                             <CheckMark className="ml-auto " color="#dfff32" />
@@ -170,7 +170,12 @@ function Page() {
                         // 모든 세트 완료시 /plan-info 페이지로 이동
                         if (selectedSet === workout.set) {
                             dispatch(markWorkoutAsCompleted(selectedWorkout));
-                            dispatch(setCompletionTime({ workoutIndex: selectedWorkout, completionTime: timerTime }));
+                            dispatch(
+                                setCompletionTime({
+                                    workoutIndex: selectedWorkout,
+                                    completionTime: timerTime,
+                                })
+                            );
 
                             // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
                             for (let i = 0; i < planInfo.workouts.length; i++) {

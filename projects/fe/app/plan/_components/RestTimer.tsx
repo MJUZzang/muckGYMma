@@ -94,7 +94,7 @@ function RestTimer({
             }}
         >
             <DrawerTrigger>{children}</DrawerTrigger>
-            <DrawerContent className="h-[85dvh] bg-[#181818] border-none focus:outline-none">
+            <DrawerContent className="h-fit bg-[#181818] border-none focus:outline-none">
                 <DrawerHeader>
                     <DrawerTitle className="text-white/90 ">
                         <p className="text-xl">휴식 타이머</p>
@@ -105,8 +105,8 @@ function RestTimer({
                     </DrawerDescription> */}
                 </DrawerHeader>
                 x
-                <div className="h-full flex flex-col pb-4">
-                    <div className="ml-3 flex gap-2 text-white/90 text-base md:text-lg overflow-y-auto pb-2">
+                <div className="h-fit flex flex-col pb-4">
+                    <div className="ml-3 px-1 flex gap-2 text-white/90 text-base md:text-lg overflow-y-auto pb-2">
                         {times.map((time, i) => (
                             <div
                                 key={i}
@@ -196,7 +196,7 @@ function RestTimer({
                         </div>
                     </div>
 
-                    <div className="mx-4 mt-auto">
+                    <div className="mx-4 mt-5">
                         <Button
                             className={`text-base md:text-2xl py-3 w-fit ${
                                 time === 0
