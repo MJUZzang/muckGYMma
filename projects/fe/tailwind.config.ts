@@ -55,21 +55,25 @@ const config = {
                 },
 
                 default: "#0B1416",
-                fluorescent: "#dfff32",
-                "fluorescent-light": "#f4ff8c",
-                "fluorescent-lighter": "#eaff5e",
-                "fluorescent-lightest": "#f5ff9e",
-                "fluorescent-dark": "#b4ff00",
-                "fluorescent-darker": "#7fff00",
-                "fluorescent-darkest": "#4dff00",
 
-                purple: "#7310f8",
-                "purple-light": "#a44eff",
-                "purple-lighter": "#c97aff",
-                "purple-lightest": "#e2aaff",
-                "purple-dark": "#4b00b7",
-                "purple-darker": "#2e0080",
-                "purple-darkest": "#1a0054",
+                fluorescent: {
+                    DEFAULT: "#dfff32",
+                    light: "#f4ff8c",
+                    lighter: "#eaff5e",
+                    lightest: "#f5ff9e",
+                    dark: "#b4ff00",
+                    darker: "#7fff00",
+                    darkest: "#4dff00",
+                },
+
+                blue: {
+                    DEFAULT: "#4880ee"
+                },
+
+                "app-bg": {
+                    DEFAULT: "var(--app-bg)"
+                }
+
             },
             borderRadius: {
                 lg: "var(--radius)",

@@ -145,7 +145,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`max-h-[100dvh] bg-default ${inter.className} dark:text-white`}
+                className={`max-h-[100dvh] bg-app-bg ${inter.className} dark:text-white`}
             >
                 <StoreProvider>
                     <InitialLoad>
