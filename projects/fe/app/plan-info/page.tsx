@@ -68,13 +68,12 @@ function PlanInfo() {
                     </div>
                 </div>
 
-                <div className="space-y-3 mt-4">
+                <div className="space-y-3 mt-4 group">
                     {planInfo.workouts.map((workout, index) => (
                         <div
                             key={index}
-                            className={`flex justify-between items-center p-3 rounded-lg ${GetWorkoutStyle(
-                                index
-                            )}`}
+                            className={`flex justify-between items-center p-3 rounded-lg 
+                            ${GetWorkoutStyle(index)} ${!workout.isCompleted && "cursor-pointer"}`}
                             onClick={() => {
                                 if (!workout.isCompleted) {
                                     dispatch(setSelectedWorkout(index));
