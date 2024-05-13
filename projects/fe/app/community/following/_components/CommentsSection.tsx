@@ -34,7 +34,7 @@ function CommentsSection({
             <DrawerTrigger>{children}</DrawerTrigger>
             <DrawerContent className="h-full bg-[#181818] border-none focus:outline-none">
                 <DrawerHeader>
-                    <DrawerTitle className="text-white/90 ">
+                    <DrawerTitle className="text-app-font-2 ">
                         Comments
                         <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424] " />
                     </DrawerTitle>
@@ -64,7 +64,7 @@ function CommentsSection({
                                 <div className="w-full">
                                     {/* User Name */}
                                     <div className=" flex gap-3 items-center">
-                                        <p className="text-white/90">
+                                        <p className="text-app-font-2">
                                             Jehee Cheon
                                         </p>
                                         <p className="text-white/60 text-[12px]">
@@ -74,7 +74,7 @@ function CommentsSection({
 
                                     {/* Comment Content and Like button */}
                                     <div className="w-full flex">
-                                        <p className="w-full text-white/90">
+                                        <p className="w-full text-app-font-2">
                                             This is a comment...먹짐마 데모
                                             코멘트 내용에 뭘 넣을까여
                                         </p>

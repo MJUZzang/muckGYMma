@@ -33,7 +33,7 @@ function Page() {
     const router = useRouter();
     const dispatch = useAppDispatch();
     return (
-        <div className="text-white/90 h-full flex flex-col animate-page-enter">
+        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl">운동 경험이 얼마나 되시나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다
@@ -47,7 +47,7 @@ function Page() {
                         transition-all duration-500
                         ${
                             selectedExp === idx
-                                ? "bg-fluorescent text-black"
+                                ? "bg-app-blue text-black"
                                 : "bg-white/15"
                         }`}
                         onClick={() => {

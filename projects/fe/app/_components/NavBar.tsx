@@ -35,7 +35,8 @@ const NavBar = () => {
                 }`}
             >
                 <div
-                    className={`fixed bg-app-bg bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[65px] pb-4 justify-between items-center`}
+                    className={`fixed bg-app-bg bottom-0 w-full flex boxshadow h-[65px] pb-4 justify-between items-center
+                    shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)]`}
                 >
                     <Link
                         href="/workout"
@@ -45,11 +46,19 @@ const NavBar = () => {
                             isActive={pathname.includes("/workout")}
                             className={`${
                                 pathname === "/workout"
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200"
+                                    ? "fill-app-blue"
+                                    : "fill-gray-600"
                             }`}
                         />
-                        <p className="text-white/90 text-[0.6rem]">운동</p>
+                        <p
+                            className={`text-[0.6rem] ${
+                                pathname === "/workout"
+                                    ? "text-app-blue"
+                                    : "text-gray-600"
+                            }`}
+                        >
+                            운동
+                        </p>
                     </Link>
 
                     <Link
@@ -59,15 +68,23 @@ const NavBar = () => {
                         <Analysis
                             className={`${
                                 pathname === "/analysis"
-                                    ? "fill-fluorescent stroke-fluorescent"
-                                    : "fill-none stroke-gray-200"
+                                    ? "fill-app-blue stroke-app-blue"
+                                    : "fill-none stroke-gray-600"
                             }`}
                         />
-                        <p className="text-white/90 text-[0.6rem]">그래프</p>
+                        <p
+                            className={`text-[0.6rem] ${
+                                pathname === "/analysis"
+                                    ? "text-app-blue"
+                                    : "text-gray-600"
+                            }`}
+                        >
+                            그래프
+                        </p>
                     </Link>
 
-                    <div className="bg-fluorescent p-3 rounded-full relative bottom-5 cursor-pointer">
-                        <FoodPicture className="fill-gray-900" />
+                    <div className="bg-app-blue p-3 rounded-full relative bottom-5 cursor-pointer">
+                        <FoodPicture className="fill-app-bg" />
                     </div>
 
                     <Link
@@ -78,11 +95,20 @@ const NavBar = () => {
                             isActive={pathname === "/community/following"}
                             className={`${
                                 pathname === "/community/following"
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200"
+                                    ? "fill-app-blue"
+                                    : "fill-gray-600"
                             }`}
+                            dotsColor="fill-app-bg"
                         />
-                        <p className="text-white/90 text-[0.6rem]">커뮤니티</p>
+                        <p
+                            className={`text-[0.6rem] ${
+                                pathname === "/community/following"
+                                    ? "text-app-blue"
+                                    : "text-gray-600"
+                            }`}
+                        >
+                            커뮤니티
+                        </p>
                     </Link>
 
                     <Link
@@ -93,11 +119,19 @@ const NavBar = () => {
                             isActive={pathname.includes("/profile/")}
                             className={`${
                                 pathname.includes("/profile/")
-                                    ? "fill-fluorescent"
-                                    : "fill-gray-200/75"
+                                    ? "fill-app-blue"
+                                    : "fill-gray-600/75"
                             }`}
                         />
-                        <p className="text-white/90 text-[0.6rem]">프로필</p>
+                        <p
+                            className={`text-[0.6rem] ${
+                                pathname.includes("/profile")
+                                    ? "text-app-blue"
+                                    : "text-gray-600"
+                            }`}
+                        >
+                            프로필
+                        </p>
                     </Link>
                 </div>
             </div>

@@ -100,20 +100,6 @@ const dummyList = [
     },
 ];
 
-function GetBgColor(index: number) {
-    const remain = index % 3;
-    if (remain === 0) return "bg-[#13231d]";
-    if (remain === 1) return "bg-white/45";
-    return "bg-fluorescent/20";
-}
-
-function GetZIndex(index: number) {
-    const remain = index % 3;
-    if (remain === 0) return "z-[10]";
-    if (remain === 1) return "z-[20]";
-    return "z-[30]";
-}
-
 const Page = () => {
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
@@ -141,9 +127,7 @@ const Page = () => {
                         workoutCnt={task.workoutCnt}
                         dueDate={task.dueDate}
                         designType={index % 3}
-                        className={`task py-6 translate-x-[-100%] opacity-0 blur-[5px] ${GetBgColor(
-                            index
-                        )} ${GetZIndex(index)}`}
+                        className={`task py-6 translate-x-[100%]`}
                     />
                 </Link>
             ))}

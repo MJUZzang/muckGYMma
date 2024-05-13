@@ -16,7 +16,7 @@ const SummaryGraphs = () => {
     return (
         <>
             <div className="flex flex-col items-center rounded-lg bg-white/15 backdrop-blur-lg">
-                <p className="inline-block text-xl p-5 text-fluorescent font-semibold">
+                <p className="inline-block text-xl p-5 text-app-blue font-semibold">
                     7-Day Summary
                 </p>
                 <div className="flex items-center rounded-full border-[1.5px] border-white/75 w-[260px] text-base">
@@ -24,7 +24,7 @@ const SummaryGraphs = () => {
                         className={`w-1/3 h-full text-center py-1 px-3 rounded-full text-nowrap
                         ${
                             selectedGraph === "Weight" &&
-                            "bg-fluorescent text-black/85 font-semibold"
+                            "bg-app-blue text-black/85 font-semibold"
                         }`}
                         onClick={() => setSelectedGraph("Weight")}
                     >
@@ -34,7 +34,7 @@ const SummaryGraphs = () => {
                         className={`w-1/3 h-full text-center py-1 px-3 rounded-full text-nowrap
                         ${
                             selectedGraph === "Calorie" &&
-                            "bg-fluorescent text-black/85 font-semibold"
+                            "bg-app-blue text-black/85 font-semibold"
                         }`}
                         onClick={() => setSelectedGraph("Calorie")}
                     >
@@ -44,7 +44,7 @@ const SummaryGraphs = () => {
                         className={`w-1/3 h-full text-center py-1 px-3 rounded-full text-nowrap
                         ${
                             selectedGraph === "Time" &&
-                            "bg-fluorescent text-black/85 font-semibold"
+                            "bg-app-blue text-black/85 font-semibold"
                         }`}
                         onClick={() => setSelectedGraph("Time")}
                     >

@@ -6,13 +6,9 @@ import Link from "next/link";
 import HeaderTop from "@/_components/HeaderTop";
 import LogoAndTitle from "@/_components/LogoAndTitle";
 
-import { Jua, Dosis } from "next/font/google";
+import { Noto_Sans } from "next/font/google";
 
-const jua = Jua({
-    subsets: ["latin"],
-    weight: "400",
-});
-const dosis = Dosis({ subsets: ["latin"] });
+const notoSans = Noto_Sans({ subsets: ["latin"] });
 
 const links = [
     {
@@ -34,19 +30,24 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
 
     return (
         <>
-            <div className="flex flex-col border-b-[1px] border-b-gray-700">
-                <div className="flex items-center max-w-[935px] mx-auto w-full">
-                    <LogoAndTitle />
+            <div className="flex flex-col border-b-[1px] border-b-gray-300 px-3">
+                <div className="mt-3">
+                    <p className={`text-app-font-3 text-2xl font-semibold ${notoSans.className}`}>Community</p>
+
                 </div>
-                <div className="flex max-w-[935px] mx-auto w-full">
+
+                <div className="flex max-w-[935px] mx-auto w-full mt-3">
                     {links.map((link, index) => (
                         <Link
                             key={index}
                             className={`${
                                 pathname === link.href
-                                    ? "border-b-fluorescent border-b-[3px]"
-                                    : "hover:border-b-gray-300 hover:border-b-[3px]"
-                            } w-[90px] text-center text-gray-300 hover:text-gray-100`}
+                                    ? "border-b-app-blue border-b-[3px]"
+                                    : "hover:border-b-app-blue-5 hover:border-b-[3px]"
+                            } ${
+                                notoSans.className
+                            } w-[90px] text-center text-app-font-3 text-sm pb-1
+                                transition-colors duration-1000 ease-in-out`}
                             href={link.href}
                         >
                             {link.name}

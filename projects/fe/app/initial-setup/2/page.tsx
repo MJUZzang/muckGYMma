@@ -33,7 +33,7 @@ function Page() {
 
     return (
         <div className="flex flex-col h-full animate-page-enter">
-            <p className="mt-5 inline-block text-white/90 text-2xl leading-9">
+            <p className="mt-5 inline-block text-app-font-2 text-2xl leading-9">
                 {welcomingText}
             </p>
             <div className="space-y-10 mt-auto">

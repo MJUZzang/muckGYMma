@@ -1,6 +1,4 @@
 import React from "react";
-import Link from "next/link";
-import LogoAndTitle from "@/_components/LogoAndTitle";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 
@@ -33,33 +31,33 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                         </div>
 
                         <div
-                            className="max-w-[68px] max-h-[68px] lg:max-w-[78px] lg:max-h-[78px] bg-white/90 backdrop-blur-lg w-full flex justify-center items-center 
-                            rounded-[28px] cursor-pointer group hover:bg-white/60"
+                            className="max-w-[68px] max-h-[68px] lg:max-w-[78px] lg:max-h-[78px] bg-app-bg-2 backdrop-blur-lg w-full flex justify-center items-center 
+                            rounded-[28px] cursor-pointer group hover:bg-app-bg-3"
                         >
                             <div className="grid grid-cols-2 place-content-center gap-2 group-hover:animate-spin-180">
-                                <div className="h-[4px] w-[4px] rounded-full bg-black/60" />
-                                <div className="h-[4px] w-[4px] rounded-full bg-black/60" />
-                                <div className="h-[4px] w-[4px] rounded-full bg-black/60" />
-                                <div className="h-[4px] w-[4px] rounded-full bg-black/60" />
+                                <div className="h-[4px] w-[4px] rounded-full bg-app-font-2" />
+                                <div className="h-[4px] w-[4px] rounded-full bg-app-font-2" />
+                                <div className="h-[4px] w-[4px] rounded-full bg-app-font-2" />
+                                <div className="h-[4px] w-[4px] rounded-full bg-app-font-2" />
                             </div>
                         </div>
                     </div>
                     <p
-                        className={`text-white/90 ${jua.className} font-light mt-2`}
+                        className={`text-app-font-2 ${jua.className} font-light mt-2`}
                     >
                         환영합니다,
                     </p>
                     <p
-                        className={`text-white/90 font-bold text-xl ${notoSans.className}`}
+                        className={`text-app-font-2 font-bold text-xl ${notoSans.className}`}
                     >
                         jeheecheon
                     </p>
                 </div>
 
-                <div className="relative bottom-[50px] flex mt-5 lg:mt-[60px]  gap-3 justify-center items-end">
+                <div className="relative bottom-[60px] flex mt-5 lg:mt-[60px] gap-3 justify-center items-end">
                     <div
-                        className="bg-fluorescent px-6 pt-3 pb-5 rounded-3xl rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] 
-                        relative top-10 hover:animate-pulse"
+                        className="bg-app-blue px-6 pt-3 pb-8 rounded-3xl rounded-t-[35px] rounded-b-[75px] backdrop-blur-lg w-full max-w-[350px] 
+                        relative top-10 hover:animate-pulse text-white/95"
                     >
                         <div className="mx-auto w-fit">
                             <div className="w-fit">
@@ -69,7 +67,7 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                                     620
                                 </p>
                                 <p
-                                    className={`inline-block text-xl ${jua.className}`}
+                                    className={`inline-block text-xl ${notoSans.className}`}
                                 >
                                     kcal
                                 </p>
@@ -80,22 +78,23 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
 
                             <div className="w-fit">
                                 <p
-                                    className={`mt-4 text-xl font-light ${jua.className}`}
+                                    className={`text-sm mt-4 font-light ${jua.className}`}
                                 >
-                                    섭취 음식:
+                                    금일 섭취 :
                                 </p>
                                 <p className={`text-sm ${jua.className}`}>
-                                    비빔면, 삼겹살
+                                    &quot;비빔면, 삼겹살&quot;
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="bg-white px-4 py-5 pb-8 rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] hover:animate-pulse">
+                    <div className="bg-app-bg-4 px-4 py-5 pb-8 rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] hover:animate-pulse
+                        text-app-font-2">
                         <div className="w-fit mx-auto">
                             <div className="w-fit">
                                 <div
-                                    className={`bg-fluorescent w-[40px] h-[40px] flex justify-center items-center rounded-full 
+                                    className={`bg-app-blue w-[40px] h-[40px] flex justify-center items-center rounded-full 
                                     ${notnSerifJP.className} font-extrabold text-lg`}
                                 >
                                     !
@@ -107,7 +106,7 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                                     2
                                 </p>
                                 <p
-                                    className={`${jua.className} inline-block text-xl`}
+                                    className={`${notoSans.className} inline-block font-semibold text-xl`}
                                 >
                                     h
                                 </p>
@@ -117,7 +116,7 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                                     15
                                 </p>
                                 <p
-                                    className={`${jua.className} inline-block text-xl`}
+                                    className={`${notoSans.className} inline-block font-semibold text-xl`}
                                 >
                                     m
                                 </p>

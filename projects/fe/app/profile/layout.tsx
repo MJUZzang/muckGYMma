@@ -67,7 +67,7 @@ const Page = ({
                     </div>
 
                     <div className="flex flex-col w-full gap-2 text-sm">
-                        <div className="flex text-white/90 justify-between w-full">
+                        <div className="flex text-app-font-2 justify-between w-full">
                             <div className="w-full flex flex-col items-center">
                                 <p>6</p>
                                 <p className="font-semibold">게시글</p>
@@ -81,7 +81,7 @@ const Page = ({
                                 <p className="font-semibold">팔로워</p>
                             </div>
                         </div>
-                        <div className="flex text-white/90 justify-between w-full">
+                        <div className="flex text-app-font-2 justify-between w-full">
                             <div className="w-full flex flex-col items-center">
                                 <p>6</p>
                                 <p className="font-semibold">달성</p>

@@ -13,7 +13,7 @@ function ConfirmModal({ isVisible, onClose }: ConfirmModalProps) {
             }`}
         >
             <div className="mx-auto w-[50vw] bg-stone-900 border-white p-2 rounded-3xl">
-                <p className="text-white/90">
+                <p className="text-app-font-2">
                     모든 정보를 올바르게 입력해주세요.
                 </p>
                 <button

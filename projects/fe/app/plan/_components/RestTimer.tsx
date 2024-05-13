@@ -107,7 +107,7 @@ function RestTimer({
             <DrawerTrigger>{children}</DrawerTrigger>
             <DrawerContent className="h-fit bg-[#181818] border-none focus:outline-none">
                 <DrawerHeader>
-                    <DrawerTitle className="text-white/90 ">
+                    <DrawerTitle className="text-app-font-2 ">
                         <p className="text-xl">휴식 타이머</p>
                         {/* <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424]" /> */}
                     </DrawerTitle>
@@ -117,13 +117,13 @@ function RestTimer({
                 </DrawerHeader>
                 x
                 <div className="h-fit flex flex-col pb-4">
-                    <div className="ml-3 px-1 flex gap-2 text-white/90 text-base md:text-lg overflow-y-auto pb-2">
+                    <div className="ml-3 px-1 flex gap-2 text-app-font-2 text-base md:text-lg overflow-y-auto pb-2">
                         {times.map((time, i) => (
                             <div
                                 key={i}
                                 className={`rounded-full cursor-pointer backdrop-blur-xl px-3 md:px-5 mt-1 py-1 md:py-3 ${
                                     selectedTime === i
-                                        ? "bg-black/80 ring-[1.5px] ring-fluorescent text-fluorescent"
+                                        ? "bg-black/80 ring-[1.5px] ring-app-blue text-app-blue"
                                         : "bg-slate-800/80"
                                 }`}
                                 onClick={() => {
@@ -156,14 +156,14 @@ function RestTimer({
                             }}
                         >
                             <div
-                                className="text-[54px] md:text-[70px] m-2 text-white/90 flex justify-center items-center w-[30dvh] h-[30dvh]
+                                className="text-[54px] md:text-[70px] m-2 text-app-font-2 flex justify-center items-center w-[30dvh] h-[30dvh]
                                     bg-black rounded-full"
                             >
                                 {formatTime(time)}
                             </div>
                         </div>
 
-                        <div className="flex justify-center gap-10 text-white/90 text-base md:text-2xl mt-4">
+                        <div className="flex justify-center gap-10 text-app-font-2 text-base md:text-2xl mt-4">
                             <div
                                 className="bg-slate-800/80 px-6 py-3 rounded-2xl cursor-pointer"
                                 onClick={() => {
@@ -228,8 +228,8 @@ function RestTimer({
                         <Button
                             className={`text-base md:text-2xl py-3 w-fit ${
                                 time === 0
-                                    ? "bg-slate-800 text-white/90"
-                                    : "bg-fluorescent"
+                                    ? "bg-slate-800 text-app-font-2"
+                                    : "bg-app-blue"
                             }`}
                             onClick={() => {
                                 setIsRunning(!isRunning);

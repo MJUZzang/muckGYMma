@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 
 function CommentSectionTextArea({
     text,
-    setText
+    setText,
 }: {
     text: string;
     setText: React.Dispatch<React.SetStateAction<string>>;
@@ -14,7 +14,7 @@ function CommentSectionTextArea({
 
     useEffect(() => {
         if (!hiddenTextArea.current || !textArea.current) return;
-        
+
         hiddenTextArea.current.value = textArea.current.value;
         textArea.current.style.height =
             hiddenTextArea.current.scrollHeight + 5 + "px";
@@ -28,7 +28,7 @@ function CommentSectionTextArea({
                 maxLength={700}
                 onChange={(e) => setText(e.target.value)}
                 rows={1}
-                className="w-full min-h-[43px] py-2 rounded-xl pl-3 bg-[#202020] text-white/90 
+                className="w-full min-h-[43px] py-2 rounded-xl pl-3 bg-[#202020] text-app-font-2 
                 focus:outline-none resize-none max-h-[45dvh] overflow-y-auto
                 duration-75 transition-all"
                 placeholder="Leave a comment for jeheecheon..."

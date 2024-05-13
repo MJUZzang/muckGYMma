@@ -54,8 +54,9 @@ const config = {
                     foreground: "hsl(var(--card-foreground))",
                 },
 
-                default: "#0B1416",
 
+
+                // 커스텀 칼라들
                 fluorescent: {
                     DEFAULT: "#dfff32",
                     light: "#f4ff8c",
@@ -66,14 +67,42 @@ const config = {
                     darkest: "#4dff00",
                 },
 
-                blue: {
-                    DEFAULT: "#4880ee"
+                "app-blue": {
+                    DEFAULT: "#4880ee",
+                    1: "#5c8cff",
+                    2: "#6f9eff",
+                    3: "#82afff",
+                    4: "#95bfff",
+                    5: "#a8d0ff",
+                    6: "#bbf0ff",
                 },
 
                 "app-bg": {
-                    DEFAULT: "var(--app-bg)"
-                }
+                    DEFAULT: "var(--app-bg)",
+                    1: "var(--app-bg-1)",
+                    2: "var(--app-bg-2)",
+                    3: "var(--app-bg-3)",
+                    4: "var(--app-bg-4)",
+                    5: "var(--app-bg-5)",
+                    6: "var(--app-bg-6)",
+                },
 
+                "app-font": {
+                    DEFAULT: "var(--app-font)",
+                    1: "var(--app-font-1)",
+                    2: "var(--app-font-2)",
+                    3: "var(--app-font-3)",
+                    4: "var(--app-font-4)",
+                    5: "var(--app-font-5)",
+                    6: "var(--app-font-6)",
+                },
+
+                "app-inverted-font": {
+                    DEFAULT: "var(--app-inverted-font)",
+                    1: "var(--app-inverted-font-1)",
+                    2: "var(--app-inverted-font-2)",
+                    3: "var(--app-inverted-font-3)",
+                },
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -97,7 +126,7 @@ const config = {
                     from: {
                         opacity: "0",
                         filter: "blur(5px)",
-                        transform: "translateX(-100%)",
+                        transform: "translateX(100%)",
                     },
                     to: {
                         opacity: "1",

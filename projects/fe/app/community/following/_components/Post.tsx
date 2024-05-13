@@ -8,13 +8,14 @@ import Comment from "@/community/following/_images/Comment";
 import SpoonKnife from "@/community/following/_images/SpoonKnife";
 import CommentsSection from "@/community/following/_components/CommentsSection";
 
-import { Jua, Noto_Sans_KR } from "next/font/google";
+import { Jua, Noto_Sans_KR, Noto_Sans } from "next/font/google";
 
 const jua = Jua({
     subsets: ["latin"],
     weight: "400",
 });
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
+const notoSans = Noto_Sans({ subsets: ["latin"] });
 // const dosis = Dosis({ subsets: ["latin"] });
 
 interface PostProps {
@@ -50,7 +51,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     return (
         <div
             ref={postRef}
-            className="max-w-[470px] w-full backdrop-blur-lg rounded-lg"
+            className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2"
         >
             <div className="mx-1 flex flex-col py-3">
                 {/* 유저 정보 */}
@@ -61,10 +62,12 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                         className="w-10 h-10 rounded-full pointer-events-none"
                     />
                     <div className="flex flex-col">
-                        <p className="ml-2 text-gray-100">
+                        <p
+                            className={`ml-2 text-app-font-2 ${notoSans.className}`}
+                        >
                             {postInfo.user.name}
                         </p>
-                        <p className="ml-2 text-xs text-gray-300">
+                        <p className="ml-2 text-xs text-app-font-4">
                             {postInfo.postedAt.toDateString()}
                         </p>
                     </div>
@@ -87,31 +90,49 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 />
             </div>
 
-            {/* 포스트 액션 */}
-            <div className="flex justify-between mt-1 pl-1 pr-3">
-                <div className="flex py-1 gap-3">
-                    <Like
-                        onClick={() => setIsLiked(!isLiked)}
-                        isLiked={isLiked}
-                    />
-                    <CommentsSection>
-                        <Comment className="fill-white" />
-                    </CommentsSection>
-                    <SpoonKnife className="fill-white" />
-                </div>
+            {/* 포스트 정보 */}
+            <div className="flex justify-between mt-1 px-2">
+                <div className="w-full flex py-1 gap-3">
+                    <div
+                        className={`flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className}`}
+                    >
+                        <Like
+                            onClick={() => setIsLiked(!isLiked)}
+                            isLiked={isLiked}
+                            className={`${
+                                isLiked
+                                    ? "stroke-[#FF0000]"
+                                    : "stroke-app-font-3"
+                            } ${isLiked ? "fill-[#FF0000]" : "fill-none"}`}
+                        />
+                        <p>{postInfo.likes}</p>
+                    </div>
 
-                {/* 포스트 정보 */}
-                <div className="flex justify-end gap-4 text-sm text-gray-300 py-2">
-                    <p>{postInfo.likes} liked</p>
-                    <p>{postInfo.comments} comments</p>
+                    <div
+                        className={`flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className}`}
+                    >
+                        <CommentsSection>
+                            <Comment className="fill-app-font-3" />
+                        </CommentsSection>
+                        <p>{postInfo.comments}</p>
+                    </div>
+
+                    <div
+                        className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className}`}
+                    >
+                        <SpoonKnife className="fill-app-font-3" />
+                        <p>322 kcal</p>
+                    </div>
                 </div>
             </div>
 
             {/* 포스트 내용 */}
-            <p className="mx-1 text-gray-100 text-pretty">{truncatedContent}</p>
+            <p className={`mx-1 text-pretty text-sm text-app-font-1 mt-1`}>
+                {truncatedContent}
+            </p>
             {!showFullContent && (
                 <button
-                    className={`text-gray-300 text-xs mt-1 mx-1`}
+                    className={`text-app-font-4 text-xs mt-1 mx-1`}
                     onClick={() => {
                         setTruncatedContent(postInfo.content);
                         setShowFullContent(true);

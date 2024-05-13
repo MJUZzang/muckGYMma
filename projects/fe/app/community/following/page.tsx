@@ -19,7 +19,7 @@ const Follwing = () => {
 
     return (
         <>
-            <div className="flex flex-col items-center pt-3 pb-6 h-full gap-3">
+            <div className="flex flex-col items-center pt-3 pb-6 h-full gap-3 bg-app-bg-1">
                 <Post postInfo={dummyPost} />
                 <Post postInfo={dummyPost} />
                 <Post postInfo={dummyPost} />

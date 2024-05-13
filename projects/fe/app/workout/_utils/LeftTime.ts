@@ -15,12 +15,12 @@ export const CaclLeftTime = (dueDate: Date) => {
     const leftSeconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     return leftDays > 0
-        ? leftDays + "day(s)"
+        ? leftDays + "일"
         : leftHours > 0
-        ? leftHours + "hr(s)"
+        ? leftHours + "시간"
         : leftMinutes > 0
-        ? leftMinutes + "min(s)"
+        ? leftMinutes + "분"
         : leftSeconds > 0
-        ? leftSeconds + "sec(s)"
-        : "0sec";
+        ? leftSeconds + "초"
+        : "0초";
 };

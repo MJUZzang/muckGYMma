@@ -8,7 +8,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = (props) => {
     return (
         <div
             className="bg-stone-900 w-[50px] h-[29px] rounded-full transition-colors
-                dark:bg-blue-950"
+                dark:bg-app-blue-950"
             onClick={props.onClick}
         >
             <div

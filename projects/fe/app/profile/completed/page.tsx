@@ -14,9 +14,11 @@ function Page() {
                     >
                         <Muscle />
                         <div>
-                            <p className="text-white/90">Gym workout</p>
-                            <p className="text-white/90">320kcal</p>
-                            <p className="text-white/90">완료일: 2022-01-01</p>
+                            <p className="text-app-font-2">Gym workout</p>
+                            <p className="text-app-font-2">320kcal</p>
+                            <p className="text-app-font-2">
+                                완료일: 2022-01-01
+                            </p>
                         </div>
                     </Link>
                 ))}

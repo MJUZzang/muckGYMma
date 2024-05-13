@@ -64,7 +64,7 @@ function InitialLoad(props: InitialLoadProps) {
                         animate-spin"
                     />
                     <div className="animate-bounce mt-3">
-                        <p className="text-white/90">Welcome to 먹짐마!</p>
+                        <p className="text-app-font-2">Welcome to 먹짐마!</p>
                     </div>
                 </div>
             ) : (
