@@ -8,6 +8,9 @@ import Workout from "@/_images/Workout";
 import Forum from "@/_images/Forum";
 import { usePathname } from "next/navigation";
 import FoodPicture from "@/_components/FoodPicture";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
 const excepts = ["/initial-setup", "/plan-info", "/food-info", "/plan"];
 
@@ -28,7 +31,11 @@ const NavBar = () => {
 
     return (
         <>
-            <div className={`pb-[85px] ${!isVisible && "hidden"} ${pathname.startsWith("/community") && "bg-app-bg-1"}`} />
+            <div
+                className={`pb-[85px] ${!isVisible && "hidden"} ${
+                    pathname.startsWith("/community") && "bg-app-bg-1"
+                }`}
+            />
             <div
                 className={`absolute max-h-[100dvh] h-full ${
                     !isVisible && "hidden"
@@ -55,7 +62,8 @@ const NavBar = () => {
                                 pathname === "/workout"
                                     ? "text-app-blue"
                                     : "text-gray-600"
-                            }`}
+                            }
+                            ${notoSansKr.className}`}
                         >
                             운동
                         </p>
@@ -77,7 +85,8 @@ const NavBar = () => {
                                 pathname === "/analysis"
                                     ? "text-app-blue"
                                     : "text-gray-600"
-                            }`}
+                            }
+                            ${notoSansKr.className}`}
                         >
                             내 기록
                         </p>
@@ -105,7 +114,8 @@ const NavBar = () => {
                                 pathname === "/community/following"
                                     ? "text-app-blue"
                                     : "text-gray-600"
-                            }`}
+                            } 
+                            ${notoSansKr.className}`}
                         >
                             커뮤니티
                         </p>
@@ -128,7 +138,8 @@ const NavBar = () => {
                                 pathname.includes("/profile")
                                     ? "text-app-blue"
                                     : "text-gray-600"
-                            }`}
+                            }
+                            ${notoSansKr.className}`}
                         >
                             프로필
                         </p>

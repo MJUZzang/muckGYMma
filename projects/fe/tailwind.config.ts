@@ -75,6 +75,7 @@ const config = {
                     4: "#95bfff",
                     5: "#a8d0ff",
                     6: "#bbf0ff",
+                    "darker-1": "#3c6fd6",
                 },
 
                 "app-bg": {
@@ -122,6 +123,10 @@ const config = {
                     from: { rotate: "0deg" },
                     to: { rotate: "180deg" },
                 },
+                "spin-360": {
+                    from: { rotate: "0deg" },
+                    to: { rotate: "360deg" },
+                },
                 "show-task": {
                     from: {
                         opacity: "0",
@@ -148,6 +153,7 @@ const config = {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 "spin-180": "spin-180 0.6s ease-in-out",
+                "spin-360-slow": "spin-360 3.6s ease-in-out infinite",
                 "show-task": "show-task 0.6s ease-in-out forwards",
                 "page-enter": "page-enter 0.6s ease-in-out forwards",
                 "custom-pulse": "custom-pulse 1s ease-in-out infinite",

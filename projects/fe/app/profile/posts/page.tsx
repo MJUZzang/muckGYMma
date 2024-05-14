@@ -27,9 +27,11 @@ function Page() {
         //         </div>
         //     ))}
         // </div>
-        Array.from({ length: 16 }).map((_, i) => (
-            <Post key={i} postInfo={dummyPost} />
-        ))
+        <div className="pt-4 flex flex-col items-center gap-3">
+            {Array.from({ length: 16 }).map((_, i) => (
+                <Post key={i} postInfo={dummyPost} />
+            ))}
+        </div>
     );
 }
 
