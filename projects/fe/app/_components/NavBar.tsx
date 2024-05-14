@@ -129,8 +129,8 @@ const NavBar = () => {
                             isActive={pathname.includes("/profile/")}
                             className={`${
                                 pathname.includes("/profile/")
-                                    ? "fill-app-blue"
-                                    : "fill-gray-600/75"
+                                    ? "stroke-app-blue fill-app-blue"
+                                    : "stroke-gray-600/75 fill-none"
                             }`}
                         />
                         <p

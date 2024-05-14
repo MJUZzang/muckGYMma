@@ -153,7 +153,7 @@ const config = {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 "spin-180": "spin-180 0.6s ease-in-out",
-                "spin-360-slow": "spin-360 3.6s ease-in-out infinite",
+                "spin-360-slow": "spin-360 3s ease-in-out infinite",
                 "show-task": "show-task 0.6s ease-in-out forwards",
                 "page-enter": "page-enter 0.6s ease-in-out forwards",
                 "custom-pulse": "custom-pulse 1s ease-in-out infinite",

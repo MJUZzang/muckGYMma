@@ -1,48 +1,115 @@
 import React from "react";
 
-import exampleImage from "@/_images/닭갈비.jpg";
+import img1 from "@/_images/닭갈비.jpg";
+import img2 from "@/_images/삼겹살.jpg";
+import img3 from "@/_images/떡볶이.jpg";
+import img4 from "@/_images/버거.jpg";
+
 import Image from "next/image";
 
-import { Jua } from "next/font/google";
+import { Jua, Noto_Sans_KR, Dosis } from "next/font/google";
 
 import NavigateNext from "@/_images/NavigateNext";
 import Link from "next/link";
+
+const dummyData = [
+    {
+        image: img1,
+        name: "삼겹살",
+        date: "2024-01-01: 12:00",
+        kcal: 320,
+        posted: false,
+    },
+    {
+        image: img2,
+        name: "비빔면",
+        date: "2024-01-01: 12:00",
+        kcal: 320,
+        posted: false,
+    },
+    {
+        image: img3,
+        name: "떡볶이",
+        date: "2024-01-01: 12:00",
+        kcal: 320,
+        posted: true,
+    },
+    {
+        image: img4,
+        name: "버거",
+        date: "2024-01-01: 12:00",
+        kcal: 320,
+        posted: true,
+    },
+];
 
 const jua = Jua({
     subsets: ["latin"],
     weight: ["400"],
 });
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
+const dosis = Dosis({
+    subsets: ["latin"],
+});
 
 function Page() {
     return (
-        <div className="">
-            {Array(10)
-                .fill(0)
-                .map((_, i) => (
-                    <Link
-                        key={i}
-                        href="/food-info"
-                        className="px-1 flex gap-2 hover:bg-white/10 transition duration-200 "
+        <div className="space-y-3">
+            {dummyData.map((meal, i) => (
+                <Link
+                    key={i}
+                    href="/food-info"
+                    className="flex gap-2 cursor-pointer"
+                >
+                    <div
+                        className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] 
+                        overflow-clip rounded-2xl shrink-0"
                     >
-                        <div className="w-[75px] h-[75px] overflow-clip rounded-3xl shrink-0">
-                            <Image
-                                src={exampleImage}
-                                alt="Pooh"
-                                className="h-full"
-                            />
-                        </div>
+                        <Image src={meal.image} alt="Pooh" className="h-full" />
+                    </div>
 
-                        <div className={`${jua.className} py-1 w-full`}>
-                            <p className="text-app-font-2 text-xl">
-                                삼겹살, 비빔면
-                            </p>
-                            <p className="text-app-font-2 text-sm">320kcal</p>
-                            <p className="text-app-font-2 text-xs">
-                                2024-01-01
+                    <div className={`py-[6px] w-full flex flex-col justify-start`}>
+                        <p
+                            className={`text-app-font-2 text-lg ${notoSansKr.className}`}
+                        >
+                            {meal.name}
+                        </p>
+
+                        <div className="mt-auto">
+                            <div className="text-app-font-2 text-base">
+                                <p
+                                    className={`inline-block ${dosis.className}`}
+                                >
+                                    {`${meal.kcal} `}
+                                </p>
+                                <p
+                                    className={`inline-block ${notoSansKr.className}`}
+                                >
+                                    kcal
+                                </p>
+                            </div>
+
+                            <p
+                                className={`text-app-font-2 text-xs ${dosis.className}`}
+                            >
+                                {meal.date}
                             </p>
                         </div>
+                    </div>
 
-                        <div className="flex items-center justify-center">
+                    <div className="ml-auto my-auto">
+                        <button
+                            className={`text-nowrap mr-2 bg-app-blue rounded-full px-4 py-2 
+                                text-sm text-app-inverted-font
+                                ${notoSansKr.className}`}
+                        >
+                            상세 정보
+                        </button>
+                    </div>
+
+                    {/* <div className="flex items-center justify-center">
                             <p
                                 className={`text-black/85 bg-app-blue border-[1px] text-xs border-black/20 px-2 py-1 rounded-3xl font-mono font-semibold`}
                             >
@@ -53,9 +120,9 @@ function Page() {
                                 width={34}
                                 className="fill-white/90"
                             />
-                        </div>
-                    </Link>
-                ))}
+                        </div> */}
+                </Link>
+            ))}
         </div>
     );
 }
