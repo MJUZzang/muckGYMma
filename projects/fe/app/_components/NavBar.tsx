@@ -28,7 +28,7 @@ const NavBar = () => {
 
     return (
         <>
-            <div className={`pb-[95px] ${!isVisible && "hidden"}`} />
+            <div className={`pb-[85px] ${!isVisible && "hidden"} ${pathname.startsWith("/community") && "bg-app-bg-1"}`} />
             <div
                 className={`absolute max-h-[100dvh] h-full ${
                     !isVisible && "hidden"
@@ -79,7 +79,7 @@ const NavBar = () => {
                                     : "text-gray-600"
                             }`}
                         >
-                            그래프
+                            내 기록
                         </p>
                     </Link>
 

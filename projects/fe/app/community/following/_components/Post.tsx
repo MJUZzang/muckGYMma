@@ -53,7 +53,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             ref={postRef}
             className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2"
         >
-            <div className="mx-1 flex flex-col py-3">
+            <div className="mx-2 flex flex-col py-3">
                 {/* 유저 정보 */}
                 <div className="flex">
                     <Image
@@ -127,12 +127,12 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             </div>
 
             {/* 포스트 내용 */}
-            <p className={`mx-1 text-pretty text-sm text-app-font-1 mt-1`}>
+            <p className={`mx-2 text-pretty text-sm text-app-font-1 mt-1`}>
                 {truncatedContent}
             </p>
             {!showFullContent && (
                 <button
-                    className={`text-app-font-4 text-xs mt-1 mx-1`}
+                    className={`text-app-font-4 text-xs mt-1 mx-2`}
                     onClick={() => {
                         setTruncatedContent(postInfo.content);
                         setShowFullContent(true);

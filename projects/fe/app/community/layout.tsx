@@ -3,21 +3,24 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import HeaderTop from "@/_components/HeaderTop";
-import LogoAndTitle from "@/_components/LogoAndTitle";
 
-import { Noto_Sans } from "next/font/google";
+import { Noto_Sans, Dosis } from "next/font/google";
 
 const notoSans = Noto_Sans({ subsets: ["latin"] });
+const dosis = Dosis({ subsets: ["latin"] });
 
 const links = [
     {
-        name: "following",
+        name: "Following",
         href: "/community/following",
     },
     {
-        name: "hot",
+        name: "Hot",
         href: "/community/hot",
+    },
+    {
+        name: "Club",
+        href: "/community/club",
     },
 ];
 
@@ -31,9 +34,12 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
     return (
         <>
             <div className="flex flex-col border-b-[1px] border-b-gray-300 px-3">
-                <div className="mt-3">
-                    <p className={`text-app-font-3 text-2xl font-semibold ${notoSans.className}`}>Community</p>
-
+                <div className="mt-3 max-w-[935px] mx-auto w-full">
+                    <p
+                        className={`text-app-font-3 text-2xl font-semibold ${dosis.className}`}
+                    >
+                        Community
+                    </p>
                 </div>
 
                 <div className="flex max-w-[935px] mx-auto w-full mt-3">
@@ -43,7 +49,7 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
                             className={`${
                                 pathname === link.href
                                     ? "border-b-app-blue border-b-[3px]"
-                                    : "hover:border-b-app-blue-5 hover:border-b-[3px]"
+                                    : "hover:border-b-app-blue-5 border-b-[3px]"
                             } ${
                                 notoSans.className
                             } w-[90px] text-center text-app-font-3 text-sm pb-1
