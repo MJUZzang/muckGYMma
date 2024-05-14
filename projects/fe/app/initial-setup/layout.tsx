@@ -87,7 +87,7 @@ function InitialSetupLayout({
     }, []);
 
     return (
-        <div className="bg-default px-5 flex flex-col h-[100dvh] py-4">
+        <div className="bg-app-bg px-5 flex flex-col h-[100dvh] py-4">
             <div>
                 {pageInfo.order !== 0 && (
                     <ArrowBack
@@ -95,7 +95,7 @@ function InitialSetupLayout({
                         onClick={() => router.back()}
                     />
                 )}
-                <p className="inline-block w-full text-center text-white/90">
+                <p className="inline-block w-full text-center text-app-font-2">
                     {pageInfo.title}
                 </p>
             </div>
@@ -103,7 +103,7 @@ function InitialSetupLayout({
             {/* Progress bar */}
             <div className="h-[5px] rounded-full mt-5 bg-stone-800">
                 <div
-                    className={`transition-all h-full bg-fluorescent rounded-full`}
+                    className={`transition-all h-full bg-app-blue rounded-full`}
                     style={{
                         width: pageInfo.progress,
                     }}

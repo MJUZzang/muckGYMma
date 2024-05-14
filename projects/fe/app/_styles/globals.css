@@ -33,9 +33,31 @@
         --ring: 222.2 84% 4.9%;
 
         --radius: 0.5rem;
+
+        --app-bg: #ffffff;
+        --app-bg-1: rgba(241, 243, 247);
+        --app-bg-2: rgba(235, 237, 241);
+        --app-bg-3: rgba(229, 231, 235);
+        --app-bg-4: rgba(223, 225, 229);
+        --app-bg-5: rgba(217, 219, 223);
+        --app-bg-6: rgba(211, 213, 217);
+
+        --app-font: #000000;
+        --app-font-1: #141414;
+        --app-font-2: #333333;
+        --app-font-3: #494949;
+        --app-font-4: #666666;
+        --app-font-5: #999999;
+        --app-font-6: #cccccc;
+        --app-font-7: #f0f0f0;
+
+        --app-inverted-font: #ffffff;
+        --app-inverted-font-1: #f0f0f0;
+        --app-inverted-font-2: #e0e0e0;
+        --app-inverted-font-3: #d0d0d0;
     }
 
-    .dark {
+    /* .dark {
         --background: 222.2 84% 4.9%;
         --foreground: 210 40% 98%;
 
@@ -63,7 +85,9 @@
         --border: 217.2 32.6% 17.5%;
         --input: 217.2 32.6% 17.5%;
         --ring: 212.7 26.8% 83.9%;
-    }
+
+        --app-bg: #0B1416;
+    } */
 
     * {
         @apply border-border;
@@ -76,11 +100,10 @@
 @layer components {
 }
 
-
 @layer utilities {
-  .paper-shadow {
-    box-shadow: 0 0px 8px 1px rgba(0, 0, 0, 0.2);
-  }
+    .paper-shadow {
+        box-shadow: 0 0px 8px 1px rgba(0, 0, 0, 0.2);
+    }
 }
 
 @media (prefers-reduced-motion) {

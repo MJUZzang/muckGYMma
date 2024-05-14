@@ -13,7 +13,7 @@ const Button = forwardRef(function Butt(
     return (
         <div
             ref={ref}
-            className={`text-nowrap inline-block text-center w-full bg-fluorescent rounded-lg py-2 font-semibold text-black 
+            className={`text-nowrap inline-block text-center w-full bg-app-blue rounded-lg py-2 font-semibold text-black 
                 focus:outline-none active:scale-90 transition-all cursor-pointer ${className}`}
             onClick={onClick}
         >

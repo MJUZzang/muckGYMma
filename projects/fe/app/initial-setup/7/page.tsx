@@ -19,7 +19,7 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="text-white/90 h-full flex flex-col animate-page-enter">
+        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl text-pretty">
                 체중/신장과 생년월일을 알려주세요!
             </p>
@@ -40,7 +40,7 @@ function Page() {
                             );
                         }}
                         className="bg-white/15 rounded-lg py-1 pr-3 w-[150px] text-center
-                        focus:outline-1 focus:outline-fluorescent-lightest"
+                        focus:outline-1 focus:outline-app-blue-lightest"
                     />
                 </label>
                 <label className="flex justify-between mt-5">
@@ -54,7 +54,7 @@ function Page() {
                                 );
                             }}
                             className="bg-white/15 rounded-lg py-1 pr-3 w-[110px] text-center
-                            focus:outline-1 focus:outline-fluorescent-lightest"
+                            focus:outline-1 focus:outline-app-blue-lightest"
                         />
                         <p className="relative text-red z-[50] right-3 bottom-[27px]">
                             kg
@@ -72,7 +72,7 @@ function Page() {
                                 );
                             }}
                             className="bg-white/15 rounded-lg py-1 pr-3 w-[110px] text-center
-                            focus:outline-1 focus:outline-fluorescent-lightest"
+                            focus:outline-1 focus:outline-app-blue-lightest"
                         />
                         <p className="relative text-red z-[50] right-3 bottom-[27px]">
                             cm
@@ -100,7 +100,7 @@ function Page() {
                     (!initialInfo.physicalSetting.birth ||
                         !initialInfo.physicalSetting.weight ||
                         !initialInfo.physicalSetting.height) &&
-                    "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
+                    "bg-app-blue/75 text-black/80 hover:bg-app-blue/90"
                 }`}
             />
 

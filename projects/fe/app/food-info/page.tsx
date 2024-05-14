@@ -62,18 +62,18 @@ function FoodInfo() {
                     {/* 운동 아이콘 */}
                     <div className="w-[80px] h-[80px] bg-white rounded-full" />
                     <div>
-                        <p className="text-white/90">제육볶음</p>
-                        <p className="text-white/90">720kcal</p>
-                        <p className="text-white/90">업로드: 2022-01-01</p>
+                        <p className="text-app-font-2">제육볶음</p>
+                        <p className="text-app-font-2">720kcal</p>
+                        <p className="text-app-font-2">업로드: 2022-01-01</p>
                     </div>
                 </div>
             </div>
 
             <div
-                className="bg-white/15 rounded-lg cursor-pointer px-2 w-[80vw] mx-auto text-white/90 backdrop-blur-lg
+                className="bg-white/15 rounded-lg cursor-pointer px-2 w-[80vw] mx-auto text-app-font-2 backdrop-blur-lg
                     py-1 mt-4"
             >
-                <p className="block text-center text-xl text-fluorescent my-1">
+                <p className="block text-center text-xl text-app-blue my-1">
                     영양성분
                 </p>
                 <p>
@@ -91,7 +91,7 @@ function FoodInfo() {
 
             <div className="inline-block mt-auto mx-3 mb-3">
                 <button
-                    className="text-center w-full bg-fluorescent rounded-lg py-2 font-semibold text-black 
+                    className="text-center w-full bg-app-blue rounded-lg py-2 font-semibold text-black 
                 active:scale-90 transition-all "
                 >
                     포스트 작성

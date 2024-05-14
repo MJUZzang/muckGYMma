@@ -7,8 +7,9 @@ import Swimming from "@/_images/Swimming";
 import Football from "@/_images/Football";
 import { CaclLeftTime } from "@/workout/_utils/LeftTime";
 
-import { Dosis, Jua } from "next/font/google";
+import { Dosis, Jua, Noto_Sans } from "next/font/google";
 
+const notoSans = Noto_Sans({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });
 const jua = Jua({
     subsets: ["latin"],
@@ -23,33 +24,6 @@ function GetIcon(type: string) {
             return <Swimming />;
         case "football":
             return <Football />;
-    }
-}
-
-function GetTagDesign(type: number) {
-    switch (type) {
-        case 0:
-            //return "bg-fluorescent text-black";
-            return "bg-turkish-dark text-black/80";
-        case 1:
-            //return "bg-black/60 text-white";
-            return "bg-turkish-dark text-black/80";
-        case 2:
-            //return "bg-white text-black";
-            return "bg-turkish-dark text-black/80";
-    }
-}
-
-function GetTextColor(designType: number) {
-    switch (designType) {
-        case 0:
-            //return "text-white/90";
-            return "text-black/80";
-        case 1:
-            return "text-black/80";
-        case 2:
-            //return "text-fluorescent";
-            return "text-black/80";
     }
 }
 
@@ -83,46 +57,35 @@ const Task: React.FC<TaskProps> = ({
 
     return (
         <div
-            className={`py-2 pl-2 pr-5 rounded-[2rem] backdrop-blur-xl cursor-pointer 
-            hover:bg-white/20
-            flex justify-between items-center gap-3 ${className}`}
+            className={`py-2 pl-5 pr-5 rounded-[2rem] backdrop-blur-xl cursor-pointer 
+            bg-app-bg-1 hover:bg-app-bg-3
+            flex justify-between items-center gap-5 ${className}`}
         >
             <div>{GetIcon(type)}</div>
 
             <div className="basis-full flex justify-between items-center">
-                <div
-                    className={`flex flex-col justify-center ${
-                        jua.className
-                    } ${GetTextColor(designType)}`}
-                >
-                    <p className={`${jua.className} text-xl text-nowrap`}>
-                        {type === "health" && `Gym Workout`}
-                        {type === "swimming" && `Swimming`}
-                        {type === "football" && `Football`}
+                <div className={`${jua.className} text-app-font-2`}>
+                    <p className={`text-xl text-nowrap`}>
+                        {type === "health" && `헬스`}
+                        {type === "swimming" && `수영`}
+                        {type === "football" && `축구`}
                     </p>
 
-                    <p className="">{timeLeft} left</p>
+                    <p className="mt-3 text-sm">소멸되기 까지 {timeLeft} 남음</p>
 
                     <div
-                        className={`${GetTagDesign(
-                            designType
-                        )} w-fit px-2 py-1 rounded-full mt-1`}
+                        className={`w-fit mt-1 px-3 py-2 rounded-full bg-app-blue 
+                            text-sm text-app-inverted-font`}
                     >
                         {duration}분 소요
                     </div>
                 </div>
             </div>
 
-            <div className="">
-                <p className={`text-white/90 ${dosis.className}`}>950</p>
-                <p className={`text-white/90 ${jua.className}`}>kcal</p>
+            <div className="text-center font-semibold">
+                <p className={`text-app-font-2 ${dosis.className}`}>950</p>
+                <p className={`text-app-font-2 ${notoSans.className}`}>kcal</p>
             </div>
-
-            {/* <NavigateNext
-                width={35}
-                hight={35}
-                className="fill-fluorescent my-auto"
-            /> */}
         </div>
     );
 };

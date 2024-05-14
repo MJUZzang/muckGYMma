@@ -1,8 +1,8 @@
 import { Lilita_One } from "next/font/google";
 
-import Image from "next/image";
+// import Image from "next/image";
 import React from "react";
-import Logo from "@/_images/logo.png";
+// import Logo from "@/_images/logo.png";
 
 const lilitaOne = Lilita_One({
     weight: "400",
@@ -12,14 +12,13 @@ const lilitaOne = Lilita_One({
 const LogoAndTitle = () => {
     return (
         <>
-            <Image src={Logo} alt="Logo" width={78} />
+            {/* <Image src={Logo} alt="Logo" width={78} /> */}
             <div
-                className={`flex items-end text-white text-xl ${lilitaOne.className}
-                    relative top-1`}
+                className={`flex items-end text-white text-xl ${lilitaOne.className}`}
             >
-                <p>muck</p>
-                <p className="text-fluorescent text-2xl">GYM</p>
-                <p>ma</p>
+                <p className="text-app-font-3 text-2xl">muck</p>
+                <p className="text-app-blue text-3xl">GYM</p>
+                <p className="text-app-font-3 text-2xl">ma</p>
             </div>
         </>
     );

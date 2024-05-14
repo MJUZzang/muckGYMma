@@ -3,13 +3,16 @@ import React from "react";
 interface ForumProps {
     className?: string;
     isActive: boolean;
+    dotsColor?: string;
 }
 
 const Forum: React.FC<ForumProps> = (props) => {
     return (
         <>
             <svg
-                className={`${props.isActive === true && "hidden"} ${props.className}`}
+                className={`${props.isActive === true && "hidden"} ${
+                    props.className
+                }`}
                 width={30}
                 height={29}
                 viewBox="0 0 30 29"
@@ -45,7 +48,9 @@ const Forum: React.FC<ForumProps> = (props) => {
             </svg>
 
             <svg
-                className={`${props.isActive === false && "hidden"} ${props.className}`}
+                className={`${props.isActive === false && "hidden"} ${
+                    props.className
+                }`}
                 width={30}
                 height={29}
                 viewBox="0 0 30 24"
@@ -60,15 +65,15 @@ const Forum: React.FC<ForumProps> = (props) => {
                     />
                     <path
                         d="M18.9438 12.5757C17.9711 12.5757 17.186 11.7906 17.186 10.8179C17.186 9.84522 17.9711 9.06006 18.9438 9.06006C19.893 9.06006 20.7016 9.84522 20.7016 10.8179C20.7016 11.7906 19.893 12.5757 18.9438 12.5757Z"
-                        fill="white"
+                        className={props.dotsColor}
                     />
                     <path
                         d="M13.2955 12.5757C12.3228 12.5757 11.5376 11.7906 11.5376 10.8179C11.5376 9.84522 12.3228 9.06006 13.2955 9.06006C14.2681 9.06006 15.0533 9.84522 15.0533 10.8179C15.0533 11.7906 14.2681 12.5757 13.2955 12.5757Z"
-                        fill="white"
+                        className={props.dotsColor}
                     />
                     <path
                         d="M7.65869 12.5757C6.69776 12.5757 5.90088 11.7906 5.90088 10.8179C5.90088 9.84522 6.69776 9.06006 7.65869 9.06006C8.60791 9.06006 9.40479 9.84522 9.40479 10.8179C9.40479 11.7906 8.61963 12.5757 7.65869 12.5757Z"
-                        fill="white"
+                        className={props.dotsColor}
                     />
                 </g>
                 <defs>

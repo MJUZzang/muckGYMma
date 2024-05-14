@@ -27,10 +27,10 @@ function PlanInfo() {
 
     function GetWorkoutStyle(index: number) {
         if (planInfo.workouts[index].isCompleted) {
-            return "bg-fluorescent/10";
+            return "bg-app-blue/10";
         }
         if (index === selectedWorkout) {
-            return "bg-fluorescent/20 ring-2 ring-fluorescent/50";
+            return "bg-app-blue/20 ring-2 ring-app-blue/50";
         }
         return "bg-white/10";
     }
@@ -55,10 +55,10 @@ function PlanInfo() {
                     {/* 운동 아이콘 */}
                     <div className="w-[80px] h-[80px] bg-white rounded-full" />
                     <div>
-                        <p className="text-white/90">{planInfo.type}</p>
-                        <p className="text-white/90">{planInfo.kcal} kcal</p>
+                        <p className="text-app-font-2">{planInfo.type}</p>
+                        <p className="text-app-font-2">{planInfo.kcal} kcal</p>
                         <p
-                            className={`text-white/90 ${
+                            className={`text-app-font-2 ${
                                 !planInfo.isCompleted && "invisible"
                             }`}
                         >
@@ -68,13 +68,14 @@ function PlanInfo() {
                     </div>
                 </div>
 
-                <div className="space-y-3 mt-4">
+                <div className="space-y-3 mt-4 group">
                     {planInfo.workouts.map((workout, index) => (
                         <div
                             key={index}
-                            className={`flex justify-between items-center p-3 rounded-lg ${GetWorkoutStyle(
-                                index
-                            )}`}
+                            className={`flex justify-between items-center p-3 rounded-lg 
+                            ${GetWorkoutStyle(index)} ${
+                                !workout.isCompleted && "cursor-pointer"
+                            }`}
                             onClick={() => {
                                 if (!workout.isCompleted) {
                                     dispatch(setSelectedWorkout(index));
@@ -120,7 +121,7 @@ function PlanInfo() {
                         !(
                             selectedWorkout &&
                             !planInfo.workouts[selectedWorkout].isCompleted
-                        ) && "bg-fluorescent/20 text-white/30"
+                        ) && "bg-app-blue/20 text-white/30"
                     }`}
                 >
                     운동 시작

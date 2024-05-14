@@ -33,16 +33,18 @@ function Page() {
                         </div>
 
                         <div className={`${jua.className} py-1 w-full`}>
-                            <p className="text-white/90 text-xl">
+                            <p className="text-app-font-2 text-xl">
                                 삼겹살, 비빔면
                             </p>
-                            <p className="text-white/90 text-sm">320kcal</p>
-                            <p className="text-white/90 text-xs">2024-01-01</p>
+                            <p className="text-app-font-2 text-sm">320kcal</p>
+                            <p className="text-app-font-2 text-xs">
+                                2024-01-01
+                            </p>
                         </div>
 
                         <div className="flex items-center justify-center">
                             <p
-                                className={`text-black/85 bg-fluorescent border-[1px] text-xs border-black/20 px-2 py-1 rounded-3xl font-mono font-semibold`}
+                                className={`text-black/85 bg-app-blue border-[1px] text-xs border-black/20 px-2 py-1 rounded-3xl font-mono font-semibold`}
                             >
                                 posted
                             </p>

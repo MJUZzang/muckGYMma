@@ -13,7 +13,7 @@ const HeatMap = () => {
 
     return (
         <div className="rounded-lg bg-white/15 backdrop-blur-lg">
-            <p className="inline-block p-5 w-full text-center text-xl pb-5 text-fluorescent font-semibold">
+            <p className="inline-block p-5 w-full text-center text-xl pb-5 text-app-blue font-semibold">
                 Streak Chart
             </p>
             {isClient && (

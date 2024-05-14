@@ -2,7 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
-import { PredictState, selectPredict, setPredict } from "@/../lib/slices/predictSlice";
+import {
+    PredictState,
+    selectPredict,
+    setPredict,
+} from "@/../lib/slices/predictSlice";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import ConfirmModal from "@/prediction/pick-one/_components/ConfirmModal";
@@ -97,10 +101,13 @@ export default function Page() {
         if (process.env.NODE_ENV === "development") {
             dispatch(setPredict(dummyData));
         }
-    })
+    });
 
     return (
-        <div className="h-full animate-page-enter" onClick={() => setIsModalOpen(false)}>
+        <div
+            className="h-full animate-page-enter"
+            onClick={() => setIsModalOpen(false)}
+        >
             <ConfirmModal
                 title="섭취한 음식을 선택해주세요"
                 onOkClicked={() => setIsModalOpen(false)}
@@ -110,7 +117,7 @@ export default function Page() {
                 selectedPredict={selectedPredict}
             />
 
-            <p className="block mb-2 text-center text-white/90 mx-auto text-2xl">
+            <p className="block mb-2 text-center text-app-font-2 mx-auto text-2xl">
                 분석 완료!
             </p>
             <Image
@@ -121,11 +128,11 @@ export default function Page() {
                 className="h-[30vh] mx-auto rounded-xl"
             />
 
-            <p className="text-white/90 block mt-10 text-center px-5 text-xl text-balance">
+            <p className="text-app-font-2 block mt-10 text-center px-5 text-xl text-balance">
                 아래에서 정확한 분석 결과 하나를 골라주세요.
             </p>
             <div ref={emblaRef} className="overflow-hidden flex flex-col mt-5">
-                <div className="flex text-white/90">
+                <div className="flex text-app-font-2">
                     {predict.predictlist?.map((item, idx) => (
                         <div
                             key={item.keyname}
@@ -137,7 +144,7 @@ export default function Page() {
                                 setIsModalOpen(true);
                             }}
                         >
-                            <p className="block backdrop-blur-lg text-center text-xl text-fluorescent">
+                            <p className="block backdrop-blur-lg text-center text-xl text-app-blue">
                                 {idx + 1}번
                             </p>
                             <p>정확도: {item.possibility}%</p>

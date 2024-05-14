@@ -47,7 +47,7 @@ function Page() {
     return (
         <>
             <div className="h-full animate-page-enter">
-                <p className="block mb-2 text-center text-white/90 mx-auto text-2xl">
+                <p className="block mb-2 text-center text-app-font-2 mx-auto text-2xl">
                     분석 완료!
                 </p>
                 <Image
@@ -58,14 +58,14 @@ function Page() {
                     className="h-[30vh] mx-auto rounded-xl"
                 />
 
-                <p className="text-white/90 block mt-10 text-center px-5 text-xl text-balance">
+                <p className="text-app-font-2 block mt-10 text-center px-5 text-xl text-balance">
                     영앙소 분석 결과입니다.
                 </p>
                 <div
-                    className="bg-white/15 rounded-lg cursor-pointer px-2 w-[80vw] mx-auto text-white/90 backdrop-blur-lg
+                    className="bg-white/15 rounded-lg cursor-pointer px-2 w-[80vw] mx-auto text-app-font-2 backdrop-blur-lg
                     mt-2 py-1"
                 >
-                    <p className="block text-center text-xl text-fluorescent my-1">
+                    <p className="block text-center text-xl text-app-blue my-1">
                         {predict.predictresult?.foodName}
                     </p>
                     <p>

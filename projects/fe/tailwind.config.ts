@@ -54,28 +54,56 @@ const config = {
                     foreground: "hsl(var(--card-foreground))",
                 },
 
-                default: "#0B1416",
-                fluorescent: "#dfff32",
-                "fluorescent-light": "#f4ff8c",
-                "fluorescent-lighter": "#eaff5e",
-                "fluorescent-lightest": "#f5ff9e",
-                "fluorescent-dark": "#b4ff00",
-                "fluorescent-darker": "#7fff00",
-                "fluorescent-darkest": "#4dff00",
 
-                purple: "#7310f8",
-                "purple-light": "#a44eff",
-                "purple-lighter": "#c97aff",
-                "purple-lightest": "#e2aaff",
-                "purple-dark": "#4b00b7",
-                "purple-darker": "#2e0080",
-                "purple-darkest": "#1a0054",
 
-                turkish: "#CBF1F5",
-                "turkish-light": "#E3FDFD",
-                "turkish-lighter": "#F0FAF9",
-                "turkish-dark": "#A6E3E9",
-                "turkish-darker": "#71C9CE",
+                // 커스텀 칼라들
+                fluorescent: {
+                    DEFAULT: "#dfff32",
+                    light: "#f4ff8c",
+                    lighter: "#eaff5e",
+                    lightest: "#f5ff9e",
+                    dark: "#b4ff00",
+                    darker: "#7fff00",
+                    darkest: "#4dff00",
+                },
+
+                "app-blue": {
+                    DEFAULT: "#4880ee",
+                    1: "#5c8cff",
+                    2: "#6f9eff",
+                    3: "#82afff",
+                    4: "#95bfff",
+                    5: "#a8d0ff",
+                    6: "#bbf0ff",
+                    "darker-1": "#3c6fd6",
+                },
+
+                "app-bg": {
+                    DEFAULT: "var(--app-bg)",
+                    1: "var(--app-bg-1)",
+                    2: "var(--app-bg-2)",
+                    3: "var(--app-bg-3)",
+                    4: "var(--app-bg-4)",
+                    5: "var(--app-bg-5)",
+                    6: "var(--app-bg-6)",
+                },
+
+                "app-font": {
+                    DEFAULT: "var(--app-font)",
+                    1: "var(--app-font-1)",
+                    2: "var(--app-font-2)",
+                    3: "var(--app-font-3)",
+                    4: "var(--app-font-4)",
+                    5: "var(--app-font-5)",
+                    6: "var(--app-font-6)",
+                },
+
+                "app-inverted-font": {
+                    DEFAULT: "var(--app-inverted-font)",
+                    1: "var(--app-inverted-font-1)",
+                    2: "var(--app-inverted-font-2)",
+                    3: "var(--app-inverted-font-3)",
+                },
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -95,11 +123,15 @@ const config = {
                     from: { rotate: "0deg" },
                     to: { rotate: "180deg" },
                 },
+                "spin-360": {
+                    from: { rotate: "0deg" },
+                    to: { rotate: "360deg" },
+                },
                 "show-task": {
                     from: {
                         opacity: "0",
                         filter: "blur(5px)",
-                        transform: "translateX(-100%)",
+                        transform: "translateX(100%)",
                     },
                     to: {
                         opacity: "1",
@@ -121,6 +153,7 @@ const config = {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
                 "spin-180": "spin-180 0.6s ease-in-out",
+                "spin-360-slow": "spin-360 3.6s ease-in-out infinite",
                 "show-task": "show-task 0.6s ease-in-out forwards",
                 "page-enter": "page-enter 0.6s ease-in-out forwards",
                 "custom-pulse": "custom-pulse 1s ease-in-out infinite",

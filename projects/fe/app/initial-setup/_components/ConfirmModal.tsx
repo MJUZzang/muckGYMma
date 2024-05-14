@@ -12,11 +12,8 @@ function ConfirmModal({ isVisible, onClose }: ConfirmModalProps) {
                 !isVisible && "hidden"
             }`}
         >
-
-            {/* 모달 박스 */}
-            <div className="flex flex-col justify-center items-center bg-white/15 mx-auto w-[45vw] h-fit bg-stone-900 border-white p-2 rounded-3xl text-center
-                px-4 py-6">
-                <p className="text-white/90 pb-10 text-base sm:text-xl md:text-2xl">
+            <div className="mx-auto w-[50vw] bg-stone-900 border-white p-2 rounded-3xl">
+                <p className="text-app-font-2">
                     모든 정보를 올바르게 입력해주세요.
                 </p>
                 <button

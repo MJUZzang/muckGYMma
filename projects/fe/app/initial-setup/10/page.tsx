@@ -31,7 +31,7 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="text-white/90 h-full flex flex-col animate-page-enter">
+        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl text-pretty">자주하는 운동이 있나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다
@@ -57,7 +57,7 @@ function Page() {
                         transition-all cursor-pointer
                         ${
                             selectedWorkouts.includes(sport)
-                                ? "bg-fluorescent text-black"
+                                ? "bg-app-blue text-black"
                                 : "bg-white/15"
                         }`}
                     >
@@ -80,7 +80,7 @@ function Page() {
                 title="다음"
                 className={`mt-10 ${
                     selectedWorkouts.length === 0 &&
-                    "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
+                    "bg-app-blue/75 text-black/80 hover:bg-app-blue/90"
                 }`}
             />
 

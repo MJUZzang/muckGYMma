@@ -14,8 +14,24 @@ import { formatTime } from "@/plan/_utils/time";
 
 const times = [
     {
+        title: "0:10",
+        value: 10,
+    },
+    {
+        title: "0:20",
+        value: 20,
+    },
+    {
         title: "0:30",
         value: 30,
+    },
+    {
+        title: "0:40",
+        value: 40,
+    },
+    {
+        title: "0:50",
+        value: 50,
     },
     {
         title: "1:00",
@@ -91,7 +107,7 @@ function RestTimer({
             <DrawerTrigger>{children}</DrawerTrigger>
             <DrawerContent className="h-fit bg-[#181818] border-none focus:outline-none">
                 <DrawerHeader>
-                    <DrawerTitle className="text-white/90 ">
+                    <DrawerTitle className="text-app-font-2 ">
                         <p className="text-xl">휴식 타이머</p>
                         {/* <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424]" /> */}
                     </DrawerTitle>
@@ -101,13 +117,13 @@ function RestTimer({
                 </DrawerHeader>
                 x
                 <div className="h-fit flex flex-col pb-4">
-                    <div className="ml-3 px-1 flex gap-2 text-white/90 text-base md:text-lg overflow-y-auto pb-2">
+                    <div className="ml-3 px-1 flex gap-2 text-app-font-2 text-base md:text-lg overflow-y-auto pb-2">
                         {times.map((time, i) => (
                             <div
                                 key={i}
-                                className={`rounded-full  backdrop-blur-xl px-3 md:px-5 mt-1 py-1 md:py-3 ${
+                                className={`rounded-full cursor-pointer backdrop-blur-xl px-3 md:px-5 mt-1 py-1 md:py-3 ${
                                     selectedTime === i
-                                        ? "bg-black/80 ring-[1.5px] ring-fluorescent text-fluorescent"
+                                        ? "bg-black/80 ring-[1.5px] ring-app-blue text-app-blue"
                                         : "bg-slate-800/80"
                                 }`}
                                 onClick={() => {
@@ -140,50 +156,67 @@ function RestTimer({
                             }}
                         >
                             <div
-                                className="text-[54px] md:text-[70px] m-2 text-white/90 flex justify-center items-center w-[30dvh] h-[30dvh]
+                                className="text-[54px] md:text-[70px] m-2 text-app-font-2 flex justify-center items-center w-[30dvh] h-[30dvh]
                                     bg-black rounded-full"
                             >
                                 {formatTime(time)}
                             </div>
                         </div>
 
-                        <div className="flex justify-center gap-10 text-white/90 text-base md:text-2xl mt-4">
+                        <div className="flex justify-center gap-10 text-app-font-2 text-base md:text-2xl mt-4">
                             <div
-                                className="bg-slate-800/80 px-6 py-3 rounded-2xl"
+                                className="bg-slate-800/80 px-6 py-3 rounded-2xl cursor-pointer"
                                 onClick={() => {
-                                    localStorage.setItem(
-                                        "restTime",
-                                        (time - 10).toString()
-                                    );
-                                    localStorage.setItem("timeIndex", "-1");
+                                    if (time === 0) {
+                                        return;
+                                    }
 
                                     const changedTime = time - 10;
-                                    setTime(changedTime);
-                                    setSelectedTime(
-                                        changedTime % 30 === 0
-                                            ? changedTime / 30 - 1
-                                            : -1
+                                    localStorage.setItem(
+                                        "restTime",
+                                        changedTime.toString()
                                     );
+
+                                    setTime(changedTime);
+
+                                    let changedTimeIndex = -1;
+                                    for (let i = 0; i < times.length; i++) {
+                                        if (times[i].value === changedTime) {
+                                            changedTimeIndex = i;
+                                            break;
+                                        }
+                                    }
+                                    localStorage.setItem(
+                                        "timeIndex",
+                                        `${changedTimeIndex}`
+                                    );
+                                    setSelectedTime(changedTimeIndex);
                                 }}
                             >
                                 -10초
                             </div>
                             <div
-                                className="bg-slate-800/80 px-6 py-3 rounded-2xl"
+                                className="bg-slate-800/80 px-6 py-3 rounded-2xl cursor-pointer"
                                 onClick={() => {
+                                    const changedTime = time + 10;
                                     localStorage.setItem(
                                         "restTime",
-                                        (time + 10).toString()
+                                        changedTime.toString()
                                     );
-                                    localStorage.setItem("timeIndex", "-1");
-
-                                    const changedTime = time + 10;
                                     setTime(changedTime);
-                                    setSelectedTime(
-                                        changedTime % 30 === 0
-                                            ? changedTime / 30 - 1
-                                            : -1
+
+                                    let changedTimeIndex = -1;
+                                    for (let i = 0; i < times.length; i++) {
+                                        if (times[i].value === changedTime) {
+                                            changedTimeIndex = i;
+                                            break;
+                                        }
+                                    }
+                                    localStorage.setItem(
+                                        "timeIndex",
+                                        `${changedTimeIndex}`
                                     );
+                                    setSelectedTime(changedTimeIndex);
                                 }}
                             >
                                 +10초
@@ -195,8 +228,8 @@ function RestTimer({
                         <Button
                             className={`text-base md:text-2xl py-3 w-fit ${
                                 time === 0
-                                    ? "bg-slate-800 text-white/90"
-                                    : "bg-fluorescent"
+                                    ? "bg-slate-800 text-app-font-2"
+                                    : "bg-app-blue"
                             }`}
                             onClick={() => {
                                 setIsRunning(!isRunning);

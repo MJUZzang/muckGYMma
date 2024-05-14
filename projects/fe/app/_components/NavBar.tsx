@@ -8,6 +8,9 @@ import Workout from "@/_images/Workout";
 import Forum from "@/_images/Forum";
 import { usePathname } from "next/navigation";
 import FoodPicture from "@/_components/FoodPicture";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
 const excepts = ["/initial-setup", "/plan-info", "/food-info", "/plan"];
 
@@ -28,14 +31,19 @@ const NavBar = () => {
 
     return (
         <>
-            <div className={`pb-[95px] ${!isVisible && "hidden"}`} />
+            <div
+                className={`pb-[85px] ${!isVisible && "hidden"} ${
+                    pathname.startsWith("/community") && "bg-app-bg-1"
+                }`}
+            />
             <div
                 className={`absolute max-h-[100dvh] h-full ${
                     !isVisible && "hidden"
                 }`}
             >
                 <div
-                    className={`fixed bg-white/90 bottom-0 w-full flex border-t-[0.1px] border-t-gray-700 h-[65px] pb-4 justify-between items-center`}
+                    className={`fixed bg-app-bg bottom-0 w-full flex boxshadow h-[65px] pb-4 justify-between items-center
+                    shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)]`}
                 >
                     <Link
                         href="/workout"
@@ -45,11 +53,20 @@ const NavBar = () => {
                             isActive={pathname.includes("/workout")}
                             className={`${
                                 pathname === "/workout"
-                                    ? "fill-turkish"
-                                    : "fill-gray-500"
+                                    ? "fill-app-blue"
+                                    : "fill-gray-600"
                             }`}
                         />
-                        <p className="text-black/90/90 text-[0.6rem]">운동</p>
+                        <p
+                            className={`text-[0.6rem] ${
+                                pathname === "/workout"
+                                    ? "text-app-blue"
+                                    : "text-gray-600"
+                            }
+                            ${notoSansKr.className}`}
+                        >
+                            운동
+                        </p>
                     </Link>
 
                     <Link
@@ -59,15 +76,24 @@ const NavBar = () => {
                         <Analysis
                             className={`${
                                 pathname === "/analysis"
-                                    ? "fill-turkish stroke-turkish"
-                                    : "fill-none stroke-gray-400"
+                                    ? "fill-app-blue stroke-app-blue"
+                                    : "fill-none stroke-gray-600"
                             }`}
                         />
-                        <p className="text-black/90/90 text-[0.6rem]">그래프</p>
+                        <p
+                            className={`text-[0.6rem] ${
+                                pathname === "/analysis"
+                                    ? "text-app-blue"
+                                    : "text-gray-600"
+                            }
+                            ${notoSansKr.className}`}
+                        >
+                            내 기록
+                        </p>
                     </Link>
 
-                    <div className="bg-turkish-dark p-3 rounded-full relative bottom-5 cursor-pointer">
-                        <FoodPicture className="fill-turkish-lighter" />
+                    <div className="bg-app-blue p-3 rounded-full relative bottom-5 cursor-pointer">
+                        <FoodPicture className="fill-app-bg" />
                     </div>
 
                     <Link
@@ -78,11 +104,21 @@ const NavBar = () => {
                             isActive={pathname === "/community/following"}
                             className={`${
                                 pathname === "/community/following"
-                                    ? "fill-turkish"
-                                    : "fill-gray-400"
+                                    ? "fill-app-blue"
+                                    : "fill-gray-600"
                             }`}
+                            dotsColor="fill-app-bg"
                         />
-                        <p className="text-black/90/90 text-[0.6rem]">커뮤니티</p>
+                        <p
+                            className={`text-[0.6rem] ${
+                                pathname === "/community/following"
+                                    ? "text-app-blue"
+                                    : "text-gray-600"
+                            } 
+                            ${notoSansKr.className}`}
+                        >
+                            커뮤니티
+                        </p>
                     </Link>
 
                     <Link
@@ -93,11 +129,20 @@ const NavBar = () => {
                             isActive={pathname.includes("/profile/")}
                             className={`${
                                 pathname.includes("/profile/")
-                                    ? "fill-turkish"
-                                    : "fill-gray-400"
+                                    ? "fill-app-blue"
+                                    : "fill-gray-600/75"
                             }`}
                         />
-                        <p className="text-black/90/90 text-[0.6rem]">프로필</p>
+                        <p
+                            className={`text-[0.6rem] ${
+                                pathname.includes("/profile")
+                                    ? "text-app-blue"
+                                    : "text-gray-600"
+                            }
+                            ${notoSansKr.className}`}
+                        >
+                            프로필
+                        </p>
                     </Link>
                 </div>
             </div>

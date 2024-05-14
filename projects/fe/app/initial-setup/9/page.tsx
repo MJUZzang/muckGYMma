@@ -46,7 +46,7 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="text-white/90 h-full flex flex-col animate-page-enter">
+        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
             <p className="mt-5 text-xl text-pretty">
                 자주 즐기는 스포츠가 있나요?
             </p>
@@ -71,7 +71,7 @@ function Page() {
                         transition-all cursor-pointer
                         ${
                             selectedSports.includes(sport)
-                                ? "bg-fluorescent text-black"
+                                ? "bg-app-blue text-black"
                                 : "bg-white/15"
                         }`}
                     >
@@ -94,7 +94,7 @@ function Page() {
                 title="다음"
                 className={`mt-10 ${
                     selectedSports.length === 0 &&
-                    "bg-fluorescent/75 text-black/80 hover:bg-fluorescent/90"
+                    "bg-app-blue/75 text-black/80 hover:bg-app-blue/90"
                 }`}
             />
 

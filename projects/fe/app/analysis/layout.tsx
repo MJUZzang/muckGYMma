@@ -5,7 +5,7 @@ const layout: React.FC<{
     children: React.ReactNode;
 }> = (props) => {
     return (
-        <div className="max-w-[935px] mx-auto w-full">
+        <div className="max-w-[835px] mx-auto w-full">
             {/* Header */}
             <div className="flex items-center">
                 <LogoAndTitle />

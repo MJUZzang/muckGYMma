@@ -64,7 +64,7 @@ function ConfirmModal({
             .then((data: PredictResult) => {
                 console.log(data);
                 dispatch(setPredictResult(data));
-                router.push("/prediction/result")
+                router.push("/prediction/result");
             })
             .catch((err) => console.error(err));
     };
@@ -78,7 +78,7 @@ function ConfirmModal({
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="bg-black/90 rounded-xl w-full py-6 flex flex-col">
-                    <p className="block text-center text-xl text-fluorescent">
+                    <p className="block text-center text-xl text-app-blue">
                         {title}
                     </p>
 
@@ -123,7 +123,7 @@ function ConfirmModal({
 
                     <div className="mt-auto flex justify-center gap-5">
                         <button
-                            className="bg-fluorescent px-5 py-2 rounded-lg font-bold"
+                            className="bg-app-blue px-5 py-2 rounded-lg font-bold"
                             onClick={handleOkClicked}
                         >
                             분석하기

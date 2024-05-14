@@ -53,10 +53,10 @@ function Page() {
 
     function GetPlanStyle(order: number) {
         if (order === selectedSet) {
-            return "bg-slate-700 border-2 border-fluorescent/50 text-white";
+            return "bg-slate-700 border-2 border-app-blue/50 text-white";
         }
         if (order < selectedSet) {
-            return "bg-fluorescent/20 text-fluorescent/80";
+            return "bg-app-blue/20 text-app-blue/80";
         } else {
             return "bg-slate-700 text-white/50";
         }
@@ -73,7 +73,7 @@ function Page() {
                 {/* Timer */}
                 <div
                     className="flex items-center justify-between gap-2 mx-auto w-[119px] h-[35px] my-auto
-                        rounded-full border-fluorescent border-[1.5px] px-2"
+                        rounded-full border-app-blue border-[1.5px] px-2"
                     onClick={() => {
                         if (timerIntervalId === null) {
                             const intervalId = setInterval(() => {
@@ -87,10 +87,10 @@ function Page() {
                     }}
                 >
                     {/* Dot */}
-                    <div className="rounded-full w-[5px] h-[5px] animate-custom-pulse bg-fluorescent" />
+                    <div className="rounded-full w-[5px] h-[5px] animate-custom-pulse bg-app-blue" />
 
                     {/* Timer */}
-                    <p className="text-white/90 text-sm">
+                    <p className="text-app-font-2 text-sm">
                         {formatTimeHour(timerTime)}
                     </p>
 
@@ -119,7 +119,7 @@ function Page() {
             <p className="text-white/60 text-sm">1 / 6</p>
 
             {/* Workout name */}
-            <p className="text-white/90 text-2xl mt-3">{workout.name}</p>
+            <p className="text-app-font-2 text-2xl mt-3">{workout.name}</p>
 
             <div className="flex flex-col gap-2 mt-3">
                 {Array.from({ length: workout.set }).map((set, idx) => (
@@ -187,7 +187,7 @@ function Page() {
                 >
                     <Button
                         ref={restTimerButtonRef}
-                        className="px-3 bg-slate-500 text-fluorescent"
+                        className="px-3 bg-slate-500 text-app-blue"
                         onClick={() => {
                             const savedRestTime =
                                 localStorage.getItem("restTime");
