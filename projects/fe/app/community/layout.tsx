@@ -36,7 +36,7 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
             <div className="flex flex-col border-b-[1px] border-b-gray-300 px-3">
                 <div className="mt-3 max-w-[935px] mx-auto w-full">
                     <p
-                        className={`text-app-font-3 text-2xl font-semibold ${dosis.className}`}
+                        className={`text-app-font-4 text-2xl font-semibold ${dosis.className}`}
                     >
                         Community
                     </p>

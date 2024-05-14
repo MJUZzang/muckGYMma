@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect } from "react";
-import LogoAndTitle from "@/_components/LogoAndTitle";
-import Settings from "@/profile/_images/Settings";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 import FoodPicture from "@/_components/FoodPicture";
@@ -12,6 +10,9 @@ import ForkKnife from "@/profile/_components/ForkKnife";
 import Analytics from "@/profile/_components/Analytics";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
 const Page = ({
     children,
@@ -25,8 +26,8 @@ const Page = ({
             <div className="mx-auto max-w-[935px] flex items-center justify-between px-3 mt-2 lg:mt-4 mb-4">
                 {/* User name */}
                 <div className="flex items-center gap-1">
-                    <Hash strokeColor="#cccccc" size={21} />
-                    <p className="text-[#dddddd] text-lg md:text-xl lg:text-2xl font-bold">
+                    <Hash className="stroke-app-font-4" size={21} />
+                    <p className="text-app-font-4 text-lg md:text-xl lg:text-2xl font-bold">
                         jeheecheon
                     </p>
                 </div>
@@ -67,7 +68,9 @@ const Page = ({
                     </div>
 
                     <div className="flex flex-col w-full gap-2 text-sm">
-                        <div className="flex text-app-font-2 justify-between w-full">
+                        <div
+                            className={`flex text-app-font-2 justify-between w-full ${notoSansKr.className}`}
+                        >
                             <div className="w-full flex flex-col items-center">
                                 <p>6</p>
                                 <p className="font-semibold">게시글</p>
@@ -98,10 +101,10 @@ const Page = ({
                     </div>
                 </div>
 
-                <div className="mx-4 mt-5">
-                    <p className="text-white">jeheecheon</p>
-                    <p className="text-white">🇰🇷</p>
-                    <p className="text-white">🔗 www.jeheecheon.com</p>
+                <div className="mx-4 mt-5 text-app-font-2">
+                    <p>jeheecheon</p>
+                    <p>🇰🇷</p>
+                    <p>🔗 www.jeheecheon.com</p>
                 </div>
 
                 <div className="flex justify-between items-center mt-3">
@@ -114,11 +117,10 @@ const Page = ({
                         href="/profile/posts"
                     >
                         <Grid
-                            className={`w-full`}
-                            color={`${
+                            className={`w-full ${
                                 pathname.includes("/profile/posts")
-                                    ? "white"
-                                    : "#aaaaaa"
+                                    ? "fill-app-"
+                                    : "fill-app-interted-font-3"
                             }`}
                             size={33}
                         />
