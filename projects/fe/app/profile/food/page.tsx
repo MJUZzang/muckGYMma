@@ -70,7 +70,9 @@ function Page() {
                         <Image src={meal.image} alt="Pooh" className="h-full" />
                     </div>
 
-                    <div className={`py-[6px] w-full flex flex-col justify-start`}>
+                    <div
+                        className={`py-[6px] w-full flex flex-col justify-start`}
+                    >
                         <p
                             className={`text-app-font-2 text-lg ${notoSansKr.className}`}
                         >
