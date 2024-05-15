@@ -12,6 +12,12 @@ import {
 } from "../../../lib/slices/initialInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
+
 function Page() {
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -19,7 +25,7 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
+        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
             <p className="mt-5 text-xl text-pretty">
                 체중/신장과 생년월일을 알려주세요!
             </p>
@@ -39,8 +45,8 @@ function Page() {
                                 )
                             );
                         }}
-                        className="bg-white/15 rounded-lg py-1 pr-3 w-[150px] text-center
-                        focus:outline-1 focus:outline-app-blue-lightest"
+                        className="bg-app-bg-1 rounded-lg py-1 pr-3 w-[150px] text-center
+                            focus:outline-1 focus:outline-app-blue-1"
                     />
                 </label>
                 <label className="flex justify-between mt-5">
@@ -53,10 +59,10 @@ function Page() {
                                     setWeight(parseInt(e.currentTarget.value))
                                 );
                             }}
-                            className="bg-white/15 rounded-lg py-1 pr-3 w-[110px] text-center
-                            focus:outline-1 focus:outline-app-blue-lightest"
+                            className="bg-app-bg-1 rounded-lg py-1 pr-3 w-[110px] text-center
+                            focus:outline-1 focus:outline-app-blue-1 peer"
                         />
-                        <p className="relative text-red z-[50] right-3 bottom-[27px]">
+                        <p className="relative z-[50] right-5 bottom-[27px] peer-focus:opacity-0 transition-opacity duration-500">
                             kg
                         </p>
                     </div>
@@ -71,10 +77,10 @@ function Page() {
                                     setHeight(parseInt(e.currentTarget.value))
                                 );
                             }}
-                            className="bg-white/15 rounded-lg py-1 pr-3 w-[110px] text-center
-                            focus:outline-1 focus:outline-app-blue-lightest"
+                            className="bg-app-bg-1 rounded-lg py-1 pr-3 w-[110px] text-center
+                            focus:outline-1 focus:outline-app-blue-1 peer"
                         />
-                        <p className="relative text-red z-[50] right-3 bottom-[27px]">
+                        <p className="relative z-[50] right-5 bottom-[27px] peer-focus:opacity-0 transition-opacity duration-500">
                             cm
                         </p>
                     </div>
@@ -100,7 +106,7 @@ function Page() {
                     (!initialInfo.physicalSetting.birth ||
                         !initialInfo.physicalSetting.weight ||
                         !initialInfo.physicalSetting.height) &&
-                    "bg-app-blue/75 text-black/80 hover:bg-app-blue/90"
+                    "bg-app-blue/65 text-app-inverted-font hover:bg-app-blue/90"
                 }`}
             />
 

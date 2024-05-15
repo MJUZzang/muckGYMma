@@ -7,6 +7,12 @@ import { useAppDispatch } from "@/../lib/hooks";
 import { setExercises } from "../../../lib/slices/initialInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
+
 const workouts = [
     "벤치프레스",
     "스쿼트",
@@ -31,7 +37,7 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
+        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
             <p className="mt-5 text-xl text-pretty">자주하는 운동이 있나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다
@@ -53,12 +59,12 @@ function Page() {
                                 ]);
                             }
                         }}
-                        className={`px-2 py-1 rounded-full font-bold 
+                        className={`px-3 py-2 rounded-full text-sm font-semibold 
                         transition-all cursor-pointer
                         ${
                             selectedWorkouts.includes(sport)
-                                ? "bg-app-blue text-black"
-                                : "bg-white/15"
+                                ? "bg-app-blue text-app-inverted-font"
+                                : "bg-app-bg-1 text-app-font-2"
                         }`}
                     >
                         {sport}
@@ -80,7 +86,7 @@ function Page() {
                 title="다음"
                 className={`mt-10 ${
                     selectedWorkouts.length === 0 &&
-                    "bg-app-blue/75 text-black/80 hover:bg-app-blue/90"
+                    "bg-app-blue/75 text-app-inverted-font hover:bg-app-blue/90"
                 }`}
             />
 

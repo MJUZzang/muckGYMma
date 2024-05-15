@@ -8,6 +8,12 @@ import { selectInitialInfo } from "../../../lib/slices/initialInfoSlice";
 import { useAppSelector } from "../../../lib/hooks";
 import { backendUrl } from "@/_utils/urls";
 
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
+
 const words = "초기 설정을 마쳤어요! 건강한 습관을 만들기 위해 함께 노력해요!";
 
 function Page() {
@@ -35,7 +41,7 @@ function Page() {
     }, []);
 
     return (
-        <div className="flex flex-col h-full animate-page-enter">
+        <div className={`flex flex-col h-full animate-page-enter ${notoSansKr.className}`}>
             <p className="mt-5 inline-block text-app-font-2 text-2xl leading-9">
                 {text}
             </p>

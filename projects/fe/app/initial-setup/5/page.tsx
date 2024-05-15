@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
 import { setGoal } from "../../../lib/slices/initialInfoSlice";
 
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
+
 const goals = [
     {
         title: "근비대",
@@ -26,7 +32,7 @@ function Page() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
+        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
             <p className="mt-5 text-xl">운동 목적이 무엇인가요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다
@@ -36,12 +42,12 @@ function Page() {
                 {goals.map((goal, idx) => (
                     <div
                         key={idx}
-                        className={`flex items-center gap-7 p-4 backdrop-blur-lg rounded-xl font-bold 
+                        className={`flex items-center gap-7 p-4 backdrop-blur-lg rounded-xl font-semibold cursor-pointer
                         transition-all duration-500
                         ${
                             selectedGoal === idx
-                                ? "bg-app-blue text-black"
-                                : "bg-white/15"
+                                ? "bg-app-blue text-app-inverted-font"
+                                : "bg-app-bg-1"
                         }`}
                         onClick={() => {
                             setSelectedGoal(idx);

@@ -4,6 +4,11 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
 import { setLevel } from "../../../lib/slices/initialInfoSlice";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
 
 const levels = [
     {
@@ -30,7 +35,7 @@ function Page() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="text-app-font-2 flex flex-col h-full mt-auto animate-page-enter">
+        <div className={`text-app-font-2 flex flex-col h-full mt-auto animate-page-enter ${notoSansKr.className}`}>
             <p className="mt-5 text-xl">운동을 얼마나 잘하시나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 구성을 위한 질문이며 공유되지 않습니다
@@ -40,23 +45,23 @@ function Page() {
                 {levels.map((level, idx) => (
                     <div
                         key={idx}
-                        className={`flex items-center gap-7 p-4 backdrop-blur-lg rounded-xl font-bold 
+                        className={`flex items-center gap-7 p-4 rounded-xl cursor-pointer
                         transition-all duration-500
                         ${
                             selectedLevel === idx
-                                ? "bg-app-blue text-black"
-                                : "bg-white/15"
+                                ? "bg-app-blue text-app-inverted-font"
+                                : "bg-app-bg-1"
                         }`}
                         onClick={() => {
                             setSelectedLevel(idx);
                             dispatch(setLevel(level.title));
                             setTimeout(() => {
                                 router.push("/initial-setup/4");
-                            }, 500);
+                            }, 700);
                         }}
                     >
-                        <p>{level.title}</p>
-                        <p className="text-xs">{level.description}</p>
+                        <p className="text-base font-bold">{level.title}</p>
+                        <p className="text-xs font-medium">{level.description}</p>
                     </div>
                 ))}
             </div>

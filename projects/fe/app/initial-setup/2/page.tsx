@@ -4,6 +4,11 @@ import React, { useEffect } from "react";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import ShyCat from "@/initial-setup/2/_images/ShyCat";
 import { useRouter } from "next/navigation";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
 
 const welcomingWords =
     "주인님의 취향에 맞는 운동 플랜을 추천해드리기 위해 몇가지 질문을 드릴게요!";
@@ -33,7 +38,7 @@ function Page() {
 
     return (
         <div className="flex flex-col h-full animate-page-enter">
-            <p className="mt-5 inline-block text-app-font-2 text-2xl leading-9">
+            <p className={`mt-5 inline-block text-app-font-2 text-2xl leading-9 ${notoSansKr.className}`}>
                 {welcomingText}
             </p>
             <div className="space-y-10 mt-auto">

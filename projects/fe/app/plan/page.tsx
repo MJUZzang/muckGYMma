@@ -20,6 +20,11 @@ import {
     setSelectedWorkout,
 } from "@/../lib/slices/planInfoSlice";
 import { formatTimeHour } from "@/plan/_utils/time";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
 
 function Page() {
     const router = useRouter();
@@ -53,167 +58,186 @@ function Page() {
 
     function GetPlanStyle(order: number) {
         if (order === selectedSet) {
-            return "bg-slate-700 border-2 border-app-blue/50 text-white";
+            return "bg-app-blue scale-[101.5%]";
         }
         if (order < selectedSet) {
-            return "bg-app-blue/20 text-app-blue/80";
+            return "bg-app-blue";
         } else {
-            return "bg-slate-700 text-white/50";
+            return "bg-slate-700";
         }
     }
 
     return (
-        <div className="py-3 mx-2 flex flex-col min-h-[100dvh] animate-page-enter">
-            <div className="grid grid-cols-3">
-                <ArrowBack
-                    className="fill-white/80 cursor-pointer my-auto"
-                    onClick={() => router.back()}
-                />
-
-                {/* Timer */}
-                <div
-                    className="flex items-center justify-between gap-2 mx-auto w-[119px] h-[35px] my-auto
-                        rounded-full border-app-blue border-[1.5px] px-2"
-                    onClick={() => {
-                        if (timerIntervalId === null) {
-                            const intervalId = setInterval(() => {
-                                setTimerTime((prev) => prev + 1);
-                            }, 1000);
-                            setTimerIntervalId(intervalId);
-                        } else {
-                            setTimerIntervalId(null);
-                            clearInterval(timerIntervalId);
-                        }
-                    }}
-                >
-                    {/* Dot */}
-                    <div className="rounded-full w-[5px] h-[5px] animate-custom-pulse bg-app-blue" />
+        <>
+            <div
+                className={`pt-3 pb-[65px] mx-2 flex flex-col min-h-[100dvh] animate-page-enter ${notoSansKr.className}`}
+            >
+                <div className="grid grid-cols-3">
+                    <ArrowBack
+                        className="fill-app-font-2 cursor-pointer my-auto"
+                        onClick={() => router.back()}
+                    />
 
                     {/* Timer */}
-                    <p className="text-app-font-2 text-sm">
-                        {formatTimeHour(timerTime)}
-                    </p>
-
-                    {/* Pause image */}
-                    <Pause
-                        className={`${timerIntervalId === null && "hidden"}`}
-                    />
-                    <Play
-                        className={`${timerIntervalId !== null && "hidden"}`}
-                    />
-                </div>
-
-                {/* Avatar */}
-                <div className="w-full flex justify-end">
-                    <div className="w-[48px] h-[48px] overflow-clip rounded-3xl ">
-                        <Image
-                            src={exampleImage}
-                            alt="avatar"
-                            className="w-full"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Progress */}
-            <p className="text-white/60 text-sm">1 / 6</p>
-
-            {/* Workout name */}
-            <p className="text-app-font-2 text-2xl mt-3">{workout.name}</p>
-
-            <div className="flex flex-col gap-2 mt-3">
-                {Array.from({ length: workout.set }).map((set, idx) => (
                     <div
-                        key={idx}
-                        className={`grid grid-cols-3 py-4 px-3 rounded-xl transition-all duration-1000
-                        ${GetPlanStyle(idx)}`}
-                    >
-                        <p className={`w-full text-left my-auto`}>
-                            {idx + 1} 세트
-                        </p>
-
-                        <div>
-                            <p className={`w-full text-right`}>
-                                {workout.repeatation} 회
-                            </p>
-                            {workout.weight && (
-                                <p className={`w-full text-right`}>
-                                    {workout.weight} kg
-                                </p>
-                            )}
-                        </div>
-
-                        <div
-                            className={`w-full my-auto transition-opacity duration-1000 ${
-                                idx >= selectedSet && "opacity-0"
-                            }`}
-                        >
-                            <CheckMark className="ml-auto " color="#dfff32" />
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <div className="flex gap-3 mt-auto">
-                <RestTimer
-                    key={workout.name}
-                    time={restTime}
-                    setTime={setRestTime}
-                    onClose={() => {
-                        // 모든 세트 완료시 /plan-info 페이지로 이동
-                        if (selectedSet === workout.set) {
-                            dispatch(markWorkoutAsCompleted(selectedWorkout));
-                            dispatch(
-                                setCompletionTime({
-                                    workoutIndex: selectedWorkout,
-                                    completionTime: timerTime,
-                                })
-                            );
-
-                            // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
-                            for (let i = 0; i < planInfo.workouts.length; i++) {
-                                if (
-                                    !planInfo.workouts[i].isCompleted &&
-                                    i !== selectedWorkout
-                                ) {
-                                    dispatch(setSelectedWorkout(i));
-                                    break;
-                                }
-                            }
-
-                            router.push("/plan-info");
-                        }
-                    }}
-                >
-                    <Button
-                        ref={restTimerButtonRef}
-                        className="px-3 bg-slate-500 text-app-blue"
+                        className="flex items-center justify-between gap-2 mx-auto w-[119px] h-[35px] my-auto
+                        rounded-full border-app-blue border-[1.5px] px-2"
                         onClick={() => {
-                            const savedRestTime =
-                                localStorage.getItem("restTime");
-                            if (savedRestTime) {
-                                const parsedRestTime = parseInt(savedRestTime);
-                                setRestTime(parsedRestTime);
+                            if (timerIntervalId === null) {
+                                const intervalId = setInterval(() => {
+                                    setTimerTime((prev) => prev + 1);
+                                }, 1000);
+                                setTimerIntervalId(intervalId);
                             } else {
-                                setRestTime(30);
+                                setTimerIntervalId(null);
+                                clearInterval(timerIntervalId);
                             }
                         }}
                     >
-                        휴식 타이머
-                    </Button>
-                </RestTimer>
-                <Button
-                    onClick={() => {
-                        if (workout.set > selectedSet) {
-                            setSelectedSet(selectedSet + 1);
-                        }
-                        restTimerButtonRef.current?.click();
-                    }}
-                >
-                    세트 완료
-                </Button>
+                        {/* Dot */}
+                        <div className="rounded-full w-[5px] h-[5px] animate-custom-pulse bg-app-blue" />
+
+                        {/* Timer */}
+                        <p className="text-app-font-2 text-sm">
+                            {formatTimeHour(timerTime)}
+                        </p>
+
+                        {/* Pause image */}
+                        <Pause
+                            className={`fill-app-blue-1 ${
+                                timerIntervalId === null && "hidden"
+                            }`}
+                        />
+                        <Play
+                            className={`${
+                                timerIntervalId !== null && "hidden"
+                            }`}
+                        />
+                    </div>
+
+                    {/* Avatar */}
+                    <div className="w-full flex justify-end">
+                        <div className="w-[48px] h-[48px] overflow-clip rounded-3xl ">
+                            <Image
+                                src={exampleImage}
+                                alt="avatar"
+                                className="w-full"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Progress */}
+                <p className="text-white/60 text-sm">1 / 6</p>
+
+                {/* Workout name */}
+                <p className="text-app-font-2 text-2xl mt-3">{workout.name}</p>
+
+                <div className="flex flex-col gap-3 mt-3">
+                    {Array.from({ length: workout.set }).map((set, idx) => (
+                        <div
+                            key={idx}
+                            className={`shadow-xl grid grid-cols-3 py-4 px-3 rounded-xl transition-all duration-1000
+                        text-app-inverted-font
+                        ${GetPlanStyle(idx)}`}
+                        >
+                            <p className={`w-full text-left my-auto`}>
+                                {idx + 1} 세트
+                            </p>
+
+                            <div>
+                                <p className={`w-full text-right`}>
+                                    {workout.repeatation} 회
+                                </p>
+                                {workout.weight && (
+                                    <p className={`w-full text-right`}>
+                                        {workout.weight} kg
+                                    </p>
+                                )}
+                            </div>
+
+                            <div
+                                className={`w-full my-auto transition-opacity duration-1000 ${
+                                    idx >= selectedSet && "opacity-0"
+                                }`}
+                            >
+                                <CheckMark
+                                    className="ml-auto "
+                                    color="#dfff32"
+                                />
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
+
+            <div className="bg-app-bg shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)] fixed bottom-0 w-full pt-2 pb-3 px-3 flex gap-3 mt-auto">
+                    <RestTimer
+                        key={workout.name}
+                        time={restTime}
+                        setTime={setRestTime}
+                        onClose={() => {
+                            // 모든 세트 완료시 /plan-info 페이지로 이동
+                            if (selectedSet === workout.set) {
+                                dispatch(
+                                    markWorkoutAsCompleted(selectedWorkout)
+                                );
+                                dispatch(
+                                    setCompletionTime({
+                                        workoutIndex: selectedWorkout,
+                                        completionTime: timerTime,
+                                    })
+                                );
+
+                                // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
+                                for (
+                                    let i = 0;
+                                    i < planInfo.workouts.length;
+                                    i++
+                                ) {
+                                    if (
+                                        !planInfo.workouts[i].isCompleted &&
+                                        i !== selectedWorkout
+                                    ) {
+                                        dispatch(setSelectedWorkout(i));
+                                        break;
+                                    }
+                                }
+
+                                router.push("/plan-info");
+                            }
+                        }}
+                    >
+                        <Button
+                            ref={restTimerButtonRef}
+                            className="px-3 bg-slate-500 text-app-blue"
+                            onClick={() => {
+                                const savedRestTime =
+                                    localStorage.getItem("restTime");
+                                if (savedRestTime) {
+                                    const parsedRestTime =
+                                        parseInt(savedRestTime);
+                                    setRestTime(parsedRestTime);
+                                } else {
+                                    setRestTime(30);
+                                }
+                            }}
+                        >
+                            휴식 타이머
+                        </Button>
+                    </RestTimer>
+                    <Button
+                        onClick={() => {
+                            if (workout.set > selectedSet) {
+                                setSelectedSet(selectedSet + 1);
+                            }
+                            restTimerButtonRef.current?.click();
+                        }}
+                    >
+                        세트 완료
+                    </Button>
+                </div>
+        </>
     );
 }
 

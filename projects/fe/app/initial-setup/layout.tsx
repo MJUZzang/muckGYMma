@@ -4,6 +4,11 @@ import ArrowBack from "@/_images/ArrowBack";
 import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
 
 const pages = [
     {
@@ -91,17 +96,17 @@ function InitialSetupLayout({
             <div>
                 {pageInfo.order !== 0 && (
                     <ArrowBack
-                        className="fill-white/80 absolute cursor-pointer"
+                        className="fill-app-font-3 absolute cursor-pointer"
                         onClick={() => router.back()}
                     />
                 )}
-                <p className="inline-block w-full text-center text-app-font-2">
+                <p className={`inline-block w-full text-center font-semibold text-app-font-3 ${notoSansKr.className}`}>
                     {pageInfo.title}
                 </p>
             </div>
 
             {/* Progress bar */}
-            <div className="h-[5px] rounded-full mt-5 bg-stone-800">
+            <div className="h-[5px] rounded-full mt-5 bg-gray-200">
                 <div
                     className={`transition-all h-full bg-app-blue rounded-full`}
                     style={{

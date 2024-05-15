@@ -10,6 +10,12 @@ import {
 } from "../../../lib/slices/initialInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
+
 const sports = [
     "축구",
     "농구",
@@ -46,7 +52,7 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
+        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
             <p className="mt-5 text-xl text-pretty">
                 자주 즐기는 스포츠가 있나요?
             </p>
@@ -67,12 +73,12 @@ function Page() {
                                 setSelectedSports([...selectedSports, sport]);
                             }
                         }}
-                        className={`px-2 py-1 rounded-full font-bold 
+                        className={`px-3 py-2 rounded-full font-semibold text-sm
                         transition-all cursor-pointer
                         ${
                             selectedSports.includes(sport)
-                                ? "bg-app-blue text-black"
-                                : "bg-white/15"
+                                ? "bg-app-blue text-app-inverted-font"
+                                : "bg-app-bg-1 hover:bg-app-bg-3 hover:shadow-sm transition duration-500 ease-in-out"
                         }`}
                     >
                         {sport}
@@ -94,7 +100,7 @@ function Page() {
                 title="다음"
                 className={`mt-10 ${
                     selectedSports.length === 0 &&
-                    "bg-app-blue/75 text-black/80 hover:bg-app-blue/90"
+                    "bg-app-blue/75 text-app-inverted-font hover:bg-app-blue/90"
                 }`}
             />
 

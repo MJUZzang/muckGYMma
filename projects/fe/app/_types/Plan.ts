@@ -29,7 +29,7 @@ export const dummyPlanInfo: PlanInfo = {
     workouts: [
         {
             name: "벤치프레스",
-            set: 5,
+            set: 7,
             repeatation: 12,
             kcal: 113,
             weight: 60,
@@ -38,7 +38,7 @@ export const dummyPlanInfo: PlanInfo = {
         },
         {
             name: "데드리프트",
-            set: 5,
+            set: 7,
             repeatation: 12,
             kcal: 113,
             weight: 60,

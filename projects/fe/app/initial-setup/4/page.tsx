@@ -5,6 +5,12 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
 import { setFrequency } from "../../../lib/slices/initialInfoSlice";
 
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
+
 const selection = [
     {
         title: "주 1회",
@@ -40,7 +46,7 @@ function Page() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className="text-app-font-2 h-full flex flex-col animate-page-enter">
+        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
             <p className="mt-5 text-xl">운동을 매주 얼마나 자주 하시나요?</p>
             <p className="mt-2 text-xs">이후에도 변경하실 수 있습니다</p>
 
@@ -48,12 +54,12 @@ function Page() {
                 {selection.map((item, idx) => (
                     <div
                         key={idx}
-                        className={`pl-4 text-left py-2 backdrop-blur-lg rounded-xl font-bold 
-                        transition-all text-sm duration-500
+                        className={`pl-4 text-left py-2 backdrop-blur-lg rounded-xl font-semibold cursor-pointer
+                        transition-all text-base duration-500
                          ${
                              selectedFrequency === idx
-                                 ? "bg-app-blue text-black"
-                                 : "bg-white/15"
+                                 ? "bg-app-blue text-app-inverted-font"
+                                 : "bg-app-bg-1"
                          }`}
                         onClick={() => {
                             setSelectedFrequency(idx);
