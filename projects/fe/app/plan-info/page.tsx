@@ -36,12 +36,12 @@ function PlanInfo() {
 
     function GetWorkoutBoxStyle(index: number) {
         if (planInfo.workouts[index].isCompleted) {
-            return "bg-app-blue";
+            return "bg-[#9b93af]";
         }
         if (index === selectedWorkout) {
-            return "bg-app-blue scale-[101.5%]";
+            return "bg-[#666de8] scale-[101.5%]";
         }
-        return "bg-slate-700";
+        return "bg-[#8f95f9]";
     }
 
     return (
@@ -51,7 +51,7 @@ function PlanInfo() {
             >
                 {/* 엑스 버튼 */}
                 <div
-                    className="cursor-pointer mt-5"
+                    className="cursor-pointer mt-7"
                     onClick={() => {
                         router.push("/");
                     }}
@@ -62,7 +62,7 @@ function PlanInfo() {
                     </div>
                 </div>
 
-                <div className="flex flex-col mt-4">
+                <div className="flex flex-col mt-6">
                     <div className="flex items-center gap-3">
                         {/* 운동 아이콘 */}
                         <Muscle className="bg-app-bg-2 rounded-full p-4" />
@@ -82,11 +82,11 @@ function PlanInfo() {
                         </div>
                     </div>
 
-                    <div className="space-y-3 mt-6 group">
+                    <div className="space-y-3 mt-6 group px-2">
                         {planInfo.workouts.map((workout, index) => (
                             <div
                                 key={index}
-                                className={`flex justify-between items-center p-3 rounded-lg transition-all duration-500 ease-in-out
+                                className={`shadow-xl flex justify-between items-center p-3 rounded-lg transition-all duration-500 ease-in-out
                             ${GetWorkoutBoxStyle(index)} ${
                                     !workout.isCompleted && "cursor-pointer"
                                 }`}
@@ -128,10 +128,9 @@ function PlanInfo() {
                                 </div>
                                 <div>
                                     <CheckMark
-                                        className={`text-app-inverted-font/70 ${
+                                        className={`text-app-inverted-font/70 fill-[#dfff32] ${
                                             !workout.isCompleted && "invisible"
                                         }`}
-                                        color="#dfff32"
                                     />
                                 </div>
                             </div>
@@ -146,7 +145,7 @@ function PlanInfo() {
             >
                 <Link href="/plan">
                     <Button
-                        className={`${
+                        className={`bg-blue-800 ${
                             !(
                                 selectedWorkout &&
                                 !planInfo.workouts[selectedWorkout].isCompleted

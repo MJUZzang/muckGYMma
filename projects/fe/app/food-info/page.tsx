@@ -83,7 +83,7 @@ function FoodInfo() {
                 </div>
 
                 <div className="mx-5">
-                    <p className="py-3 text-xl font-semibold">닭갈비, 된장</p>
+                    <p className="py-3 text-xl font-semibold">닭갈비, 소주, 맥주</p>
                     <Image
                         src={img1}
                         alt="food"

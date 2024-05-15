@@ -1,4 +1,4 @@
-import LogoAndTitle from "@/_components/LogoAndTitle";
+import Logo from "@/_components/Logo";
 import React from "react";
 
 function PredictionLayout({
@@ -9,7 +9,7 @@ function PredictionLayout({
     return (
         <>
             <div className="flex items-center">
-                <LogoAndTitle />
+                <Logo />
             </div>
             {children}
         </>

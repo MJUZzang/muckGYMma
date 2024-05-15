@@ -56,16 +56,16 @@ const dosis = Dosis({
 
 function Page() {
     return (
-        <div className="space-y-3">
+        <div className="space-y-3 pt-2">
             {dummyData.map((meal, i) => (
                 <Link
                     key={i}
                     href="/food-info"
-                    className="flex gap-2 cursor-pointer"
+                    className="flex gap-3 cursor-pointer"
                 >
                     <div
-                        className="w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] 
-                        overflow-clip rounded-2xl shrink-0"
+                        className="w-[85px] h-[85px] sm:w-[105px] sm:h-[105px] 
+                        overflow-clip rounded-2xl shrink-0 "
                     >
                         <Image src={meal.image} alt="Pooh" className="h-full" />
                     </div>
@@ -103,7 +103,7 @@ function Page() {
 
                     <div className="ml-auto my-auto">
                         <button
-                            className={`text-nowrap mr-2 bg-app-blue rounded-full px-4 py-2 
+                            className={`text-nowrap mr-3 bg-app-blue rounded-full px-4 py-2 
                                 text-sm text-app-inverted-font
                                 ${notoSansKr.className}`}
                         >

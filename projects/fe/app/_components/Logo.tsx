@@ -9,12 +9,19 @@ const lilitaOne = Lilita_One({
     subsets: ["latin"],
     display: "swap",
 });
-const LogoAndTitle = () => {
+
+interface LogoProps {
+    className?: string;
+}
+
+const Logo = ({
+    className
+}: LogoProps) => {
     return (
         <>
             {/* <Image src={Logo} alt="Logo" width={78} /> */}
             <div
-                className={`flex items-end text-white text-xl ${lilitaOne.className}`}
+                className={`flex items-end text-white text-xl ${lilitaOne.className} ${className}`}
             >
                 <p className="text-app-font-3 text-2xl">muck</p>
                 <p className="text-app-blue text-3xl">GYM</p>
@@ -24,4 +31,4 @@ const LogoAndTitle = () => {
     );
 };
 
-export default LogoAndTitle;
+export default Logo;

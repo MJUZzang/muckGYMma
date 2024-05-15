@@ -58,19 +58,19 @@ function Page() {
 
     function GetPlanStyle(order: number) {
         if (order === selectedSet) {
-            return "bg-app-blue scale-[101.5%]";
+            return "bg-[#666de8] scale-[101.5%]";
         }
         if (order < selectedSet) {
-            return "bg-app-blue";
+            return "bg-[#9b93af]";
         } else {
-            return "bg-slate-700";
+            return "bg-[#8f95f9]";
         }
     }
 
     return (
         <>
             <div
-                className={`pt-3 pb-[65px] mx-2 flex flex-col min-h-[100dvh] animate-page-enter ${notoSansKr.className}`}
+                className={`pt-3 pb-[65px] mx-3 flex flex-col min-h-[100dvh] animate-page-enter ${notoSansKr.className}`}
             >
                 <div className="grid grid-cols-3">
                     <ArrowBack
@@ -133,7 +133,7 @@ function Page() {
                 {/* Workout name */}
                 <p className="text-app-font-2 text-2xl mt-3">{workout.name}</p>
 
-                <div className="flex flex-col gap-3 mt-3">
+                <div className="flex flex-col gap-3 mt-4 px-2">
                     {Array.from({ length: workout.set }).map((set, idx) => (
                         <div
                             key={idx}
@@ -162,8 +162,7 @@ function Page() {
                                 }`}
                             >
                                 <CheckMark
-                                    className="ml-auto "
-                                    color="#dfff32"
+                                    className="ml-auto fill-[#dfff32]"
                                 />
                             </div>
                         </div>
@@ -172,71 +171,65 @@ function Page() {
             </div>
 
             <div className="bg-app-bg shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)] fixed bottom-0 w-full pt-2 pb-3 px-3 flex gap-3 mt-auto">
-                    <RestTimer
-                        key={workout.name}
-                        time={restTime}
-                        setTime={setRestTime}
-                        onClose={() => {
-                            // 모든 세트 완료시 /plan-info 페이지로 이동
-                            if (selectedSet === workout.set) {
-                                dispatch(
-                                    markWorkoutAsCompleted(selectedWorkout)
-                                );
-                                dispatch(
-                                    setCompletionTime({
-                                        workoutIndex: selectedWorkout,
-                                        completionTime: timerTime,
-                                    })
-                                );
+                <RestTimer
+                    key={workout.name}
+                    time={restTime}
+                    setTime={setRestTime}
+                    onClose={() => {
+                        // 모든 세트 완료시 /plan-info 페이지로 이동
+                        if (selectedSet === workout.set) {
+                            dispatch(markWorkoutAsCompleted(selectedWorkout));
+                            dispatch(
+                                setCompletionTime({
+                                    workoutIndex: selectedWorkout,
+                                    completionTime: timerTime,
+                                })
+                            );
 
-                                // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
-                                for (
-                                    let i = 0;
-                                    i < planInfo.workouts.length;
-                                    i++
+                            // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
+                            for (let i = 0; i < planInfo.workouts.length; i++) {
+                                if (
+                                    !planInfo.workouts[i].isCompleted &&
+                                    i !== selectedWorkout
                                 ) {
-                                    if (
-                                        !planInfo.workouts[i].isCompleted &&
-                                        i !== selectedWorkout
-                                    ) {
-                                        dispatch(setSelectedWorkout(i));
-                                        break;
-                                    }
+                                    dispatch(setSelectedWorkout(i));
+                                    break;
                                 }
+                            }
 
-                                router.push("/plan-info");
-                            }
-                        }}
-                    >
-                        <Button
-                            ref={restTimerButtonRef}
-                            className="px-3 bg-slate-500 text-app-blue"
-                            onClick={() => {
-                                const savedRestTime =
-                                    localStorage.getItem("restTime");
-                                if (savedRestTime) {
-                                    const parsedRestTime =
-                                        parseInt(savedRestTime);
-                                    setRestTime(parsedRestTime);
-                                } else {
-                                    setRestTime(30);
-                                }
-                            }}
-                        >
-                            휴식 타이머
-                        </Button>
-                    </RestTimer>
+                            router.push("/plan-info");
+                        }
+                    }}
+                >
                     <Button
+                        ref={restTimerButtonRef}
+                        className="px-3 bg-slate-500 text-app-blue"
                         onClick={() => {
-                            if (workout.set > selectedSet) {
-                                setSelectedSet(selectedSet + 1);
+                            const savedRestTime =
+                                localStorage.getItem("restTime");
+                            if (savedRestTime) {
+                                const parsedRestTime = parseInt(savedRestTime);
+                                setRestTime(parsedRestTime);
+                            } else {
+                                setRestTime(30);
                             }
-                            restTimerButtonRef.current?.click();
                         }}
                     >
-                        세트 완료
+                        휴식 타이머
                     </Button>
-                </div>
+                </RestTimer>
+                <Button
+                    className="bg-blue-800"
+                    onClick={() => {
+                        if (workout.set > selectedSet) {
+                            setSelectedSet(selectedSet + 1);
+                        }
+                        restTimerButtonRef.current?.click();
+                    }}
+                >
+                    세트 완료
+                </Button>
+            </div>
         </>
     );
 }

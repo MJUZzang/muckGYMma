@@ -105,17 +105,17 @@ function RestTimer({
             }}
         >
             <DrawerTrigger>{children}</DrawerTrigger>
-            <DrawerContent className="h-fit bg-[#181818] border-none focus:outline-none">
+            <DrawerContent className="h-fit bg-app-bg border-none focus:outline-none">
                 <DrawerHeader>
                     <DrawerTitle className="text-app-font-2 ">
-                        <p className="text-xl">휴식 타이머</p>
+                        <p className="text-lg">휴식 타이머</p>
                         {/* <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424]" /> */}
                     </DrawerTitle>
                     {/* <DrawerDescription>
                         This action cannot be undone.
                     </DrawerDescription> */}
                 </DrawerHeader>
-                x
+
                 <div className="h-fit flex flex-col pb-4">
                     <div className="ml-3 px-1 flex gap-2 text-app-font-2 text-base md:text-lg overflow-y-auto pb-2">
                         {times.map((time, i) => (
@@ -123,8 +123,8 @@ function RestTimer({
                                 key={i}
                                 className={`rounded-full cursor-pointer backdrop-blur-xl px-3 md:px-5 mt-1 py-1 md:py-3 ${
                                     selectedTime === i
-                                        ? "bg-black/80 ring-[1.5px] ring-app-blue text-app-blue"
-                                        : "bg-slate-800/80"
+                                        ? "bg-app-bg ring-[1.5px] ring-app-blue-2 text-app-blue-2"
+                                        : "bg-app-bg-1 text-app-font-5"
                                 }`}
                                 onClick={() => {
                                     setSelectedTime(i);
@@ -147,17 +147,17 @@ function RestTimer({
                     {/* 타이머 */}
                     <div>
                         <div
-                            className="mt-8 mx-auto w-fit h-fit rounded-full border-8 box-border border-transparent 
+                            className="mt-8 mx-auto w-fit h-fit rounded-full border-8 box-border border-transparent
                                 flex justify-center items-center"
                             style={{
                                 backgroundImage:
-                                    "linear-gradient(to top, #dfff32 0%, orange 100%)",
+                                    "linear-gradient(to top, rgba(223, 255, 50, 0.4) 0%, rgba(255, 194, 50, 0.7) 100%)",
                                 backgroundClip: "content-box, border-box",
                             }}
                         >
                             <div
-                                className="text-[54px] md:text-[70px] m-2 text-app-font-2 flex justify-center items-center w-[30dvh] h-[30dvh]
-                                    bg-black rounded-full"
+                                className="text-[54px] md:text-[70px] m-2 text-app-font-4 flex justify-center items-center w-[30dvh] h-[30dvh]
+                                    bg-white/90 rounded-full"
                             >
                                 {formatTime(time)}
                             </div>
@@ -165,7 +165,7 @@ function RestTimer({
 
                         <div className="flex justify-center gap-10 text-app-font-2 text-base md:text-2xl mt-4">
                             <div
-                                className="bg-slate-800/80 px-6 py-3 rounded-2xl cursor-pointer"
+                                className="bg-app-bg-2 px-6 py-3 rounded-2xl cursor-pointer"
                                 onClick={() => {
                                     if (time === 0) {
                                         return;
@@ -196,7 +196,7 @@ function RestTimer({
                                 -10초
                             </div>
                             <div
-                                className="bg-slate-800/80 px-6 py-3 rounded-2xl cursor-pointer"
+                                className="bg-app-bg-2 px-6 py-3 rounded-2xl cursor-pointer"
                                 onClick={() => {
                                     const changedTime = time + 10;
                                     localStorage.setItem(

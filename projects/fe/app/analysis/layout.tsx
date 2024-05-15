@@ -1,5 +1,5 @@
 import React from "react";
-import LogoAndTitle from "@/_components/LogoAndTitle";
+import Logo from "@/_components/Logo";
 
 const layout: React.FC<{
     children: React.ReactNode;
@@ -8,7 +8,7 @@ const layout: React.FC<{
         <div className="max-w-[835px] mx-auto w-full">
             {/* Header */}
             <div className="flex items-center">
-                <LogoAndTitle />
+                <Logo />
             </div>
 
             <div className="px-3 space-y-4 h-full">

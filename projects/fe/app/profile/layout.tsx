@@ -155,7 +155,7 @@ const Page = ({
                     <Link
                         className={`w-full transition-all duration-1000 border-b-2 ${
                             pathname.includes("profile/posts")
-                                ? "border-b-app-font-4"
+                                ? "border-b-app-font-3"
                                 : "border-b-app-bg"
                         }`}
                         href="/profile/posts"
@@ -172,7 +172,7 @@ const Page = ({
                     <Link
                         className={`w-full transition duration-1000 border-b-2 ${
                             pathname.includes("profile/food")
-                                ? "border-b-app-font-4"
+                                ? "border-b-app-font-3"
                                 : "border-b-white/0"
                         }`}
                         href="/profile/food"
@@ -180,7 +180,7 @@ const Page = ({
                         <ForkKnife
                             className={`w-full transition-all duration-1000 relative top-1 ${
                                 pathname.includes("/profile/food")
-                                    ? "fill-app-font-4"
+                                    ? "fill-app-font-3"
                                     : "fill-app-font-5"
                             }`}
                             size={33}
@@ -189,7 +189,7 @@ const Page = ({
                     <Link
                         className={`w-full transition duration-1000 border-b-2 ${
                             pathname.includes("profile/completed")
-                                ? "border-b-app-font-4"
+                                ? "border-b-app-font-3"
                                 : "border-b-white/0"
                         }`}
                         href={`/profile/completed`}
@@ -197,7 +197,7 @@ const Page = ({
                         <Analytics
                             className={`w-full transition-all duration-1000 ${
                                 pathname.includes("/profile/completed")
-                                    ? "fill-app-font-4"
+                                    ? "fill-app-font-3"
                                     : "fill-app-font-5"
                             }`}
                             size={33}

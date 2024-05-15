@@ -28,7 +28,7 @@ function CommentSectionTextArea({
                 maxLength={700}
                 onChange={(e) => setText(e.target.value)}
                 rows={1}
-                className="w-full min-h-[43px] py-2 rounded-xl pl-3 bg-[#202020] text-app-font-2 
+                className="w-full min-h-[43px] py-2 rounded-xl pl-3 bg-app-bg-2 text-app-font 
                 focus:outline-none resize-none max-h-[45dvh] overflow-y-auto
                 duration-75 transition-all"
                 placeholder="Leave a comment for jeheecheon..."

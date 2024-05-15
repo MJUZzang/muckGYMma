@@ -20,6 +20,9 @@ import { Button } from "@/_components/shadcn/ui/button";
 import exampleImage from "@/_images/pooh.jpg";
 import Image from "next/image";
 import CommentSectionTextArea from "./CommentSectionTextArea";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
 function CommentsSection({
     children,
@@ -32,11 +35,13 @@ function CommentsSection({
     return (
         <Drawer closeThreshold={0.9}>
             <DrawerTrigger>{children}</DrawerTrigger>
-            <DrawerContent className="h-full bg-[#181818] border-none focus:outline-none">
+            <DrawerContent className="h-[80dvh] bg-app-bg border-none focus:outline-none">
                 <DrawerHeader>
-                    <DrawerTitle className="text-app-font-2 ">
+                    <DrawerTitle
+                        className={`text-app-font-2 text-base ${notoSansKr.className}`}
+                    >
                         Comments
-                        <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424] " />
+                        <div className="mt-2 absolute -left-[10vw] w-[110vw] border-b-[1.5px] border-b-app-font-6/85" />
                     </DrawerTitle>
                     {/* <DrawerDescription>
                         This action cannot be undone.
@@ -83,19 +88,20 @@ function CommentsSection({
                                                 onClick={() =>
                                                     setIsLiked(!isLiked)
                                                 }
+                                                className="fill-red-500"
                                                 isLiked={isLiked}
                                             />
-                                            <p className="text-white/80 text-[12px]">
+                                            <p className="text-app-font-4 text-[12px]">
                                                 2,462
                                             </p>
                                         </div>
                                     </div>
 
-                                    <div className="flex gap-5">
-                                        <button className="text-white/60">
+                                    <div className="flex gap-5 text-xs">
+                                        <button className="text-app-font-4">
                                             답글
                                         </button>
-                                        <button className="text-white/60">
+                                        <button className="text-app-font-4">
                                             번역
                                         </button>
                                     </div>
