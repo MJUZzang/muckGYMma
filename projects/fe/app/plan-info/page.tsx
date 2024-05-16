@@ -35,13 +35,13 @@ function PlanInfo() {
     }, []);
 
     function GetWorkoutBoxStyle(index: number) {
-        if (planInfo.workouts[index].isCompleted) {
-            return "bg-[#9b93af]";
-        }
         if (index === selectedWorkout) {
-            return "bg-[#666de8] scale-[101.5%]";
+            return "bg-app-blue-2 scale-[105%]";
         }
-        return "bg-[#8f95f9]";
+        if (planInfo.workouts[index].isCompleted) {
+            return "bg-gray-700 text-app-inverted-font-4 scale-[105%]";
+        }
+        return "bg-gray-400 text-app-inverted-font-4";
     }
 
     return (
@@ -67,11 +67,14 @@ function PlanInfo() {
                         {/* 운동 아이콘 */}
                         <Muscle className="bg-app-bg-2 rounded-full p-4" />
                         <div>
-                            <p className="text-app-font-2 text-lg">
+                            <p className="text-app-font-2 text-lg font-semibold">
                                 {planInfo.type}
                             </p>
-                            <p className={`text-app-font-2 ${dosis.className}`}>
-                                {planInfo.kcal} kcal
+                            <p className={`text-app-font-2 flex`}>
+                                <p className={`${dosis.className}`}>
+                                    {planInfo.kcal}
+                                </p>
+                                &nbsp;kcal
                             </p>
                             {/* {!planInfo.isCompleted && (
                             <p>
@@ -82,7 +85,7 @@ function PlanInfo() {
                         </div>
                     </div>
 
-                    <div className="space-y-3 mt-6 group px-2">
+                    <div className="space-y-3 mt-6 group px-4">
                         {planInfo.workouts.map((workout, index) => (
                             <div
                                 key={index}
@@ -97,25 +100,19 @@ function PlanInfo() {
                                 }}
                             >
                                 <div className="w-fit text-nowrap">
-                                    <p className="text-app-inverted-font">
-                                        {workout.name}
-                                    </p>
+                                    <p className="">{workout.name}</p>
                                     <div className="flex">
-                                        <p className="text-app-inverted-font">
-                                            {workout.set}sets
-                                        </p>
+                                        <p className="">{workout.set}sets</p>
                                         &nbsp;
-                                        <p className="text-app-inverted-font">
+                                        <p className="">
                                             {workout.repeatation}reps
                                         </p>
                                     </div>
                                 </div>
                                 <div className="w-full text-right pr-4">
-                                    <p className="text-app-inverted-font">
-                                        {workout.kcal}kcal
-                                    </p>
+                                    <p className="">{workout.kcal}&nbsp;kcal</p>
                                     <p
-                                        className={`text-app-inverted-font text-sm ${
+                                        className={` text-sm ${
                                             !workout.isCompleted && "invisible"
                                         }`}
                                     >
@@ -128,7 +125,9 @@ function PlanInfo() {
                                 </div>
                                 <div>
                                     <CheckMark
-                                        className={`text-app-inverted-font/70 fill-[#dfff32] ${
+                                        width={28}
+                                        height={28}
+                                        className={`fill-app-blue-4 ${
                                             !workout.isCompleted && "invisible"
                                         }`}
                                     />
@@ -145,7 +144,7 @@ function PlanInfo() {
             >
                 <Link href="/plan">
                     <Button
-                        className={`bg-blue-800 ${
+                        className={`bg-app-blue-2 ${
                             !(
                                 selectedWorkout &&
                                 !planInfo.workouts[selectedWorkout].isCompleted

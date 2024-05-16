@@ -2,13 +2,15 @@ import React from "react";
 
 interface CheckMarkProps {
     className?: string;
+    width?: number;
+    height?: number;
 }
 
-function CheckMark({ className }: CheckMarkProps) {
+function CheckMark({ className, width = 23, height = 23 }: CheckMarkProps) {
     return (
         <svg
-            width={23}
-            height={23}
+            width={width}
+            height={height}
             viewBox="0 0 29 29"
             xmlns="http://www.w3.org/2000/svg"
             className={`${className}`}

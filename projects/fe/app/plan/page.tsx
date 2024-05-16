@@ -58,12 +58,12 @@ function Page() {
 
     function GetPlanStyle(order: number) {
         if (order === selectedSet) {
-            return "bg-[#666de8] scale-[101.5%]";
+            return "bg-app-blue-2 scale-[105%]";
         }
         if (order < selectedSet) {
-            return "bg-[#9b93af]";
+            return "bg-gray-700 text-app-inverted-font-4 scale-[105%]";
         } else {
-            return "bg-[#8f95f9]";
+            return "bg-gray-400 text-app-inverted-font-4";
         }
     }
 
@@ -127,19 +127,19 @@ function Page() {
                     </div>
                 </div>
 
-                {/* Progress */}
-                <p className="text-white/60 text-sm">1 / 6</p>
 
                 {/* Workout name */}
-                <p className="text-app-font-2 text-2xl mt-3">{workout.name}</p>
+                <p className="text-app-font-2 font-semibold text-2xl mt-3 px-3">{workout.name} x {workout.set}세트</p>
 
-                <div className="flex flex-col gap-3 mt-4 px-2">
+                {/* Progress */}
+                <p className="mt-2 px-3 text-app-font-3 text-sm">{selectedSet + 1} / {workout.set}</p>
+
+                <div className="flex flex-col gap-3 mt-3 px-4">
                     {Array.from({ length: workout.set }).map((set, idx) => (
                         <div
                             key={idx}
-                            className={`shadow-xl grid grid-cols-3 py-4 px-3 rounded-xl transition-all duration-1000
-                        text-app-inverted-font
-                        ${GetPlanStyle(idx)}`}
+                            className={`shadow-xl grid grid-cols-3 py-2 px-4 rounded-xl transition-all duration-1000
+                                ${GetPlanStyle(idx)}`}
                         >
                             <p className={`w-full text-left my-auto`}>
                                 {idx + 1} 세트
@@ -162,7 +162,9 @@ function Page() {
                                 }`}
                             >
                                 <CheckMark
-                                    className="ml-auto fill-[#dfff32]"
+                                    width={28}
+                                    height={28}
+                                    className="ml-auto fill-app-blue-4"
                                 />
                             </div>
                         </div>
@@ -203,7 +205,7 @@ function Page() {
                 >
                     <Button
                         ref={restTimerButtonRef}
-                        className="px-3 bg-slate-500 text-app-blue"
+                        className="px-3 bg-gray-600 text-white/90"
                         onClick={() => {
                             const savedRestTime =
                                 localStorage.getItem("restTime");
@@ -219,7 +221,7 @@ function Page() {
                     </Button>
                 </RestTimer>
                 <Button
-                    className="bg-blue-800"
+                    className="bg-app-blue-2"
                     onClick={() => {
                         if (workout.set > selectedSet) {
                             setSelectedSet(selectedSet + 1);

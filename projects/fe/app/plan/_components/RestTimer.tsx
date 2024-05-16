@@ -11,6 +11,16 @@ import {
 } from "@/_components/shadcn/ui/drawer";
 import React, { useEffect, useState } from "react";
 import { formatTime } from "@/plan/_utils/time";
+import { Dosis, Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
+
+const dosis = Dosis({
+    subsets: ["latin"],
+    weight: "400",
+});
 
 const times = [
     {
@@ -107,7 +117,7 @@ function RestTimer({
             <DrawerTrigger>{children}</DrawerTrigger>
             <DrawerContent className="h-fit bg-app-bg border-none focus:outline-none">
                 <DrawerHeader>
-                    <DrawerTitle className="text-app-font-2 ">
+                    <DrawerTitle className={`text-app-font-2 ${notoSansKr.className}`}>
                         <p className="text-lg">휴식 타이머</p>
                         {/* <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424]" /> */}
                     </DrawerTitle>
@@ -121,7 +131,7 @@ function RestTimer({
                         {times.map((time, i) => (
                             <div
                                 key={i}
-                                className={`rounded-full cursor-pointer backdrop-blur-xl px-3 md:px-5 mt-1 py-1 md:py-3 ${
+                                className={`font-sans rounded-full cursor-pointer backdrop-blur-xl px-3 md:px-5 mt-1 py-1 md:py-3 ${
                                     selectedTime === i
                                         ? "bg-app-bg ring-[1.5px] ring-app-blue-2 text-app-blue-2"
                                         : "bg-app-bg-1 text-app-font-5"
@@ -156,8 +166,8 @@ function RestTimer({
                             }}
                         >
                             <div
-                                className="text-[54px] md:text-[70px] m-2 text-app-font-4 flex justify-center items-center w-[30dvh] h-[30dvh]
-                                    bg-white/90 rounded-full"
+                                className={`text-[54px] md:text-[70px] m-2 text-app-font-4 flex justify-center items-center w-[30dvh] h-[30dvh]
+                                bg-white/90 rounded-full font-sans`}
                             >
                                 {formatTime(time)}
                             </div>
@@ -165,7 +175,7 @@ function RestTimer({
 
                         <div className="flex justify-center gap-10 text-app-font-2 text-base md:text-2xl mt-4">
                             <div
-                                className="bg-app-bg-2 px-6 py-3 rounded-2xl cursor-pointer"
+                                className={`bg-app-bg-2 px-6 py-3 rounded-2xl cursor-pointer`}
                                 onClick={() => {
                                     if (time === 0) {
                                         return;
@@ -193,7 +203,8 @@ function RestTimer({
                                     setSelectedTime(changedTimeIndex);
                                 }}
                             >
-                                -10초
+                                <p className={`inline-block ${notoSansKr.className}`}>- 10</p>
+                                <p className={`inline-block ${notoSansKr.className}`}>초</p>
                             </div>
                             <div
                                 className="bg-app-bg-2 px-6 py-3 rounded-2xl cursor-pointer"
@@ -219,8 +230,8 @@ function RestTimer({
                                     setSelectedTime(changedTimeIndex);
                                 }}
                             >
-                                +10초
-                            </div>
+                                <p className={`inline-block ${notoSansKr.className}`}>+ 10</p>
+                                <p className={`inline-block ${notoSansKr.className}`}>초</p>                            </div>
                         </div>
                     </div>
 

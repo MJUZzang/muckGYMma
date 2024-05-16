@@ -144,7 +144,7 @@ export default function Page() {
             .then((data: PredictResult) => {
                 console.log(data);
                 dispatch(setPredictResult(data));
-                router.push("/prediction/result");
+                router.push("/");
             })
             .catch((err) => console.error(err));
     }
