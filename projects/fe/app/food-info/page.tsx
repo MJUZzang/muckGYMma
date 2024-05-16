@@ -73,24 +73,27 @@ function FoodInfo() {
                 </div>
             </div> */}
 
-                <div>
+                <div className="">
                     <ArrowBack
-                        className="cursor-pointer fill-app-font-2"
+                        className="absolute cursor-pointer fill-app-font-2"
                         onClick={() => {
                             router.back();
                         }}
                     />
+
+                    <p className="text-lg text-center font-semibold">
+                        닭갈비, 소주, 맥주
+                    </p>
                 </div>
 
-                <div className="mx-5">
-                    <p className="py-3 text-xl font-semibold">닭갈비, 소주, 맥주</p>
+                <div className="mx-auto mt-4 px-5 max-w-[625px] w-full">
                     <Image
                         src={img1}
                         alt="food"
                         className="w-full rounded-2xl"
                     />
-
-                    <div className="flex text-lg items-end mt-3 font-medium">
+                    <p className={`text-right text-sm text-app-font-4 mr-2 mt-1 ${dosis.className}`}>2024-01-01: 12:00</p>
+                    <div className="flex text-app-font-1 text-lg items-end font-medium">
                         <p>총</p>
                         <p
                             className={`${dosis.className} mx-1 text-2xl font-semibold`}
@@ -105,7 +108,11 @@ function FoodInfo() {
                     </div>
 
                     <p className="flex mt-4 text-xs text-app-font-3">
-                        나트륨: <p className={`${dosis.className}`}>{predict.predictresult?.sodium}</p>mg
+                        나트륨:{" "}
+                        <p className={`${dosis.className}`}>
+                            {predict.predictresult?.sodium}
+                        </p>
+                        mg
                     </p>
 
                     {/* 영양성분 표시 */}

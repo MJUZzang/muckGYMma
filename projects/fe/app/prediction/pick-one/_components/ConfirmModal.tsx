@@ -18,6 +18,8 @@ interface ConfirmModalProps {
     isModalOpen: boolean;
     predict: PredictState;
     selectedPredict: number | null;
+    setFoodsSelected: React.Dispatch<React.SetStateAction<number[]>>;
+    foodsSelected: number[];
 }
 
 function ConfirmModal({
@@ -27,8 +29,9 @@ function ConfirmModal({
     isModalOpen,
     predict,
     selectedPredict,
+    setFoodsSelected,
+    foodsSelected,
 }: ConfirmModalProps) {
-    const [foodsSelected, setFoodsSelected] = useState<number[]>([]);
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -39,37 +42,6 @@ function ConfirmModal({
     const handleOkClicked: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation();
         onOkClicked();
-
-        if (!predict.predictlist) {
-            console.error("predictlist is not exist");
-            return;
-        }
-
-        fetch(`${backendUrl}/api/foods/pick`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                id: foodsSelected,
-                imageUrl: predict.fileUrl,
-            }),
-        })
-            .then((res) => {
-                console.log(res.status);
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    console.error("fail");
-                }
-            })
-            .then((data: PredictResult) => {
-                console.log(data);
-                dispatch(setPredictResult(data));
-                router.push("/prediction/result");
-            })
-            .catch((err) => console.error(err));
     };
 
     return (
@@ -77,7 +49,9 @@ function ConfirmModal({
         selectedPredict !== undefined && (
             <div
                 className={`absolute w-full px-[8vw] top-[30vh] transition-all duration-500
-                    ${isModalOpen ? "opacity-100 z-[50]" : "opacity-0"} ${notoSansKr.className}`}
+                    ${isModalOpen ? "opacity-100 z-[50]" : "opacity-0"} ${
+                    notoSansKr.className
+                }`}
                 onClick={(e) => e.stopPropagation()}
             >
                 <div className="bg-app-bg-1 rounded-xl w-full py-6 flex flex-col shadow-xl border-2">

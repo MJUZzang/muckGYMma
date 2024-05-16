@@ -137,7 +137,7 @@ function Page() {
                             </p>
 
                             <p
-                                className={`mt-2 text-xs ${notoSansKr.className}`}
+                                className={`mt-2 text-xs text-app-font-2 ${notoSansKr.className}`}
                             >
                                 {formatTimeInKor(task.duration)} 소요
                             </p>

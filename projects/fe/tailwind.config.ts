@@ -2,7 +2,6 @@ import { transform } from "next/dist/build/swc";
 import type { Config } from "tailwindcss";
 
 const config = {
-    darkMode: "selector",
     content: [
         "./pages/**/*.{ts,tsx}",
         "./components/**/*.{ts,tsx}",

@@ -3,9 +3,11 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
 import {
+    PredictResult,
     PredictState,
     selectPredict,
     setPredict,
+    setPredictResult,
 } from "@/../lib/slices/predictSlice";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
@@ -13,6 +15,8 @@ import ConfirmModal from "@/prediction/pick-one/_components/ConfirmModal";
 import { Noto_Sans_KR } from "next/font/google";
 import ArrowBack from "@/_images/ArrowBack";
 import Button from "@/_components/Button";
+import { backendUrl } from "@/_utils/urls";
+import { useRouter } from "next/navigation";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -102,6 +106,9 @@ export default function Page() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const predict: PredictState = useAppSelector(selectPredict);
     const [isFoodSelected, setIsFoodSelected] = useState<boolean>(false);
+    const [foodsSelected, setFoodsSelected] = useState<number[]>([]);
+    
+    const router = useRouter();
 
     useEffect(() => {
         if (process.env.NODE_ENV === "development") {
@@ -109,6 +116,38 @@ export default function Page() {
         }
     });
 
+    function handleOkClicked() {
+        if (!predict.predictlist) {
+            console.error("predictlist is not exist");
+            return;
+        }
+
+        fetch(`${backendUrl}/api/foods/pick`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                id: foodsSelected,
+                imageUrl: predict.fileUrl,
+            }),
+        })
+            .then((res) => {
+                console.log(res.status);
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    console.error("fail");
+                }
+            })
+            .then((data: PredictResult) => {
+                console.log(data);
+                dispatch(setPredictResult(data));
+                router.push("/prediction/result");
+            })
+            .catch((err) => console.error(err));
+    }
     return (
         <>
             <div
@@ -127,7 +166,7 @@ export default function Page() {
                     />
                 </div>
 
-                <p className="mt-3 text-app-font-2 mx-auto text-xl px-5 text-center font-semibold">
+                <p className="mt-3 text-app-font-3 mx-auto text-xl px-5 text-center font-semibold">
                     AI 음식 분석 완료!
                 </p>
                 <p className="text-app-font-2 mt-3 text-center px-5 text-balance text-base">
@@ -156,7 +195,7 @@ export default function Page() {
                                     <p className="text-sm text-app-font-4 text-left">
                                         정확도: {item.possibility}%
                                     </p>
-                                    <div className="mt-2">
+                                    <div className="mt-2 text-sm">
                                         {item.foodlist.map((food) => (
                                             <p key={food.id}>{food.foodname}</p>
                                         ))}
@@ -170,7 +209,10 @@ export default function Page() {
 
             <div className="fixed bottom-0 px-4 pb-4 w-full">
                 <Button
-                    className={`bg-app-blue/65 text-app-inverted-font hover:bg-app-blue/90`}
+                    className={`${
+                        !isFoodSelected &&
+                        "bg-app-blue/65 text-app-inverted-font hover:bg-app-blue/90"
+                    }`}
                 >
                     영양성분 분석하기
                 </Button>
@@ -182,6 +224,8 @@ export default function Page() {
                     setIsModalOpen(false);
                     setIsFoodSelected(true);
                 }}
+                foodsSelected={foodsSelected}
+                setFoodsSelected={setFoodsSelected}
                 onCancelClicked={() => setIsModalOpen(false)}
                 isModalOpen={isModalOpen}
                 predict={predict}
