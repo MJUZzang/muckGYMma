@@ -16,8 +16,8 @@ const KakaoLoginButton: React.FC<KakaoLoginButtonProps> = (props) => {
     return (
         <LoginButton
             onClick={() => router.push(kakaoLoginUrl)}
-            className="bg-[#FEE500]"
-            title="Continue with Kakao"
+            className="bg-[#FEE500] text-[#191919]"
+            title="카카오 로그인"
             Symbol={KakaoSymbol}
         />
     );

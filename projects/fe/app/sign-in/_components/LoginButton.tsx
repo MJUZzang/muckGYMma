@@ -1,4 +1,9 @@
+import { Noto_Sans_KR } from "next/font/google";
 import React from "react";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
 
 interface LoginButtonProps {
     className?: string;
@@ -16,11 +21,11 @@ const LoginButton: React.FC<LoginButtonProps> = ({
     return (
         <button
             className={`text-sm font-[500] px-4 w-full flex items-center rounded-[4px] py-2
-                ${className}`}
+                ${className} ${notoSansKr.className}`}
             onClick={onClick}
         >
             <Symbol />
-            <p className="w-full text-center text-black/85">{title}</p>
+            <p className="w-full text-center">{title}</p>
         </button>
     );
 };

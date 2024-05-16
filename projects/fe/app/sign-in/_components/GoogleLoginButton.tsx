@@ -17,8 +17,8 @@ const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = (props) => {
     return (
         <LoginButton
             onClick={() => router.push(googleLoginUrl)}
-            className="bg-[#FEFEFE]"
-            title="Continue with Google"
+            className="bg-[#FEFEFE] text-[#1f1f1f]"
+            title="구글 로그인"
             Symbol={GoogleSymbol}
         />
     );
