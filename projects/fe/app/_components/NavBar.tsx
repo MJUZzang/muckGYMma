@@ -12,7 +12,7 @@ import { Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
-const excepts = ["/initial-setup", "/plan-info", "/food-info", "/plan"];
+const excepts = ["/initial-setup", "/plan-info", "/food-info", "/plan", "/prediction"];
 
 const NavBar = () => {
     const pathname = usePathname();

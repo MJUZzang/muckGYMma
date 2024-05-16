@@ -8,9 +8,6 @@ function PredictionLayout({
 }>) {
     return (
         <>
-            <div className="flex items-center">
-                <Logo />
-            </div>
             {children}
         </>
     );

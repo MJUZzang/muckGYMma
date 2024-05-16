@@ -58,7 +58,7 @@ function FoodInfo() {
     return (
         <>
             <div
-                className={`flex flex-col h-[100dvh] animate-page-enter px-2 pt-3 ${notoSansKr.className}`}
+                className={`flex flex-col h-[100dvh] animate-page-enter px-3 pt-4 ${notoSansKr.className}`}
             >
                 {/* 엑스 버튼 */}
                 {/* <div

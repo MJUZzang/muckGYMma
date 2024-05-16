@@ -10,6 +10,11 @@ import {
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import ConfirmModal from "@/prediction/pick-one/_components/ConfirmModal";
+import { Noto_Sans_KR } from "next/font/google";
+import ArrowBack from "@/_images/ArrowBack";
+import Button from "@/_components/Button";
+
+const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
 const dummyData = {
     predictlist: [
@@ -96,6 +101,7 @@ export default function Page() {
     const [selectedPredict, setSelectedPredict] = useState<number | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const predict: PredictState = useAppSelector(selectPredict);
+    const [isFoodSelected, setIsFoodSelected] = useState<boolean>(false);
 
     useEffect(() => {
         if (process.env.NODE_ENV === "development") {
@@ -104,61 +110,83 @@ export default function Page() {
     });
 
     return (
-        <div
-            className="h-full animate-page-enter"
-            onClick={() => setIsModalOpen(false)}
-        >
+        <>
+            <div
+                className={`h-full animate-page-enter ${notoSansKr.className}`}
+                onClick={() => setIsModalOpen(false)}
+            >
+                <ArrowBack className="fill-app-font-4 cursor-pointer ml-3 mt-4 mb-3" />
+
+                <div className="mx-5">
+                    <Image
+                        src={predict.fileUrl}
+                        alt="food"
+                        width={375}
+                        height={375}
+                        className="w-full mx-auto rounded-3xl"
+                    />
+                </div>
+
+                <p className="mt-3 text-app-font-2 mx-auto text-xl px-5 text-center font-semibold">
+                    AI 음식 분석 완료!
+                </p>
+                <p className="text-app-font-2 mt-3 text-center px-5 text-balance text-base">
+                    아래에서 정확한 분석 결과 하나를 선택하세요.
+                </p>
+                <div
+                    ref={emblaRef}
+                    className="overflow-hidden flex flex-col mt-5"
+                >
+                    <div className="flex text-app-font-2">
+                        {predict.predictlist?.map((item, idx) => (
+                            <div
+                                key={item.keyname}
+                                className="bg-app-bg-1 shrink-0 grow-0 rounded-lg cursor-pointer
+                                    px-2 py-3 first:ml-[10vw] last:mr-[10vw] ml-[5vw] w-[65vw]"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedPredict(idx);
+                                    setIsModalOpen(true);
+                                }}
+                            >
+                                <div className="w-[55vw] mx-auto">
+                                    <p className="backdrop-blur-lg text-left text-xl text-app-blue">
+                                        {idx + 1}번
+                                    </p>
+                                    <p className="text-sm text-app-font-4 text-left">
+                                        정확도: {item.possibility}%
+                                    </p>
+                                    <div className="mt-2">
+                                        {item.foodlist.map((food) => (
+                                            <p key={food.id}>{food.foodname}</p>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="fixed bottom-0 px-4 pb-4 w-full">
+                <Button
+                    className={`bg-app-blue/65 text-app-inverted-font hover:bg-app-blue/90`}
+                >
+                    영양성분 분석하기
+                </Button>
+            </div>
+
             <ConfirmModal
-                title="섭취한 음식을 선택해주세요"
-                onOkClicked={() => setIsModalOpen(false)}
+                title="섭취하신 음식을 알려주세요"
+                onOkClicked={() => {
+                    setIsModalOpen(false);
+                    setIsFoodSelected(true);
+                }}
                 onCancelClicked={() => setIsModalOpen(false)}
                 isModalOpen={isModalOpen}
                 predict={predict}
                 selectedPredict={selectedPredict}
             />
-
-            <p className="block mb-2 text-center text-app-font-2 mx-auto text-2xl">
-                분석 완료!
-            </p>
-            <Image
-                src={predict.fileUrl}
-                width={300}
-                height={300}
-                alt="food"
-                className="h-[30vh] mx-auto rounded-xl"
-            />
-
-            <p className="text-app-font-2 block mt-10 text-center px-5 text-xl text-balance">
-                아래에서 정확한 분석 결과 하나를 골라주세요.
-            </p>
-            <div ref={emblaRef} className="overflow-hidden flex flex-col mt-5">
-                <div className="flex text-app-font-2">
-                    {predict.predictlist?.map((item, idx) => (
-                        <div
-                            key={item.keyname}
-                            className="bg-white/15  shrink-0 grow-0 rounded-lg cursor-pointer
-                            px-2 first:ml-[10vw] last:mr-[10vw] ml-[5vw] w-[80vw]"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedPredict(idx);
-                                setIsModalOpen(true);
-                            }}
-                        >
-                            <p className="block backdrop-blur-lg text-center text-xl text-app-blue">
-                                {idx + 1}번
-                            </p>
-                            <p>정확도: {item.possibility}%</p>
-                            <div>
-                                {item.foodlist.map((food) => (
-                                    <div key={food.id}>
-                                        <p>{food.foodname}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
+        </>
     );
 }
