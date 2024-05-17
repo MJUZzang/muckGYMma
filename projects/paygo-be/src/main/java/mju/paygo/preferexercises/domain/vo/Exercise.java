@@ -1,9 +1,12 @@
 package mju.paygo.preferexercises.domain.vo;
 
+import lombok.Getter;
 import mju.paygo.preferexercises.exception.exceptions.ExerciseNotFoundException;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
+@Getter
 public enum Exercise {
 
     BENCH_PRESS("벤치프레스"),
@@ -32,6 +35,12 @@ public enum Exercise {
                 .filter(exercise -> exercise.isSame(name))
                 .findAny()
                 .orElseThrow(ExerciseNotFoundException::new);
+    }
+
+    public static String collectAllNames() {
+        return Arrays.stream(values())
+                .map(Exercise::getName)
+                .collect(Collectors.joining(", "));
     }
 
     public boolean isSame(final String name) {

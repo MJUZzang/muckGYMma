@@ -1,9 +1,11 @@
 package mju.paygo.exerciseprofile.domain.vo;
 
+import lombok.Getter;
 import mju.paygo.exerciseprofile.exception.exceptions.ExperienceNotFoundException;
 
 import java.util.Arrays;
 
+@Getter
 public enum Experience {
 
     FIRST("처음"),

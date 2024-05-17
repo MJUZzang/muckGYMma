@@ -1,9 +1,11 @@
 package mju.paygo.physicalprofile.domain.vo;
 
+import lombok.Getter;
 import mju.paygo.physicalprofile.exception.exceptions.GenderNotFoundException;
 
 import java.util.Arrays;
 
+@Getter
 public enum Gender {
 
     MALE("남성"),

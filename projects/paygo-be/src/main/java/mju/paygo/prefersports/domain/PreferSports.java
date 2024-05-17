@@ -62,4 +62,11 @@ public class PreferSports {
 
         this.sports = sports;
     }
+
+    public String getSports() {
+        List<String> sportsNames = sports.stream()
+                .map(Sports::getName)
+                .toList();
+        return String.join(",", sportsNames);
+    }
 }
