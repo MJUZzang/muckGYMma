@@ -11,4 +11,6 @@ public interface MemberRepository {
     Member save(final Member member);
 
     boolean existsByEmail(final String email);
+
+    boolean existsByNickname(final String nickname);
 }

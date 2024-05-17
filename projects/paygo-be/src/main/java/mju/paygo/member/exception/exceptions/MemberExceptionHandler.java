@@ -10,6 +10,7 @@ import mju.paygo.member.exception.exceptions.auth.TokenFormInvalidException;
 import mju.paygo.member.exception.exceptions.auth.TokenInvalidException;
 import mju.paygo.member.exception.exceptions.auth.UnsupportedTokenException;
 import mju.paygo.member.exception.exceptions.member.MemberNotInitializedException;
+import mju.paygo.member.exception.exceptions.member.NicknameAlreadyExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,6 +45,12 @@ public class MemberExceptionHandler {
     })
     public ResponseEntity<ExceptionResponse> handleAuthException(final Exception e) {
         return getUnAuthorized(e);
+    }
+
+    @ExceptionHandler(NicknameAlreadyExistException.class)
+    public ResponseEntity<ExceptionResponse> handleNicknameException(final NicknameAlreadyExistException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(new ExceptionResponse(e.getMessage()));
     }
 
     private ResponseEntity<ExceptionResponse> getBadRequest(final Exception e) {

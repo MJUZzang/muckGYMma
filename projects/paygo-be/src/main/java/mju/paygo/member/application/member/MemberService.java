@@ -10,6 +10,7 @@ import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
 import mju.paygo.member.exception.exceptions.member.MemberNotFoundException;
 import mju.paygo.member.exception.exceptions.member.MemberNotInitializedException;
+import mju.paygo.member.exception.exceptions.member.NicknameAlreadyExistException;
 import mju.paygo.member.ui.member.dto.MemberEditRequest;
 import mju.paygo.member.ui.member.dto.MemberInitializeRequest;
 import mju.paygo.physicalprofile.application.event.PhysicalProfileCreatedEvent;
@@ -107,5 +108,13 @@ public class MemberService {
             return;
         }
         Events.raise(new ExerciseProfileEditedEvent(memberId, request));
+    }
+
+    public void editNickname(final Long memberId, final String nickname) {
+        if (memberRepository.existsByNickname(nickname)) {
+            throw new NicknameAlreadyExistException();
+        }
+        Member member = findById(memberId);
+        member.updateNickname(nickname);
     }
 }

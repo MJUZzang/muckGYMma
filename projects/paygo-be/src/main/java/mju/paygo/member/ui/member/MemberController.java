@@ -3,6 +3,7 @@ package mju.paygo.member.ui.member;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.member.application.member.MemberService;
+import mju.paygo.member.application.member.dto.NicknameRequest;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import mju.paygo.member.ui.member.dto.MemberEditRequest;
@@ -39,6 +40,12 @@ public class MemberController {
     @PatchMapping("/setup")
     public ResponseEntity<Void> editSetting(@AuthMember final Long memberId, @RequestBody @Valid final MemberEditRequest request) {
         memberService.editSetting(memberId, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/nickname")
+    public ResponseEntity<Void> changeNickname(@AuthMember final Long memberId, @RequestBody @Valid final NicknameRequest request) {
+        memberService.editNickname(memberId, request.nickname());
         return ResponseEntity.ok().build();
     }
 }

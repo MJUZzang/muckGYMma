@@ -60,4 +60,8 @@ public class Member {
                 .initialized(false)
                 .build();
     }
+
+    public void updateNickname(final String nickname) {
+        this.nickname = nickname;
+    }
 }
