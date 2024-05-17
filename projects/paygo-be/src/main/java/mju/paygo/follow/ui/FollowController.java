@@ -1,5 +1,6 @@
 package mju.paygo.follow.ui;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.follow.application.FollowService;
 import mju.paygo.follow.domain.dto.FollowRequest;
@@ -24,13 +25,13 @@ public class FollowController {
     private final FollowService followService;
 
     @PostMapping("/follow")
-    public ResponseEntity<Void> follow(@AuthMember final Long followerId, @RequestBody final FollowRequest followRequest) {
+    public ResponseEntity<Void> follow(@AuthMember final Long followerId, @Valid @RequestBody final FollowRequest followRequest) {
         followService.follow(followerId, followRequest.followeeId());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @DeleteMapping("/unfollow")
-    public ResponseEntity<Void> unfollow(@AuthMember final Long followerId, @RequestBody final FollowRequest followRequest) {
+    public ResponseEntity<Void> unfollow(@AuthMember final Long followerId, @Valid @RequestBody final FollowRequest followRequest) {
         followService.unfollow(followerId, followRequest.followeeId());
         return ResponseEntity.ok().build();
     }

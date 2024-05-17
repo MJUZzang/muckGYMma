@@ -39,7 +39,7 @@ public class Member {
     @Column(nullable = false)
     private Boolean initialized;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String profileContent;  // 프로필 소개글 내용
 
     public boolean isAdmin() {

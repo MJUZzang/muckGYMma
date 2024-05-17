@@ -24,7 +24,7 @@ public class LikesService {
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
 
-    public boolean like(final Long memberId, final Long boardId) {
+    public void like(final Long memberId, final Long boardId) {
         Member member = findMemberById(memberId);
         Board board = findBoardById(boardId);
 
@@ -34,10 +34,9 @@ public class LikesService {
 
         Likes likes = Likes.of(member, board);
         likesRepository.save(likes);
-        return true;
     }
 
-    public boolean unlike(final Long memberId, final Long boardId) {
+    public void unlike(final Long memberId, final Long boardId) {
         Member member = findMemberById(memberId);
         Board board = findBoardById(boardId);
 
@@ -45,7 +44,6 @@ public class LikesService {
                 .orElseThrow(LikeNotFoundException::new);
 
         likesRepository.deleteByMemberAndBoard(member, board);
-        return true;
     }
 
     public long countLikes(final Long boardId) {

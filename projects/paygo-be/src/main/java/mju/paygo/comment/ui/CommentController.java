@@ -1,5 +1,6 @@
 package mju.paygo.comment.ui;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.comment.application.CommentService;
 import mju.paygo.comment.domain.Comment;
@@ -31,7 +32,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createComment(@AuthMember Long memberId, @RequestBody final CommentRequest request) {
+    public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentRequest request) {
         Comment comment = commentService.createComment(memberId, request.boardId(), request.content());
         LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
@@ -39,7 +40,7 @@ public class CommentController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<Void> updateComment(@AuthMember Long memberId, @RequestBody final CommentRequest request) {
+    public ResponseEntity<Void> updateComment(@AuthMember Long memberId, @Valid @RequestBody final CommentRequest request) {
         Comment comment = commentService.updateComment(memberId, request.commentId(), request.content());
         LocalDateTime updatedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
@@ -47,7 +48,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteComment(@AuthMember Long memberId, @RequestBody final CommentDeleteRequest request) {
+    public ResponseEntity<Void> deleteComment(@AuthMember Long memberId, @Valid @RequestBody final CommentDeleteRequest request) {
         commentService.deleteComment(memberId, request.commentId());
 
         return ResponseEntity.ok().build();

@@ -1,5 +1,6 @@
 package mju.paygo.board.ui;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.board.application.BoardService;
 import mju.paygo.board.domain.Board;
@@ -92,7 +93,7 @@ public class BoardController {
     }*/
 
     @PatchMapping("/update")
-    public ResponseEntity<Void> updateBoard(@AuthMember final Long memberId, @RequestBody final BoardUpdateRequest updateRequest) {
+    public ResponseEntity<Void> updateBoard(@AuthMember final Long memberId, @Valid @RequestBody final BoardUpdateRequest updateRequest) {
         boardService.updateBoard(updateRequest.boardId(), memberId, updateRequest.content());
 
         Board board = boardService.findById(updateRequest.boardId())
@@ -102,7 +103,7 @@ public class BoardController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> deleteBoard(@AuthMember final Long memberId, @RequestBody final BoardDeleteRequest request) {
+    public ResponseEntity<Void> deleteBoard(@AuthMember final Long memberId, @Valid @RequestBody final BoardDeleteRequest request) {
         boardService.deleteBoard(request.boardId());
 
         return ResponseEntity.ok().build();

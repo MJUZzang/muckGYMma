@@ -13,12 +13,8 @@ public class ProfileExceptionHandler {
     @ExceptionHandler(value = {
             MemberNotFoundException.class
     })
-    public ResponseEntity<ExceptionResponse> handleProfileException(Exception e) {
-        return getServerError(e);
-    }
-
-    private ResponseEntity<ExceptionResponse> getServerError(final Exception e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<ExceptionResponse> handleProfileException(MemberNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ExceptionResponse(e.getMessage()));
     }
 }
