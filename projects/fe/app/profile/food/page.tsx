@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { use } from "react";
 
 import img1 from "@/_images/닭갈비.jpg";
 import img2 from "@/_images/삼겹살.jpg";
@@ -12,6 +14,7 @@ import { Jua, Noto_Sans_KR, Dosis } from "next/font/google";
 import NavigateNext from "@/_images/NavigateNext";
 import Link from "next/link";
 import CheckMark from "@/_images/CheckMark";
+import { backendUrl } from "@/_utils/urls";
 
 const dummyData = [
     {
@@ -56,6 +59,27 @@ const dosis = Dosis({
 });
 
 function Page() {
+    use(
+        fetch(`${backendUrl}/api/foods/eaten`, {
+            method: "GET",
+            credentials: "include",
+            cache: "no-store",
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error("Server responded with an error");
+                }
+            })
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    );
+
     return (
         <>
             <p className="flex items-center mx-3 gap-1 px-3 rounded-lg py-2 bg-app-blue bg-opacity-20 backdrop-blur-lg text-black/80 font-semibold text-[14px] mt-3 mb-3">

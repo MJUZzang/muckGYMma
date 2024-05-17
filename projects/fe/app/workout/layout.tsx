@@ -89,8 +89,10 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                         </div>
                     </div>
 
-                    <div className="bg-app-bg-4 px-4 py-5 pb-8 rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] hover:animate-pulse
-                        text-app-font-2">
+                    <div
+                        className="bg-app-bg-4 px-4 py-5 pb-8 rounded-t-[35px] rounded-b-[55px] backdrop-blur-lg w-full max-w-[350px] hover:animate-pulse
+                        text-app-font-2"
+                    >
                         <div className="w-fit mx-auto">
                             <div className="w-fit">
                                 <div

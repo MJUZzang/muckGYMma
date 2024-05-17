@@ -47,11 +47,11 @@ const page = () => {
                 <div className="h-1/2 flex flex-col justify-between">
                     <div>
                         <div className="flex items-center gap-4 mt-6 mb-6">
-                            <div className="w-full border-t-2 border-app-font-5" />
+                            <div className="w-full border-t-[1px] border-app-font-5" />
                             <p className="text-app-font-5 text-xs text-nowrap">
                                 로그인 & 회원가입
                             </p>
-                            <div className="w-full border-t-2 border-app-font-5" />
+                            <div className="w-full border-t-[1px] border-app-font-5" />
                         </div>
                         <div className="space-y-4">
                             <KakaoLoginButton />

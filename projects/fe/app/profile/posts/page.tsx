@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { use } from "react";
 import exampleImage from "@/_images/pooh.jpg";
 import Post from "@/community/following/_components/Post";
 

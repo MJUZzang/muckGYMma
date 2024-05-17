@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { use, useEffect } from "react";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 import FoodPicture from "@/_components/FoodPicture";
@@ -46,11 +46,11 @@ const Page = ({
                         size={25}
                     />
 
-                    <div className="w-[27px] lg:w-[30px] gap-[4px] flex flex-col cursor-pointer">
-                        <div className="w-full h-[2.5px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
-                        <div className="w-full h-[2.5px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
-                        <div className="w-full h-[2.5px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
-                    </div>
+                    <Link href="/settings" className="w-[27px] lg:w-[30px] h-fit gap-[4px] flex flex-col cursor-pointer">
+                        <div className="w-full h-[3px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
+                        <div className="w-full h-[3px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
+                        <div className="w-full h-[3px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
+                    </Link>
                 </div>
             </div>
 
