@@ -18,27 +18,32 @@ public class CommentRepositoryImpl implements CommentRepository {
     private final CommentJpaRepository commentJpaRepository;
 
     @Override
-    public Comment save(Comment comment) {
+    public Comment save(final Comment comment) {
         return commentJpaRepository.save(comment);
     }
 
     @Override
-    public Optional<Comment> findById(Long id) {
+    public Optional<Comment> findById(final Long id) {
         return commentJpaRepository.findById(id);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         commentJpaRepository.deleteById(id);
     }
 
     @Override
-    public List<Comment> findByBoard(Board board) {
+    public List<Comment> findByBoard(final Board board) {
         return commentJpaRepository.findByBoard(board);
     }
 
     @Override
-    public long countByBoard(Board board) {
+    public long countByBoard(final Board board) {
         return commentJpaRepository.countByBoard(board);
+    }
+
+    @Override
+    public void delete(final Comment comment) {
+        commentJpaRepository.delete(comment);
     }
 }

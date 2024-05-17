@@ -14,17 +14,16 @@ import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mju.paygo.global.domain.BaseEntity;
 import mju.paygo.likes.domain.Likes;
 import mju.paygo.member.domain.member.Member;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Board {
+public class Board extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,28 +40,24 @@ public class Board {
     @Column(nullable = false)
     private String content;  // 게시글 내용
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
     @Column(nullable = false)
     private Boolean verified = false;  // 게시글 검증 상태
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Likes> likes;
 
-    public Board(Member member, String imageUrl, String content, Boolean verified) {
+    public Board(final Member member, final String imageUrl, final String content, final Boolean verified) {
         this.member = member;
         this.imageUrl = imageUrl;
         this.content = content;
-        this.createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         this.verified = verified;
     }
 
-    public static Board of(Member member, String imageUrl, String content, Boolean verified) {
+    public static Board of(final Member member, final String imageUrl, final String content, final Boolean verified) {
         return new Board(member, imageUrl, content, verified);
     }
 
-    public void updateContent(String content) {
+    public void updateContent(final String content) {
         this.content = content;
     }
 }

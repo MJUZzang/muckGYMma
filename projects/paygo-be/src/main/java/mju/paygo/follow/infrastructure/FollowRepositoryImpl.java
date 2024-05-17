@@ -16,42 +16,52 @@ public class FollowRepositoryImpl implements FollowRepository {
     private final FollowJpaRepository followJpaRepository;
 
     @Override
-    public Follow save(Follow follow) {
+    public boolean existsByFollowerAndFollowee(final Member follower, final Member followee) {
+        return followJpaRepository.existsByFollowerAndFollowee(follower, followee);
+    }
+
+    @Override
+    public Follow save(final Follow follow) {
         return followJpaRepository.save(follow);
     }
 
     @Override
-    public Optional<Follow> findById(Long id) {
+    public void deleteByFollowerAndFollowee(final Member follower, final Member followee) {
+        followJpaRepository.deleteByFollowerAndFollowee(follower, followee);
+    }
+
+    @Override
+    public Optional<Follow> findById(final Long id) {
         return followJpaRepository.findById(id);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         followJpaRepository.deleteById(id);
     }
 
     @Override
-    public List<Follow> findAllByFollower(Member follower) {
+    public List<Follow> findAllByFollower(final Member follower) {
         return followJpaRepository.findAllByFollower(follower);
     }
 
     @Override
-    public List<Follow> findAllByFollowee(Member followee) {
+    public List<Follow> findAllByFollowee(final Member followee) {
         return followJpaRepository.findAllByFollowee(followee);
     }
 
     @Override
-    public Optional<Follow> findByFollowerAndFollowee(Member follower, Member followee) {
+    public Optional<Follow> findByFollowerAndFollowee(final Member follower, final Member followee) {
         return followJpaRepository.findByFollowerAndFollowee(follower, followee);
     }
 
     @Override
-    public long countByFollower(Member follower) {
+    public long countByFollower(final Member follower) {
         return followJpaRepository.countByFollower(follower);
     }
 
     @Override
-    public long countByFollowee(Member followee) {
+    public long countByFollowee(final Member followee) {
         return followJpaRepository.countByFollowee(followee);
     }
 }

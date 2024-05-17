@@ -13,15 +13,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mju.paygo.board.domain.Board;
+import mju.paygo.global.domain.BaseEntity;
 import mju.paygo.member.domain.member.Member;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Comment {
+public class Comment extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,18 +37,10 @@ public class Comment {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    @Column(nullable = false)
-    private LocalDateTime updatedAt;
-
     private Comment(final Member member, final Board board, final String content) {
         this.member = member;
         this.board = board;
         this.content = content;
-        this.createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
-        this.updatedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 
     public static Comment of(final Member member, final Board board, final String content) {
@@ -58,6 +49,5 @@ public class Comment {
 
     public void updateContent(final String content) {
         this.content = content;
-        this.updatedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
     }
 }

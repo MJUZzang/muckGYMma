@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface LikesJpaRepository  extends JpaRepository<Likes, Long> {
-    Optional<Likes> findByMemberAndBoard(Member member, Board board);
-    void deleteByMemberAndBoard(Member member, Board board);
-    long countByBoard(Board board);
+    Optional<Likes> findByMemberAndBoard(final Member member, final Board board);
+    void deleteByMemberAndBoard(final Member member, final Board board);
+    long countByBoard(final Board board);
 }

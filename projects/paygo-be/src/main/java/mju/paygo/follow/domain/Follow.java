@@ -36,13 +36,13 @@ public class Follow {
     @Column(nullable = false)
     private FollowStatus status;
 
-    private Follow(Member follower, Member followee, FollowStatus status) {
+    private Follow(final Member follower, final Member followee, final FollowStatus status) {
         this.follower = follower;
         this.followee = followee;
         this.status = status;
     }
 
-    public static Follow of(Member follower, Member followee, FollowStatus status) {
+    public static Follow of(final Member follower, final Member followee, final FollowStatus status) {
         return new Follow(follower, followee, status);
     }
 

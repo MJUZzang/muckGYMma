@@ -33,7 +33,7 @@ public class LikesRepositoryImpl implements LikesRepository {
     }
 
     @Override
-    public Likes save(Likes likes) {
+    public Likes save(final Likes likes) {
         return likesJpaRepository.save(likes);
     }
 }

@@ -6,6 +6,10 @@ import mju.paygo.board.domain.Board;
 import mju.paygo.board.domain.BoardRepository;
 import mju.paygo.comment.domain.Comment;
 import mju.paygo.comment.domain.CommentRepository;
+import mju.paygo.comment.exception.exceptions.BoardNotFoundException;
+import mju.paygo.comment.exception.exceptions.CommentNotFoundException;
+import mju.paygo.comment.exception.exceptions.InvalidCommentOwnerException;
+import mju.paygo.comment.exception.exceptions.MemberNotFoundException;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
 import org.springframework.stereotype.Service;
@@ -21,45 +25,48 @@ public class CommentService {
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
 
-    private Member findMemberById(Long memberId) {
-        return memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-    }
-
-    private Board findBoardById(Long boardId) {
-        return boardRepository.findById(boardId)
-                .orElseThrow(() -> new IllegalArgumentException("Board not found"));
-    }
-
-    public Comment createComment(Long memberId, Long boardId, String content) {
+    public Comment createComment(final Long memberId, final Long boardId, final String content) {
         Member member = findMemberById(memberId);
         Board board = findBoardById(boardId);
         Comment comment = Comment.of(member, board, content);
         return commentRepository.save(comment);
     }
 
-    public Comment updateComment(Long commentId, Long memberId, String content) {
+    public Comment updateComment(final Long memberId, final Long commentId, final String content) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
+                .orElseThrow(CommentNotFoundException::new);
+
         if (!comment.getMember().getId().equals(memberId)) {
-            throw new IllegalArgumentException("Member ID does not match the comment's owner");
+            throw new InvalidCommentOwnerException();
         }
+
         comment.updateContent(content);
-        return commentRepository.save(comment);
+        return comment;
     }
 
-    public void deleteComment(Long memberId, Long commentId) {
+    public void deleteComment(final Long memberId, final Long commentId) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("Comment not found"));
-        if (comment.getMember().getId().equals(memberId)) {
-            commentRepository.deleteById(commentId);
-        } else {
-            throw new IllegalArgumentException("Member ID does not match the comment's owner");
+                .orElseThrow(CommentNotFoundException::new);
+
+        if (!comment.getMember().getId().equals(memberId)) {
+            throw new InvalidCommentOwnerException();
         }
+
+        commentRepository.delete(comment);
     }
 
-    public List<Comment> getCommentsByBoard(Long boardId) {
+    public List<Comment> getCommentsByBoard(final Long boardId) {
         Board board = findBoardById(boardId);
         return commentRepository.findByBoard(board);
+    }
+
+    private Member findMemberById(final Long memberId) {
+        return memberRepository.findById(memberId)
+                .orElseThrow(MemberNotFoundException::new);
+    }
+
+    private Board findBoardById(final Long boardId) {
+        return boardRepository.findById(boardId)
+                .orElseThrow(BoardNotFoundException::new);
     }
 }

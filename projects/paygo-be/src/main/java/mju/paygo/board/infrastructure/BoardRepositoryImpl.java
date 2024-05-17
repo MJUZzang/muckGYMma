@@ -1,8 +1,5 @@
 package mju.paygo.board.infrastructure;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.board.domain.Board;
 import mju.paygo.board.domain.BoardRepository;
@@ -16,9 +13,6 @@ import java.util.Optional;
 @Repository
 public class BoardRepositoryImpl implements BoardRepository {
 
-    @PersistenceContext
-    private final EntityManager entityManager;
-
     private final BoardJpaRepository boardJpaRepository;
 
     @Override
@@ -27,19 +21,13 @@ public class BoardRepositoryImpl implements BoardRepository {
     }
 
     @Override
-    public List<Board> findByMemberId(Long memberId) {
-        String jpql = "SELECT b FROM Board b WHERE b.member.id = :memberId";
-        TypedQuery<Board> query = entityManager.createQuery(jpql, Board.class);
-        query.setParameter("memberId", memberId);
-        return query.getResultList();
+    public List<Board> findByMemberId(final Long memberId) {
+        return boardJpaRepository.findByMemberId(memberId);
     }
 
     @Override
     public List<Board> findAllExceptMemberId(final Long memberId) {
-        String jpql = "SELECT b FROM Board b WHERE b.member.id <> :memberId";
-        TypedQuery<Board> query = entityManager.createQuery(jpql, Board.class);
-        query.setParameter("memberId", memberId);
-        return query.getResultList();
+        return boardJpaRepository.findAllByMemberIdNot(memberId);
     }
 
     @Override
@@ -48,22 +36,32 @@ public class BoardRepositoryImpl implements BoardRepository {
     }
 
     @Override
+    public void delete(final Board board) {
+        boardJpaRepository.delete(board);
+    }
+
+    @Override
     public Optional<Board> findById(final Long id) {
         return boardJpaRepository.findById(id);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         boardJpaRepository.deleteById(id);
     }
 
     @Override
-    public List<Board> findByMemberNickname(String nickname) {
+    public List<Board> findByMemberNickname(final String nickname) {
         return boardJpaRepository.findByMemberNickname(nickname);
     }
 
     @Override
-    public long countByMember(Member member) {
+    public long countByMember(final Member member) {
         return boardJpaRepository.countByMember(member);
+    }
+
+    @Override
+    public Optional<Board> findByIdAndMemberId(final Long id, final Long memberId) {
+        return boardJpaRepository.findByIdAndMemberId(id, memberId);
     }
 }

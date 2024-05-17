@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.board.domain.BoardRepository;
 import mju.paygo.follow.domain.FollowRepository;
+import mju.paygo.likes.exception.exception.MemberNotFoundException;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
 import mju.paygo.profile.ui.dto.ProfileResponse;
@@ -18,10 +19,10 @@ public class ProfileService {
     private final BoardRepository boardRepository;
     private final FollowRepository followRepository;
 
-    public ProfileResponse getProfile(Long memberId) {
+    public ProfileResponse getProfile(final Long memberId) {
         Member member = findMemberById(memberId);
         String nickname = member.getNickname();
-        String content = member.getProfileContent(); // 프로필 내용
+        String content = member.getProfileContent();
         long postCount = boardRepository.countByMember(member);
         long followingCount = followRepository.countByFollower(member);
         long followerCount = followRepository.countByFollowee(member);
@@ -29,8 +30,9 @@ public class ProfileService {
         return new ProfileResponse(nickname, postCount, followingCount, followerCount, content);
     }
 
-    private Member findMemberById(Long memberId) {
+    private Member findMemberById(final Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+                .orElseThrow(MemberNotFoundException::new);
     }
 }
+

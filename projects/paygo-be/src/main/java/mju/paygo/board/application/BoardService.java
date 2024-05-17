@@ -3,6 +3,8 @@ package mju.paygo.board.application;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.board.domain.Board;
 import mju.paygo.board.domain.BoardRepository;
+import mju.paygo.board.exception.exceptions.BoardNotFoundException;
+import mju.paygo.board.exception.exceptions.InvalidMemberException;
 import mju.paygo.board.ui.dto.BoardFindResponse;
 import mju.paygo.comment.domain.CommentRepository;
 import mju.paygo.likes.application.LikesService;
@@ -22,7 +24,58 @@ public class BoardService {
     private final LikesService likesService;
     private final CommentRepository commentRepository;
 
-    private BoardFindResponse toBoardFindResponse(Board board, Long memberId) {
+    public List<BoardFindResponse> findByMemberId(final Long memberId) {
+        return boardRepository.findByMemberId(memberId).stream()
+                .map(board -> toBoardFindResponse(board, memberId))
+                .collect(Collectors.toList());
+    }
+
+    public void updateBoard(final Long boardId, final Long memberId, final String content) {
+        Board board = boardRepository.findByIdAndMemberId(boardId, memberId)
+                .orElseThrow(BoardNotFoundException::new);
+
+        if (!board.getMember().getId().equals(memberId)) {
+            throw new InvalidMemberException();
+        }
+
+        board.updateContent(content);
+        boardRepository.save(board);
+    }
+
+    public void deleteBoard(final Long boardId) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(BoardNotFoundException::new);
+        boardRepository.delete(board);
+    }
+
+    public List<BoardFindResponse> findAllByNickname(final String nickname) {
+        return boardRepository.findByMemberNickname(nickname).stream()
+                .map(board -> toBoardFindResponse(board, board.getMember().getId()))
+                .collect(Collectors.toList());
+    }
+
+    public List<BoardFindResponse> findAllExceptMemberId(final Long memberId) {
+        return boardRepository.findAllExceptMemberId(memberId).stream()
+                .map(board -> toBoardFindResponse(board, memberId))
+                .collect(Collectors.toList());
+    }
+
+    public List<BoardFindResponse> findAllExceptNickname(final String nickname) {
+        return boardRepository.findAll().stream()
+                .filter(board -> !board.getMember().getNickname().equals(nickname))
+                .map(board -> toBoardFindResponse(board, board.getMember().getId()))
+                .collect(Collectors.toList());
+    }
+
+    public Optional<Board> findById(final Long boardId) {
+        return boardRepository.findById(boardId);
+    }
+
+    public Board save(final Board board) {
+        return boardRepository.save(board);
+    }
+
+    private BoardFindResponse toBoardFindResponse(final Board board, final Long memberId) {
         return new BoardFindResponse(
                 board.getId(),
                 board.getContent(),
@@ -31,60 +84,7 @@ public class BoardService {
                 board.getMember().getNickname(),
                 likesService.countLikes(board.getId()),
                 likesService.hasLiked(memberId, board.getId()),
-                commentRepository.countByBoard(board) // 댓글 수 포함
+                commentRepository.countByBoard(board)
         );
-    }
-
-    public List<BoardFindResponse> findByMemberId(Long memberId) {
-        return boardRepository.findByMemberId(memberId).stream()
-                .map(board -> toBoardFindResponse(board, memberId))
-                .collect(Collectors.toList());
-    }
-
-    public void updateBoard(Long boardId, Long memberId, String content) {
-        Optional<Board> optionalBoard = boardRepository.findById(boardId);
-        if (optionalBoard.isPresent()) {
-            Board board = optionalBoard.get();
-            if (board.getMember().getId().equals(memberId)) {
-                board.updateContent(content);
-                boardRepository.save(board);
-            } else {
-                throw new IllegalArgumentException("Member ID does not match the board's owner");
-            }
-        } else {
-            throw new IllegalArgumentException("Board not found");
-        }
-    }
-
-    public void deleteBoard(Long boardId) {
-        boardRepository.deleteById(boardId);
-    }
-
-    public List<BoardFindResponse> findAllByNickname(String nickname) {
-        return boardRepository.findByMemberNickname(nickname).stream()
-                .map(board -> toBoardFindResponse(board, board.getMember().getId()))
-                .collect(Collectors.toList());
-    }
-
-    public List<BoardFindResponse> findAllExceptMemberId(Long memberId) {
-        return boardRepository.findAllExceptMemberId(memberId).stream()
-                .map(board -> toBoardFindResponse(board, memberId))
-                .collect(Collectors.toList());
-    }
-
-
-    public List<BoardFindResponse> findAllExceptNickname(String nickname) {
-        return boardRepository.findAll().stream()
-                .filter(board -> !board.getMember().getNickname().equals(nickname))
-                .map(board -> toBoardFindResponse(board, board.getMember().getId()))
-                .collect(Collectors.toList());
-    }
-
-    public Optional<Board> findById(Long boardId) {
-        return boardRepository.findById(boardId);
-    }
-
-    public Board save(Board board) {
-        return boardRepository.save(board);
     }
 }

@@ -6,8 +6,8 @@ import mju.paygo.member.domain.member.Member;
 import java.util.Optional;
 
 public interface LikesRepository {
-    Optional<Likes> findByMemberAndBoard(Member member, Board board);
-    void deleteByMemberAndBoard(Member member, Board board);
-    long countByBoard(Board board);
-    Likes save(Likes likes);
+    Optional<Likes> findByMemberAndBoard(final Member member, final Board board);
+    void deleteByMemberAndBoard(final Member member, final Board board);
+    long countByBoard(final Board board);
+    Likes save(final Likes likes);
 }

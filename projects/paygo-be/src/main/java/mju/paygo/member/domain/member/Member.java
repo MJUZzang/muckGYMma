@@ -55,10 +55,12 @@ public class Member {
     }
 
     public static Member createWithOAuthLogin(final String email,
-                                              final String nickname) {
+                                              final String nickname,
+                                              final String profileContent) {
         return Member.builder()
                 .email(email)
                 .nickname(nickname)
+                .profileContent(profileContent)
                 .memberRole(MemberRole.MEMBER)
                 .initialized(false)
                 .build();

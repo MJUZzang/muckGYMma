@@ -8,9 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface FollowJpaRepository extends JpaRepository<Follow, Long> {
-    List<Follow> findAllByFollower(Member follower);
-    List<Follow> findAllByFollowee(Member followee);
-    Optional<Follow> findByFollowerAndFollowee(Member follower, Member followee);
-    long countByFollower(Member follower);
-    long countByFollowee(Member followee);
+    boolean existsByFollowerAndFollowee(final Member follower, final Member followee);
+    void deleteByFollowerAndFollowee(final Member follower, final Member followee);
+    List<Follow> findAllByFollower(final Member follower);
+    List<Follow> findAllByFollowee(final Member followee);
+    Optional<Follow> findByFollowerAndFollowee(final Member follower, final Member followee);
+    long countByFollower(final Member follower);
+    long countByFollowee(final Member followee);
 }

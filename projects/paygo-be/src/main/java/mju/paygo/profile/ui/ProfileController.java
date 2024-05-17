@@ -17,7 +17,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @GetMapping
-    public ResponseEntity<ProfileResponse> getProfile(@AuthMember Long memberId) {
+    public ResponseEntity<ProfileResponse> getProfile(@AuthMember final Long memberId) {
         ProfileResponse profile = profileService.getProfile(memberId);
         return ResponseEntity.ok(profile);
     }

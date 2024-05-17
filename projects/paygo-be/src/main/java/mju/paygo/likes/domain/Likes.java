@@ -16,6 +16,7 @@ import mju.paygo.member.domain.member.Member;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Likes {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
