@@ -6,6 +6,7 @@ import mju.paygo.meal.domain.Meal;
 import mju.paygo.meal.domain.MealRepository;
 import mju.paygo.meal.domain.S3Uploader;
 import mju.paygo.meal.domain.vo.Nutrient;
+import mju.paygo.meal.exception.exceptions.MealNotFoundException;
 import mju.paygo.meal.infrastructure.dto.FoodAnalyzeResponse;
 import mju.paygo.meal.infrastructure.dto.FoodPickResponse;
 import mju.paygo.meal.infrastructure.dto.FoodSearchResponse;
@@ -42,5 +43,11 @@ public class MealService {
 
     public List<Meal> findEatenMeals(final Long memberId) {
         return mealRepository.findAllByMemberId(memberId);
+    }
+
+    public void clearMealPlan(final Long memberId, final Long mealId) {
+        Meal meal = mealRepository.findByMemberAndId(memberId, mealId)
+                .orElseThrow(MealNotFoundException::new);
+        meal.clearExercise();
     }
 }
