@@ -39,6 +39,9 @@ public class Member {
     @Column(nullable = false)
     private Boolean initialized;
 
+    @Column(nullable = false)
+    private String profileContent;  // 프로필 소개글 내용
+
     public boolean isAdmin() {
         return this.memberRole.isAdministrator();
     }
