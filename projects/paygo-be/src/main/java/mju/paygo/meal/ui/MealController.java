@@ -12,6 +12,7 @@ import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,5 +56,13 @@ public class MealController {
 
         return ResponseEntity.ok()
                 .body(history);
+    }
+
+    @GetMapping("/{mealId}")
+    public ResponseEntity<MealHistoryResponse> findEatenById(@AuthMember final Long memberId,
+                                                             @PathVariable final Long mealId) {
+        Meal meal = mealService.findEatenMeal(memberId, mealId);
+        return ResponseEntity.ok()
+                .body(MealHistoryResponse.from(meal));
     }
 }

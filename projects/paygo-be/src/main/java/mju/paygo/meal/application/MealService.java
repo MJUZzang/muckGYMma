@@ -50,4 +50,9 @@ public class MealService {
                 .orElseThrow(MealNotFoundException::new);
         meal.clearExercise();
     }
+
+    public Meal findEatenMeal(final Long memberId, final Long mealId) {
+        return mealRepository.findByMemberAndId(memberId, mealId)
+                .orElseThrow(MealNotFoundException::new);
+    }
 }
