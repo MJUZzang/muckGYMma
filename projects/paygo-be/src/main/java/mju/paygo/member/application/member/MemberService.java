@@ -11,6 +11,7 @@ import mju.paygo.member.domain.member.MemberRepository;
 import mju.paygo.member.exception.exceptions.member.MemberNotFoundException;
 import mju.paygo.member.exception.exceptions.member.MemberNotInitializedException;
 import mju.paygo.member.exception.exceptions.member.NicknameAlreadyExistException;
+import mju.paygo.member.infrastructure.member.dto.MemberSettingResponse;
 import mju.paygo.member.ui.member.dto.MemberEditRequest;
 import mju.paygo.member.ui.member.dto.MemberInitializeRequest;
 import mju.paygo.physicalprofile.application.event.PhysicalProfileCreatedEvent;
@@ -116,5 +117,13 @@ public class MemberService {
         }
         Member member = findById(memberId);
         member.updateNickname(nickname);
+    }
+
+    public MemberSettingResponse viewSetting(final Long memberId) {
+        Member member = findById(memberId);
+        if (!member.isInitialized()) {
+            throw new MemberNotInitializedException();
+        }
+        return memberRepository.viewSetting(memberId);
     }
 }

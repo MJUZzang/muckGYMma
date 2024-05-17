@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import mju.paygo.member.application.member.MemberService;
 import mju.paygo.member.application.member.dto.NicknameRequest;
 import mju.paygo.member.domain.member.Member;
+import mju.paygo.member.infrastructure.member.dto.MemberSettingResponse;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import mju.paygo.member.ui.member.dto.MemberEditRequest;
 import mju.paygo.member.ui.member.dto.MemberInitializeRequest;
@@ -30,17 +31,24 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
+    @PatchMapping("/setup")
+    public ResponseEntity<Void> editSetting(@AuthMember final Long memberId, @RequestBody @Valid final MemberEditRequest request) {
+        memberService.editSetting(memberId, request);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/setup")
+    public ResponseEntity<MemberSettingResponse> viewSetting(@AuthMember final Long memberId) {
+        MemberSettingResponse response = memberService.viewSetting(memberId);
+        return ResponseEntity.ok()
+                .body(response);
+    }
+
     @GetMapping("/initialized")
     public ResponseEntity<MemberInitializeResponse> isInitialized(@AuthMember final Long memberId) {
         Member member = memberService.findById(memberId);
         return ResponseEntity.ok()
                 .body(new MemberInitializeResponse(member.isInitialized()));
-    }
-
-    @PatchMapping("/setup")
-    public ResponseEntity<Void> editSetting(@AuthMember final Long memberId, @RequestBody @Valid final MemberEditRequest request) {
-        memberService.editSetting(memberId, request);
-        return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/nickname")

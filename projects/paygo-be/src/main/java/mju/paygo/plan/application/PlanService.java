@@ -104,8 +104,8 @@ public class PlanService {
 
         StringBuilder builder = new StringBuilder();
         builder.append("회원 정보는 아래와 같다.").append("\n");
-        builder.append("성별: ").append(physicalProfile.getGender().getName()).append("\n");
-        builder.append("생년월일: ").append(physicalProfile.getBirth().getBirthDate()).append("\n");
+        builder.append("성별: ").append(physicalProfile.getGender()).append("\n");
+        builder.append("생년월일: ").append(physicalProfile.getBirth()).append("\n");
         builder.append("키: ").append(physicalProfile.getHeight()).append("\n");
         builder.append("현재 체중: ").append(physicalProfile.getWeight()).append("\n");
         builder.append("운동 레벨: ").append(exerciseProfile.getLevel().getName()).append("\n");

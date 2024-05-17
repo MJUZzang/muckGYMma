@@ -3,6 +3,7 @@ package mju.paygo.member.infrastructure.member;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
+import mju.paygo.member.infrastructure.member.dto.MemberSettingResponse;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class MemberRepositoryImpl implements MemberRepository {
 
     private final MemberJpaRepository memberJpaRepository;
+    private final MemberQueryRepository memberQueryRepository;
 
     @Override
     public Optional<Member> findById(final Long id) {
@@ -36,5 +38,10 @@ public class MemberRepositoryImpl implements MemberRepository {
     @Override
     public boolean existsByNickname(final String nickname) {
         return memberJpaRepository.existsByNickname(nickname);
+    }
+
+    @Override
+    public MemberSettingResponse viewSetting(final Long memberId) {
+        return memberQueryRepository.viewSetting(memberId);
     }
 }
