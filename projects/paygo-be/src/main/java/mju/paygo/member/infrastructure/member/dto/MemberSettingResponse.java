@@ -10,16 +10,19 @@ import java.util.stream.Collectors;
 @Getter
 public class MemberSettingResponse {
 
+    String nickname;
     PhysicalSettingResponse physicalSetting;
     Set<String> sports;
     Set<String> exercises;
     ExerciseSettingResponse exerciseSetting;
 
     public MemberSettingResponse(
+            final String nickname,
             final PhysicalSettingResponse physicalSetting,
             final Set<Sports> sports,
             final Set<Exercise> exercises,
             final ExerciseSettingResponse exerciseSetting) {
+        this.nickname = nickname;
         this.physicalSetting = physicalSetting;
         this.sports = collectSports(sports);
         this.exercises = collectExercises(exercises);

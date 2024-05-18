@@ -27,6 +27,7 @@ public class MemberQueryRepository {
 
     public MemberSettingResponse viewSetting(final Long memberId) {
         Tuple tuple = jpaQueryFactory.select(
+                        member.nickname,
                         physicalProfile.birth,
                         physicalProfile.gender,
                         physicalProfile.weight,
@@ -79,6 +80,7 @@ public class MemberQueryRepository {
         }
 
         return new MemberSettingResponse(
+                tuple.get(member.nickname),
                 physicalSetting,
                 sports,
                 exercises,
