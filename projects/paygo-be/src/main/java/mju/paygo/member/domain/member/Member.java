@@ -39,6 +39,9 @@ public class Member {
     @Column(nullable = false)
     private Boolean initialized;
 
+    @Column(nullable = true)
+    private String profileContent;  // 프로필 소개글 내용
+
     public boolean isAdmin() {
         return this.memberRole.isAdministrator();
     }
@@ -52,10 +55,12 @@ public class Member {
     }
 
     public static Member createWithOAuthLogin(final String email,
-                                              final String nickname) {
+                                              final String nickname,
+                                              final String profileContent) {
         return Member.builder()
                 .email(email)
                 .nickname(nickname)
+                .profileContent(profileContent)
                 .memberRole(MemberRole.MEMBER)
                 .initialized(false)
                 .build();
