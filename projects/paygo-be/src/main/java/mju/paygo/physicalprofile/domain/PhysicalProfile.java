@@ -66,4 +66,12 @@ public class PhysicalProfile {
         this.weight = (request.weight() != null) ? request.weight() : this.weight;
         this.height = (request.height() != null) ? request.height() : this.height;
     }
+
+    public String getGender() {
+        return gender.getName();
+    }
+
+    public String getBirth() {
+        return birth.getBirthDate();
+    }
 }

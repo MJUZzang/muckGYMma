@@ -68,4 +68,8 @@ public class Birth {
             throw new BirthInputException();
         }
     }
+
+    public String getBirthDate() {
+        return String.format("%d.%d.%d", year, month, day);
+    }
 }

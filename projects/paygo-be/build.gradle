@@ -43,6 +43,12 @@ dependencies {
 	// OPEN AI GPT
 	implementation "org.springframework.ai:spring-ai-openai-spring-boot-starter:0.8.0-SNAPSHOT"
 
+	// QueryDSL Implementation
+	implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
