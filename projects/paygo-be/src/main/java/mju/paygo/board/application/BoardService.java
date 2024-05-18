@@ -37,7 +37,7 @@ public class BoardService {
         if (!board.getMember().getId().equals(memberId)) {
             throw new InvalidMemberException();
         }
-        boardRepository.save(board);
+        board.updateContent(content);
     }
 
     public void deleteBoard(final Long boardId) {
