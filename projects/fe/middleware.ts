@@ -2,9 +2,9 @@ import { backendUrl } from "@/_utils/urls";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
     if (process.env.NODE_ENV !== "development") {
+        // jwt토큰이 있으면 유효성 검사
         if (request.cookies.has("token")) {
             const token = request.cookies.get("token");
             console.log("token: ", token);
@@ -12,7 +12,6 @@ export async function middleware(request: NextRequest) {
             await fetch(`${backendUrl}/api/login/check`, {
                 method: "GET",
                 credentials: "include",
-                cache: "no-store",
                 headers: {
                     Authorization: `Bearer ${token}`,
                     Cookie: request.cookies
@@ -24,20 +23,26 @@ export async function middleware(request: NextRequest) {
                 },
             })
                 .then((res) => {
-                    console.log("res: ", res.status);
+                    if (res.ok) {
+                        return NextResponse.next();
+                    } else if (res.status === 401) {
+                        return NextResponse.redirect(
+                            new URL("/sign-in", request.url)
+                        );
+                    }
                 })
                 .catch((err) => {
                     console.log("err: ", err);
                 });
+        // jwt토큰이 없으면 로그인 페이지로 이동
         } else {
-            console.log("no token");
-            if (!request.nextUrl.pathname.startsWith("/sign-in")) {
+            if (request.nextUrl.pathname.startsWith("/sign-in")) {
+                return NextResponse.next();
+            } else {
                 return NextResponse.redirect(new URL("/sign-in", request.url));
             }
         }
     }
-
-    return NextResponse.next();
 }
 
 export const config = {
