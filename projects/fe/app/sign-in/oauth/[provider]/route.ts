@@ -27,7 +27,12 @@ export async function GET(request: NextRequest, params: { provider: string }) {
     })
         .then((res) => {
             if (res.ok) {
-                return NextResponse.redirect(new URL("/", request.url));
+                const cookies = res.headers.get("Set-Cookie");
+                return NextResponse.redirect(new URL("/", request.url), {
+                    headers: {
+                        "Set-Cookie": cookies || "" // Ensure that the value is not null
+                    },
+                });
             }
             return NextResponse.redirect(new URL("/sign-in", request.url));
         })
