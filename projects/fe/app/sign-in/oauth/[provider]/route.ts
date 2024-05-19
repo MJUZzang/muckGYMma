@@ -14,9 +14,9 @@ export function generateStaticParams() {
     ];
 }
 
-export async function GET(request: NextRequest, params: { provider: string }) {
+export async function GET(request: NextRequest, {params}: { params: {provider: string}}) {
     const code = request.nextUrl.searchParams.get("code");
-    const provider = params.provider;
+    const provider = params.provider.toUpperCase();
 
     return await fetch(`${backendUrl}/api/login`, {
         method: "POST",
@@ -34,7 +34,9 @@ export async function GET(request: NextRequest, params: { provider: string }) {
                     },
                 });
             }
-            return NextResponse.redirect(new URL("/sign-in", request.url));
+            else {
+                return NextResponse.redirect(new URL("/sign-in", request.url));
+            }
         })
         .catch((err) => {
             console.error(err);
