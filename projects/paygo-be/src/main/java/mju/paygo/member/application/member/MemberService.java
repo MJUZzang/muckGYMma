@@ -41,12 +41,17 @@ public class MemberService {
     }
 
     public void writeInitializeSetting(final Long memberId, final MemberInitializeRequest request) {
+       if (memberRepository.existsByNickname(request.nickname())) {
+           throw new NicknameAlreadyExistException();
+       }
+
        writePhysicalProfile(memberId, request.physicalSetting());
        writePreferSports(memberId, request.sports());
        writePreferExercises(memberId, request.exercises());
        writeExerciseProfile(memberId, request.exerciseSetting());
 
        Member member = findById(memberId);
+       member.updateNickname(request.nickname());
        member.clearInitialize();
     }
 
@@ -76,6 +81,12 @@ public class MemberService {
         Member member = findById(memberId);
         if (!member.isInitialized()) {
             throw new MemberNotInitializedException();
+        }
+        if (request.nickname() != null) {
+            if (memberRepository.existsByNickname(request.nickname())) {
+                throw new NicknameAlreadyExistException();
+            }
+            member.updateNickname(request.nickname());
         }
         editPhysicalProfile(memberId, request.physicalSetting());
         editPreferSports(memberId, request.sports());

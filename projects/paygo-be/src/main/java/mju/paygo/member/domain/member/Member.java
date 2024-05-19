@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mju.paygo.member.exception.exceptions.member.BlankContainsException;
 
 @Getter
 @Builder
@@ -67,6 +68,9 @@ public class Member {
     }
 
     public void updateNickname(final String nickname) {
+        if (nickname.contains(" ")) {
+            throw new BlankContainsException();
+        }
         this.nickname = nickname;
     }
 }
