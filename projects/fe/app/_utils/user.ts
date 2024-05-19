@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { backendUrl } from "./urls";
 
 export async function checkIfSignedIn(request: NextRequest) {
+    console.log(request.nextUrl)
     // jwt토큰이 있으면 유효성 검사
     if (request.cookies.has("token")) {
         const token = request.cookies.get("token");
@@ -39,7 +40,7 @@ export async function checkIfSignedIn(request: NextRequest) {
     }
 }
 
-export async function checkIfJustSignedUp(request: NextRequest) {
+export async function checkIfEnteredInitialInfo(request: NextRequest) {
     if (request.cookies.has("token")) {
         const token = request.cookies.get("token");
 
@@ -62,9 +63,10 @@ export async function checkIfJustSignedUp(request: NextRequest) {
                     throw new Error("Sever responsded with an error");
                 }
             })
-            .then((data) => {
-                if (data.status) {
-                    return data.status as boolean;
+            .then(({ status }: { status: boolean }) => {
+                if (status) {
+                    console.log(status)
+                    return status;
                 } else {
                     return false;
                 }
