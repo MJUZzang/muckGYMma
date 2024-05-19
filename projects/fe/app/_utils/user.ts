@@ -2,7 +2,6 @@ import { NextRequest } from "next/server";
 import { backendUrl } from "./urls";
 
 export async function checkIfSignedIn(request: NextRequest) {
-    console.log(request.nextUrl)
     // jwt토큰이 있으면 유효성 검사
     if (request.cookies.has("token")) {
         const token = request.cookies.get("token");

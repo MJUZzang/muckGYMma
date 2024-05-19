@@ -6,20 +6,24 @@ import type { NextRequest } from "next/server";
 export async function middleware(request: NextRequest) {
     // if (process.env.NODE_ENV !== "development") {
     if (true) {
+        // 로그인한 지 확인
+        if (request.nextUrl.pathname.startsWith("/sign-in"))
+            return NextResponse.next();
+        
         const isSignedIn = await checkIfSignedIn(request);
-
-        if (!isSignedIn) {
+        if (!isSignedIn) 
             return NextResponse.redirect(new URL("/sign-in", request.url));
-        }
+
+
+        // 초기 유저 데이터 입력한 지 확인.
+        if (request.nextUrl.pathname.startsWith("/initial-setup"))
+            return NextResponse.next();
 
         const hasEnteredInitialInfo = await checkIfEnteredInitialInfo(request);
-        if (hasEnteredInitialInfo) {
-            return NextResponse.next();
-        } else {
-            return NextResponse.redirect(new URL("/initial-setup/1", request.url));
-        }
-
+        if (!hasEnteredInitialInfo) 
+            return NextResponse.redirect(new URL("/initial-setup/1", request.url)); 
     }
+    return NextResponse.next();
 }
 
 export const config = {
