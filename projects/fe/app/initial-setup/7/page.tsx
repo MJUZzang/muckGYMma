@@ -5,11 +5,11 @@ import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
 import {
-    selectInitialInfo,
+    selectUserInfo,
     setBirthDate,
     setHeight,
     setWeight,
-} from "../../../lib/slices/initialInfoSlice";
+} from "../../../lib/slices/userInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 import { Noto_Sans_KR } from "next/font/google";
@@ -21,11 +21,13 @@ const notoSansKr = Noto_Sans_KR({
 function Page() {
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const initialInfo = useAppSelector(selectInitialInfo);
+    const initialInfo = useAppSelector(selectUserInfo);
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
+        <div
+            className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}
+        >
             <p className="mt-5 text-xl text-pretty">
                 체중/신장과 생년월일을 알려주세요!
             </p>

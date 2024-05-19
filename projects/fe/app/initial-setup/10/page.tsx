@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setExercises } from "../../../lib/slices/initialInfoSlice";
+import { setExercises } from "../../../lib/slices/userInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 import { Noto_Sans_KR } from "next/font/google";
@@ -37,7 +37,9 @@ function Page() {
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
+        <div
+            className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}
+        >
             <p className="mt-5 text-xl text-pretty">자주하는 운동이 있나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다

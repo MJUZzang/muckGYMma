@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setFrequency } from "../../../lib/slices/initialInfoSlice";
+import { setFrequency } from "../../../lib/slices/userInfoSlice";
 
 import { Noto_Sans_KR } from "next/font/google";
 
@@ -46,7 +46,9 @@ function Page() {
     const dispatch = useAppDispatch();
 
     return (
-        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
+        <div
+            className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}
+        >
             <p className="mt-5 text-xl">운동을 매주 얼마나 자주 하시나요?</p>
             <p className="mt-2 text-xs">이후에도 변경하실 수 있습니다</p>
 

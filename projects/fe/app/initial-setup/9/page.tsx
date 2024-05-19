@@ -4,10 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
-import {
-    selectInitialInfo,
-    setSports,
-} from "../../../lib/slices/initialInfoSlice";
+import { selectUserInfo, setSports } from "../../../lib/slices/userInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 import { Noto_Sans_KR } from "next/font/google";
@@ -48,11 +45,13 @@ function Page() {
     const [selectedSports, setSelectedSports] = useState<string[]>([]);
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const initialInfo = useAppSelector(selectInitialInfo);
+    const initialInfo = useAppSelector(selectUserInfo);
     const [isModelOpen, setIsModalOpen] = useState(false);
 
     return (
-        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
+        <div
+            className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}
+        >
             <p className="mt-5 text-xl text-pretty">
                 자주 즐기는 스포츠가 있나요?
             </p>

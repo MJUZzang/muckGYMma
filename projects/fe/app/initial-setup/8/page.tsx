@@ -3,7 +3,7 @@
 import React, { useActionState, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setExperience } from "../../../lib/slices/initialInfoSlice";
+import { setExperience } from "../../../lib/slices/userInfoSlice";
 
 import { Noto_Sans_KR } from "next/font/google";
 
@@ -39,7 +39,9 @@ function Page() {
     const router = useRouter();
     const dispatch = useAppDispatch();
     return (
-        <div className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}>
+        <div
+            className={`text-app-font-2 h-full flex flex-col animate-page-enter ${notoSansKr.className}`}
+        >
             <p className="mt-5 text-xl">운동 경험이 얼마나 되시나요?</p>
             <p className="mt-2 text-xs">
                 운동 플랜 생성에 사용되며 공유되지 않습니다

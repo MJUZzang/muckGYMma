@@ -2,7 +2,9 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/../lib/store";
 
 // Define a type for the slice state
-export interface initialInfoState {
+export interface userInfoState {
+    username: string;
+
     physicalSetting: {
         birth?: string; // year.month.day 형식
         gender?: string; // 남성, 여성, 그 외
@@ -23,15 +25,16 @@ export interface initialInfoState {
 }
 
 // Define the initial state using that type
-const initialState: initialInfoState = {
+const initialState: userInfoState = {
+    username: "",
     physicalSetting: {},
     sports: [],
     exercises: [],
     exerciseSetting: {},
 };
 
-export const initialInfoSlice = createSlice({
-    name: "initialInfo",
+export const userInfoSlice = createSlice({
+    name: "userInfo",
     // `createSlice` will infer the state type from the `initialState` argument
     initialState,
     reducers: {
@@ -74,6 +77,10 @@ export const initialInfoSlice = createSlice({
         setExercises: (state, action: PayloadAction<string[]>) => {
             state.exercises = action.payload;
         },
+
+        setUsername: (state, action: PayloadAction<string>) => {
+            state.username = action.payload;
+        },
     },
 });
 
@@ -88,8 +95,9 @@ export const {
     setLevel,
     setSports,
     setWeight,
-} = initialInfoSlice.actions;
+    setUsername
+} = userInfoSlice.actions;
 
-export const selectInitialInfo = (state: RootState) => state.initialInfo;
+export const selectUserInfo = (state: RootState) => state.userInfo;
 
-export default initialInfoSlice.reducer;
+export default userInfoSlice.reducer;

@@ -17,8 +17,6 @@ export function generateStaticParams() {
 export async function GET(request: NextRequest, {params}: { params: {provider: string}}) {
     const code = request.nextUrl.searchParams.get("code");
     const provider = params.provider.toUpperCase();
-    console.log(provider);
-    console.log(code);
 
     return await fetch(`${backendUrl}/api/login`, {
         method: "POST",
