@@ -79,12 +79,13 @@ function RestTimer({
     onClose = () => {},
 }: Readonly<RestTimerProps>) {
     const timeIndex =
+        typeof window !== "undefined" &&
         localStorage.getItem("timeIndex") !== "" &&
         localStorage.getItem("timeIndex") !== null
             ? parseInt(localStorage.getItem("timeIndex") as string)
             : 0;
 
-    const [selectedTime, setSelectedTime] = useState(timeIndex);
+    const [selectedTime, setSelectedTime] = useState(0);
     const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
     const [isRunning, setIsRunning] = useState(false);
 

@@ -147,13 +147,13 @@ export default function RootLayout({
             <body
                 className={`max-h-[100dvh] bg-app-bg ${inter.className} dark:text-white`}
             >
-                <InitialLoad>
+                {/* <InitialLoad> */}
                     <StoreProvider>
                         <div className="overflow-hidden">{children}</div>
                         <NavBar />
                         <DarkMode />
                     </StoreProvider>
-                </InitialLoad>
+                {/* </InitialLoad> */}
             </body>
         </html>
     );

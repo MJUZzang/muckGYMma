@@ -31,22 +31,6 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     );
     const [isLiked, setIsLiked] = useState<boolean>(false);
     const postRef = useRef<HTMLDivElement>(null);
-    const [height, setHeight] = React.useState<number>(
-        document.documentElement.clientWidth > 470
-            ? 470
-            : document.documentElement.clientWidth
-    );
-
-    useEffect(() => {
-        function handleWidthChange() {
-            setHeight(postRef.current?.clientWidth || 0);
-        }
-
-        window.addEventListener("resize", handleWidthChange);
-        return () => {
-            window.removeEventListener("resize", handleWidthChange);
-        };
-    }, []);
 
     return (
         <div
@@ -76,17 +60,13 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
 
             {/* 포스트 이미지 */}
             <div
-                className={`overflow-clip`}
-                style={{
-                    width: height,
-                    height: height,
-                }}
+                className={`overflow-clip aspect-square`}
             >
                 <Image
                     src={postInfo.image}
                     alt="Post image"
-                    width={height}
-                    className="rounded-t-lg"
+                    width={325}
+                    className="rounded-t-lg w-full"
                 />
             </div>
 
