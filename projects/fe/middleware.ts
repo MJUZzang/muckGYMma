@@ -3,11 +3,11 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-    if (process.env.NODE_ENV !== "development") {
+    // if (process.env.NODE_ENV !== "development") {
+    if (true) {
         // jwt토큰이 있으면 유효성 검사
         if (request.cookies.has("token")) {
             const token = request.cookies.get("token");
-            console.log("token: ", token);
 
             await fetch(`${backendUrl}/api/login/check`, {
                 method: "GET",

@@ -17,6 +17,8 @@ export function generateStaticParams() {
 export async function GET(request: NextRequest, {params}: { params: {provider: string}}) {
     const code = request.nextUrl.searchParams.get("code");
     const provider = params.provider.toUpperCase();
+    console.log(provider);
+    console.log(code);
 
     return await fetch(`${backendUrl}/api/login`, {
         method: "POST",
@@ -26,7 +28,8 @@ export async function GET(request: NextRequest, {params}: { params: {provider: s
         body: JSON.stringify({ code, provider }),
     })
         .then((res) => {
-            if (res.ok) {
+            console.log(res.status)
+            if (res.status === 200) {
                 const cookies = res.headers.get("Set-Cookie");
                 return NextResponse.redirect(new URL("/", request.url), {
                     headers: {
@@ -38,7 +41,5 @@ export async function GET(request: NextRequest, {params}: { params: {provider: s
                 return NextResponse.redirect(new URL("/sign-in", request.url));
             }
         })
-        .catch((err) => {
-            console.error(err);
-        });
+        .catch(err => console.error(err));
 }
