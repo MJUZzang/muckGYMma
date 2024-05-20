@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { backendUrl } from "./urls";
+import { cookies } from "next/headers";
 
 export async function checkIfSignedIn(request: NextRequest) {
     // jwt토큰이 있으면 유효성 검사
@@ -26,7 +27,7 @@ export async function checkIfSignedIn(request: NextRequest) {
                 }
             })
             .catch((err) => {
-                console.log("err: ", err);
+                console.error("err: ", err);
                 return false;
             });
         // jwt토큰이 없으면 로그인 페이지로 이동
@@ -64,7 +65,6 @@ export async function checkIfEnteredInitialInfo(request: NextRequest) {
             })
             .then(({ status }: { status: boolean }) => {
                 if (status) {
-                    console.log(status)
                     return status;
                 } else {
                     return false;

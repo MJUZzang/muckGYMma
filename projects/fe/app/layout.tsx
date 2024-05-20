@@ -5,6 +5,9 @@ import NavBar from "@/_components/NavBar";
 import DarkMode from "@/_components/DarkMode";
 import StoreProvider from "@/_components/StoreProvider";
 import InitialLoad from "@/_components/InitialLoad";
+import { backendUrl } from "./_utils/urls";
+import { cookies } from "next/headers";
+import { userInfoState } from "../lib/slices/userInfoSlice";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -137,23 +140,46 @@ export const viewport: Viewport = {
     themeColor: "#0B1416",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    // const cookieStore = cookies();
+
+    // const userInfo = await fetch(`${backendUrl}/api/member/setup`, {
+    //     cache: "force-cache",
+    //     method: "GET",
+    //     credentials: "include",
+    //     headers: {
+    //         Cookie: cookieStore
+    //             .getAll()
+    //             .map((cookie) => `${cookie.name}=${cookie.value}`)
+    //             .join("; "),
+    //     },
+    // })
+    //     .then((res) => {
+    //         if (res.ok) return res.json();
+    //         return null;
+    //     })
+    //     .then((data: userInfoState) => {
+    //         return data;
+    //     })
+    //     .catch((err) => {
+    //         console.error(err);
+    //         return null;
+    //     });
+
     return (
         <html lang="en">
             <body
                 className={`max-h-[100dvh] bg-app-bg ${inter.className} dark:text-white`}
             >
-                {/* <InitialLoad> */}
-                    <StoreProvider>
-                        <div className="overflow-hidden">{children}</div>
-                        <NavBar />
-                        <DarkMode />
-                    </StoreProvider>
-                {/* </InitialLoad> */}
+                <StoreProvider>
+                    <div className="overflow-hidden">{children}</div>
+                    <NavBar />
+                    <DarkMode />
+                </StoreProvider>
             </body>
         </html>
     );

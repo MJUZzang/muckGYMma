@@ -25,7 +25,6 @@ export async function GET(request: NextRequest, {params}: { params: {provider: s
         body: JSON.stringify({ code, provider }),
     })
         .then((res) => {
-            console.log(res.status)
             if (res.status === 200) {
                 const cookies = res.headers.get("Set-Cookie");
                 return NextResponse.redirect(new URL("/", request.url), {

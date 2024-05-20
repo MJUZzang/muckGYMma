@@ -3,6 +3,9 @@ import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 
 import { Dosis, Jua, Noto_Sans, Noto_Serif_JP } from "next/font/google";
+import { cookies } from "next/headers";
+import { backendUrl } from "@/_utils/urls";
+import { userInfoState } from "../../lib/slices/userInfoSlice";
 
 const dosis = Dosis({ subsets: ["latin"] });
 const jua = Jua({
@@ -16,7 +19,32 @@ interface WorkoutLayoutProps {
     children: React.ReactNode;
 }
 
-const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
+async function WorkoutLayout(props: WorkoutLayoutProps) {
+    const cookieStore = cookies();
+
+    const userInfo = await fetch(`${backendUrl}/api/member/setup`, {
+        cache: "force-cache",
+        method: "GET",
+        credentials: "include",
+        headers: {
+            Cookie: cookieStore
+                .getAll()
+                .map((cookie) => `${cookie.name}=${cookie.value}`)
+                .join("; "),
+        },
+    })
+        .then((res) => {
+            if (res.ok) return res.json();
+            return null;
+        })
+        .then((data: userInfoState) => {
+            return data;
+        })
+        .catch((err) => {
+            console.error(err);
+            return null;
+        });
+
     return (
         <div className="max-w-[835px] mx-auto w-full">
             <div className="px-4 w-full">
@@ -50,7 +78,7 @@ const WorkoutLayout: React.FC<WorkoutLayoutProps> = (props) => {
                     <p
                         className={`text-app-font-2 font-bold text-xl ${notoSans.className}`}
                     >
-                        jeheecheon
+                        { userInfo ? userInfo.nickname : "John Doe" }
                     </p>
                 </div>
 

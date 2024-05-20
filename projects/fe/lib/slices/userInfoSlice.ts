@@ -3,7 +3,7 @@ import type { RootState } from "@/../lib/store";
 
 // Define a type for the slice state
 export interface userInfoState {
-    username: string;
+    nickname: string;
 
     physicalSetting: {
         birth?: string; // year.month.day 형식
@@ -26,7 +26,7 @@ export interface userInfoState {
 
 // Define the initial state using that type
 const initialState: userInfoState = {
-    username: "",
+    nickname: "",
     physicalSetting: {},
     sports: [],
     exercises: [],
@@ -78,8 +78,8 @@ export const userInfoSlice = createSlice({
             state.exercises = action.payload;
         },
 
-        setUsername: (state, action: PayloadAction<string>) => {
-            state.username = action.payload;
+        setNickname: (state, action: PayloadAction<string>) => {
+            state.nickname = action.payload;
         },
     },
 });
@@ -95,7 +95,7 @@ export const {
     setLevel,
     setSports,
     setWeight,
-    setUsername
+    setNickname
 } = userInfoSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.userInfo;

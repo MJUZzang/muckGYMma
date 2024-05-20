@@ -16,26 +16,11 @@ const notoSansKr = Noto_Sans_KR({
 
 const Settings = () => {
     const router = useRouter();
-    const [darkMode, setDarkMode] = useState(false);
+    
 
     useEffect(() => {
-        const updatedDarkMode =
-            (typeof localStorage !== "undefined" &&
-                localStorage.theme === "dark") ||
-            (!("theme" in localStorage) &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches);
-        setDarkMode(updatedDarkMode);
+
     }, []);
-
-    useEffect(() => {
-        if (darkMode) {
-            document.documentElement.classList.add("dark");
-            localStorage.theme = "dark";
-        } else {
-            localStorage.theme = "light";
-            document.documentElement.classList.remove("dark");
-        }
-    }, [darkMode]);
 
     return (
         <main
@@ -82,29 +67,6 @@ const Settings = () => {
                 </SettingsGroup>
 
                 <SettingsGroup title="디스플레이">
-                    {/* <SettingElement title="다크 모드">
-                        <ToggleSwitch
-                            onClick={() => {
-                                setDarkMode(!darkMode);
-                                if (darkMode) {
-                                    document.documentElement.classList.remove(
-                                        "dark"
-                                    );
-                                    if (typeof localStorage !== "undefined") {
-                                        localStorage.theme = "light";
-                                    }
-                                } else {
-                                    document.documentElement.classList.add(
-                                        "dark"
-                                    );
-                                    if (typeof localStorage !== "undefined") {
-                                        localStorage.theme = "dark";
-                                    }
-                                }
-                            }}
-                        />
-                    </SettingElement> */}
-
                     <SettingElement title="언어">
                         <p>한국어</p>
                         <ArrowDown className="fill-app-font-4" />
