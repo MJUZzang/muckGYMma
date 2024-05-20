@@ -12,7 +12,7 @@ const HeatMap = () => {
     }, []);
 
     return (
-        <div className="rounded-lg bg-white/15 backdrop-blur-lg">
+        <div className="rounded-lg bg-app-bg-1 shadow-lg backdrop-blur-lg">
             <p className="inline-block p-5 w-full text-center text-xl pb-5 text-app-blue font-semibold">
                 Streak Chart
             </p>
@@ -30,6 +30,9 @@ const HeatMap = () => {
                             colors: ["#008FFB"],
                             title: {
                                 text: "2023-2024",
+                                style: {
+                                    color: "#595959"
+                                }
                             },
                         }}
                         series={[
