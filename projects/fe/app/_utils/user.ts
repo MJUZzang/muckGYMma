@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { backendUrl } from "./urls";
 import { cookies } from "next/headers";
+import { userInfoState } from "../../lib/slices/userInfoSlice";
 
 export async function checkIfSignedIn(request: NextRequest) {
     // jwt토큰이 있으면 유효성 검사
@@ -77,4 +78,31 @@ export async function checkIfEnteredInitialInfo(request: NextRequest) {
     } else {
         return false;
     }
+}
+
+export async function FetchNickname() {
+    const cookieStore = cookies();
+
+    const userInfo = await fetch(`${backendUrl}/api/member/setup`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            Cookie: cookieStore
+                .getAll()
+                .map((cookie) => `${cookie.name}=${cookie.value}`)
+                .join("; "),
+        },
+    })
+        .then((res) => {
+            if (res.ok) return res.json();
+            return null;
+        })
+        .then((data: userInfoState) => {
+            return data;
+        })
+        .catch((err) => {
+            console.error(err);
+            return null;
+        });
+    return userInfo?.nickname;
 }

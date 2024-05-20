@@ -135,7 +135,7 @@
 }
 
 @media (prefers-reduced-motion) {
-    .animate-show-task {
+    .animate-show-plan {
         transition: none;
     }
 }

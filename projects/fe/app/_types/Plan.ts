@@ -10,19 +10,21 @@ export interface Workout {
 }
 
 export interface PlanInfo {
-    workouts: Workout[];
-    type: string;
-    isCompleted?: boolean;
-    completedAt?: string;
-    kcal: number;
+    workouts?: Workout[];
+    name: string;
+    time: number;
+    cleared?: boolean;
+    createdAt?: string;
+    total: number;
 }
 
 export const emptyPlanInfo: PlanInfo = {
     workouts: [],
-    type: "",
-    isCompleted: false,
-    completedAt: "",
-    kcal: 0,
+    name: "",
+    cleared: false,
+    createdAt: "",
+    time: 0,
+    total: 0,
 };
 
 export const dummyPlanInfo: PlanInfo = {
@@ -68,8 +70,9 @@ export const dummyPlanInfo: PlanInfo = {
             isCompleted: false,
         },
     ],
-    type: "헬스",
-    kcal: 565,
-    isCompleted: false,
-    completedAt: "2021-06-01",
+    name: "헬스",
+    total: 565,
+    time: 0,
+    cleared: false,
+    createdAt: "2021-06-01",
 };

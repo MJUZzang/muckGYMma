@@ -8,6 +8,7 @@ import Football from "@/_images/Football";
 import { CaclLeftTime } from "@/workout/_utils/LeftTime";
 
 import { Dosis, Jua, Noto_Sans } from "next/font/google";
+import { PlanInfo } from "@/_types/Plan";
 
 const notoSans = Noto_Sans({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });
@@ -18,42 +19,32 @@ const jua = Jua({
 
 function GetIcon(type: string) {
     switch (type) {
-        case "health":
+        case "헬스":
             return <Muscle />;
-        case "swimming":
+        case "수영":
             return <Swimming />;
-        case "football":
+        case "축구":
             return <Football />;
     }
 }
 
-interface TaskProps {
+interface PlanProps {
     className?: string;
-    type: string;
-    level: string;
-    duration: number;
-    workoutCnt: number;
-    dueDate: Date;
-    designType: number;
+    plan: PlanInfo
 }
 
-const Task: React.FC<TaskProps> = ({
+const Plan: React.FC<PlanProps> = ({
     className,
-    type,
-    level,
-    duration,
-    workoutCnt,
-    dueDate,
-    designType,
+    plan
 }) => {
     const [timeLeft, setTimeLeft] = useState("");
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTimeLeft(CaclLeftTime(dueDate));
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [dueDate]);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         setTimeLeft(CaclLeftTime(plan.));
+    //     }, 1000);
+    //     return () => clearInterval(interval);
+    // }, [dueDate]);
 
     return (
         <div
@@ -61,14 +52,12 @@ const Task: React.FC<TaskProps> = ({
             bg-app-bg-1 hover:bg-app-bg-3
             flex justify-between items-center gap-5 ${className}`}
         >
-            <div>{GetIcon(type)}</div>
+            <div>{GetIcon(plan.name)}</div>
 
             <div className="basis-full flex justify-between items-center">
                 <div className={`${jua.className} text-app-font-2`}>
                     <p className={`text-xl text-nowrap`}>
-                        {type === "health" && `헬스`}
-                        {type === "swimming" && `수영`}
-                        {type === "football" && `축구`}
+                        {plan.name}
                     </p>
 
                     <p className="mt-3 text-sm">소멸되기 까지 {timeLeft} 남음</p>
@@ -77,17 +66,17 @@ const Task: React.FC<TaskProps> = ({
                         className={`w-fit mt-1 px-3 py-2 rounded-full bg-app-blue 
                             text-sm text-app-inverted-font`}
                     >
-                        {duration}분 소요
+                        {plan.time}분 소요
                     </div>
                 </div>
             </div>
 
             <div className="text-center font-semibold">
-                <p className={`text-app-font-2 ${dosis.className}`}>950</p>
+                <p className={`text-app-font-2 ${dosis.className}`}>{plan.time}</p>
                 <p className={`text-app-font-2 ${notoSans.className}`}>kcal</p>
             </div>
         </div>
     );
 };
 
-export default Task;
+export default Plan;

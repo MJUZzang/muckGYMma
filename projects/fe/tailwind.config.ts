@@ -126,7 +126,7 @@ const config = {
                     from: { rotate: "0deg" },
                     to: { rotate: "360deg" },
                 },
-                "show-task": {
+                "show-plan": {
                     from: {
                         opacity: "0",
                         filter: "blur(5px)",
@@ -153,7 +153,7 @@ const config = {
                 "accordion-up": "accordion-up 0.2s ease-out",
                 "spin-180": "spin-180 0.6s ease-in-out",
                 "spin-360-slow": "spin-360 3s ease-in-out infinite",
-                "show-task": "show-task 0.6s ease-in-out forwards",
+                "show-plan": "show-plan 0.6s ease-in-out forwards",
                 "page-enter": "page-enter 0.6s ease-in-out forwards",
                 "custom-pulse": "custom-pulse 5s ease-in-out infinite",
             },

@@ -68,11 +68,11 @@ function PlanInfo() {
                         <Muscle className="bg-app-bg-2 rounded-full p-4" />
                         <div>
                             <p className="text-app-font-2 text-lg font-semibold">
-                                {planInfo.type}
+                                {planInfo.name}
                             </p>
                             <p className={`text-app-font-2 flex`}>
                                 <p className={`${dosis.className}`}>
-                                    {planInfo.kcal}
+                                    {planInfo.total}
                                 </p>
                                 &nbsp;kcal
                             </p>
