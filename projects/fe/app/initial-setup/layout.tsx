@@ -61,10 +61,15 @@ const pages = [
     {
         order: 9,
         title: "Workout Experience",
-        progress: "90%",
+        progress: "87%",
     },
     {
         order: 10,
+        title: "Username",
+        progress: "94%",
+    },
+    {
+        order: 11,
         title: "Finished!",
         progress: "100%",
     },
