@@ -110,15 +110,15 @@ export default function Page() {
     
     const router = useRouter();
 
-    useEffect(() => {
-        if (process.env.NODE_ENV === "development") {
-            dispatch(setPredict(dummyData));
-        }
-    });
+    // useEffect(() => {
+    //     if (process.env.NODE_ENV === "development") {
+    //         dispatch(setPredict(dummyData));
+    //     }
+    // });
 
     function handleOkClicked() {
         if (!predict.predictlist) {
-            console.error("predictlist is not exist");
+            console.error("predictlist does not exist");
             return;
         }
 
@@ -148,6 +148,7 @@ export default function Page() {
             })
             .catch((err) => console.error(err));
     }
+
     return (
         <>
             <div
@@ -213,6 +214,7 @@ export default function Page() {
                         !isFoodSelected &&
                         "bg-app-blue/65 text-app-inverted-font hover:bg-app-blue/90"
                     }`}
+                    onClick={handleOkClicked}
                 >
                     영양성분 분석하기
                 </Button>

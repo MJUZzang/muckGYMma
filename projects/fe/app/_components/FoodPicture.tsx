@@ -2,7 +2,7 @@
 
 import Camera from "@/_images/Camera";
 import { backendUrl } from "@/_utils/urls";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
 import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
@@ -13,7 +13,7 @@ interface FoodPictureProps {
 }
 
 function FoodPicture({ className, size = 29 }: FoodPictureProps) {
-    const inputRef = React.createRef<HTMLInputElement>();
+    const inputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const dispatch = useAppDispatch();
 

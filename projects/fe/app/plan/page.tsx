@@ -21,6 +21,7 @@ import {
 } from "@/../lib/slices/planInfoSlice";
 import { formatTimeHour } from "@/plan/_utils/time";
 import { Noto_Sans_KR } from "next/font/google";
+import { dummyPlanInfo } from "@/_types/Plan";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -36,7 +37,7 @@ function Page() {
     const dispatch = useAppDispatch();
     const planInfo = useAppSelector(selectPlanInfo);
     const selectedWorkout = useAppSelector(selectSelectedWorkout);
-    const workout = useAppSelector(selectPlanInfo).workouts[selectedWorkout];
+    const workout = planInfo.workouts![selectedWorkout];
 
     const [selectedSet, setSelectedSet] = useState(0);
 
@@ -189,9 +190,9 @@ function Page() {
                             );
 
                             // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
-                            for (let i = 0; i < planInfo.workouts.length; i++) {
+                            for (let i = 0; i < planInfo.workouts!.length; i++) {
                                 if (
-                                    !planInfo.workouts[i].isCompleted &&
+                                    !planInfo.workouts![i].isCompleted &&
                                     i !== selectedWorkout
                                 ) {
                                     dispatch(setSelectedWorkout(i));

@@ -38,7 +38,7 @@ function PlanInfo() {
         if (index === selectedWorkout) {
             return "bg-app-blue-2 scale-[105%]";
         }
-        if (planInfo.workouts[index].isCompleted) {
+        if (planInfo.workouts && planInfo.workouts[index].isCompleted) {
             return "bg-gray-700 text-app-inverted-font-4 scale-[105%]";
         }
         return "bg-gray-400 text-app-inverted-font-4";
@@ -86,7 +86,7 @@ function PlanInfo() {
                     </div>
 
                     <div className="space-y-3 mt-6 group px-4">
-                        {planInfo.workouts.map((workout, index) => (
+                        {planInfo.workouts && planInfo.workouts.map((workout, index) => (
                             <div
                                 key={index}
                                 className={`shadow-xl flex justify-between items-center p-3 rounded-lg transition-all duration-500 ease-in-out
@@ -147,7 +147,7 @@ function PlanInfo() {
                         className={`bg-app-blue-2 ${
                             !(
                                 selectedWorkout &&
-                                !planInfo.workouts[selectedWorkout].isCompleted
+                                (planInfo.workouts && planInfo.workouts[selectedWorkout].isCompleted)
                             ) && "bg-app-blue/20 text-app-inverted-font"
                         }`}
                     >
