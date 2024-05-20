@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Noto_Sans_KR } from "next/font/google";
+import { backendUrl } from "@/_utils/urls";
+import { userInfoState } from "../../lib/slices/userInfoSlice";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -83,6 +85,21 @@ function InitialSetupLayout({
     }, [pathname]);
 
     useEffect(() => {
+        fetch(`${backendUrl}/api/member/setup`, {
+            cache: "force-cache",
+            method: "GET",
+            credentials: "include",
+        })
+            .then((res) => {
+                if (res.ok) return res.json();
+            })
+            .then((data: userInfoState) => {
+                console.log(data);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
         document.documentElement.classList.add("overflow-hidden");
         // document.body.classList.add("overflow-y-hidden");
         return () => {
@@ -100,7 +117,9 @@ function InitialSetupLayout({
                         onClick={() => router.back()}
                     />
                 )}
-                <p className={`inline-block w-full text-center font-semibold text-app-font-3 ${notoSansKr.className}`}>
+                <p
+                    className={`inline-block w-full text-center font-semibold text-app-font-3 ${notoSansKr.className}`}
+                >
                     {pageInfo.title}
                 </p>
             </div>

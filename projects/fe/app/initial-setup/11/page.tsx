@@ -4,10 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
-import {
-    selectUserInfo,
-    setWeight,
-} from "../../../lib/slices/userInfoSlice";
+import { selectUserInfo, setNickname } from "../../../lib/slices/userInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 import { Noto_Sans_KR } from "next/font/google";
@@ -34,16 +31,13 @@ function Page() {
             </p>
 
             <div className="mt-7">
-
                 <label className="flex justify-between mt-5">
                     유저이름
                     <div className="flex flex-col items-end">
                         <input
                             type="text"
                             onInput={(e) => {
-                                dispatch(
-                                    setWeight(parseInt(e.currentTarget.value))
-                                );
+                                dispatch(setNickname(e.currentTarget.value));
                             }}
                             className="bg-app-bg-1 rounded-lg py-1 pr-3 w-[110px] text-center
                             focus:outline-1 focus:outline-app-blue-1 peer"
@@ -56,11 +50,10 @@ function Page() {
                 onClick={() => {
                     setTimeout(() => {
                         if (
-                            initialInfo.physicalSetting.birth ||
-                            initialInfo.physicalSetting.weight ||
-                            initialInfo.physicalSetting.height
+                            initialInfo.nickname &&
+                            initialInfo.nickname !== ""
                         ) {
-                            router.push("/initial-setup/8");
+                            router.push("/initial-setup/12");
                         } else {
                             setIsModalOpen(true);
                         }
@@ -68,9 +61,8 @@ function Page() {
                 }}
                 title="다음"
                 className={`${
-                    (!initialInfo.physicalSetting.birth ||
-                        !initialInfo.physicalSetting.weight ||
-                        !initialInfo.physicalSetting.height) &&
+                    !initialInfo.nickname &&
+                    initialInfo.nickname === "" &&
                     "bg-app-blue/65 text-app-inverted-font hover:bg-app-blue/90"
                 }`}
             />

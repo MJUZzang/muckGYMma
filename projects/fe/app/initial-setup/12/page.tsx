@@ -53,8 +53,6 @@ function Page() {
                 <ForwardButton
                     title="알겠어!"
                     onClick={() => {
-                        console.log(initialInfo);
-
                         fetch(`${backendUrl}/api/member/setup`, {
                             method: "POST",
                             headers: {
