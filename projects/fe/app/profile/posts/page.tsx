@@ -1,9 +1,15 @@
+"use client";
+
 import Image from "next/image";
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import exampleImage from "@/_images/pooh.jpg";
 import Post from "@/community/following/_components/Post";
+import UploadMenu from "@/_components/UploadMenu";
+import Camera from "@/_images/Camera";
 
 function Page() {
+    const [showUploadMenu, setShowUploadMenu] = useState(false);
+
     const dummyPost = {
         comments: 0,
         content:
@@ -27,11 +33,14 @@ function Page() {
         //         </div>
         //     ))}
         // </div>
-        <div className="flex flex-col items-center gap-3">
-            {Array.from({ length: 16 }).map((_, i) => (
-                <Post key={i} postInfo={dummyPost} />
-            ))}
-        </div>
+
+        <>
+            <div className="flex flex-col items-center gap-3">
+                {Array.from({ length: 16 }).map((_, i) => (
+                    <Post key={i} postInfo={dummyPost} />
+                ))}
+            </div>
+        </>
     );
 }
 

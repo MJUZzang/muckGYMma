@@ -9,6 +9,8 @@ import Forum from "@/_images/Forum";
 import { usePathname } from "next/navigation";
 import FoodPicture from "@/_components/FoodPicture";
 import { Noto_Sans_KR } from "next/font/google";
+import Camera from "@/_images/Camera";
+import UploadMenu from "./UploadMenu";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -24,6 +26,7 @@ const excepts = [
 const NavBar = () => {
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
+    const [showUploadMenu, setShowUploadMenu] = useState(false);
 
     useEffect(() => {
         let temp = true;
@@ -99,8 +102,18 @@ const NavBar = () => {
                         </p>
                     </Link>
 
-                    <div className="bg-app-blue p-3 rounded-full relative bottom-5 cursor-pointer">
-                        <FoodPicture className="fill-app-bg" />
+                    <div
+                        className="bg-app-blue p-3 rounded-full relative bottom-5 cursor-pointer"
+                        onClick={() => setShowUploadMenu(!showUploadMenu)}
+                    >
+                        <UploadMenu
+                            isVisible={showUploadMenu}
+                            className={`absolute bottom-[56px]`}
+                        />
+
+                        <Camera className="fill-app-bg" />
+
+                        {/* <FoodPicture className="fill-app-bg" /> */}
                     </div>
 
                     <Link

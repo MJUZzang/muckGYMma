@@ -1,21 +1,24 @@
 "use client";
 
-import Camera from "@/_images/Camera";
-import { backendUrl } from "@/_utils/urls";
-import React, { FormEvent, useRef } from "react";
 import { useRouter } from "next/navigation";
+import React, { FormEvent, useRef } from "react";
 import { useAppDispatch } from "@/../lib/hooks";
+import { backendUrl } from "@/_utils/urls";
 import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
 
-interface FoodPictureProps {
+interface UploadMenuProps {
     className?: string;
-    size?: number;
+    isVisible: boolean;
 }
 
-function FoodPicture({ className, size = 29 }: FoodPictureProps) {
+function UploadMenu({ className, isVisible }: UploadMenuProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const dispatch = useAppDispatch();
+
+    function handleClicked() {
+        inputRef.current?.click();
+    }
 
     function handleUpload(e: FormEvent<HTMLInputElement>) {
         if (e.currentTarget.files) {
@@ -54,24 +57,32 @@ function FoodPicture({ className, size = 29 }: FoodPictureProps) {
         }
     }
 
-    function handleClicked() {
-        inputRef.current?.click();
-    }
-
     return (
         <>
+            <div
+                className={`bg-app-bg shadow-xl text-app-font-2 font-semibold 
+            text-base px-3 py-2 rounded-2xl transition-opacity duration-500
+            flex flex-col items-start ${
+                isVisible ? "opacity-100" : "opacity-0"
+            } ${className}`}
+            >
+                <button className="text-nowrap">포스트 작성</button>
+
+                <div className="my-1 border-b-[1px] border-b-app-font-6 w-full" />
+
+                <button className="text-nowrap" onClick={handleClicked}>
+                    식사 업로드
+                </button>
+            </div>
+
             <input
                 ref={inputRef}
                 className="hidden"
                 type="file"
                 onInput={handleUpload}
             />
-
-            <div onClick={handleClicked} className={`${className}`}>
-                <Camera size={size} />
-            </div>
         </>
     );
 }
 
-export default FoodPicture;
+export default UploadMenu;
