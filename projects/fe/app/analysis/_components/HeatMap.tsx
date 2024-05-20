@@ -31,8 +31,22 @@ const HeatMap = () => {
                             title: {
                                 text: "2023-2024",
                                 style: {
-                                    color: "#595959"
-                                }
+                                    color: "#595959",
+                                },
+                            },
+                            xaxis: {
+                                labels: {
+                                    style: {
+                                        colors: "#595959",
+                                    },
+                                },
+                            },
+                            yaxis: {
+                                labels: {
+                                    style: {
+                                        colors: "#595959",
+                                    },
+                                },
                             },
                         }}
                         series={[

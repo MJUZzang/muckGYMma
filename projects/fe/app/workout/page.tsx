@@ -9,6 +9,59 @@ import { userInfoState } from "@/../lib/slices/userInfoSlice";
 import { FetchNickname as fetchNickname } from "@/_utils/user";
 import { fetchTodoWorkoutPlans } from "@/_utils/plan";
 import Plans from "@/workout/_components/Plans";
+import { PlanInfo } from "@/_types/Plan";
+
+const dummyList: PlanInfo[] = [
+    {
+        name: "헬스",
+        time: 1804,
+        cleared: false,
+        createdAt: "2024-018-05T00:00:00Z",
+        total: 290,
+    },
+    {
+        name: "수영",
+        time: 1804,
+        cleared: false,
+        createdAt: "2024-018-05T00:00:00Z",
+        total: 290,
+    },
+    {
+        name: "축구",
+        time: 1804,
+        cleared: false,
+        createdAt: "2024-018-05T00:00:00Z",
+        total: 290,
+    },
+    {
+        name: "축구",
+        time: 1804,
+        cleared: false,
+        createdAt: "2024-018-05T00:00:00Z",
+        total: 290,
+    },
+    {
+        name: "축구",
+        time: 1804,
+        cleared: false,
+        createdAt: "2024-018-05T00:00:00Z",
+        total: 290,
+    },
+    {
+        name: "축구",
+        time: 1804,
+        cleared: false,
+        createdAt: "2024-018-05T00:00:00Z",
+        total: 290,
+    },
+    {
+        name: "축구",
+        time: 1804,
+        cleared: false,
+        createdAt: "2024-018-05T00:00:00Z",
+        total: 290,
+    },
+];
 
 const dosis = Dosis({ subsets: ["latin"] });
 const jua = Jua({
@@ -20,8 +73,9 @@ const notnSerifJP = Noto_Serif_JP({ subsets: ["latin"], weight: "900" });
 
 async function WorkoutPage() {
     const nickname = await fetchNickname();
-    const plans = await fetchTodoWorkoutPlans();
-    
+    // const plans = await fetchTodoWorkoutPlans();
+    const plans = dummyList;
+
     return (
         <div className="max-w-[835px] mx-auto w-full">
             <div className="px-4 w-full">
@@ -55,7 +109,7 @@ async function WorkoutPage() {
                     <p
                         className={`text-app-font-2 font-bold text-xl ${notoSans.className}`}
                     >
-                        { nickname ? nickname : "John Doe" }
+                        {nickname ? nickname : "John Doe"}
                     </p>
                 </div>
 
@@ -155,6 +209,6 @@ async function WorkoutPage() {
             </div>
         </div>
     );
-};
+}
 
 export default WorkoutPage;

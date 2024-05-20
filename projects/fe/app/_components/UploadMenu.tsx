@@ -61,10 +61,10 @@ function UploadMenu({ className, isVisible }: UploadMenuProps) {
         <>
             <div
                 className={`bg-app-bg shadow-xl text-app-font-2 font-semibold 
-            text-base px-3 py-2 rounded-2xl transition-opacity duration-500
-            flex flex-col items-start ${
+                text-base px-3 py-2 rounded-2xl transition-opacity duration-500
+                flex flex-col items-start ${
                 isVisible ? "opacity-100" : "opacity-0"
-            } ${className}`}
+                } ${className}`}
             >
                 <button className="text-nowrap">포스트 작성</button>
 
