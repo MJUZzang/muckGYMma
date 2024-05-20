@@ -3,7 +3,11 @@
 import React, { useState } from "react";
 import Cropper, { Area, Point } from "react-easy-crop";
 import { getOrientation } from "get-orientation/browser";
-import { ORIENTATION_TO_ANGLE, getRotatedImage } from "@/_utils/canvas";
+import {
+    ORIENTATION_TO_ANGLE,
+    getCroppedImg,
+    getRotatedImage,
+} from "@/_utils/canvas";
 import { Slider } from "@/_components/shadcn/ui/slider";
 
 function readFile(file: File): Promise<string | ArrayBuffer | null> {
@@ -16,13 +20,32 @@ function readFile(file: File): Promise<string | ArrayBuffer | null> {
 
 const UploadPostPage = () => {
     const [imageSrc, setImageSrc] = useState<string | null>(null);
+    const [croppedImage, setCroppedImage] = useState<string | null>(null);
 
     const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const [rotation, setRotation] = useState(0);
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(
+        null
+    );
+
+    const showCroppedImage = async () => {
+        if (!imageSrc || !croppedAreaPixels) return;
+        try {
+            const croppedImage = await getCroppedImg(
+                imageSrc,
+                croppedAreaPixels,
+                rotation
+            );
+            console.log("donee", { croppedImage });
+            setCroppedImage(croppedImage);
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
     const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-        console.log(croppedArea, croppedAreaPixels);
+        setCroppedAreaPixels(croppedAreaPixels);
     };
 
     const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +84,7 @@ const UploadPostPage = () => {
                         crop={crop}
                         zoom={zoom}
                         rotation={rotation}
-                        aspect={4 / 3}
+                        aspect={1 / 1}
                         onCropChange={setCrop}
                         onCropComplete={onCropComplete}
                         onRotationChange={setRotation}

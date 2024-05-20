@@ -21,6 +21,7 @@ const excepts = [
     "/plan",
     "/prediction",
     "/settings",
+    "/post",
 ];
 
 const NavBar = () => {

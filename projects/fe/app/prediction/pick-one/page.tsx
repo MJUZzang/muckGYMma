@@ -12,11 +12,11 @@ import {
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import ConfirmModal from "@/prediction/pick-one/_components/ConfirmModal";
-import { Noto_Sans_KR } from "next/font/google";
 import ArrowBack from "@/_images/ArrowBack";
 import Button from "@/_components/Button";
 import { backendUrl } from "@/_utils/urls";
 import { useRouter } from "next/navigation";
+import { Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
