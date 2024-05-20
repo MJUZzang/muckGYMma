@@ -5,7 +5,7 @@ import Muscle from "@/_images/Muscle";
 import NavigateNext from "@/_images/NavigateNext";
 import Swimming from "@/_images/Swimming";
 import Football from "@/_images/Football";
-import { CaclLeftTime, CalcLeftTimeFromNow, timeUntilSevenDaysLater } from "@/workout/_utils/LeftTime";
+import { CaclLeftTime, timeUntilSevenDaysLater } from "@/workout/_utils/LeftTime";
 
 import { Dosis, Jua, Noto_Sans } from "next/font/google";
 import { PlanInfo } from "@/_types/Plan";
