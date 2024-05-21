@@ -36,7 +36,9 @@ function Page() {
                 {welcomingText}
             </p>
             <div className="space-y-10 mt-auto">
-                <Welcome />
+                <div className="max-w-[470px]">
+                    <Welcome />
+                </div>
 
                 <ForwardButton
                     title="안녕!"

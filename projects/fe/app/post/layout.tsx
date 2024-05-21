@@ -13,7 +13,7 @@ function PostLayout({
     return (
         <>
             <div
-                className={`grid grid-cols-3 px-2 py-[6px] shadow-md ${notoSansKr.className}`}
+                className={`grid grid-cols-3 px-2 h-[45px] shadow-md ${notoSansKr.className}`}
             >
                 <Link href="/workout" className="w-full flex justify-start items-center">
                     <XButton className="stroke-app-font-3" size={33} />
