@@ -7,7 +7,6 @@ import AccountCircle from "@/_images/AccountCircle";
 import Workout from "@/_images/Workout";
 import Forum from "@/_images/Forum";
 import { usePathname } from "next/navigation";
-import FoodPicture from "@/_components/FoodPicture";
 import { Noto_Sans_KR } from "next/font/google";
 import Camera from "@/_images/Camera";
 import UploadMenu from "./UploadMenu";
@@ -32,7 +31,7 @@ const NavBar = () => {
     useEffect(() => {
         let temp = true;
         for (const except of excepts) {
-            if (pathname.includes(except)) {
+            if (pathname.startsWith(except)) {
                 temp = false;
                 break;
             }
