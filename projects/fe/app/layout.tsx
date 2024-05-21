@@ -1,15 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import "@/_styles/globals.css";
 import NavBar from "@/_components/NavBar";
 import DarkMode from "@/_components/DarkMode";
 import StoreProvider from "@/_components/StoreProvider";
-import InitialLoad from "@/_components/InitialLoad";
-import { backendUrl } from "./_utils/urls";
-import { cookies } from "next/headers";
-import { userInfoState } from "../lib/slices/userInfoSlice";
 
-const inter = Inter({ subsets: ["latin"] });
 
 const APP_NAME = "먹짐마";
 const APP_DEFAULT_TITLE = "먹짐마";
@@ -173,7 +167,7 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`max-h-[100dvh] bg-app-bg ${inter.className} dark:text-white`}
+                className={`max-h-[100dvh] bg-app-bg`}
             >
                 <StoreProvider>
                     <div className="overflow-hidden">{children}</div>

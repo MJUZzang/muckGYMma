@@ -5,6 +5,7 @@ import React, { FormEvent, useRef } from "react";
 import { useAppDispatch } from "@/../lib/hooks";
 import { backendUrl } from "@/_utils/urls";
 import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
+import Link from "next/link";
 
 interface UploadMenuProps {
     className?: string;
@@ -66,7 +67,7 @@ function UploadMenu({ className, isVisible }: UploadMenuProps) {
                 isVisible ? "opacity-100" : "opacity-0"
                 } ${className}`}
             >
-                <button className="text-nowrap">포스트 작성</button>
+                <Link href="/post/write" className="text-nowrap">포스트 작성</Link>
 
                 <div className="my-1 border-b-[1px] border-b-app-font-6 w-full" />
 

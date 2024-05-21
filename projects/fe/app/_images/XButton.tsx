@@ -14,8 +14,8 @@ function XButton({ className = "stroke-[#222222]", size = 24 }: Readonly<XButton
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
         >
-            <path d="M18 6L6 18" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M6 6L18 18" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M18 6L6 18" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} />
+            <path d="M6 6L18 18" strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.6} />
         </svg>
     );
 }

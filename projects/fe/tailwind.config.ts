@@ -139,8 +139,9 @@ const config = {
                     },
                 },
                 "page-enter": {
-                    from: { transform: "translateX(100%)", opacity: "0" },
-                    to: { transform: "translateX(0)", opacity: "1" },
+                    "0%": { transform: "translateX(100%)", opacity: "0" },
+                    "10%": { transform: "translateX(100%)", opacity: "0.9" },
+                    "100%": { transform: "translateX(0)", opacity: "1" },
                 },
                 "custom-pulse": {
                     "0%": { opacity: ".3" },

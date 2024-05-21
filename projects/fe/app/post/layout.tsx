@@ -13,16 +13,20 @@ function PostLayout({
     return (
         <>
             <div
-                className={`grid grid-cols-3 px-2 h-[45px] shadow-md ${notoSansKr.className}`}
+                className={`grid grid-cols-3 px-2 h-[55px] bg-app-bg border-b-[1px] border-b-app-bg-2 ${notoSansKr.className}`}
             >
-                <Link href="/workout" className="w-full flex justify-start items-center">
+                <Link
+                    href="/workout"
+                    className="w-full flex justify-start items-center"
+                >
                     <XButton className="stroke-app-font-3" size={33} />
                 </Link>
-                <div className="w-full flex items-center justify-center text-sm text-app-font-3">
+                <div className="w-full flex items-center justify-center font-semibold text-base text-app-font-3">
                     새 포스트 작성
                 </div>
                 <div className="w-full flex justify-end items-center"></div>
             </div>
+
             {children}
         </>
     );
