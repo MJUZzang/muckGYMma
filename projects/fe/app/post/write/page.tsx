@@ -74,7 +74,7 @@ function WritePage() {
         <div className={`flex flex-col min-h-[100dvh] absolute top-0 pt-[55px] w-full ${notoSansKr.className}`}>
             <div
                 ref={emblaRef}
-                className="overflow-hidden flex flex-col mt-5 w-full h-fit"
+                className="overflow-hidden flex flex-col mt-5 w-full h-fit pb-5"
             >
                 <div className="flex text-black">
                     {activeIndex <= 3 && (
@@ -96,7 +96,7 @@ function WritePage() {
                         <div
                             key={i}
                             className={`aspect-square h-[40dvh] shrink-0 grow-0 overflow-clip
-                            border-2 border-app-blue-3 shadow-lg bg-gray-50 rounded-2xl
+                            border-2 border-app-bg-2 shadow-lg bg-gray-50 rounded-2xl
                             last:mr-[10vw] ml-[5vw]
                             flex justify-center items-center`}
                         >

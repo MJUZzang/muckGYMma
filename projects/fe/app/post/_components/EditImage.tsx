@@ -107,9 +107,7 @@ const EditImage = ({ imageSrc, onCrop, onClose }: EditImageProps) => {
         <div
             className={`absolute bg-app-bg top-0 left-0 w-full h-[100dvh] flex flex-col animate-page-enter ${notoSansKr.className}`}
         >
-            <div
-                className={`grid grid-cols-3 px-2 h-[55px] bg-app-bg border-b-[1px] border-b-app-bg-2 ${notoSansKr.className}`}
-            >
+            <div className="grid grid-cols-3 px-2 h-[55px] bg-app-bg border-b-[1px] border-b-app-bg-2">
                 <button
                     onClick={() => {
                         onClose();
@@ -140,15 +138,17 @@ const EditImage = ({ imageSrc, onCrop, onClose }: EditImageProps) => {
                     onTouchRequest={onTouchRequest}
                 />
                 {showZoomHint && (
-                    <div className="zoom-hint">
-                        <p>
-                            Use ⌘ + scroll (or ctrl + scroll) to zoom the image
+                    <div className="text-black z-[50] absolute w-full h-full flex justify-center items-center pointer-events-none">
+                        <p className="bg-black/70 p-3 mx-3 rounded-sm text-white/90 text-lg text-pretty pointer-events-none">
+                            ⌘ + 마우스휠 (또는 ctrl + 마우스휠) 로 확대/축소
                         </p>
                     </div>
                 )}
-                {showMultiTouchHint && (
-                    <div className="touch-hint">
-                        <p>Use 2 fingers to interact with the image</p>
+                {!showZoomHint && showMultiTouchHint && (
+                    <div className="text-black z-[49] absolute w-full h-full flex justify-center items-center pointer-events-none">
+                        <p className="bg-black/70 p-3 mx-3 rounded-sm text-white/90 text-lg text-pretty pointer-events-none">
+                            두 손가락으로 확대/축소, 회전
+                        </p>
                     </div>
                 )}
             </div>
