@@ -10,6 +10,11 @@ import EditImage from "@/post/_components/EditImage";
 import { getOrientation } from "get-orientation/browser";
 import { ORIENTATION_TO_ANGLE, getRotatedImage } from "@/_utils/canvas";
 import Button from "@/_components/Button";
+import { Noto_Sans_KR } from "next/font/google";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+});
 
 function readFile(file: File): Promise<string | ArrayBuffer | null> {
     return new Promise((resolve) => {
@@ -66,15 +71,15 @@ function WritePage() {
     };
 
     return (
-        <div className="flex flex-col min-h-[100dvh] absolute top-0 pt-[55px]">
+        <div className={`flex flex-col min-h-[100dvh] absolute top-0 pt-[55px] w-full ${notoSansKr.className}`}>
             <div
                 ref={emblaRef}
-                className="relative overflow-hidden flex flex-col mt-5 w-full"
+                className="overflow-hidden flex flex-col mt-5 w-full h-fit"
             >
                 <div className="flex text-black">
                     {activeIndex <= 3 && (
                         <button
-                            className="aspect-square ml-[10vw] last:mr-[10vw] w-[76vw] max-w-[600px] shrink-0 grow-0 
+                            className="aspect-square ml-[10vw] last:mr-[10vw] h-[40dvh] shrink-0 grow-0 
                             border-2 border-app-bg-2 shadow-lg bg-gray-50 rounded-2xl
                             flex justify-center items-center"
                             onClick={() => {
@@ -90,8 +95,8 @@ function WritePage() {
                     {Array.from({ length: activeIndex }).map((_, i) => (
                         <div
                             key={i}
-                            className={`aspect-square w-[76vw] max-w-[600px] shrink-0 grow-0 overflow-clip
-                            border-2 border-app-bg-2 shadow-lg bg-gray-50 rounded-2xl
+                            className={`aspect-square h-[40dvh] shrink-0 grow-0 overflow-clip
+                            border-2 border-app-blue-3 shadow-lg bg-gray-50 rounded-2xl
                             last:mr-[10vw] ml-[5vw]
                             flex justify-center items-center`}
                         >
@@ -106,13 +111,23 @@ function WritePage() {
                 </div>
             </div>
 
-            <div className="px-3 h-full mt-auto">
-                    
+            <div className="px-3 mt-auto flex flex-col gap-1">
+                <p className="text-lg text-app-font-4 font-semibold">
+                    포스트 내용
+                </p>
+                <textarea
+                    maxLength={700}
+                    onChange={(e) => setText(e.target.value)}
+                    rows={1}
+                    className="w-full h-[25dvh] py-2 rounded-xl px-3 bg-app-bg-2 text-app-font 
+                    focus:outline-none resize-none overflow-y-auto"
+                    placeholder="오늘 하루를 기록해보세요."
+                />
             </div>
 
-            <div className="bg-app-bg w-full pt-3 pb-6 px-3 mt-1 border-t-[1px] border-app-bg-3">
+            <div className="bg-app-bg w-full pt-3 pb-6 px-3 mt-2 border-t-[1px] border-app-bg-3">
                 <Button onClick={() => {}} className="bg-app-blue-1">
-                    일기 업로드
+                    포스트 작성완료
                 </Button>
             </div>
 

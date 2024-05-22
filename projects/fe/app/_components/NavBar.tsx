@@ -103,7 +103,7 @@ const NavBar = () => {
                     </Link>
 
                     <div
-                        className="bg-app-blue p-3 rounded-full relative bottom-5 cursor-pointer"
+                        className="shadow-md bg-app-blue p-3 rounded-full relative bottom-5 cursor-pointer"
                         onClick={() => setShowUploadMenu(!showUploadMenu)}
                     >
                         <UploadMenu

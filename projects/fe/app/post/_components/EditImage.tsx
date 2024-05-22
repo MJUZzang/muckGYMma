@@ -6,8 +6,6 @@ import { getCroppedImg } from "@/_utils/canvas";
 import { Slider } from "@/_components/shadcn/ui/slider";
 import Button from "@/_components/Button";
 import { Noto_Sans_KR } from "next/font/google";
-import Link from "next/link";
-import XButton from "@/_images/XButton";
 import ArrowBack from "@/_images/ArrowBack";
 
 const notoSansKr = Noto_Sans_KR({
