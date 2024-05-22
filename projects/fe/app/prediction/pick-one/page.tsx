@@ -151,13 +151,18 @@ export default function Page() {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                }).then((res) => {
-                    if (res.ok) {
-                        return res.json();
-                    } else {
-                        throw new Error("");
-                    }
-                });
+                })
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.json();
+                        } else {
+                            throw new Error("");
+                        }
+                    })
+                    .then((data) => {
+                        console.log(data);
+                    })
+                    .catch((err) => console.error(err));
 
                 router.push("/");
             })
