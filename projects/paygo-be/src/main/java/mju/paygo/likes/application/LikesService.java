@@ -6,14 +6,14 @@ import mju.paygo.board.domain.BoardRepository;
 import mju.paygo.likes.domain.Likes;
 import mju.paygo.likes.domain.LikesRepository;
 import mju.paygo.likes.exception.exception.BoardNotFoundException;
-import mju.paygo.likes.exception.exception.LikeAlreadyExistsException;
-import mju.paygo.likes.exception.exception.LikeNotFoundException;
 import mju.paygo.likes.exception.exception.MemberNotFoundException;
 import mju.paygo.likes.ui.dto.LikesResponse;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
@@ -24,26 +24,24 @@ public class LikesService {
     private final MemberRepository memberRepository;
     private final BoardRepository boardRepository;
 
-    public void like(final Long memberId, final Long boardId) {
+    public LikesResponse toggleLike(final Long memberId, final Long boardId) {
         Member member = findMemberById(memberId);
         Board board = findBoardById(boardId);
 
-        if (likesRepository.findByMemberAndBoard(member, board).isPresent()) {
-            throw new LikeAlreadyExistsException();
+        Optional<Likes> existingLike = likesRepository.findByMemberAndBoard(member, board);
+
+        boolean isLiked;
+        if (existingLike.isPresent()) {
+            likesRepository.deleteByMemberAndBoard(member, board);
+            isLiked = false; // 좋아요 취소
+        } else {
+            Likes likes = Likes.of(member, board);
+            likesRepository.save(likes);
+            isLiked = true; // 좋아요 추가
         }
 
-        Likes likes = Likes.of(member, board);
-        likesRepository.save(likes);
-    }
-
-    public void unlike(final Long memberId, final Long boardId) {
-        Member member = findMemberById(memberId);
-        Board board = findBoardById(boardId);
-
-        Likes like = likesRepository.findByMemberAndBoard(member, board)
-                .orElseThrow(LikeNotFoundException::new);
-
-        likesRepository.deleteByMemberAndBoard(member, board);
+        long likeCount = likesRepository.countByBoard(board);
+        return new LikesResponse(isLiked, likeCount);
     }
 
     public long countLikes(final Long boardId) {
@@ -56,14 +54,6 @@ public class LikesService {
         Board board = findBoardById(boardId);
 
         return likesRepository.findByMemberAndBoard(member, board).isPresent();
-    }
-
-    public LikesResponse getLikesResponse(final Long boardId, final Long memberId) {
-        long likeCount = countLikes(boardId);
-        boolean isLikedByMember = hasLiked(memberId, boardId);
-
-        Member member = findMemberById(memberId);
-        return new LikesResponse(boardId, likeCount, isLikedByMember, member.getId(), member.getEmail(), member.getNickname());
     }
 
     private Member findMemberById(final Long memberId) {

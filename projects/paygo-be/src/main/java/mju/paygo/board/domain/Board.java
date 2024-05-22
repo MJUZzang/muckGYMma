@@ -34,7 +34,7 @@ public class Board extends BaseEntity {
     private Member member;
 
     @Column(nullable = false)
-    private String imageUrl;  // 게시글에 포함된 이미지 URL
+    private String imageUrl;
 
     @Lob
     @Column(nullable = false)

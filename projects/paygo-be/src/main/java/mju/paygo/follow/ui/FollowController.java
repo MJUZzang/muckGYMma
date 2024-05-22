@@ -6,9 +6,7 @@ import mju.paygo.follow.application.FollowService;
 import mju.paygo.follow.domain.dto.FollowRequest;
 import mju.paygo.follow.ui.dto.FollowResponse;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,16 +22,10 @@ public class FollowController {
 
     private final FollowService followService;
 
-    @PostMapping("/follow")
-    public ResponseEntity<Void> follow(@AuthMember final Long followerId, @Valid @RequestBody final FollowRequest followRequest) {
-        followService.follow(followerId, followRequest.followeeId());
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    @DeleteMapping("/unfollow")
-    public ResponseEntity<Void> unfollow(@AuthMember final Long followerId, @Valid @RequestBody final FollowRequest followRequest) {
-        followService.unfollow(followerId, followRequest.followeeId());
-        return ResponseEntity.ok().build();
+    @PostMapping
+    public ResponseEntity<Boolean> toggleFollow(@AuthMember final Long followerId, @Valid @RequestBody final FollowRequest request) {
+        boolean isFollowing = followService.follow(followerId, request.followeeId());
+        return ResponseEntity.ok(isFollowing);
     }
 
     @GetMapping("/followers")

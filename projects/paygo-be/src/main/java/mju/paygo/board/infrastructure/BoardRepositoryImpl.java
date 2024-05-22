@@ -26,11 +26,6 @@ public class BoardRepositoryImpl implements BoardRepository {
     }
 
     @Override
-    public List<Board> findAllExceptMemberId(final Long memberId) {
-        return boardJpaRepository.findAllByMemberIdNot(memberId);
-    }
-
-    @Override
     public Board save(final Board board) {
         return boardJpaRepository.save(board);
     }
@@ -43,11 +38,6 @@ public class BoardRepositoryImpl implements BoardRepository {
     @Override
     public Optional<Board> findById(final Long id) {
         return boardJpaRepository.findById(id);
-    }
-
-    @Override
-    public void deleteById(final Long id) {
-        boardJpaRepository.deleteById(id);
     }
 
     @Override

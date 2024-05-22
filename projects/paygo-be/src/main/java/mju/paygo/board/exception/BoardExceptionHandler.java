@@ -4,6 +4,7 @@ import mju.paygo.board.exception.exceptions.BoardNotFoundException;
 import mju.paygo.board.exception.exceptions.InvalidBoardIdException;
 import mju.paygo.board.exception.exceptions.InvalidMemberException;
 import mju.paygo.board.exception.exceptions.InvalidMemberIdException;
+import mju.paygo.board.exception.exceptions.MealNotFoundException;
 import mju.paygo.global.exception.dto.ExceptionResponse;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,8 @@ public class BoardExceptionHandler {
     @ExceptionHandler(value = {
             BoardNotFoundException.class,
             InvalidBoardIdException.class,
-            InvalidMemberIdException.class
+            InvalidMemberIdException.class,
+            MealNotFoundException.class
     })
     public ResponseEntity<ExceptionResponse> handleBadRequestException(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)

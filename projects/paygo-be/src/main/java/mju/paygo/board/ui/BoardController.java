@@ -9,8 +9,6 @@ import mju.paygo.board.domain.dto.BoardUpdateRequest;
 import mju.paygo.board.exception.exceptions.InvalidBoardIdException;
 import mju.paygo.board.exception.exceptions.InvalidMemberIdException;
 import mju.paygo.board.ui.dto.BoardFindResponse;
-import mju.paygo.comment.domain.CommentRepository;
-import mju.paygo.likes.application.LikesService;
 import mju.paygo.meal.domain.MealRepository;
 import mju.paygo.meal.domain.S3Uploader;
 import mju.paygo.member.domain.member.Member;
@@ -39,12 +37,12 @@ public class BoardController {
     private final S3Uploader s3Uploader;
     private final MemberRepository memberRepository;
     private final MealRepository mealRepository;
-    private final LikesService likesService;
-    private final CommentRepository commentRepository;
 
+    // TODO: file을 여러게 들어갈수 있게 해야함.
     // 게시글 생성(사진과 함께)
     @PostMapping("/create")
     public ResponseEntity<Void> createBoard(@RequestParam("file") final MultipartFile file, @RequestParam("content") final String content, @AuthMember final Long memberId) {
+
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(InvalidMemberIdException::new);
 
@@ -56,41 +54,18 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    // TODO: file을 여러게 들어갈수 있게 해야함.
     // 게시글 생성(Meal의 id 사용)
-    // TODO: mealID를 받아서 다시 테스트해봐야함.
-    /*
     @PostMapping("/create-with-meal")
-    public ResponseEntity<Void> createBoardWithMeal(@RequestParam("mealId") final Long mealId, @RequestParam("content") final String content, @AuthMember final Long memberId) {
+    public ResponseEntity<Void> createBoardFromMeal(@AuthMember final Long memberId, @RequestParam("mealId") final Long mealId, @RequestParam("content") final String content) {
 
-        Meal meal = mealRepository.findById(mealId).orElseThrow();
-        Member member = memberRepository.findById(memberId).orElseThrow();
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(InvalidMemberIdException::new);
 
-        if (!meal.getPosted() && meal.getMemberId().equals(memberId)) {
-            Board board = new Board(member, meal.getImageUrl(), content, false);
-            boardService.save(board);
-            meal.clearUpload();  // posted를 true로 설정
+        Board board = boardService.saveBoardWithMeal(member, mealId, content);
 
-            // 초기화 작업
-            long likeCount = 0L;
-            boolean isLikedByMember = false;
-            long commentCount = 0L;
-
-            logger.info("Board created successfully. Board ID: {}, Created At: {}, Content: {}, Member ID: {}, Member Nickname: {}, Member Email: {}, Likes: {}, Is Liked: {}, Comments: {}",
-                    board.getId(),
-                    board.getCreatedAt(),
-                    board.getContent(),
-                    member.getId(),
-                    member.getNickname(),
-                    member.getEmail(),
-                    likeCount,
-                    isLikedByMember,
-                    commentCount);
-
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        }
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-    }*/
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
     @PatchMapping("/update")
     public ResponseEntity<Void> updateBoard(@AuthMember final Long memberId, @Valid @RequestBody final BoardUpdateRequest updateRequest) {
