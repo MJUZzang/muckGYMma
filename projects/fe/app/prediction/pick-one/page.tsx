@@ -144,27 +144,7 @@ export default function Page() {
             .then((data: PredictResult) => {
                 console.log(data);
                 dispatch(setPredictResult(data));
-
-                fetch(`${backendUrl}/api/task/ask/${data.id}`, {
-                    method: "POST",
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                    .then((res) => {
-                        if (res.ok) {
-                            return res.json();
-                        } else {
-                            throw new Error("");
-                        }
-                    })
-                    .then((data) => {
-                        console.log(data);
-                    })
-                    .catch((err) => console.error(err));
-
-                router.push("/");
+                router.push("/prediction/plan-selection");
             })
             .catch((err) => console.error(err));
     }

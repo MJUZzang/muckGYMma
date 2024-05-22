@@ -65,5 +65,6 @@ export const { setFileUrl, setPredict, setPredictResult } =
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectPredict = (state: RootState) => state.predict;
+export const selectPredictResult = (state: RootState) => state.predict.predictresult;
 
 export default predictSlice.reducer;
