@@ -107,7 +107,7 @@ export default function Page() {
     const predict: PredictState = useAppSelector(selectPredict);
     const [isFoodSelected, setIsFoodSelected] = useState<boolean>(false);
     const [foodsSelected, setFoodsSelected] = useState<number[]>([]);
-    
+
     const router = useRouter();
 
     // useEffect(() => {
@@ -144,6 +144,21 @@ export default function Page() {
             .then((data: PredictResult) => {
                 console.log(data);
                 dispatch(setPredictResult(data));
+
+                fetch(`${backendUrl}/api/task/ask/${data.id}`, {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }).then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw new Error("");
+                    }
+                });
+
                 router.push("/");
             })
             .catch((err) => console.error(err));
