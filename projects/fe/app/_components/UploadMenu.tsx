@@ -61,15 +61,15 @@ function UploadMenu({ className, isVisible }: UploadMenuProps) {
     return (
         <>
             <div
-                className={`bg-app-bg shadow-xl text-app-font-2 font-semibold 
-                text-base px-3 py-2 rounded-2xl transition-opacity duration-500
+                className={`bg-app-bg shadow-xl text-app-font-4 font-semibold 
+                text-base px-3 py-3 rounded-2xl transition-opacity duration-500
                 flex flex-col items-start ${
                 isVisible ? "opacity-100" : "opacity-0"
                 } ${className}`}
             >
                 <Link href="/post/write" className="text-nowrap">포스트 작성</Link>
 
-                <div className="my-1 border-b-[1px] border-b-app-font-6 w-full" />
+                <div className="my-[6px] border-b-[1px] border-b-app-font-6 w-full" />
 
                 <button className="text-nowrap" onClick={handleClicked}>
                     식사 업로드
