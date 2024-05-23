@@ -165,6 +165,9 @@ public class PlanService {
             planName = request.type();
         }
         Plan plan = Plan.of(memberId, mealId, tasks, planName);
+        Meal meal = mealRepository.findByMemberAndId(memberId, mealId)
+                .orElseThrow(MealNotFoundException::new);
+        meal.updatePlaned();
 
         return planRepository.save(plan);
     }

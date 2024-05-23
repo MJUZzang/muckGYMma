@@ -17,6 +17,7 @@ public record MealHistoryResponse(
         String imageUrl,
         Boolean exercised,
         Boolean posted,
+        Boolean planed,
         LocalDateTime createdAt
 ) {
 
@@ -33,6 +34,7 @@ public record MealHistoryResponse(
                 meal.getImageUrl(),
                 meal.getExercised(),
                 meal.getPosted(),
+                meal.getPlaned(),
                 meal.getCreatedAt()
         );
     }
