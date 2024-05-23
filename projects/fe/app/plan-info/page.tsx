@@ -86,54 +86,62 @@ function PlanInfo() {
                     </div>
 
                     <div className="space-y-3 mt-6 group px-4">
-                        {planInfo.workouts && planInfo.workouts.map((workout, index) => (
-                            <div
-                                key={index}
-                                className={`shadow-xl flex justify-between items-center p-3 rounded-lg transition-all duration-500 ease-in-out
-                            ${GetWorkoutBoxStyle(index)} ${
-                                    !workout.isCompleted && "cursor-pointer"
-                                }`}
-                                onClick={() => {
-                                    if (!workout.isCompleted) {
-                                        dispatch(setSelectedWorkout(index));
-                                    }
-                                }}
-                            >
-                                <div className="w-fit text-nowrap">
-                                    <p className="">{workout.name}</p>
-                                    <div className="flex">
-                                        <p className="">{workout.set}sets</p>
-                                        &nbsp;
+                        {planInfo.workouts &&
+                            planInfo.workouts.map((workout, index) => (
+                                <div
+                                    key={index}
+                                    className={`shadow-xl flex justify-between items-center p-3 rounded-lg 
+                                transition-all duration-500 ease-in-out text-app-inverted-font
+                                ${GetWorkoutBoxStyle(index)} ${
+                                        !workout.isCompleted && "cursor-pointer"
+                                    }`}
+                                    onClick={() => {
+                                        if (!workout.isCompleted) {
+                                            dispatch(setSelectedWorkout(index));
+                                        }
+                                    }}
+                                >
+                                    <div className="w-fit text-nowrap">
+                                        <p className="">{workout.name}</p>
+                                        <div className="flex">
+                                            <p className="">
+                                                {workout.set}sets
+                                            </p>
+                                            &nbsp;
+                                            <p className="">
+                                                {workout.repeatation}reps
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="w-full text-right pr-4">
                                         <p className="">
-                                            {workout.repeatation}reps
+                                            {workout.kcal}&nbsp;kcal
+                                        </p>
+                                        <p
+                                            className={` text-sm ${
+                                                !workout.isCompleted &&
+                                                "invisible"
+                                            }`}
+                                        >
+                                            {workout.isCompleted &&
+                                                workout.completionTime &&
+                                                `${formatTimeInKor(
+                                                    workout.completionTime
+                                                )} 소요`}
                                         </p>
                                     </div>
+                                    <div>
+                                        <CheckMark
+                                            width={28}
+                                            height={28}
+                                            className={`fill-app-blue-4 ${
+                                                !workout.isCompleted &&
+                                                "invisible"
+                                            }`}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="w-full text-right pr-4">
-                                    <p className="">{workout.kcal}&nbsp;kcal</p>
-                                    <p
-                                        className={` text-sm ${
-                                            !workout.isCompleted && "invisible"
-                                        }`}
-                                    >
-                                        {workout.isCompleted &&
-                                            workout.completionTime &&
-                                            `${formatTimeInKor(
-                                                workout.completionTime
-                                            )} 소요`}
-                                    </p>
-                                </div>
-                                <div>
-                                    <CheckMark
-                                        width={28}
-                                        height={28}
-                                        className={`fill-app-blue-4 ${
-                                            !workout.isCompleted && "invisible"
-                                        }`}
-                                    />
-                                </div>
-                            </div>
-                        ))}
+                            ))}
                     </div>
                 </div>
             </div>
@@ -143,16 +151,7 @@ function PlanInfo() {
                 shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)]"
             >
                 <Link href="/plan">
-                    <Button
-                        className={`bg-app-blue-2 ${
-                            !(
-                                selectedWorkout &&
-                                (planInfo.workouts && planInfo.workouts[selectedWorkout].isCompleted)
-                            ) && "bg-app-blue/20 text-app-inverted-font"
-                        }`}
-                    >
-                        운동 시작
-                    </Button>
+                    <Button className={`bg-app-blue-2`}>운동 시작</Button>
                 </Link>
             </div>
         </>

@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/../lib/store";
 
 export interface PredictResult {
+    id?: number;
     carbo?: number;
     fat?: number;
     foodLensId?: number[];
     foodName?: string;
     gram?: number;
-    id?: number;
     kcal?: number;
     protein?: number;
     sodium?: number;

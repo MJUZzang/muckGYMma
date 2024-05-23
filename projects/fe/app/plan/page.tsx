@@ -75,7 +75,7 @@ function Page() {
             >
                 <div className="grid grid-cols-3">
                     <ArrowBack
-                        className="fill-app-font-2 cursor-pointer my-auto"
+                        className="fill-app-font-3 cursor-pointer my-auto"
                         onClick={() => router.back()}
                     />
 
@@ -139,7 +139,7 @@ function Page() {
                     {Array.from({ length: workout.set }).map((set, idx) => (
                         <div
                             key={idx}
-                            className={`shadow-xl grid grid-cols-3 py-2 px-4 rounded-xl transition-all duration-1000
+                            className={`text-app-inverted-font shadow-xl grid grid-cols-3 py-2 px-4 rounded-xl transition-all duration-1000
                                 ${GetPlanStyle(idx)}`}
                         >
                             <p className={`w-full text-left my-auto`}>

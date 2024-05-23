@@ -16,7 +16,7 @@ const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 const excepts = [
     "/initial-setup",
     "/plan-info",
-    "/food-info",
+    "/meal-info",
     "/plan",
     "/prediction",
     "/settings",
@@ -43,7 +43,7 @@ const NavBar = () => {
         <>
             <div
                 className={`pb-[85px] ${!isVisible && "hidden"} ${
-                    pathname.startsWith("/community") && "bg-app-bg-1"
+                    pathname.startsWith("/main/community") && "bg-app-bg-1"
                 }`}
             />
             <div
@@ -56,20 +56,20 @@ const NavBar = () => {
                     shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)]`}
                 >
                     <Link
-                        href="/workout"
+                        href="/main/workout"
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <Workout
-                            isActive={pathname.includes("/workout")}
+                            isActive={pathname.includes("/main/workout")}
                             className={`${
-                                pathname === "/workout"
+                                pathname === "/main/workout"
                                     ? "fill-app-blue"
                                     : "fill-gray-600"
                             }`}
                         />
                         <p
                             className={`text-[0.6rem] ${
-                                pathname === "/workout"
+                                pathname === "/main/workout"
                                     ? "text-app-blue"
                                     : "text-gray-600"
                             }
@@ -80,19 +80,19 @@ const NavBar = () => {
                     </Link>
 
                     <Link
-                        href="/analysis"
+                        href="/main/analysis"
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <Analysis
                             className={`${
-                                pathname === "/analysis"
+                                pathname === "/main/analysis"
                                     ? "fill-app-blue stroke-app-blue"
                                     : "fill-none stroke-gray-600"
                             }`}
                         />
                         <p
                             className={`text-[0.6rem] ${
-                                pathname === "/analysis"
+                                pathname === "/main/analysis"
                                     ? "text-app-blue"
                                     : "text-gray-600"
                             }
@@ -117,13 +117,13 @@ const NavBar = () => {
                     </div>
 
                     <Link
-                        href="/community/following"
+                        href="/main/community/following"
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <Forum
-                            isActive={pathname === "/community/following"}
+                            isActive={pathname === "/main/community/following"}
                             className={`${
-                                pathname === "/community/following"
+                                pathname === "/main/community/following"
                                     ? "fill-app-blue"
                                     : "fill-gray-600"
                             }`}
@@ -131,7 +131,7 @@ const NavBar = () => {
                         />
                         <p
                             className={`text-[0.6rem] ${
-                                pathname === "/community/following"
+                                pathname === "/main/community/following"
                                     ? "text-app-blue"
                                     : "text-gray-600"
                             } 
@@ -142,20 +142,20 @@ const NavBar = () => {
                     </Link>
 
                     <Link
-                        href="/profile/posts"
+                        href="/main/profile/posts"
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <AccountCircle
-                            isActive={pathname.includes("/profile/")}
+                            isActive={pathname.includes("/main/profile/")}
                             className={`${
-                                pathname.includes("/profile/")
+                                pathname.includes("/main/profile/")
                                     ? "stroke-app-blue fill-app-blue"
                                     : "stroke-gray-600/75 fill-none"
                             }`}
                         />
                         <p
                             className={`text-[0.6rem] ${
-                                pathname.includes("/profile")
+                                pathname.includes("/main/profile")
                                     ? "text-app-blue"
                                     : "text-gray-600"
                             }

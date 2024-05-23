@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "@/community/following/_components/Post";
+import Post from "@/main/community/following/_components/Post";
 import exampleImage from "@/_images/pooh.jpg";
 
 const Follwing = () => {

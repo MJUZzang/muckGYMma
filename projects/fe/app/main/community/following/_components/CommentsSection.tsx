@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import Like from "@/community/following/_images/Like";
+import Like from "@/main/community/following/_images/Like";
 
 import {
     Drawer,

@@ -4,10 +4,10 @@ import React, { use, useEffect } from "react";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 import FoodPicture from "@/_components/FoodPicture";
-import Hash from "@/profile/_components/Hash";
-import Grid from "@/profile/_components/Grid";
-import ForkKnife from "@/profile/_components/ForkKnife";
-import Analytics from "@/profile/_components/Analytics";
+import Hash from "@/main/profile/_components/Hash";
+import Grid from "@/main/profile/_components/Grid";
+import ForkKnife from "@/main/profile/_components/ForkKnife";
+import Analytics from "@/main/profile/_components/Analytics";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
@@ -158,7 +158,7 @@ const Page = ({
                                 ? "border-b-app-font-3"
                                 : "border-b-app-bg"
                         }`}
-                        href="/profile/posts"
+                        href="/main/profile/posts"
                     >
                         <Grid
                             className={`w-full transition-all duration-1000 ${
@@ -175,7 +175,7 @@ const Page = ({
                                 ? "border-b-app-font-3"
                                 : "border-b-white/0"
                         }`}
-                        href="/profile/food"
+                        href="/main/profile/food"
                     >
                         <ForkKnife
                             className={`w-full transition-all duration-1000 relative top-1 ${
@@ -192,7 +192,7 @@ const Page = ({
                                 ? "border-b-app-font-3"
                                 : "border-b-white/0"
                         }`}
-                        href={`/profile/completed`}
+                        href={`/main/profile/completed`}
                     >
                         <Analytics
                             className={`w-full transition-all duration-1000 ${

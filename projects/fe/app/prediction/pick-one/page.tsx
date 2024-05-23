@@ -143,8 +143,8 @@ export default function Page() {
             })
             .then((data: PredictResult) => {
                 console.log(data);
-                dispatch(setPredictResult(data));
-                router.push("/prediction/plan-selection");
+                // dispatch(setPredictResult(data));
+                router.push(`/food-info/${data.id}`);
             })
             .catch((err) => console.error(err));
     }

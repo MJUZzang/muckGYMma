@@ -8,7 +8,7 @@ import { backendUrl } from "@/_utils/urls";
 import { userInfoState } from "@/../lib/slices/userInfoSlice";
 import { FetchNickname as fetchNickname } from "@/_utils/user";
 import { fetchTodoWorkoutPlans } from "@/_utils/plan";
-import Plans from "@/workout/_components/Plans";
+import Plans from "@/main/workout/_components/Plans";
 import { PlanInfo } from "@/_types/Plan";
 
 const dummyList: PlanInfo[] = [

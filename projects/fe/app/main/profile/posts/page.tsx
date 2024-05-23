@@ -3,7 +3,7 @@
 import Image from "next/image";
 import React, { use, useState } from "react";
 import exampleImage from "@/_images/pooh.jpg";
-import Post from "@/community/following/_components/Post";
+import Post from "@/main/community/following/_components/Post";
 import UploadMenu from "@/_components/UploadMenu";
 import Camera from "@/_images/Camera";
 

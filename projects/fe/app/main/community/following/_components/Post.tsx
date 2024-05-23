@@ -3,10 +3,10 @@
 import PostInfo from "@/_types/PostInfo";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import Like from "@/community/following/_images/Like";
-import Comment from "@/community/following/_images/Comment";
-import SpoonKnife from "@/community/following/_images/SpoonKnife";
-import CommentsSection from "@/community/following/_components/CommentsSection";
+import Like from "@/main/community/following/_images/Like";
+import Comment from "@/main/community/following/_images/Comment";
+import SpoonKnife from "@/main/community/following/_images/SpoonKnife";
+import CommentsSection from "@/main/community/following/_components/CommentsSection";
 
 import { Jua, Noto_Sans_KR, Noto_Sans } from "next/font/google";
 

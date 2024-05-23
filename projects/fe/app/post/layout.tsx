@@ -16,8 +16,8 @@ function PostLayout({
                 className={`grid grid-cols-3 px-2 h-[55px] bg-app-bg border-b-[1px] border-b-app-bg-2 ${notoSansKr.className}`}
             >
                 <Link
-                    href="/workout"
-                    className="w-full flex justify-start items-center"
+                    href="/"
+                    className="w-full flex justify-start items-center cursor-pointer"
                 >
                     <XButton className="stroke-app-font-3" size={33} />
                 </Link>

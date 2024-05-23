@@ -7,12 +7,12 @@ import { backendUrl } from "@/_utils/urls";
 
 function PlanSelectionPage() {
     const predictResult = useAppSelector(selectPredictResult);
-    const [promiseRef, setPromiseRef] = useState<Promise<void> | null>(null);
+    const [plansPromise, setPlansPromise] = useState<Promise<void> | null>(null);
 
-    if (promiseRef) use(promiseRef!);
+    if (plansPromise) use(plansPromise!);
 
     useEffect(() => {
-        if (!promiseRef) {
+        if (!plansPromise) {
             // setPromiseRef(
             //     fetch(`${backendUrl}/api/task/ask/${predictResult?.id}`, {
             //         method: "POST",
@@ -34,7 +34,7 @@ function PlanSelectionPage() {
             //         })
             //         .catch((err) => console.error(err))
             // );
-            setPromiseRef(
+            setPlansPromise(
                 new Promise((res, rej) => {
                     setTimeout(() => {}, 60000);
                 })
@@ -45,7 +45,7 @@ function PlanSelectionPage() {
     // if (!predictResult?.id) {
     //     throw new Error("Predict result is not found");
     // } else
-     if (!promiseRef) {
+     if (!plansPromise) {
         return null;
     } else {
         return <div className="text-red-500">PlanSelectionPage</div>;

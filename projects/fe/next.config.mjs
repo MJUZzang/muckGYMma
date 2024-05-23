@@ -21,7 +21,7 @@ export default withPWA({
         return [
             {
                 source: "/",
-                destination: "/workout",
+                destination: "/main/workout",
                 permanent: true,
             },
             // {

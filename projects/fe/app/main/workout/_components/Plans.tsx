@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import Plan from "@/workout/_components/Plan";
+import Plan from "@/main/workout/_components/Plan";
 import Link from "next/link";
 import { PlanInfo } from "@/_types/Plan";
 
