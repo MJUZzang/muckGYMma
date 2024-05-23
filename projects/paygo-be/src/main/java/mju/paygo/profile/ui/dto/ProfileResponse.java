@@ -5,6 +5,9 @@ public record ProfileResponse (
         long postCount,
         long followingCount,
         long followerCount,
-        String content
+        String content,
+        long totalClearDay,
+        long longestClearDay,
+        long nowClearDay
 ){
 }
