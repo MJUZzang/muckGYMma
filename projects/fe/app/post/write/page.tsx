@@ -126,7 +126,7 @@ function WritePage() {
             </div>
 
             <div className="bg-app-bg w-full pt-3 pb-6 px-3 mt-2 border-t-[1px] border-app-bg-3">
-                <Button onClick={() => {}} className="bg-app-blue-1">
+                <Button className="bg-app-blue-1">
                     포스트 작성완료
                 </Button>
             </div>

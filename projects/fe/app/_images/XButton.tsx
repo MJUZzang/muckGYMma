@@ -3,16 +3,13 @@ import React from "react";
 interface XButtonProps {
     className?: string;
     size?: number;
-    onClick?: () => void;
 }
 function XButton({
     className = "stroke-[#222222]",
     size = 24,
-    onClick = () => {},
 }: Readonly<XButtonProps>) {
     return (
         <svg
-            onClick={onClick}
             width={size}
             height={size}
             viewBox="0 0 24 24"

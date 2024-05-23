@@ -16,18 +16,20 @@ function NavigateBackButton({ className, meal }: NavigateBackButtonProps) {
 
     if (!meal.planed) {
         return (
-            <XButton
-                className={`absolute cursor-pointer stroke-app-font-2 ${className}`}
-                onClick={() => router.push("/")}
-                size={33}
-            />
+            <div onClick={() => router.push("/")}>
+                <XButton
+                    className={`absolute cursor-pointer stroke-app-font-2 ${className}`}
+                    size={33}
+                />
+            </div>
         );
     } else if (meal.planed) {
         return (
-            <ArrowBack
-                className={`absolute cursor-pointer fill-app-font-2 ${className}`}
-                onClick={() => router.back()}
-            />
+            <div onClick={() => router.back()}>
+                <ArrowBack
+                    className={`absolute cursor-pointer fill-app-font-2 ${className}`}
+                />
+            </div>
         );
     }
 }

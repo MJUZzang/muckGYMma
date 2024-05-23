@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
-    // if (process.env.NODE_ENV !== "development") {
-    if (true) {
+    if (process.env.NODE_ENV !== "development") {
+    // if (true) {
         // 로그인한 지 확인
         if (request.nextUrl.pathname.startsWith("/sign-in"))
             return NextResponse.next();
