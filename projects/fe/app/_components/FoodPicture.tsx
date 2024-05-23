@@ -46,7 +46,7 @@ function FoodPicture({ className, size = 29 }: FoodPictureProps) {
                         );
                     }
                     dispatch(setPredict(data));
-                    router.push(`/prediction/pick-one`);
+                    router.push(`/prediction/pick`);
                 })
                 .catch((err) => console.error(err));
         } else {

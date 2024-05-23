@@ -144,7 +144,7 @@ async function FoodInfo({ params }: FoodInfoProps) {
                     href={
                         meal.planed
                             ? `/post/write/${meal.id}`
-                            : `/prediction/plan-selection/${meal.id}`
+                            : `/plan/pick-plan/${meal.id}`
                     }
                     className={`inline-block text-center w-full bg-app-blue rounded-lg py-2 font-semibold text-app-inverted-font 
                     active:scale-90 transition-all ${

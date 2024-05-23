@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import WeightChart from "@/analysis/_components/WeightChart";
-import CalorieChart from "@/analysis/_components/CalorieChart";
-import TimeChart from "@/analysis/_components/TimeGraph";
+import WeightChart from "@/main/analysis/_components/WeightChart";
+import CalorieChart from "@/main/analysis/_components/CalorieChart";
+import TimeChart from "@/main/analysis/_components/TimeGraph";
 
 import { Noto_Sans_KR } from "next/font/google";
 

@@ -1,7 +1,5 @@
-import SummaryGraphs from "@/analysis/_components/SummaryGraphs";
-import HeatMap from "@/analysis/_components/HeatMap";
-import StrengthWeaknessesChart from "@/analysis/_components/StrengthWeaknessesChart";
-import VolumneProgressChart from "@/analysis/VolumneProgressChart";
+import SummaryGraphs from "@/main/analysis/_components/SummaryGraphs";
+import HeatMap from "@/main/analysis/_components/HeatMap";
 import { Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({
