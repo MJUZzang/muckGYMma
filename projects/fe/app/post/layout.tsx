@@ -17,13 +17,15 @@ function PostLayout({
             >
                 <Link
                     href="/"
-                    className="w-full flex justify-start items-center cursor-pointer"
+                    className="w-full inline-flex justify-start items-center"
                 >
-                    <XButton className="stroke-app-font-3" size={33} />
+                    <XButton className="stroke-app-font-3 z-[50] cursor-pointer" size={33} />
                 </Link>
+
                 <div className="w-full flex items-center justify-center font-semibold text-base text-app-font-3">
                     새 포스트 작성
                 </div>
+
                 <div className="w-full flex justify-end items-center"></div>
             </div>
 

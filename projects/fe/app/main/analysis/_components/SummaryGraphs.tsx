@@ -33,7 +33,7 @@ const SummaryGraphs = () => {
             <div
                 className={`flex flex-col items-center rounded-xl bg-app-bg-1 shadow-lg ${notoSansKr.className}`}
             >
-                <p className="inline-block text-lg p-5 text-blue-400 font-semibold">
+                <p className="inline-block text-base p-5 text-app-blue">
                     최근 30일 요약
                 </p>
                 <div

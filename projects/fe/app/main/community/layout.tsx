@@ -12,15 +12,15 @@ const dosis = Dosis({ subsets: ["latin"] });
 const links = [
     {
         name: "Following",
-        href: "/community/following",
+        href: "/main/community/following",
     },
     {
         name: "Hot",
-        href: "/community/hot",
+        href: "/main/community/hot",
     },
     {
         name: "Club",
-        href: "/community/club",
+        href: "/main/community/club",
     },
 ];
 
@@ -36,9 +36,9 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
             <div className="flex flex-col border-b-[1px] border-b-gray-300 px-3">
                 <div className="mt-3 max-w-[835px] mx-auto w-full">
                     <p
-                        className={`text-app-blue-darker-1 text-2xl font-semibold ${dosis.className}`}
+                        className={`w-fit pl-1 rounded-sm text-app-font-3 text-xl font-semibold ${notoSans.className}`}
                     >
-                        Community
+                        
                     </p>
                 </div>
 
@@ -48,11 +48,11 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
                             key={index}
                             className={`${
                                 pathname === link.href
-                                    ? "border-b-app-blue border-b-[3px] text-app-font-3"
+                                    ? "border-b-app-blue-3 border-b-[3px] text-app-font-3"
                                     : "hover:border-b-app-blue-5 text-app-font-5"
                             } ${
                                 notoSans.className
-                            } w-fit text-center text-base pb-1 px-1
+                            } w-fit text-center text-[15px] pb-1 px-1
                                 transition-colors duration-1000 ease-in-out`}
                             href={link.href}
                         >

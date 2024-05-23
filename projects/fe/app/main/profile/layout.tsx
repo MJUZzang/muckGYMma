@@ -128,7 +128,7 @@ const Page = ({
                                     456
                                 </p>
                                 <p className={`${notoSansKr.className}`}>
-                                    최장연속
+                                    최장달성
                                 </p>
                             </div>
                             <div className="w-full flex flex-col items-center">

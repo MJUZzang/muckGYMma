@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Noto_Sans_KR } from "next/font/google";
+import Settings from "@/main/analysis/_images/Settings";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -11,29 +12,34 @@ const layout: React.FC<{
 }> = (props) => {
     return (
         <>
-            <div className="fixed w-full grid grid-cols-3 items-center py-3 px-5 bg-app-bg-3 shadow-xl border-b-2 bg-opacity-100 z-[50]">
+            <div
+                className={`bg-app-bg fixed w-full grid grid-cols-3 items-center py-3 px-5 border-b-[1px] z-[50] ${notoSansKr.className}`}
+            >
                 <div />
-                <p className="text-app-font-3 text-sm font-bold w-full text-center">
-                    눈바디
+
+                <p className="text-app-font-4 text-sm font-semibold w-full text-center">
+                    내 기록 눈바디
                 </p>
+
                 <div className="w-full flex justify-end">
                     <div className="flex flex-col gap-[4px]">
                         {Array.from({ length: 3 }).map((_, i) => (
                             <div
                                 key={i}
-                                className="h-[4.5px] w-[4.5px] bg-app-font-4 rounded-full"
+                                className="h-[4px] w-[4px] bg-app-font-4 rounded-full"
                             />
                         ))}
                     </div>
                 </div>
+                {/* <div className="w-full ">
+                    <Settings className="ml-auto stroke-app-font-3 fill-none rotate-90" />
+                </div> */}
             </div>
 
             <div
-                className={`max-w-[835px] mx-auto w-full ${notoSansKr.className}`}
+                className={`max-w-[835px] mx-auto w-full pt-[60px] ${notoSansKr.className}`}
             >
-                <div className="space-y-4 h-full">
-                    <div className="px-3">{props.children}</div>
-                </div>
+                <div className="px-5 h-full">{props.children}</div>
             </div>
         </>
     );

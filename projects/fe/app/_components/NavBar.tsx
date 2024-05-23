@@ -103,7 +103,7 @@ const NavBar = () => {
                     </Link>
 
                     <div
-                        className="shadow-md bg-app-blue p-3 rounded-full relative bottom-5 cursor-pointer"
+                        className="shadow-md shadow-gray-400 bg-app-blue p-3 rounded-full relative bottom-5 cursor-pointer"
                         onClick={() => setShowUploadMenu(!showUploadMenu)}
                     >
                         <UploadMenu
@@ -111,7 +111,7 @@ const NavBar = () => {
                             className={`absolute bottom-[56px]`}
                         />
 
-                        <Camera className="fill-app-bg" />
+                        <Camera className="fill-app-bg" size={31} />
 
                         {/* <FoodPicture className="fill-app-bg" /> */}
                     </div>
