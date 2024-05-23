@@ -13,30 +13,43 @@ function PlanSelectionPage() {
 
     useEffect(() => {
         if (!promiseRef) {
+            // setPromiseRef(
+            //     fetch(`${backendUrl}/api/task/ask/${predictResult?.id}`, {
+            //         method: "POST",
+            //         credentials: "include",
+            //         cache: "force-cache",
+            //         headers: {
+            //             "Content-Type": "application/json",
+            //         },
+            //     })
+            //         .then((res) => {
+            //             if (res.ok) {
+            //                 return res.json();
+            //             } else {
+            //                 throw new Error("");
+            //             }
+            //         })
+            //         .then((data) => {
+            //             console.log(data);
+            //         })
+            //         .catch((err) => console.error(err))
+            // );
             setPromiseRef(
-                fetch(`${backendUrl}/api/task/ask/${predictResult?.id}`, {
-                    method: "POST",
-                    credentials: "include",
-                    cache: "force-cache",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                new Promise((res, rej) => {
+                    setTimeout(() => {}, 60000);
                 })
-                    .then((res) => {
-                        if (res.ok) {
-                            return res.json();
-                        } else {
-                            throw new Error("");
-                        }
-                    })
-                    .then((data) => {
-                        console.log(data);
-                    })
-                    .catch((err) => console.error(err))
             );
         }
     }, []);
-    return <div>PlanSelectionPage</div>;
+
+    // if (!predictResult?.id) {
+    //     throw new Error("Predict result is not found");
+    // } else
+     if (!promiseRef) {
+        return null;
+    } else {
+        return <div className="text-red-500">PlanSelectionPage</div>;
+    }
 }
 
 export default PlanSelectionPage;

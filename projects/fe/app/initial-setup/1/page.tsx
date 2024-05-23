@@ -6,7 +6,7 @@ import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useRouter } from "next/navigation";
 
 const welcomingWords =
-    "안녕하세요! 먹짐마에 오신걸 환영해요! 저는 인공지능 코치 제이라고 해요!";
+    "안녕하세요! 먹짐마에 오신걸 환영해요! 저는 인공지능 코치 꾸미라고 해요!";
 
 function Page() {
     const [welcomingText, setWelcomingText] = React.useState<string>("");

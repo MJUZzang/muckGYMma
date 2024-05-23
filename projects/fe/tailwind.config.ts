@@ -53,8 +53,6 @@ const config = {
                     foreground: "hsl(var(--card-foreground))",
                 },
 
-
-
                 // 커스텀 칼라들
                 fluorescent: {
                     DEFAULT: "#dfff32",
@@ -144,9 +142,13 @@ const config = {
                     "100%": { transform: "translateX(0)", opacity: "1" },
                 },
                 "custom-pulse": {
-                    "0%": { opacity: ".3" },
+                    "0%": { opacity: "0.3" },
                     "50%": { opacity: "1" },
-                    "100%": { opacity: ".3" },
+                    "100%": { opacity: "0.3" },
+                },
+                "fade-in": {
+                    "0%": { opacity: "0" },
+                    "100%": { opacity: "1" },
                 },
             },
             animation: {
@@ -156,6 +158,7 @@ const config = {
                 "spin-360-slow": "spin-360 3s ease-in-out infinite",
                 "show-plan": "show-plan 0.6s ease-in-out forwards",
                 "page-enter": "page-enter 0.6s ease-in-out forwards",
+                "page-fade-in": "fade-in 0.6s ease-in-out forwards",
                 "custom-pulse": "custom-pulse 5s ease-in-out infinite",
             },
         },

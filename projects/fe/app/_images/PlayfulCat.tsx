@@ -1,6 +1,6 @@
 import React from "react";
 
-function ShyCat() {
+function PlayfulCat() {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -187,4 +187,4 @@ function ShyCat() {
     );
 }
 
-export default ShyCat;
+export default PlayfulCat;

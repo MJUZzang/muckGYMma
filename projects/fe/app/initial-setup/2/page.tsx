@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
-import ShyCat from "@/initial-setup/2/_images/ShyCat";
+import PlayfulCat from "@/_images/PlayfulCat";
 import { useRouter } from "next/navigation";
 import { Noto_Sans_KR } from "next/font/google";
 
@@ -38,11 +38,13 @@ function Page() {
 
     return (
         <div className="flex flex-col h-full animate-page-enter">
-            <p className={`mt-5 inline-block text-app-font-2 text-2xl leading-9 ${notoSansKr.className}`}>
+            <p
+                className={`mt-5 inline-block text-app-font-2 text-2xl leading-9 ${notoSansKr.className}`}
+            >
                 {welcomingText}
             </p>
             <div className="space-y-10 mt-auto">
-                <ShyCat />
+                <PlayfulCat />
 
                 <ForwardButton
                     title="알겠어!"
