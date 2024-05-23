@@ -3,6 +3,7 @@ import React from "react";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 interface LoginButtonProps {

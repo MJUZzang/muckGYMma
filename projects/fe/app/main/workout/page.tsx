@@ -63,13 +63,19 @@ const dummyList: PlanInfo[] = [
     },
 ];
 
-const dosis = Dosis({ subsets: ["latin"] });
+const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600",] });
 const jua = Jua({
     subsets: ["latin"],
-    weight: ["400"],
+    weight: "400",
 });
-const notoSans = Noto_Sans({ subsets: ["latin"] });
-const notnSerifJP = Noto_Serif_JP({ subsets: ["latin"], weight: "900" });
+const notoSans = Noto_Sans({
+    subsets: ["latin"],
+    weight: ["400", "700"],
+});
+const notnSerifJP = Noto_Serif_JP({
+    subsets: ["latin"],
+    weight: "900",
+});
 
 async function WorkoutPage() {
     const nickname = await fetchNickname();

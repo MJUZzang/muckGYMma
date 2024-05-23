@@ -12,6 +12,7 @@ import { Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 const words = "초기 설정을 마쳤어요! 건강한 습관을 만들기 위해 함께 노력해요!";

@@ -5,18 +5,15 @@ import React from "react";
 // import Logo from "@/_images/logo.png";
 
 const lilitaOne = Lilita_One({
-    weight: "400",
     subsets: ["latin"],
-    display: "swap",
+    weight: "400",
 });
 
 interface LogoProps {
     className?: string;
 }
 
-const Logo = ({
-    className
-}: LogoProps) => {
+const Logo = ({ className }: LogoProps) => {
     return (
         <>
             {/* <Image src={Logo} alt="Logo" width={78} /> */}

@@ -11,10 +11,12 @@ import NavigateBackButton from "./_components/NavigateBackButton";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 const dosis = Dosis({
     subsets: ["latin"],
+    weight: "400",
 });
 
 const dummyMeal: MealInfo = {
@@ -69,7 +71,7 @@ async function FoodInfo({ params }: FoodInfoProps) {
                 className={`flex flex-col h-[100dvh] animate-page-enter px-3 ${notoSansKr.className}`}
             >
                 <div className="mt-4">
-                    <NavigateBackButton meal={meal}/>
+                    <NavigateBackButton meal={meal} />
 
                     <p className="text-lg text-center font-semibold">
                         {meal.name}

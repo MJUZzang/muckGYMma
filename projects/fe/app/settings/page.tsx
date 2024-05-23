@@ -12,15 +12,13 @@ import { useRouter } from "next/navigation";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 const Settings = () => {
     const router = useRouter();
-    
 
-    useEffect(() => {
-
-    }, []);
+    useEffect(() => {}, []);
 
     return (
         <main

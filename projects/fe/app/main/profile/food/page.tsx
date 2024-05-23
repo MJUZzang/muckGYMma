@@ -49,13 +49,15 @@ const dummyData = [
 
 const jua = Jua({
     subsets: ["latin"],
-    weight: ["400"],
+    weight: "400",
 });
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 const dosis = Dosis({
     subsets: ["latin"],
+    weight: "400",
 });
 
 function Page() {

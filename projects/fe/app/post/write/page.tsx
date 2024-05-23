@@ -14,6 +14,7 @@ import { Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 function readFile(file: File): Promise<string | ArrayBuffer | null> {
@@ -71,7 +72,9 @@ function WritePage() {
     };
 
     return (
-        <div className={`flex flex-col min-h-[100dvh] absolute top-0 pt-[55px] w-full ${notoSansKr.className}`}>
+        <div
+            className={`flex flex-col min-h-[100dvh] absolute top-0 pt-[55px] w-full ${notoSansKr.className}`}
+        >
             <div
                 ref={emblaRef}
                 className="overflow-hidden flex flex-col mt-5 w-full h-fit pb-5"
@@ -126,9 +129,7 @@ function WritePage() {
             </div>
 
             <div className="bg-app-bg w-full pt-3 pb-6 px-3 mt-2 border-t-[1px] border-app-bg-3">
-                <Button className="bg-app-blue-1">
-                    포스트 작성완료
-                </Button>
+                <Button className="bg-app-blue-1">포스트 작성완료</Button>
             </div>
 
             <input

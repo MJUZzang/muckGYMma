@@ -4,11 +4,14 @@ import React from "react";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 function Loading() {
     return (
-        <div className={`animate-page-fade-in flex items-center h-[100dvh] ${notoSansKr.className}`}>
+        <div
+            className={`animate-page-fade-in flex items-center h-[100dvh] ${notoSansKr.className}`}
+        >
             <div className="w-full flex flex-col justify-start">
                 <Shycat className="" />
 

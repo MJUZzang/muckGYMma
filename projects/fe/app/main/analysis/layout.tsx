@@ -5,6 +5,7 @@ import Settings from "@/main/analysis/_images/Settings";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 const layout: React.FC<{

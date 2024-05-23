@@ -9,8 +9,11 @@ import { timeUntilSevenDaysLater } from "@/main/workout/_utils/LeftTime";
 import { Dosis, Jua, Noto_Sans } from "next/font/google";
 import { PlanInfo } from "@/_types/Plan";
 
-const notoSans = Noto_Sans({ subsets: ["latin"] });
-const dosis = Dosis({ subsets: ["latin"] });
+const notoSans = Noto_Sans({
+    subsets: ["latin"],
+    weight: "400",
+});
+const dosis = Dosis({ subsets: ["latin"], weight: "400" });
 const jua = Jua({
     subsets: ["latin"],
     weight: "400",
@@ -29,13 +32,10 @@ function GetIcon(type: string) {
 
 interface PlanProps {
     className?: string;
-    plan: PlanInfo
+    plan: PlanInfo;
 }
 
-const Plan: React.FC<PlanProps> = ({
-    className,
-    plan
-}) => {
+const Plan: React.FC<PlanProps> = ({ className, plan }) => {
     const [timeLeft, setTimeLeft] = useState("");
 
     useEffect(() => {
@@ -55,11 +55,11 @@ const Plan: React.FC<PlanProps> = ({
 
             <div className="basis-full flex justify-between items-center">
                 <div className={`${jua.className} text-app-font-2`}>
-                    <p className={`text-xl text-nowrap`}>
-                        {plan.name}
-                    </p>
+                    <p className={`text-xl text-nowrap`}>{plan.name}</p>
 
-                    <p className="mt-3 text-sm">소멸되기 까지 {timeLeft} 남음</p>
+                    <p className="mt-3 text-sm">
+                        소멸되기 까지 {timeLeft} 남음
+                    </p>
 
                     <div
                         className={`w-fit mt-1 px-3 py-2 rounded-full bg-app-blue 
@@ -71,7 +71,9 @@ const Plan: React.FC<PlanProps> = ({
             </div>
 
             <div className="text-center font-semibold">
-                <p className={`text-app-font-2 ${dosis.className}`}>{plan.time}</p>
+                <p className={`text-app-font-2 ${dosis.className}`}>
+                    {plan.time}
+                </p>
                 <p className={`text-app-font-2 ${notoSans.className}`}>kcal</p>
             </div>
         </div>

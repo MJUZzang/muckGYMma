@@ -25,6 +25,7 @@ import { dummyPlanInfo } from "@/_types/Plan";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 function Page() {
@@ -128,12 +129,15 @@ function Page() {
                     </div>
                 </div>
 
-
                 {/* Workout name */}
-                <p className="text-app-font-2 font-semibold text-2xl mt-3 px-3">{workout.name} x {workout.set}세트</p>
+                <p className="text-app-font-2 font-semibold text-2xl mt-3 px-3">
+                    {workout.name} x {workout.set}세트
+                </p>
 
                 {/* Progress */}
-                <p className="mt-2 px-3 text-app-font-3 text-sm">{selectedSet + 1} / {workout.set}</p>
+                <p className="mt-2 px-3 text-app-font-3 text-sm">
+                    {selectedSet + 1} / {workout.set}
+                </p>
 
                 <div className="flex flex-col gap-3 mt-3 px-4">
                     {Array.from({ length: workout.set }).map((set, idx) => (
@@ -190,7 +194,11 @@ function Page() {
                             );
 
                             // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
-                            for (let i = 0; i < planInfo.workouts!.length; i++) {
+                            for (
+                                let i = 0;
+                                i < planInfo.workouts!.length;
+                                i++
+                            ) {
                                 if (
                                     !planInfo.workouts![i].isCompleted &&
                                     i !== selectedWorkout

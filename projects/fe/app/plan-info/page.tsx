@@ -18,9 +18,11 @@ import Muscle from "@/_images/Muscle";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 const dosis = Dosis({
     subsets: ["latin"],
+    weight: "400",
 });
 
 function PlanInfo() {

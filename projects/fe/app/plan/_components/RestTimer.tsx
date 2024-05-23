@@ -15,6 +15,7 @@ import { Dosis, Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 const dosis = Dosis({
@@ -118,7 +119,9 @@ function RestTimer({
             <DrawerTrigger>{children}</DrawerTrigger>
             <DrawerContent className="h-fit bg-app-bg border-none focus:outline-none">
                 <DrawerHeader>
-                    <DrawerTitle className={`text-app-font-2 ${notoSansKr.className}`}>
+                    <DrawerTitle
+                        className={`text-app-font-2 ${notoSansKr.className}`}
+                    >
                         <p className="text-lg">휴식 타이머</p>
                         {/* <div className="mt-3 absolute -left-[10vw] w-[110vw] border-b-2 border-b-[#242424]" /> */}
                     </DrawerTitle>
@@ -204,8 +207,16 @@ function RestTimer({
                                     setSelectedTime(changedTimeIndex);
                                 }}
                             >
-                                <p className={`inline-block ${notoSansKr.className}`}>- 10</p>
-                                <p className={`inline-block ${notoSansKr.className}`}>초</p>
+                                <p
+                                    className={`inline-block ${notoSansKr.className}`}
+                                >
+                                    - 10
+                                </p>
+                                <p
+                                    className={`inline-block ${notoSansKr.className}`}
+                                >
+                                    초
+                                </p>
                             </div>
                             <div
                                 className="bg-app-bg-2 px-6 py-3 rounded-2xl cursor-pointer"
@@ -231,8 +242,17 @@ function RestTimer({
                                     setSelectedTime(changedTimeIndex);
                                 }}
                             >
-                                <p className={`inline-block ${notoSansKr.className}`}>+ 10</p>
-                                <p className={`inline-block ${notoSansKr.className}`}>초</p>                            </div>
+                                <p
+                                    className={`inline-block ${notoSansKr.className}`}
+                                >
+                                    + 10
+                                </p>
+                                <p
+                                    className={`inline-block ${notoSansKr.className}`}
+                                >
+                                    초
+                                </p>{" "}
+                            </div>
                         </div>
                     </div>
 

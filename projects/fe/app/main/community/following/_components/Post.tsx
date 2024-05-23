@@ -8,14 +8,16 @@ import Comment from "@/main/community/following/_images/Comment";
 import SpoonKnife from "@/main/community/following/_images/SpoonKnife";
 import CommentsSection from "@/main/community/following/_components/CommentsSection";
 
-import { Jua, Noto_Sans_KR, Noto_Sans } from "next/font/google";
+import { Jua, Noto_Sans } from "next/font/google";
 
 const jua = Jua({
     subsets: ["latin"],
     weight: "400",
 });
-const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
-const notoSans = Noto_Sans({ subsets: ["latin"] });
+const notoSans = Noto_Sans({
+    subsets: ["latin"],
+    weight: "400",
+});
 // const dosis = Dosis({ subsets: ["latin"] });
 
 interface PostProps {
@@ -59,9 +61,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             </div>
 
             {/* 포스트 이미지 */}
-            <div
-                className={`overflow-clip aspect-square`}
-            >
+            <div className={`overflow-clip aspect-square`}>
                 <Image
                     src={postInfo.image}
                     alt="Post image"

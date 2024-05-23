@@ -4,6 +4,7 @@ import { Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 interface ConfirmModalProps {
@@ -18,8 +19,10 @@ function ConfirmModal({ isVisible, onClose }: ConfirmModalProps) {
                 notoSansKr.className
             } ${!isVisible && "hidden"}`}
         >
-            <div className="mx-auto md:w-fit bg-app-bg-2
-                px-6 md:px-9 pb-4 pt-4 md:pt-6 rounded-3xl space-y-6">
+            <div
+                className="mx-auto md:w-fit bg-app-bg-2
+                px-6 md:px-9 pb-4 pt-4 md:pt-6 rounded-3xl space-y-6"
+            >
                 <p className="text-app-font-2 text-pretty text-center">
                     모든 정보를 올바르게 입력해주세요.
                 </p>

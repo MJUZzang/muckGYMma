@@ -10,6 +10,7 @@ import ArrowBack from "@/_images/ArrowBack";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
+    weight: "400",
 });
 
 interface EditImageProps {
