@@ -138,13 +138,15 @@ export default function Page() {
                 if (res.ok) {
                     return res.json();
                 } else {
-                    console.error("fail");
+                    console.error("failed");
                 }
             })
             .then((data: PredictResult) => {
-                console.log(data);
-                // dispatch(setPredictResult(data));
-                router.push(`/food-info/${data.id}`);
+                if (data) {
+                    console.log(data);
+                    // dispatch(setPredictResult(data));
+                    router.push(`/food-info/${data.id}`);
+                }
             })
             .catch((err) => console.error(err));
     }
