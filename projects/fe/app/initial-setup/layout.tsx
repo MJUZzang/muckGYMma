@@ -122,26 +122,27 @@ function InitialSetupLayout({
     }, [pathname]);
 
     useEffect(() => {
-        fetch(`${backendUrl}/api/member/setup`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dummyUserInfo),
-        })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error("Failed to set up");
-                } else {
-                    console.log("Successfully set up");
-                    router.push("/");
-                }
+        if (process.env.NODE_ENV === "development") {
+            fetch(`${backendUrl}/api/member/setup`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(dummyUserInfo),
             })
-            .catch((err) => {
-                console.error(err);
-                router.push("/");
-            });
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error("Failed to set up");
+                    } else {
+                        console.log("Successfully set up");
+                        router.push("/");
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
 
         document.documentElement.classList.add("overflow-hidden");
         // document.body.classList.add("overflow-y-hidden");
