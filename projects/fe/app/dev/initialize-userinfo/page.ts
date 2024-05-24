@@ -1,8 +1,9 @@
-import { backendUrl } from "@/_utils/urls";
-import { NextResponse, type NextRequest } from "next/server";
-import { userInfoState } from "../../../lib/slices/userInfoSlice";
+"use client";
 
-export const dynamic = "force-dynamic"; // defaults to auto
+import { backendUrl } from "@/_utils/urls";
+import { userInfoState } from "@/../lib/slices/userInfoSlice";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const dummyUserInfo: userInfoState = {
     nickname: "JoneDoe",
@@ -22,19 +23,15 @@ const dummyUserInfo: userInfoState = {
     sports: ["축구"],
 };
 
-export async function GET(request: NextRequest) {
-    if (process.env.NODE_ENV === "development") {
-        return await fetch(`${backendUrl}/api/member/setup`, {
+function InitializeUserInfoPage() {
+    const router = useRouter();
+
+    useEffect(() => {
+        fetch(`${backendUrl}/api/member/setup`, {
             method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                Cookie: request.cookies
-                    .getAll()
-                    .map((cookie) => {
-                        return `${cookie.name}=${cookie.value}`;
-                    })
-                    .join("; "),
             },
             body: JSON.stringify(dummyUserInfo),
         })
@@ -43,16 +40,15 @@ export async function GET(request: NextRequest) {
                     throw new Error("Failed to set up");
                 } else {
                     console.log("Successfully set up");
-                    return NextResponse.redirect(
-                        new URL("/main/workout", request.url)
-                    );
+                    router.push("/");
                 }
             })
             .catch((err) => {
                 console.error(err);
-                return NextResponse.error();
+                router.push("/");
             });
-    } else {
-        return NextResponse.redirect(new URL("/main/workout", request.url));
-    }
+    }, []);
+    return null;
 }
+
+export default InitializeUserInfoPage;
