@@ -145,7 +145,7 @@ export default function Page() {
                 if (data) {
                     console.log(data);
                     // dispatch(setPredictResult(data));
-                    router.push(`/food-info/${data.id}`);
+                    router.push(`/meal/info/${data.id}`);
                 }
             })
             .catch((err) => console.error(err));
