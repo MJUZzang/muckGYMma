@@ -49,15 +49,18 @@ async function FoodInfo({ params }: FoodInfoProps) {
                 credentials: "include",
             })
                 .then((res) => {
+                    console.log(res.status);
                     if (res.ok) {
                         return res.json();
                     } else {
-                        throw new Error("");
+                        throw new Error("Failed to get meal info");
                     }
                 })
                 .then((data) => {
-                    const convertedCreatedAt = new Date(data.createdAt);
-                    meal = { ...data, createdAt: convertedCreatedAt };
+                    if (data) {
+                        const convertedCreatedAt = new Date(data.createdAt);
+                        meal = { ...data, createdAt: convertedCreatedAt };
+                    }
                 })
                 .catch((err) => console.error(err));
         } else {

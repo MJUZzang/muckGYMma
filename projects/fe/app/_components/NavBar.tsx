@@ -9,7 +9,7 @@ import Forum from "@/_images/Forum";
 import { usePathname } from "next/navigation";
 import { Noto_Sans_KR } from "next/font/google";
 import Camera from "@/_images/Camera";
-import UploadMenu from "./UploadMenu";
+import UploadMenu from "@/_components/UploadMenu";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
