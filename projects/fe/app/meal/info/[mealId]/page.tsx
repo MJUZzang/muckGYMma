@@ -36,10 +36,10 @@ const dummyMeal: MealInfo = {
     createdAt: new Date("2024-04-14T19:56:39.214108"),
 };
 
-interface FoodInfoProps {
+interface MealInfoProps {
     params: { mealId: number };
 }
-async function FoodInfo({ params }: FoodInfoProps) {
+async function MealInfoPage({ params }: MealInfoProps) {
     const mealId = params.mealId;
     let meal = dummyMeal;
     if (process.env.NODE_ENV !== "development") {
@@ -165,4 +165,4 @@ async function FoodInfo({ params }: FoodInfoProps) {
     );
 }
 
-export default FoodInfo;
+export default MealInfoPage;
