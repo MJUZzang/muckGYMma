@@ -16,7 +16,7 @@ const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 const excepts = [
     "/initial-setup",
     "/plan-info",
-    "/meal-info",
+    "/meal/info",
     "/plan",
     "/prediction",
     "/settings",
