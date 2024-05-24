@@ -42,14 +42,14 @@ interface MealInfoProps {
 async function MealInfoPage({ params }: MealInfoProps) {
     const mealId = params.mealId;
     let meal = dummyMeal;
-    if (process.env.NODE_ENV !== "development") {
+    
+    // if (process.env.NODE_ENV !== "development") {
         if (mealId && !isNaN(mealId)) {
             await fetch(`${backendUrl}/api/foods/${mealId}`, {
                 method: "GET",
                 credentials: "include",
             })
                 .then((res) => {
-                    console.log(res.status);
                     if (res.ok) {
                         return res.json();
                     } else {
@@ -66,7 +66,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
         } else {
             return <div>잘못된 요청입니다.</div>;
         }
-    }
+    // }
 
     return (
         <>
