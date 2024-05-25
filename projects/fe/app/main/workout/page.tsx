@@ -24,7 +24,8 @@ const notnSerifJP = Noto_Serif_JP({
 async function WorkoutPage() {
     const nickname = await fetchNickname();
     const plans = await fetchTodoPlans();
-
+    console.log(plans);
+    
     return (
         <div className="max-w-[835px] mx-auto w-full">
             <div className="px-4 w-full">
