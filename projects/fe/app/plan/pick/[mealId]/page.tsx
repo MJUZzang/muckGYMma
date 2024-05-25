@@ -112,7 +112,7 @@ function PickPage() {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ planToSubmit }),
+            body: JSON.stringify({ ...planToSubmit }),
         })
             .then((res) => {
                 if (!res.ok) {
