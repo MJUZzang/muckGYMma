@@ -61,6 +61,7 @@ function InfoPage() {
                         initPlanInfoState({
                             ...plan,
                             selectedWorkout: 0,
+                            id: Number(planId),
                         })
                     );
                 })
