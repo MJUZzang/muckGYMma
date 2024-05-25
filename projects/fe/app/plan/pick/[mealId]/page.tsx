@@ -55,10 +55,12 @@ function PickPage() {
                             throw new Error("");
                         }
                     })
-                    .then((data: PlanInfo[]) => {
+                    .then((data: {
+                        plans: PlanInfo[]
+                    }) => {
                         console.log(data);
                         if (data) {
-                            setPlans(data);
+                            setPlans(data.plans);
                         }
                     })
                     .catch((err) => console.error(err))
