@@ -156,6 +156,7 @@ function PickPage() {
                                     className="h-fit bg-app-bg-1 shrink-0 grow-0 rounded-lg cursor-pointer
                                     px-2 py-3 first:ml-[10vw] last:mr-[10vw] ml-[5vw] w-[65vw]"
                                     onClick={() => {
+                                        setSelectedPlanIdx(idx);
                                         setIsModalOpen(true);
                                     }}
                                 >
