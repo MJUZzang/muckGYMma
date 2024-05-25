@@ -5,7 +5,7 @@ import exampleImage from "@/_images/pooh.jpg";
 import { Dosis, Jua, Noto_Sans, Noto_Serif_JP } from "next/font/google";
 import { FetchNickname as fetchNickname } from "@/_utils/user";
 import Plans from "@/main/workout/_components/Plans";
-import { fetchTodoPlans, sortPlansByDate } from "@/main/workout/_utils/Plan";
+import { fetchTodoPlans, sortPlansByDate } from "@/main/workout/_utils/plan";
 
 const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600"] });
 const jua = Jua({
