@@ -4,19 +4,21 @@ import React, { use, useEffect, useRef, useState } from "react";
 import { useAppSelector } from "@/../lib/hooks";
 import { selectPredictResult } from "@/../lib/slices/predictSlice";
 import { backendUrl } from "@/_utils/urls";
+import { useParams } from "next/navigation";
 
 function PickPage() {
     const predictResult = useAppSelector(selectPredictResult);
     const [plansPromise, setPlansPromise] = useState<Promise<void> | null>(
         null
     );
+    const params = useParams();
 
     if (plansPromise) use(plansPromise!);
 
     useEffect(() => {
         if (!plansPromise) {
             setPlansPromise(
-                fetch(`${backendUrl}/api/task/ask/${predictResult?.id}`, {
+                fetch(`${backendUrl}/api/task/ask/${params.mealId}`, {
                     method: "POST",
                     credentials: "include",
                     cache: "force-cache",
