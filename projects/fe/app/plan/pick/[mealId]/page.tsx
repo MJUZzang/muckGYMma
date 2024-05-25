@@ -39,39 +39,39 @@ function PickPage() {
 
     useEffect(() => {
         if (!plansPromise) {
-            // setPlansPromise(
-            //     fetch(`${backendUrl}/api/task/ask/${params.mealId}`, {
-            //         method: "POST",
-            //         credentials: "include",
-            //         cache: "force-cache",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //         },
-            //     })
-            //         .then((res) => {
-            //             if (res.ok) {
-            //                 return res.json();
-            //             } else {
-            //                 throw new Error("");
-            //             }
-            //         })
-            //         .then((data: {
-            //             plans: PlanInfo[]
-            //         }) => {
-            //             console.log(data);
-            //             if (data) {
-            //                 setPlans(data.plans);
-            //             }
-            //         })
-            //         .catch((err) => console.error(err))
-            // );
             setPlansPromise(
-                new Promise((res, rej) => {
-                    setTimeout(() => {
-                        res();
-                    }, 1022222);
+                fetch(`${backendUrl}/api/task/ask/${params.mealId}`, {
+                    method: "POST",
+                    credentials: "include",
+                    cache: "force-cache",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 })
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.json();
+                        } else {
+                            throw new Error("");
+                        }
+                    })
+                    .then((data: {
+                        plans: PlanInfo[]
+                    }) => {
+                        console.log(data);
+                        if (data) {
+                            setPlans(data.plans);
+                        }
+                    })
+                    .catch((err) => console.error(err))
             );
+            // setPlansPromise(
+            //     new Promise((res, rej) => {
+            //         setTimeout(() => {
+            //             res();
+            //         }, 1022222);
+            //     })
+            // );
         }
     }, []);
 
