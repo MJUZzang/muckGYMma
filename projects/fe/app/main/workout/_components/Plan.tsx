@@ -41,7 +41,7 @@ const Plan: React.FC<PlanProps> = ({ className, plan }) => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTimeLeft(timeUntilSevenDaysLater("2024-05-18T00:00:00Z"));
+            setTimeLeft(timeUntilSevenDaysLater(plan.time!.toString()));
         }, 1000);
         return () => clearInterval(interval);
     }, []);
@@ -52,7 +52,7 @@ const Plan: React.FC<PlanProps> = ({ className, plan }) => {
             bg-app-bg-1 hover:bg-app-bg-3
             flex justify-between items-center gap-5 ${className}`}
         >
-            <div>{GetIcon(plan.name)}</div>
+            <div>{GetIcon(plan.name!)}</div>
 
             <div className="basis-full flex justify-between items-center">
                 <div className={`${jua.className} text-app-font-2`}>
