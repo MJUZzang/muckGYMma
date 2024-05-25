@@ -17,9 +17,11 @@ function PickLayout({ children }: PickLayoutProps) {
             <div className="grid grid-cols-3">
                 <ArrowBack className="fill-app-font-2" />
 
-                <p className="text-lg w-full text-center font-semibold">
-                    운동계획 선택
-                </p>
+                <div className="text-lg w-full text-center font-semibold text-app-font-3">
+                    운동 계획 구성
+                </div>
+
+                <div />
             </div>
 
             {children}

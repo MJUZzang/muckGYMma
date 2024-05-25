@@ -117,7 +117,7 @@ function PlanInfo() {
                                     </div>
                                     <div className="w-full text-right pr-4">
                                         <p className="">
-                                            {workout.kcal}&nbsp;kcal
+                                            {workout.expect}&nbsp;kcal
                                         </p>
                                         <p
                                             className={` text-sm ${
