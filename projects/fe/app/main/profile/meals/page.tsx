@@ -17,6 +17,10 @@ const dosis = Dosis({
 
 async function MealPage() {
     const meals = await fetchMeals();
+    const sortedMeals = meals.sort((a, b) => {
+        return b.createdAt.getTime() - a.createdAt.getTime();
+    });
+
     return (
         <>
             <p className="flex items-center mx-3 gap-1 px-3 rounded-lg py-2 bg-app-blue bg-opacity-20 backdrop-blur-lg text-black/80 font-semibold text-[14px] mt-3 mb-3">
@@ -25,7 +29,7 @@ async function MealPage() {
             </p>
 
             <div className="px-5 space-y-3">
-                {meals.map((meal, i) => (
+                {sortedMeals.map((meal, i) => (
                     <Link
                         key={i}
                         href={`/meal/info/${meal.id}`}

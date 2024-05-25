@@ -21,7 +21,7 @@ const dummyData: MealInfo[] = [
         exercised: false,
         posted: false,
         planed: false,
-        createdAt: new Date("2024-04-14T19:56:39.214108"),
+        createdAt: new Date("2024-04-13T19:56:39.214108"),
     },
     {
         id: 2,
@@ -36,7 +36,7 @@ const dummyData: MealInfo[] = [
         exercised: false,
         posted: false,
         planed: false,
-        createdAt: new Date("2024-04-14T19:56:39.214108"),
+        createdAt: new Date("2024-04-11T19:56:39.214108"),
     },
 ];
 
@@ -65,13 +65,10 @@ export async function fetchMeals() {
         .then((meals: MealInfo[]) => {
             console.log(meals);
             if (meals) {
-                const converted = meals.map((meal) => {
+                const converted: MealInfo[] = meals.map((meal) => {
                     return { ...meal, createdAt: new Date(meal.createdAt) };
                 });
-                const sorted: MealInfo[] = converted.sort((a, b) => {
-                    return b.createdAt.getTime() - a.createdAt.getTime();
-                });
-                return sorted;
+                return converted;
             } else {
                 throw new Error("No data received");
             }
