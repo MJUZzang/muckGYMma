@@ -33,6 +33,8 @@ function PickPage() {
     const params = useParams();
     const [plans, setPlans] = useState<PlanInfo[]>([]);
 
+    const mealId = params.mealId;
+
     if (plansPromise) use(plansPromise!);
 
     // let plans: PlanInfo[] = [dummyPlanInfo, dummyPlanInfo, dummyPlanInfo];
@@ -40,7 +42,7 @@ function PickPage() {
     useEffect(() => {
         if (!plansPromise) {
             setPlansPromise(
-                fetch(`${backendUrl}/api/task/ask/${params.mealId}`, {
+                fetch(`${backendUrl}/api/task/ask/${mealId}`, {
                     method: "POST",
                     credentials: "include",
                     cache: "force-cache",
@@ -76,7 +78,7 @@ function PickPage() {
     }, []);
 
     function handleSubmit() {
-        if (!selectedPlanIdx) {
+        if (selectedPlanIdx === null) {
             console.error("selectedPlanIdx does not exist");
             return;
         }
@@ -93,7 +95,7 @@ function PickPage() {
 
         console.log(planToSubmit);
 
-        fetch(`${backendUrl}/api/plans/add`, {
+        fetch(`${backendUrl}/api/plans/add/${mealId}`, {
             credentials: "include",
             method: "POST",
             body: JSON.stringify({ planToSubmit }),
