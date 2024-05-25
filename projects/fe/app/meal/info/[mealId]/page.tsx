@@ -36,6 +36,7 @@ const dummyMeal: MealInfo = {
 interface MealInfoProps {
     params: { mealId: number };
 }
+
 async function MealInfoPage({ params }: MealInfoProps) {
     const mealId = params.mealId;
     let meal = dummyMeal;

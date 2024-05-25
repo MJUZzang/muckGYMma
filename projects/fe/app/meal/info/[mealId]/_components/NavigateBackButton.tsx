@@ -32,6 +32,21 @@ function NavigateBackButton({ className, meal }: NavigateBackButtonProps) {
             </div>
         );
     }
+
+    return (
+        <div
+            onClick={() => {
+                if (!meal.planed) {
+                    router.push("/");
+                } else {
+                    router.back();
+                }
+            }}
+            className={`absolute cursor-pointer stroke-app-font-2 ${className}`}
+        >
+            {!meal.planed ? <XButton size={33} /> : <ArrowBack />}
+        </div>
+    );
 }
 
 export default NavigateBackButton;
