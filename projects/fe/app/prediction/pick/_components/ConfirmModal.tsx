@@ -36,7 +36,9 @@ function ConfirmModal({
     const router = useRouter();
 
     useEffect(() => {
-        setFoodsSelected([]);
+        if (isModalOpen) {
+            setFoodsSelected([]);
+        }
     }, [isModalOpen]);
 
     const handleOkClicked: MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -93,7 +95,6 @@ function ConfirmModal({
                                                         food.id,
                                                     ]);
                                                 }
-                                                console.log(foodsSelected);
                                             }}
                                         />
                                     </div>
