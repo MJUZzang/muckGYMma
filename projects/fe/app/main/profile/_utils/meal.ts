@@ -65,9 +65,13 @@ export async function fetchMeals() {
         .then((meals: MealInfo[]) => {
             console.log(meals);
             if (meals) {
-                return meals.map((meal) => {
+                const converted = meals.map((meal) => {
                     return { ...meal, createdAt: new Date(meal.createdAt) };
                 });
+                const sorted: MealInfo[] = converted.sort((a, b) => {
+                    return a.createdAt.getTime() - b.createdAt.getTime();
+                });
+                return sorted;
             } else {
                 throw new Error("No data received");
             }
