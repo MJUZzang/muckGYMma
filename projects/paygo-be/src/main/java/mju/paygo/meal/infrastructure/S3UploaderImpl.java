@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -83,7 +84,7 @@ public class S3UploaderImpl implements S3Uploader {
     }
 
     private String generateFileUrl(final String originalFilename, final Long userId, final String fileExtension) throws IOException {
-        return userId + "_" + URLEncoder.encode(originalFilename, StandardCharsets.UTF_8) + fileExtension;
+        return UUID.randomUUID().toString() + "_" + userId + "_" + URLEncoder.encode(originalFilename, StandardCharsets.UTF_8) + fileExtension;
     }
 
     private void removeNewFile(final File targetFile) {
