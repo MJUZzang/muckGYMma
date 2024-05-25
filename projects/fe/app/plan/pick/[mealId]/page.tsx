@@ -45,7 +45,6 @@ function PickPage() {
                 fetch(`${backendUrl}/api/task/ask/${mealId}`, {
                     method: "POST",
                     credentials: "include",
-                    cache: "force-cache",
                     headers: {
                         "Content-Type": "application/json",
                     },
@@ -98,6 +97,9 @@ function PickPage() {
         fetch(`${backendUrl}/api/plans/add/${mealId}`, {
             credentials: "include",
             method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
             body: JSON.stringify({ planToSubmit }),
         })
             .then((res) => {
