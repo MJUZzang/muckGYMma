@@ -44,6 +44,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
 
     // if (process.env.NODE_ENV !== "development") {
     if (mealId && !isNaN(mealId)) {
+        console.log("meal id: ", mealId)
         await fetch(`${backendUrl}/api/foods/${mealId}`, {
             method: "GET",
             credentials: "include",
@@ -66,7 +67,6 @@ async function MealInfoPage({ params }: MealInfoProps) {
             })
             .then((data) => {
                 if (data) {
-                    console.log("data: ", data);
                     const convertedCreatedAt = new Date(data.createdAt);
                     meal = { ...data, createdAt: convertedCreatedAt };
                     console.log("meal: ", meal);
