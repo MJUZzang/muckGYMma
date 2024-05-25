@@ -111,8 +111,7 @@ function PickPage() {
             })
             .then((data) => {
                 if (data) {
-                    console.log(data);
-                    router.push(`/plan/info/${data.id}`);
+                    router.push(`/`);
                 }
             })
             .catch((err) => console.error(err));
