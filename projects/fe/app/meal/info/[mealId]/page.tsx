@@ -4,7 +4,7 @@ import { MealInfo } from "@/_types/Food";
 import { backendUrl } from "@/_utils/urls";
 import Link from "next/link";
 import NavigateBackButton from "./_components/NavigateBackButton";
-import { NextRequest } from "next/server";
+import { cookies } from "next/headers";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -36,9 +36,10 @@ const dummyMeal: MealInfo = {
 interface MealInfoProps {
     params: { mealId: number };
 }
-async function MealInfoPage(request: NextRequest, { params }: MealInfoProps) {
+async function MealInfoPage({ params }: MealInfoProps) {
     const mealId = params.mealId;
     let meal = dummyMeal;
+    const cookieStore = cookies();
 
     // if (process.env.NODE_ENV !== "development") {
     if (mealId && !isNaN(mealId)) {
@@ -46,7 +47,7 @@ async function MealInfoPage(request: NextRequest, { params }: MealInfoProps) {
             method: "GET",
             credentials: "include",
             headers: {
-                Cookie: request.cookies
+                Cookie: cookieStore
                     .getAll()
                     .map((cookie) => {
                         return `${cookie.name}=${cookie.value}`;
