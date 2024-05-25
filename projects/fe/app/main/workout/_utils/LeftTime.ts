@@ -1,6 +1,12 @@
 export const CaclLeftTime = (dueDate: Date) => {
     const currentDate = new Date(); // 현재 로컬 시간
-    const utcCurrent = new Date(Date.UTC(currentDate.getUTCFullYear(), currentDate.getUTCMonth(), currentDate.getUTCDate()));
+    const utcCurrent = new Date(
+        Date.UTC(
+            currentDate.getUTCFullYear(),
+            currentDate.getUTCMonth(),
+            currentDate.getUTCDate()
+        )
+    );
 
     const distance = dueDate.getTime() - utcCurrent.getTime();
 
@@ -30,7 +36,9 @@ export function timeUntilSevenDaysLater(createdAt: string): string {
     const createdDate = new Date(createdAt);
 
     // Calculate the date 7 days after the created date
-    const sevenDaysLater = new Date(createdDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+    const sevenDaysLater = new Date(
+        createdDate.getTime() + 7 * 24 * 60 * 60 * 1000
+    );
 
     // Get the current date and time
     const now = new Date();

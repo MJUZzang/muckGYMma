@@ -41,7 +41,7 @@ const Plan: React.FC<PlanProps> = ({ className, plan }) => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTimeLeft(timeUntilSevenDaysLater(plan.time!.toString()));
+            setTimeLeft(timeUntilSevenDaysLater(plan.createdAt!));
         }, 1000);
         return () => clearInterval(interval);
     }, []);
