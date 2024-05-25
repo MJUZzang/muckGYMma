@@ -80,7 +80,7 @@ const notnSerifJP = Noto_Serif_JP({
 async function fetchTodoPlans() {
     const cookieStore = cookies();
 
-    return await fetch(`${backendUrl}/plans/remain`, {
+    return await fetch(`${backendUrl}/api/plans/remain`, {
         method: "GET",
         headers: {
             Cookie: cookieStore
