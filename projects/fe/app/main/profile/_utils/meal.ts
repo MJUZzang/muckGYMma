@@ -17,8 +17,7 @@ const dummyData: MealInfo[] = [
         fat: 9.04,
         sodium: 466.86,
         gram: 120.7,
-        imageUrl:
-            "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/2_%25EB%2596%25A1%25EB%25B3%25B6%25EC%259D%25B4.jpg",
+        imageUrl: img1.src,
         exercised: false,
         posted: false,
         planed: false,
@@ -26,15 +25,14 @@ const dummyData: MealInfo[] = [
     },
     {
         id: 2,
-        name: "닭갈비",
+        name: "삼겹살",
         kcal: 186.19,
         carbo: 12.83,
         protein: 13.8,
         fat: 9.04,
         sodium: 466.86,
         gram: 120.7,
-        imageUrl:
-            "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/2_%25EB%2596%25A1%25EB%25B3%25B6%25EC%259D%25B4.jpg",
+        imageUrl: img2.src,
         exercised: false,
         posted: false,
         planed: false,

@@ -28,16 +28,18 @@ async function MealPage() {
                 {meals.map((meal, i) => (
                     <Link
                         key={i}
-                        href="/food-info"
+                        href={`/meal/info/${meal.id}`}
                         className="flex gap-3 cursor-pointer"
                     >
                         <div
                             className="w-[85px] h-[85px] sm:w-[105px] sm:h-[105px] 
-                        overflow-clip rounded-2xl shrink-0 "
+                            overflow-clip rounded-2xl shrink-0 "
                         >
                             <Image
                                 src={meal.imageUrl}
                                 alt="Pooh"
+                                width={105}
+                                height={105}
                                 className="h-full"
                             />
                         </div>

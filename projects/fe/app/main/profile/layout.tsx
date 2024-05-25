@@ -154,7 +154,7 @@ const Page = ({
                 <div className="flex justify-between items-center mt-3">
                     <Link
                         className={`w-full transition-all duration-1000 border-b-2 ${
-                            pathname.includes("profile/posts")
+                            pathname.includes("/profile/posts")
                                 ? "border-b-app-font-3"
                                 : "border-b-app-bg"
                         }`}
@@ -171,15 +171,15 @@ const Page = ({
                     </Link>
                     <Link
                         className={`w-full transition duration-1000 border-b-2 ${
-                            pathname.includes("profile/food")
+                            pathname.includes("/profile/meals")
                                 ? "border-b-app-font-3"
                                 : "border-b-white/0"
                         }`}
-                        href="/main/profile/food"
+                        href="/main/profile/meals"
                     >
                         <ForkKnife
                             className={`w-full transition-all duration-1000 relative top-1 ${
-                                pathname.includes("/profile/food")
+                                pathname.includes("/profile/meals")
                                     ? "fill-app-font-3"
                                     : "fill-app-font-5"
                             }`}
@@ -188,7 +188,7 @@ const Page = ({
                     </Link>
                     <Link
                         className={`w-full transition duration-1000 border-b-2 ${
-                            pathname.includes("profile/completed")
+                            pathname.includes("/profile/completed")
                                 ? "border-b-app-font-3"
                                 : "border-b-white/0"
                         }`}
