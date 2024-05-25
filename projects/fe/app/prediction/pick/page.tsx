@@ -122,6 +122,7 @@ export default function Page() {
             return;
         }
 
+        console.log("foodsSelected: ", foodsSelected);
         fetch(`${backendUrl}/api/foods/pick`, {
             method: "POST",
             credentials: "include",
