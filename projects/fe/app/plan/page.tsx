@@ -21,7 +21,6 @@ import {
 } from "@/../lib/slices/planInfoSlice";
 import { formatTimeHour } from "@/plan/_utils/time";
 import { Noto_Sans_KR } from "next/font/google";
-import { dummyPlanInfo } from "@/_types/Plan";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -38,7 +37,7 @@ function Page() {
     const dispatch = useAppDispatch();
     const planInfo = useAppSelector(selectPlanInfo);
     const selectedWorkout = useAppSelector(selectSelectedWorkout);
-    const workout = planInfo.workouts![selectedWorkout];
+    const task = planInfo.tasks![selectedWorkout];
 
     const [selectedSet, setSelectedSet] = useState(0);
 
@@ -131,16 +130,16 @@ function Page() {
 
                 {/* Workout name */}
                 <p className="text-app-font-2 font-semibold text-2xl mt-3 px-3">
-                    {workout.name} x {workout.set}세트
+                    {task.name} x {task.sets}세트
                 </p>
 
                 {/* Progress */}
                 <p className="mt-2 px-3 text-app-font-3 text-sm">
-                    {selectedSet + 1} / {workout.set}
+                    {selectedSet + 1} / {task.sets}
                 </p>
 
                 <div className="flex flex-col gap-3 mt-3 px-4">
-                    {Array.from({ length: workout.set }).map((set, idx) => (
+                    {Array.from({ length: task.sets! }).map((set, idx) => (
                         <div
                             key={idx}
                             className={`text-app-inverted-font shadow-xl grid grid-cols-3 py-2 px-4 rounded-xl transition-all duration-1000
@@ -152,11 +151,11 @@ function Page() {
 
                             <div>
                                 <p className={`w-full text-right`}>
-                                    {workout.repeatation} 회
+                                    {task.repeatation} 회
                                 </p>
-                                {workout.weight && (
+                                {task.weight && (
                                     <p className={`w-full text-right`}>
-                                        {workout.weight} kg
+                                        {task.weight} kg
                                     </p>
                                 )}
                             </div>
@@ -179,12 +178,12 @@ function Page() {
 
             <div className="bg-app-bg shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)] fixed bottom-0 w-full pt-2 pb-3 px-3 flex gap-3 mt-auto">
                 <RestTimer
-                    key={workout.name}
+                    key={task.name}
                     time={restTime}
                     setTime={setRestTime}
                     onClose={() => {
                         // 모든 세트 완료시 /plan-info 페이지로 이동
-                        if (selectedSet === workout.set) {
+                        if (selectedSet === task.set) {
                             dispatch(markWorkoutAsCompleted(selectedWorkout));
                             dispatch(
                                 setDoneSecond({
@@ -194,13 +193,9 @@ function Page() {
                             );
 
                             // 다음으로 진행할 수 있는 workout 인덱스 계산 후 선택
-                            for (
-                                let i = 0;
-                                i < planInfo.workouts!.length;
-                                i++
-                            ) {
+                            for (let i = 0; i < planInfo.tasks!.length; i++) {
                                 if (
-                                    !planInfo.workouts![i].cleared &&
+                                    !planInfo.tasks![i].cleared &&
                                     i !== selectedWorkout
                                 ) {
                                     dispatch(setSelectedWorkout(i));
@@ -232,7 +227,7 @@ function Page() {
                 <Button
                     className="bg-app-blue-2"
                     onClick={() => {
-                        if (workout.set > selectedSet) {
+                        if (task.sets! > selectedSet) {
                             setSelectedSet(selectedSet + 1);
                         }
                         restTimerButtonRef.current?.click();

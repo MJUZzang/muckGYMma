@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import useEmblaCarousel from "embla-carousel-react";
 import { Dosis, Noto_Sans_KR } from "next/font/google";
 import Shycat from "@/_images/Shycat";
-import { PlanInfo, dummyPlanInfo } from "@/_types/Plan";
+import { PlanInfo } from "@/_types/Plan";
 import ConfirmModal from "@/plan/pick/[mealId]/_components/ConfirmModal";
 import { useRouter } from "next/navigation";
 import { backendUrl } from "@/_utils/urls";
@@ -36,8 +36,6 @@ function PickPage() {
     const mealId = params.mealId;
 
     if (plansPromise) use(plansPromise!);
-
-    // let plans: PlanInfo[] = [dummyPlanInfo, dummyPlanInfo, dummyPlanInfo];
 
     useEffect(() => {
         if (!plansPromise) {
