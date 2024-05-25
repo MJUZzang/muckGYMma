@@ -134,7 +134,7 @@ export default function Page() {
             }),
         })
             .then((res) => {
-                console.log(res.status);
+                console.log("response status: ", res.status);
                 if (res.ok) {
                     return res.json();
                 } else {
@@ -143,7 +143,7 @@ export default function Page() {
             })
             .then((data: PredictResult) => {
                 if (data) {
-                    console.log(data);
+                    console.log("Picked foods's data: ", data);
                     // dispatch(setPredictResult(data));
                     router.push(`/meal/info/${data.id}`);
                 }
