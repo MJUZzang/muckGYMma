@@ -69,7 +69,7 @@ export async function fetchMeals() {
                     return { ...meal, createdAt: new Date(meal.createdAt) };
                 });
                 const sorted: MealInfo[] = converted.sort((a, b) => {
-                    return a.createdAt.getTime() - b.createdAt.getTime();
+                    return b.createdAt.getTime() - a.createdAt.getTime();
                 });
                 return sorted;
             } else {
