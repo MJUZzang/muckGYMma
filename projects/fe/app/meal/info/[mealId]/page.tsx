@@ -1,10 +1,8 @@
 import Image from "next/image";
-import { Noto_Sans_KR, Dosis } from "next/font/google";
-import { MealInfo } from "@/_types/Food";
-import { backendUrl } from "@/_utils/urls";
 import Link from "next/link";
+import { Noto_Sans_KR, Dosis } from "next/font/google";
 import NavigateBackButton from "./_components/NavigateBackButton";
-import { cookies } from "next/headers";
+import { fetchMeal } from "@/main/profile/_utils/meal";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -16,69 +14,17 @@ const dosis = Dosis({
     weight: "400",
 });
 
-const dummyMeal: MealInfo = {
-    id: 1,
-    name: "닭갈비",
-    kcal: 186.19,
-    carbo: 12.83,
-    protein: 13.8,
-    fat: 9.04,
-    sodium: 466.86,
-    gram: 120.7,
-    imageUrl:
-        "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/2_%25EB%2596%25A1%25EB%25B3%25B6%25EC%259D%25B4.jpg",
-    exercised: false,
-    posted: false,
-    planed: false,
-    createdAt: new Date("2024-04-14T19:56:39.214108"),
-};
-
 interface MealInfoProps {
     params: { mealId: number };
 }
 
 async function MealInfoPage({ params }: MealInfoProps) {
     const mealId = params.mealId;
-    let meal = dummyMeal;
-    const cookieStore = cookies();
 
-    // if (process.env.NODE_ENV !== "development") {
-    if (mealId && !isNaN(mealId)) {
-        console.log("meal id: ", mealId)
-        await fetch(`${backendUrl}/api/foods/${mealId}`, {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                Cookie: cookieStore
-                    .getAll()
-                    .map((cookie) => {
-                        return `${cookie.name}=${cookie.value}`;
-                    })
-                    .join("; "),
-            },
-        })
-            .then((res) => {
-                console.log(res.status);
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    throw new Error("Failed to get meal info");
-                }
-            })
-            .then((data) => {
-                if (data) {
-                    const convertedCreatedAt = new Date(data.createdAt);
-                    meal = { ...data, createdAt: convertedCreatedAt };
-                    console.log("meal: ", meal);
-                }
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    } else {
+    if (!mealId || isNaN(mealId)) {
         return <div>잘못된 요청입니다.</div>;
     }
-    // }
+    const meal = await fetchMeal(mealId);
 
     return (
         <>
