@@ -95,7 +95,7 @@ async function fetchTodoPlans() {
             if (res.ok) {
                 return res.json();
             } else {
-                throw new Error("Failed to fetch ramaining plans");
+                throw new Error(`${res.status}: Failed to fetch ramaining plans`);
             }
         })
         .then((data: PlanInfo[]) => {
