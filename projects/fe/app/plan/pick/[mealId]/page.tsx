@@ -56,9 +56,7 @@ function PickPage() {
                             throw new Error("");
                         }
                     })
-                    .then((data: {
-                        plans: PlanInfo[]
-                    }) => {
+                    .then((data: { plans: PlanInfo[] }) => {
                         console.log(data);
                         if (data) {
                             setPlans(data.plans);
@@ -81,7 +79,11 @@ function PickPage() {
             console.error("selectedPlanIdx does not exist");
             return;
         }
-        const planToSubmit = plans[selectedPlanIdx];
+
+        const planToSubmit = {
+            type: plans[selectedPlanIdx].type,
+            workouts: plans[selectedPlanIdx].workouts,
+        };
 
         if (!planToSubmit.workouts) {
             console.error("workouts does not exist");
@@ -121,7 +123,7 @@ function PickPage() {
     if (!plansPromise) {
         return null;
     } else if (plans.length === 0) {
-        throw new Error("Failed to fetch plans.")
+        throw new Error("Failed to fetch plans.");
     } else {
         return (
             <>
