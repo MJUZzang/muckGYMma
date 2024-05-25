@@ -6,6 +6,7 @@ import mju.paygo.plan.domain.Task;
 import java.time.LocalDateTime;
 
 public record PlanOuterResponse(
+        Long id,
         String name,
         Integer total,
         Integer time,
@@ -23,6 +24,6 @@ public record PlanOuterResponse(
                 .filter(task -> task.getTime() != null) // null 제외
                 .mapToInt(Task::getTime)
                 .sum();
-        return new PlanOuterResponse(plan.getName(), total, time, plan.getCleared(), plan.getCreatedAt());
+        return new PlanOuterResponse(plan.getId(), plan.getName(), total, time, plan.getCleared(), plan.getCreatedAt());
     }
 }

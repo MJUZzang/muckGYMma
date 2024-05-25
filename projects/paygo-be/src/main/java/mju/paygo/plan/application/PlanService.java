@@ -150,6 +150,7 @@ public class PlanService {
         builder.append("이 요구사항은 헬스 말고도 스포츠에도 동일하다. 스포츠 workouts 또한 expect 총합들이 모두 음식 칼로리 (예: 닭갈비일 경우 257kcal)에 근접하도록 해야 한다.").append("\n");
         builder.append("고급 경력을 가진 만큼, 충분히 expect들을 적절히 고려할 수 있을 것이라 생각한다. expect 총합을 최대한 음식 칼로리에 맞추도록 생성해라.").append("\n");
         builder.append("반환할 때, json만 나오도록 해라. 겉부분에 ```json 같은 게 있으면 안 된다.").append("\n");
+        builder.append("type이 헬스일 때에는 time을 너가 예상해서 만들어줘. 예시로 벤치프레스를 20kg로 10번씩 3세트 할 경우 걸리는 시간 (초)가 있겠지? 그 값을 time으로 넣어주면 돼.").append("\n");
         return builder.toString();
     }
 
