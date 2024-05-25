@@ -10,6 +10,8 @@ export const makeStore = () => {
             userInfo: userInfoReducer,
             planInfo: planInfoReducer,
         },
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware({ serializableCheck: false }),
     });
 };
 
