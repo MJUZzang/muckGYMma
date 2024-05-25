@@ -153,7 +153,7 @@ function PickPage() {
                             {plans.map((plan, idx) => (
                                 <div
                                     key={idx}
-                                    className="bg-app-bg-1 shrink-0 grow-0 rounded-lg cursor-pointer
+                                    className="h-fit bg-app-bg-1 shrink-0 grow-0 rounded-lg cursor-pointer
                                     px-2 py-3 first:ml-[10vw] last:mr-[10vw] ml-[5vw] w-[65vw]"
                                     onClick={() => {
                                         setIsModalOpen(true);
@@ -195,7 +195,7 @@ function PickPage() {
                                                                 </>
                                                             )}
                                                         </div>
-                                                        <p className="pl-5 text-app-font-5 flex">
+                                                        <div className="pl-5 text-app-font-5 flex">
                                                             <p
                                                                 className={`${dosis.className}`}
                                                             >
@@ -211,7 +211,7 @@ function PickPage() {
                                                                 }
                                                             </p>
                                                             <p>회</p>
-                                                        </p>
+                                                        </div>
                                                     </li>
                                                 )
                                             )}
