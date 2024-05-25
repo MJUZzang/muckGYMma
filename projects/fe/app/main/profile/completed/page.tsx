@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Dosis, Jua, Noto_Sans_KR } from "next/font/google";
 import { formatTimeInKor } from "@/plan/_utils/time";
 import CheckMark from "@/_images/CheckMark";
-import { fetchPlans } from "@/_utils/plan";
+import { fetchPlans, sortPlansByDate } from "@/_utils/plan";
 import Swimming from "@/_images/Swimming";
 import Football from "@/_images/Football";
 import Muscle from "@/_images/Muscle";
@@ -34,6 +34,7 @@ function getIcon(name: string) {
 
 async function CompletedPage() {
     const plans = await fetchPlans();
+    const sortedPlans = sortPlansByDate(plans);
 
     return (
         <div className="">
@@ -42,7 +43,7 @@ async function CompletedPage() {
                 완료된 운동 플랜
             </p>
             <div className="px-5 space-y-3">
-                {plans.map((plan, i) => (
+                {sortedPlans.map((plan, i) => (
                     <Link
                         key={i}
                         href={`/plan/info/${plan.id}`}
