@@ -65,6 +65,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
             })
             .then((data) => {
                 if (data) {
+                    console.log("data: ", data);
                     const convertedCreatedAt = new Date(data.createdAt);
                     meal = { ...data, createdAt: convertedCreatedAt };
                     console.log("meal: ", meal);
