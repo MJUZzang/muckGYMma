@@ -75,7 +75,7 @@ function InfoPage() {
         if (index === selectedWorkout) {
             return "bg-app-blue-2 scale-[105%]";
         }
-        if (planInfo.workouts && planInfo.workouts[index].cleared) {
+        if (planInfo.tasks && planInfo.tasks[index].cleared) {
             return "bg-gray-700 text-app-inverted-font-4 scale-[105%]";
         }
         return "bg-gray-400 text-app-inverted-font-4";
