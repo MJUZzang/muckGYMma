@@ -51,17 +51,18 @@ function InfoPage() {
                     }
                 })
                 .then((plan: PlanInfo) => {
-                    console.log(plan);
                     if (!plan) {
                         console.error("Failed to receive plan info");
-                    } else {
-                        dispatch(
-                            initPlanInfoState({
-                                ...plan,
-                                selectedWorkout: 0,
-                            })
-                        );
+                        throw new Error("Failed to receive plan info");
                     }
+                    console.log(plan);
+
+                    dispatch(
+                        initPlanInfoState({
+                            ...plan,
+                            selectedWorkout: 0,
+                        })
+                    );
                 })
                 .catch((err) => {
                     console.error(err);
@@ -122,46 +123,46 @@ function InfoPage() {
                     </div>
 
                     <div className="space-y-3 mt-6 group px-4">
-                        {planInfo.workouts &&
-                            planInfo.workouts.map((workout, index) => (
+                        {planInfo.tasks &&
+                            planInfo.tasks.map((task, index) => (
                                 <div
                                     key={index}
                                     className={`shadow-xl flex justify-between items-center p-3 rounded-lg 
                                 transition-all duration-500 ease-in-out text-app-inverted-font
                                 ${GetWorkoutBoxStyle(index)} ${
-                                        !workout.cleared && "cursor-pointer"
+                                        !task.cleared && "cursor-pointer"
                                     }`}
                                     onClick={() => {
-                                        if (!workout.cleared) {
+                                        if (!task.cleared) {
                                             dispatch(setSelectedWorkout(index));
                                         }
                                     }}
                                 >
                                     <div className="w-fit text-nowrap">
-                                        <p className="">{workout.name}</p>
+                                        <p className="">{task.name}</p>
                                         <div className="flex">
                                             <p className="">
-                                                {workout.set}sets
+                                                {task.set}sets
                                             </p>
                                             &nbsp;
                                             <p className="">
-                                                {workout.repeatation}reps
+                                                {task.repeatation}reps
                                             </p>
                                         </div>
                                     </div>
                                     <div className="w-full text-right pr-4">
                                         <p className="">
-                                            {workout.expect}&nbsp;kcal
+                                            {task.expect}&nbsp;kcal
                                         </p>
                                         <p
                                             className={` text-sm ${
-                                                !workout.cleared && "invisible"
+                                                !task.cleared && "invisible"
                                             }`}
                                         >
-                                            {workout.cleared &&
-                                                workout.doneSecond &&
+                                            {task.cleared &&
+                                                task.doneSecond &&
                                                 `${formatTimeInKor(
-                                                    workout.doneSecond
+                                                    task.doneSecond
                                                 )} 소요`}
                                         </p>
                                     </div>
@@ -170,7 +171,7 @@ function InfoPage() {
                                             width={28}
                                             height={28}
                                             className={`fill-app-blue-4 ${
-                                                !workout.cleared && "invisible"
+                                                !task.cleared && "invisible"
                                             }`}
                                         />
                                     </div>
