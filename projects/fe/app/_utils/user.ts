@@ -83,7 +83,7 @@ export async function checkIfEnteredInitialInfo(request: NextRequest) {
 export async function FetchNickname() {
     const cookieStore = cookies();
 
-    const userInfo = await fetch(`${backendUrl}/api/member/setup`, {
+    return await fetch(`${backendUrl}/api/member/setup`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -95,14 +95,13 @@ export async function FetchNickname() {
     })
         .then((res) => {
             if (res.ok) return res.json();
-            return null;
+            throw new Error("Failed to fetch user info");
         })
         .then((data: userInfoState) => {
-            return data;
+            return data.nickname;
         })
         .catch((err) => {
             console.error(err);
-            return null;
+            return "JohnDoe";
         });
-    return userInfo?.nickname;
 }

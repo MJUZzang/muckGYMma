@@ -3,65 +3,9 @@ import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 
 import { Dosis, Jua, Noto_Sans, Noto_Serif_JP } from "next/font/google";
-import { cookies } from "next/headers";
-import { backendUrl } from "@/_utils/urls";
-import { userInfoState } from "@/../lib/slices/userInfoSlice";
 import { FetchNickname as fetchNickname } from "@/_utils/user";
-import { fetchTodoWorkoutPlans } from "@/_utils/plan";
 import Plans from "@/main/workout/_components/Plans";
-import { PlanInfo } from "@/_types/Plan";
-
-const dummyList: PlanInfo[] = [
-    {
-        name: "헬스",
-        time: 1804,
-        cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
-        total: 290,
-    },
-    {
-        name: "수영",
-        time: 1804,
-        cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
-        total: 290,
-    },
-    {
-        name: "축구",
-        time: 1804,
-        cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
-        total: 290,
-    },
-    {
-        name: "축구",
-        time: 1804,
-        cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
-        total: 290,
-    },
-    {
-        name: "축구",
-        time: 1804,
-        cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
-        total: 290,
-    },
-    {
-        name: "축구",
-        time: 1804,
-        cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
-        total: 290,
-    },
-    {
-        name: "축구",
-        time: 1804,
-        cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
-        total: 290,
-    },
-];
+import { fetchTodoPlans } from "@/main/workout/_utils/Plan";
 
 const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600"] });
 const jua = Jua({
@@ -77,44 +21,9 @@ const notnSerifJP = Noto_Serif_JP({
     weight: "900",
 });
 
-async function fetchTodoPlans() {
-    const cookieStore = cookies();
-
-    return await fetch(`${backendUrl}/api/plans/remain`, {
-        method: "GET",
-        headers: {
-            Cookie: cookieStore
-                .getAll()
-                .map((cookie) => {
-                    return `${cookie.name}=${cookie.value}`;
-                })
-                .join("; "),
-        },
-    })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                throw new Error(`${res.status}: Failed to fetch ramaining plans`);
-            }
-        })
-        .then((data: PlanInfo[]) => {
-            if (data) {
-                return data;
-            } else {
-                throw new Error("data is null");
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            return dummyList;
-        });
-}
-
 async function WorkoutPage() {
     const nickname = await fetchNickname();
-    // const plans = await fetchTodoWorkoutPlans();
-    let plans = await fetchTodoPlans();
+    const plans = await fetchTodoPlans();
 
     return (
         <div className="max-w-[835px] mx-auto w-full">
@@ -149,7 +58,7 @@ async function WorkoutPage() {
                     <p
                         className={`text-app-font-2 font-bold text-xl ${notoSans.className}`}
                     >
-                        {nickname ? nickname : "John Doe"}
+                        {nickname}
                     </p>
                 </div>
 
@@ -230,7 +139,7 @@ async function WorkoutPage() {
                                 <p
                                     className={`inline-block mt-4 text-2xl font-semibold ${dosis.className}`}
                                 >
-                                    12
+                                    {plans.length}
                                 </p>
                                 <p
                                     className={`inline-block text-xl ml-1 ${jua.className}`}
