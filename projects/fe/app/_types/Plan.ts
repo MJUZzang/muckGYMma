@@ -1,7 +1,7 @@
 export interface Workout {
     name: string;
     repeatation: number;
-    
+
     expect?: number; // same as kcal
     kcal?: number;
 
@@ -16,10 +16,10 @@ export interface Workout {
 
 export interface PlanInfo {
     id?: number;
-    
+
     workouts?: Workout[]; // same as tasks
     tasks?: Workout[];
-    
+
     name?: string;
     type?: string;
     time?: number;
@@ -42,8 +42,14 @@ export const emptyPlanInfo: PlanInfo = {
     total: 0,
 };
 
-export const dummyPlanInfo: PlanInfo = {
-    workouts: [
+export const dummyData: PlanInfo = {
+    name: "헬스",
+    time: 1804,
+    cleared: false,
+    createdAt: new Date("2024-04-13T19:56:39.214108"),
+    total: 290,
+    type: "헬스",
+    tasks: [
         {
             name: "벤치프레스",
             set: 7,
@@ -85,10 +91,4 @@ export const dummyPlanInfo: PlanInfo = {
             cleared: false,
         },
     ],
-    name: "헬스",
-    type: "헬스",
-    total: 565,
-    time: 0,
-    cleared: false,
-    createdAt: new Date("2024-04-13T19:56:39.214108"),
 };

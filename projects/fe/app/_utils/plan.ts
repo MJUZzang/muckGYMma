@@ -2,13 +2,56 @@ import { PlanInfo } from "@/_types/Plan";
 import { backendUrl } from "@/_utils/urls";
 import { cookies } from "next/headers";
 
-const dummyList: PlanInfo[] = [
+export const dummyList: PlanInfo[] = [
     {
         name: "헬스",
         time: 1804,
         cleared: false,
         createdAt: new Date("2024-04-13T19:56:39.214108"),
         total: 290,
+        type: "헬스",
+        tasks: [
+            {
+                name: "벤치프레스",
+                set: 7,
+                repeatation: 12,
+                expect: 113,
+                weight: 60,
+                doneSecond: 180,
+                cleared: true,
+            },
+            {
+                name: "데드리프트",
+                set: 7,
+                repeatation: 12,
+                expect: 113,
+                weight: 60,
+                cleared: false,
+            },
+            {
+                name: "레터럴레이즈",
+                set: 5,
+                repeatation: 12,
+                expect: 113,
+                weight: 60,
+                cleared: false,
+            },
+            {
+                name: "풀업",
+                set: 2,
+                repeatation: 12,
+                expect: 113,
+                cleared: false,
+            },
+            {
+                name: "숄더프레스",
+                set: 5,
+                repeatation: 12,
+                expect: 113,
+                weight: 60,
+                cleared: false,
+            },
+        ],
     },
     {
         name: "수영",
@@ -113,9 +156,7 @@ export async function fetchPlans() {
             if (res.ok) {
                 return res.json();
             } else {
-                throw new Error(
-                    `${res.status}: Failed to fetch plans`
-                );
+                throw new Error(`${res.status}: Failed to fetch plans`);
             }
         })
         .then((plans: PlanInfo[]) => {

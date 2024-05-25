@@ -1,22 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/../lib/store";
-import { dummyPlanInfo, PlanInfo, PlanInfoState } from "@/_types/Plan";
+import { PlanInfoState, dummyData } from "@/_types/Plan";
 
 // Define the initial state using that type
-const initialState: PlanInfoState =
-    process.env.NODE_ENV === "development"
-        ? {
-              ...dummyPlanInfo,
-              selectedWorkout: 1,
-          }
-        : {
-              ...dummyPlanInfo,
-              selectedWorkout: 1,
-          };
-// : {
-//       ...emptyPlanInfo,
-//       selectedWorkout: 0,
-//   };
+const initialState: PlanInfoState = {
+    ...dummyData,
+    selectedWorkout: 0,
+};
 
 export const planInfoSlice = createSlice({
     name: "planInfo",
@@ -84,8 +74,12 @@ export const planInfoSlice = createSlice({
     },
 });
 
-export const { setSelectedWorkout, markWorkoutAsCompleted, setDoneSecond, initPlanInfoState } =
-    planInfoSlice.actions;
+export const {
+    setSelectedWorkout,
+    markWorkoutAsCompleted,
+    setDoneSecond,
+    initPlanInfoState,
+} = planInfoSlice.actions;
 
 export const selectPlanInfo = (state: RootState) => state.planInfo;
 export const selectSelectedWorkout = (state: RootState) =>

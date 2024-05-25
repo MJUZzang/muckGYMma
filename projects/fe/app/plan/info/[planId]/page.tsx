@@ -17,7 +17,7 @@ import { formatTimeInKor } from "@/plan/_utils/time";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import Muscle from "@/_images/Muscle";
 import { backendUrl } from "@/_utils/urls";
-import { PlanInfo } from "@/_types/Plan";
+import { PlanInfo, dummyData } from "@/_types/Plan";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -38,7 +38,6 @@ function InfoPage() {
 
     useEffect(() => {
         if (!planInfo.id || planInfo.id !== Number(planId)) {
-            console.log("다르다");
             fetch(`${backendUrl}/api/plans/${planId}`, {
                 credentials: "include",
                 method: "GET",
@@ -53,9 +52,13 @@ function InfoPage() {
                 .then((plan: PlanInfo) => {
                     if (!plan) {
                         console.error("Failed to receive plan info");
+                        initPlanInfoState({
+                            ...dummyData,
+                            selectedWorkout: 0,
+                            id: Number(planId),
+                        })
                         throw new Error("Failed to receive plan info");
                     }
-                    console.log(plan);
 
                     dispatch(
                         initPlanInfoState({
