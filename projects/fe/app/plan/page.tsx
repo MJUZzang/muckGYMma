@@ -200,7 +200,7 @@ function Page() {
                                 i++
                             ) {
                                 if (
-                                    !planInfo.workouts![i].isCompleted &&
+                                    !planInfo.workouts![i].cleared &&
                                     i !== selectedWorkout
                                 ) {
                                     dispatch(setSelectedWorkout(i));

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/../lib/store";
-import { dummyPlanInfo, emptyPlanInfo, PlanInfo } from "@/_types/Plan";
+import { dummyPlanInfo, PlanInfo } from "@/_types/Plan";
 
 type PlanInfoState = {
     selectedWorkout: number;

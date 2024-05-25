@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 import Button from "@/_components/Button";
@@ -15,6 +15,7 @@ import CheckMark from "@/_images/CheckMark";
 import { formatTimeInKor } from "@/plan/_utils/time";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import Muscle from "@/_images/Muscle";
+import { backendUrl } from "@/_utils/urls";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -27,12 +28,36 @@ const dosis = Dosis({
 
 function PlanInfo() {
     const router = useRouter();
-
     const dispatch = useAppDispatch();
     const planInfo = useAppSelector(selectPlanInfo);
     const selectedWorkout = useAppSelector(selectSelectedWorkout);
+    const params = useParams();
+    const planId = params.planId as string;
 
     useEffect(() => {
+        if (!planInfo.id || planInfo.id !== Number(planId)) {
+            console.log("다르다");
+            fetch(`${backendUrl}/api/plans/{planId}`, {
+                credentials: "include",
+                method: "GET",
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw new Error("Failed to fetch plan info");
+                    }
+                })
+                .then((plan) => {
+                    console.log(plan);
+                    if (!plan) {
+                        console.error("Failed to receive plan info");
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                });
+        }
         return () => {};
     }, []);
 
