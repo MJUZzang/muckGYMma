@@ -13,6 +13,7 @@ const notoSans = Noto_Sans({
     subsets: ["latin"],
     weight: "400",
 });
+
 const dosis = Dosis({ subsets: ["latin"], weight: "400" });
 const jua = Jua({
     subsets: ["latin"],
@@ -21,12 +22,12 @@ const jua = Jua({
 
 function GetIcon(type: string) {
     switch (type) {
-        case "헬스":
-            return <Muscle />;
         case "수영":
             return <Swimming />;
         case "축구":
             return <Football />;
+        default:
+            return <Muscle />;
     }
 }
 
