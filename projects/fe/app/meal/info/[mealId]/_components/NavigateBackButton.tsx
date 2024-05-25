@@ -14,25 +14,6 @@ interface NavigateBackButtonProps {
 function NavigateBackButton({ className, meal }: NavigateBackButtonProps) {
     const router = useRouter();
 
-    if (!meal.planed) {
-        return (
-            <div onClick={() => router.push("/")}>
-                <XButton
-                    className={`absolute cursor-pointer stroke-app-font-2 ${className}`}
-                    size={33}
-                />
-            </div>
-        );
-    } else if (meal.planed) {
-        return (
-            <div onClick={() => router.back()}>
-                <ArrowBack
-                    className={`absolute cursor-pointer fill-app-font-2 ${className}`}
-                />
-            </div>
-        );
-    }
-
     return (
         <div
             onClick={() => {
@@ -42,7 +23,7 @@ function NavigateBackButton({ className, meal }: NavigateBackButtonProps) {
                     router.back();
                 }
             }}
-            className={`absolute cursor-pointer stroke-app-font-2 ${className}`}
+            className={`cursor-pointer stroke-app-font-2 ${className}`}
         >
             {!meal.planed ? <XButton size={33} /> : <ArrowBack />}
         </div>
