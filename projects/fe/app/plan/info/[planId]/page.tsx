@@ -37,7 +37,7 @@ function PlanInfo() {
     useEffect(() => {
         if (!planInfo.id || planInfo.id !== Number(planId)) {
             console.log("다르다");
-            fetch(`${backendUrl}/api/plans/{planId}`, {
+            fetch(`${backendUrl}/api/plans/${planId}`, {
                 credentials: "include",
                 method: "GET",
             })
