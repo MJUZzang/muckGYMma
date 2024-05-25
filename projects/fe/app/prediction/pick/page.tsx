@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
 import {
     PredictResult,
     PredictState,
     selectPredict,
-    setPredict,
-    setPredictResult,
 } from "@/../lib/slices/predictSlice";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
@@ -100,8 +98,7 @@ const dummyData = {
 // }
 
 export default function Page() {
-    const dispatch = useAppDispatch();
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+    const [emblaRef] = useEmblaCarousel({ loop: false });
     const [selectedPredict, setSelectedPredict] = useState<number | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const predict: PredictState = useAppSelector(selectPredict);
@@ -122,7 +119,6 @@ export default function Page() {
             return;
         }
 
-        console.log("foodsSelected: ", foodsSelected);
         fetch(`${backendUrl}/api/foods/pick`, {
             method: "POST",
             credentials: "include",
@@ -135,7 +131,6 @@ export default function Page() {
             }),
         })
             .then((res) => {
-                console.log("response status: ", res.status);
                 if (res.ok) {
                     return res.json();
                 } else {
@@ -144,7 +139,6 @@ export default function Page() {
             })
             .then((data: PredictResult) => {
                 if (data) {
-                    console.log("Picked foods's data: ", data);
                     // dispatch(setPredictResult(data));
                     router.push(`/meal/info/${data.id}`);
                 }
@@ -225,15 +219,15 @@ export default function Page() {
 
             <ConfirmModal
                 title="섭취하신 음식을 알려주세요"
+                isModalOpen={isModalOpen}
+                predict={predict}
                 onOkClicked={() => {
                     setIsModalOpen(false);
                     setIsFoodSelected(true);
                 }}
+                onCancelClicked={() => setIsModalOpen(false)}
                 foodsSelected={foodsSelected}
                 setFoodsSelected={setFoodsSelected}
-                onCancelClicked={() => setIsModalOpen(false)}
-                isModalOpen={isModalOpen}
-                predict={predict}
                 selectedPredict={selectedPredict}
             />
         </>
