@@ -1,13 +1,10 @@
-import { NextRequest } from "next/server";
-import ArrowBack from "@/_images/ArrowBack";
-
-import img1 from "@/_images/닭갈비.jpg";
 import Image from "next/image";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import { MealInfo } from "@/_types/Food";
 import { backendUrl } from "@/_utils/urls";
 import Link from "next/link";
 import NavigateBackButton from "./_components/NavigateBackButton";
+import { NextRequest } from "next/server";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -39,7 +36,7 @@ const dummyMeal: MealInfo = {
 interface MealInfoProps {
     params: { mealId: number };
 }
-async function MealInfoPage({ params }: MealInfoProps) {
+async function MealInfoPage(request: NextRequest, { params }: MealInfoProps) {
     const mealId = params.mealId;
     let meal = dummyMeal;
 
@@ -48,6 +45,14 @@ async function MealInfoPage({ params }: MealInfoProps) {
         await fetch(`${backendUrl}/api/foods/${mealId}`, {
             method: "GET",
             credentials: "include",
+            headers: {
+                Cookie: request.cookies
+                    .getAll()
+                    .map((cookie) => {
+                        return `${cookie.name}=${cookie.value}`;
+                    })
+                    .join("; "),
+            },
         })
             .then((res) => {
                 console.log(res.status);
