@@ -97,12 +97,12 @@ function PlanInfo() {
                             <p className="text-app-font-2 text-lg font-semibold">
                                 {planInfo.name}
                             </p>
-                            <p className={`text-app-font-2 flex`}>
+                            <div className={`text-app-font-2 flex`}>
                                 <p className={`${dosis.className}`}>
                                     {planInfo.total}
                                 </p>
                                 &nbsp;kcal
-                            </p>
+                            </div>
                             {/* {!planInfo.isCompleted && (
                             <p>
                                 {planInfo.completedAt &&
