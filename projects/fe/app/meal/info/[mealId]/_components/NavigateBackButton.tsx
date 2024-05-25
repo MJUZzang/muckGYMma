@@ -23,9 +23,9 @@ function NavigateBackButton({ className, meal }: NavigateBackButtonProps) {
                     router.back();
                 }
             }}
-            className={`cursor-pointer stroke-app-font-2 ${className}`}
+            className={`w-full justify-start cursor-pointer ${className}`}
         >
-            {!meal.planed ? <XButton size={33} /> : <ArrowBack />}
+            {!meal.planed ? <XButton className="stroke-app-font-2" size={33} /> : <ArrowBack className="fill-app-font-2" />}
         </div>
     );
 }

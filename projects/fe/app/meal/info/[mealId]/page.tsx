@@ -85,10 +85,10 @@ async function MealInfoPage({ params }: MealInfoProps) {
             <div
                 className={`flex flex-col h-[100dvh] animate-page-enter px-3 ${notoSansKr.className}`}
             >
-                <div className="mt-4">
+                <div className="mt-4 grid grid-cols-3">
                     <NavigateBackButton meal={meal} />
 
-                    <p className="text-lg text-center font-semibold">
+                    <p className="text-lg w-full text-center font-semibold">
                         {meal.name}
                     </p>
                 </div>
