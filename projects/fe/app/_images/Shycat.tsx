@@ -7,7 +7,7 @@ interface ShycatProps {
 function Shycat({ className = "" }: ShycatProps) {
     return (
         <svg
-            className={`relative right-6 ${className}`}
+            className={`relative right-6 overflow-hidden ${className}`}
             xmlns="http://www.w3.org/2000/svg"
             data-name="Layer 1"
             width="100%"

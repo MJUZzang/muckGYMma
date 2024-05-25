@@ -10,7 +10,7 @@ const notoSansKr = Noto_Sans_KR({
 function Loading() {
     return (
         <div
-            className={`animate-page-fade-in flex items-center h-[100dvh] ${notoSansKr.className}`}
+            className={`absolute top-0 left-0 w-full overflow-hidden animate-page-fade-in flex items-center h-[100dvh] ${notoSansKr.className}`}
         >
             <div className="w-full flex flex-col justify-start">
                 <div className="max-w-[400px] mx-auto w-full">

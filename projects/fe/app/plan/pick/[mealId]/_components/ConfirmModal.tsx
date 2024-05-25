@@ -31,13 +31,15 @@ function ConfirmModal({
                 px-8 md:px-9 pb-4 pt-4 md:pt-6 rounded-3xl space-y-6"
             >
                 <p className="text-app-font-2 text-pretty text-center">
-                    {planIdx && `${planIdx + 1}번 플랜을 선택하시겠습니까?`}.
+                    {planIdx !== null &&
+                        `${planIdx + 1}번 플랜을 선택하시겠습니까?`}
                 </p>
                 <div className="w-fit mx-auto space-x-3">
                     <button
                         className="w-[110px] py-2 bg-app-blue text-app-inverted-font rounded-full border-none 
                         hover:scale-105 transition duration-300 ease-in-out"
                         onClick={() => {
+                            onOkClik();
                             onClose();
                         }}
                     >
