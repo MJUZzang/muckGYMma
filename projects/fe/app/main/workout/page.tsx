@@ -63,7 +63,7 @@ const dummyList: PlanInfo[] = [
     },
 ];
 
-const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600",] });
+const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600"] });
 const jua = Jua({
     subsets: ["latin"],
     weight: "400",
@@ -77,10 +77,44 @@ const notnSerifJP = Noto_Serif_JP({
     weight: "900",
 });
 
+async function fetchTodoPlans() {
+    const cookieStore = cookies();
+
+    return await fetch(`${backendUrl}/plans/remain`, {
+        method: "GET",
+        headers: {
+            Cookie: cookieStore
+                .getAll()
+                .map((cookie) => {
+                    return `${cookie.name}=${cookie.value}`;
+                })
+                .join("; "),
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Failed to fetch ramaining plans");
+            }
+        })
+        .then((data: PlanInfo[]) => {
+            if (data) {
+                return data;
+            } else {
+                throw new Error("data is null");
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            return dummyList;
+        });
+}
+
 async function WorkoutPage() {
     const nickname = await fetchNickname();
     // const plans = await fetchTodoWorkoutPlans();
-    const plans = dummyList;
+    let plans = await fetchTodoPlans();
 
     return (
         <div className="max-w-[835px] mx-auto w-full">

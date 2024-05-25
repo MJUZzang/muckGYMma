@@ -10,7 +10,7 @@ export interface Workout {
 }
 
 export interface PlanInfo {
-    workouts: Workout[];
+    workouts?: Workout[];
     name?: string;
     type?: string;
     time?: number;
