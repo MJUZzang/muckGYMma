@@ -1,6 +1,11 @@
 import ArrowBack from "@/_images/ArrowBack";
-import NavigateBackButton from "@/meal/info/[mealId]/_components/NavigateBackButton";
+import { Noto_Sans_KR } from "next/font/google";
 import React from "react";
+
+const notoSansKr = Noto_Sans_KR({
+    subsets: ["latin"],
+    weight: "400",
+});
 
 interface PickLayoutProps {
     children?: React.ReactNode;
@@ -8,7 +13,7 @@ interface PickLayoutProps {
 
 function PickLayout({ children }: PickLayoutProps) {
     return (
-        <div className="pt-4">
+        <div className={`pt-4 px-3 ${notoSansKr.className}`}>
             <div className="grid grid-cols-3">
                 <ArrowBack className="fill-app-font-2" />
 
