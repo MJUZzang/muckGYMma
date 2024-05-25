@@ -16,7 +16,7 @@ import {
     markWorkoutAsCompleted,
     selectPlanInfo,
     selectSelectedWorkout,
-    setCompletionTime,
+    setDoneSecond,
     setSelectedWorkout,
 } from "@/../lib/slices/planInfoSlice";
 import { formatTimeHour } from "@/plan/_utils/time";
@@ -187,7 +187,7 @@ function Page() {
                         if (selectedSet === workout.set) {
                             dispatch(markWorkoutAsCompleted(selectedWorkout));
                             dispatch(
-                                setCompletionTime({
+                                setDoneSecond({
                                     workoutIndex: selectedWorkout,
                                     completionTime: timerTime,
                                 })

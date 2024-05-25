@@ -1,10 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/../lib/store";
-import { dummyPlanInfo, PlanInfo } from "@/_types/Plan";
-
-type PlanInfoState = {
-    selectedWorkout: number;
-} & PlanInfo;
+import { dummyPlanInfo, PlanInfo, PlanInfoState } from "@/_types/Plan";
 
 // Define the initial state using that type
 const initialState: PlanInfoState =
@@ -31,10 +27,12 @@ export const planInfoSlice = createSlice({
         setSelectedWorkout: (state, action: PayloadAction<number>) => {
             state.selectedWorkout = action.payload;
         },
+
         markWorkoutAsCompleted: (state, action: PayloadAction<number>) => {
-            state.workouts![action.payload].isCompleted = true;
+            state.workouts![action.payload].cleared = true;
         },
-        setCompletionTime: (
+
+        setDoneSecond: (
             state,
             action: PayloadAction<{
                 workoutIndex: number;
@@ -45,15 +43,48 @@ export const planInfoSlice = createSlice({
                 index === action.payload.workoutIndex
                     ? {
                           ...workout,
-                          completionTime: action.payload.completionTime,
+                          doneSecond: action.payload.completionTime,
                       }
                     : workout
             );
         },
+
+        initPlanInfoState: (state, action: PayloadAction<PlanInfoState>) => {
+            if (action.payload.id) {
+                state.id = action.payload.id;
+            }
+            if (action.payload.workouts) {
+                state.workouts = action.payload.workouts;
+            }
+            if (action.payload.tasks) {
+                state.tasks = action.payload.tasks;
+            }
+            if (action.payload.name) {
+                state.name = action.payload.name;
+            }
+            if (action.payload.type) {
+                state.type = action.payload.type;
+            }
+            if (action.payload.cleared) {
+                state.cleared = action.payload.cleared;
+            }
+            if (action.payload.createdAt) {
+                state.createdAt = action.payload.createdAt;
+            }
+            if (action.payload.time) {
+                state.time = action.payload.time;
+            }
+            if (action.payload.total) {
+                state.total = action.payload.total;
+            }
+            if (action.payload.selectedWorkout) {
+                state.selectedWorkout = action.payload.selectedWorkout;
+            }
+        },
     },
 });
 
-export const { setSelectedWorkout, markWorkoutAsCompleted, setCompletionTime } =
+export const { setSelectedWorkout, markWorkoutAsCompleted, setDoneSecond, initPlanInfoState } =
     planInfoSlice.actions;
 
 export const selectPlanInfo = (state: RootState) => state.planInfo;

@@ -1,17 +1,25 @@
 export interface Workout {
     name: string;
     repeatation: number;
-    expect: number;
-    set: number;
+    
+    expect?: number; // same as kcal
+    kcal?: number;
+
+    set?: number; // same as sets
+    sets?: number;
+
     weight?: number | null;
     time?: number | null;
-    completionTime?: number;
-    isCompleted?: boolean;
+    doneSecond?: number;
+    cleared?: boolean;
 }
 
 export interface PlanInfo {
     id?: number;
-    workouts?: Workout[];
+    
+    workouts?: Workout[]; // same as tasks
+    tasks?: Workout[];
+    
     name?: string;
     type?: string;
     time?: number;
@@ -19,6 +27,10 @@ export interface PlanInfo {
     createdAt?: Date;
     total?: number;
 }
+
+export type PlanInfoState = {
+    selectedWorkout: number;
+} & PlanInfo;
 
 export const emptyPlanInfo: PlanInfo = {
     workouts: [],
@@ -38,8 +50,8 @@ export const dummyPlanInfo: PlanInfo = {
             repeatation: 12,
             expect: 113,
             weight: 60,
-            completionTime: 180,
-            isCompleted: true,
+            doneSecond: 180,
+            cleared: true,
         },
         {
             name: "데드리프트",
@@ -47,7 +59,7 @@ export const dummyPlanInfo: PlanInfo = {
             repeatation: 12,
             expect: 113,
             weight: 60,
-            isCompleted: false,
+            cleared: false,
         },
         {
             name: "레터럴레이즈",
@@ -55,14 +67,14 @@ export const dummyPlanInfo: PlanInfo = {
             repeatation: 12,
             expect: 113,
             weight: 60,
-            isCompleted: false,
+            cleared: false,
         },
         {
             name: "풀업",
             set: 2,
             repeatation: 12,
             expect: 113,
-            isCompleted: false,
+            cleared: false,
         },
         {
             name: "숄더프레스",
@@ -70,7 +82,7 @@ export const dummyPlanInfo: PlanInfo = {
             repeatation: 12,
             expect: 113,
             weight: 60,
-            isCompleted: false,
+            cleared: false,
         },
     ],
     name: "헬스",

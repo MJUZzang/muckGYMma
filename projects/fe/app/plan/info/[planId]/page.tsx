@@ -7,6 +7,7 @@ import Link from "next/link";
 import Button from "@/_components/Button";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
 import {
+    initPlanInfoState,
     selectPlanInfo,
     selectSelectedWorkout,
     setSelectedWorkout,
@@ -16,6 +17,7 @@ import { formatTimeInKor } from "@/plan/_utils/time";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import Muscle from "@/_images/Muscle";
 import { backendUrl } from "@/_utils/urls";
+import { PlanInfo } from "@/_types/Plan";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -26,7 +28,7 @@ const dosis = Dosis({
     weight: "400",
 });
 
-function PlanInfo() {
+function InfoPage() {
     const router = useRouter();
     const dispatch = useAppDispatch();
     const planInfo = useAppSelector(selectPlanInfo);
@@ -48,13 +50,20 @@ function PlanInfo() {
                         throw new Error("Failed to fetch plan info");
                     }
                 })
-                .then((plan) => {
+                .then((plan: PlanInfo) => {
                     console.log(plan);
                     if (!plan) {
                         console.error("Failed to receive plan info");
+                    } else {
+                        dispatch(
+                            initPlanInfoState({
+                                ...plan,
+                                selectedWorkout: 0,
+                            })
+                        );
                     }
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.error(err);
                 });
         }
@@ -65,7 +74,7 @@ function PlanInfo() {
         if (index === selectedWorkout) {
             return "bg-app-blue-2 scale-[105%]";
         }
-        if (planInfo.workouts && planInfo.workouts[index].isCompleted) {
+        if (planInfo.workouts && planInfo.workouts[index].cleared) {
             return "bg-gray-700 text-app-inverted-font-4 scale-[105%]";
         }
         return "bg-gray-400 text-app-inverted-font-4";
@@ -120,10 +129,10 @@ function PlanInfo() {
                                     className={`shadow-xl flex justify-between items-center p-3 rounded-lg 
                                 transition-all duration-500 ease-in-out text-app-inverted-font
                                 ${GetWorkoutBoxStyle(index)} ${
-                                        !workout.isCompleted && "cursor-pointer"
+                                        !workout.cleared && "cursor-pointer"
                                     }`}
                                     onClick={() => {
-                                        if (!workout.isCompleted) {
+                                        if (!workout.cleared) {
                                             dispatch(setSelectedWorkout(index));
                                         }
                                     }}
@@ -146,14 +155,13 @@ function PlanInfo() {
                                         </p>
                                         <p
                                             className={` text-sm ${
-                                                !workout.isCompleted &&
-                                                "invisible"
+                                                !workout.cleared && "invisible"
                                             }`}
                                         >
-                                            {workout.isCompleted &&
-                                                workout.completionTime &&
+                                            {workout.cleared &&
+                                                workout.doneSecond &&
                                                 `${formatTimeInKor(
-                                                    workout.completionTime
+                                                    workout.doneSecond
                                                 )} 소요`}
                                         </p>
                                     </div>
@@ -162,8 +170,7 @@ function PlanInfo() {
                                             width={28}
                                             height={28}
                                             className={`fill-app-blue-4 ${
-                                                !workout.isCompleted &&
-                                                "invisible"
+                                                !workout.cleared && "invisible"
                                             }`}
                                         />
                                     </div>
@@ -185,4 +192,4 @@ function PlanInfo() {
     );
 }
 
-export default PlanInfo;
+export default InfoPage;
