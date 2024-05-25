@@ -73,7 +73,7 @@ const Plan: React.FC<PlanProps> = ({ className, plan }) => {
 
             <div className="text-center font-semibold">
                 <p className={`text-app-font-2 ${dosis.className}`}>
-                    {plan.time}
+                    {plan.total}
                 </p>
                 <p className={`text-app-font-2 ${notoSans.className}`}>kcal</p>
             </div>
