@@ -15,7 +15,7 @@ export interface PlanInfo {
     type?: string;
     time?: number;
     cleared?: boolean;
-    createdAt?: string;
+    createdAt?: Date;
     total?: number;
 }
 
@@ -24,7 +24,7 @@ export const emptyPlanInfo: PlanInfo = {
     name: "",
     type: "",
     cleared: false,
-    createdAt: "",
+    createdAt: new Date(),
     time: 0,
     total: 0,
 };
@@ -77,5 +77,5 @@ export const dummyPlanInfo: PlanInfo = {
     total: 565,
     time: 0,
     cleared: false,
-    createdAt: "2021-06-01",
+    createdAt: new Date("2024-04-13T19:56:39.214108"),
 };

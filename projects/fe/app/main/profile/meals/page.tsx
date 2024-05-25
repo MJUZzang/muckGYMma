@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import Link from "next/link";
 import CheckMark from "@/_images/CheckMark";
-import { fetchMeals } from "../_utils/meal";
+import { fetchMeals, sortMealsByDate } from "../_utils/meal";
 
 
 const notoSansKr = Noto_Sans_KR({
@@ -17,9 +17,7 @@ const dosis = Dosis({
 
 async function MealPage() {
     const meals = await fetchMeals();
-    const sortedMeals = meals.sort((a, b) => {
-        return b.createdAt.getTime() - a.createdAt.getTime();
-    });
+    const sortedMeals = sortMealsByDate(meals);
 
     return (
         <>

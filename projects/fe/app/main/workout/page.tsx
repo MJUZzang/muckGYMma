@@ -5,7 +5,7 @@ import exampleImage from "@/_images/pooh.jpg";
 import { Dosis, Jua, Noto_Sans, Noto_Serif_JP } from "next/font/google";
 import { FetchNickname as fetchNickname } from "@/_utils/user";
 import Plans from "@/main/workout/_components/Plans";
-import { fetchTodoPlans } from "@/main/workout/_utils/Plan";
+import { fetchTodoPlans, sortPlansByDate } from "@/main/workout/_utils/Plan";
 
 const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600"] });
 const jua = Jua({
@@ -24,7 +24,8 @@ const notnSerifJP = Noto_Serif_JP({
 async function WorkoutPage() {
     const nickname = await fetchNickname();
     const plans = await fetchTodoPlans();
-    console.log(plans);
+    const sortedPlans = sortPlansByDate(plans);
+    console.log(sortedPlans);
     
     return (
         <div className="max-w-[835px] mx-auto w-full">
@@ -140,7 +141,7 @@ async function WorkoutPage() {
                                 <p
                                     className={`inline-block mt-4 text-2xl font-semibold ${dosis.className}`}
                                 >
-                                    {plans.length}
+                                    {sortedPlans.length}
                                 </p>
                                 <p
                                     className={`inline-block text-xl ml-1 ${jua.className}`}
@@ -155,7 +156,7 @@ async function WorkoutPage() {
                     </div>
                 </div>
 
-                <Plans plans={plans} />
+                <Plans plans={sortedPlans} />
             </div>
         </div>
     );

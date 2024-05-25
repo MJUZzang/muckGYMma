@@ -115,3 +115,9 @@ export async function fetchMeal(mealId: number) {
             return dummyData[0];
         });
 }
+
+export function sortMealsByDate(meals: MealInfo[]) {
+    return meals.sort((a, b) => {
+        return b.createdAt.getTime() - a.createdAt.getTime();
+    });
+}

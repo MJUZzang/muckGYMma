@@ -7,49 +7,49 @@ const dummyList: PlanInfo[] = [
         name: "헬스",
         time: 1804,
         cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
+        createdAt: new Date("2024-04-13T19:56:39.214108"),
         total: 290,
     },
     {
         name: "수영",
         time: 1804,
         cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
+        createdAt: new Date("2024-04-13T19:56:39.214108"),
         total: 290,
     },
     {
         name: "축구",
         time: 1804,
         cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
+        createdAt: new Date("2024-04-13T19:56:39.214108"),
         total: 290,
     },
     {
         name: "축구",
         time: 1804,
         cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
+        createdAt: new Date("2024-04-13T19:56:39.214108"),
         total: 290,
     },
     {
         name: "축구",
         time: 1804,
         cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
+        createdAt: new Date("2024-04-13T19:56:39.214108"),
         total: 290,
     },
     {
         name: "축구",
         time: 1804,
         cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
+        createdAt: new Date("2024-04-13T19:56:39.214108"),
         total: 290,
     },
     {
         name: "축구",
         time: 1804,
         cleared: false,
-        createdAt: "2024-018-05T00:00:00Z",
+        createdAt: new Date("2024-04-13T19:56:39.214108"),
         total: 290,
     },
 ];
@@ -77,9 +77,14 @@ export async function fetchTodoPlans() {
                 );
             }
         })
-        .then((data: PlanInfo[]) => {
-            if (data) {
-                return data;
+        .then((plans: PlanInfo[]) => {
+            if (plans) {
+                return plans.map((plan) => {
+                    return {
+                        ...plan,
+                        createdAt: new Date(plan.createdAt!),
+                    };
+                });
             } else {
                 throw new Error("data is null");
             }
@@ -88,4 +93,12 @@ export async function fetchTodoPlans() {
             console.error(err);
             return dummyList;
         });
+}
+
+export function sortPlansByDate(plans: PlanInfo[]) {
+    return plans.sort((a, b) => {
+        return (
+            new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
+        );
+    });
 }
