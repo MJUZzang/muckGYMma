@@ -1,8 +1,7 @@
 "use client";
 
 import ArrowBack from "@/_images/ArrowBack";
-import XButton from "@/_images/XButton";
-import { MealInfo } from "@/_types/Food";
+import { MealInfo } from "@/_types/Meal";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -17,15 +16,11 @@ function NavigateBackButton({ className, meal }: NavigateBackButtonProps) {
     return (
         <div
             onClick={() => {
-                if (!meal.planed) {
-                    router.push("/");
-                } else {
-                    router.back();
-                }
+                router.push("/main/profile/meals");
             }}
             className={`w-full justify-start cursor-pointer ${className}`}
         >
-            {!meal.planed ? <XButton className="stroke-app-font-2" size={33} /> : <ArrowBack className="fill-app-font-2" />}
+            <ArrowBack className="fill-app-font-2" />
         </div>
     );
 }

@@ -21,7 +21,7 @@ const dummyData: MealInfo[] = [
         exercised: false,
         posted: false,
         planed: false,
-        createdAt: "2024-04-14T19:56:39.214108",
+        createdAt: new Date("2024-04-14T19:56:39.214108"),
     },
     {
         id: 2,
@@ -36,7 +36,7 @@ const dummyData: MealInfo[] = [
         exercised: false,
         posted: false,
         planed: false,
-        createdAt: "2024-04-14T19:56:39.214108",
+        createdAt: new Date("2024-04-14T19:56:39.214108"),
     },
 ];
 
@@ -62,10 +62,12 @@ export async function fetchMeals() {
                 throw new Error("Server responded with an error");
             }
         })
-        .then((data: MealInfo[]) => {
-            console.log(data);
-            if (data) {
-                return data;
+        .then((meals: MealInfo[]) => {
+            console.log(meals);
+            if (meals) {
+                return meals.map((meal) => {
+                    return { ...meal, createdAt: new Date(meal.createdAt) };
+                });
             } else {
                 throw new Error("No data received");
             }
@@ -102,7 +104,7 @@ export async function fetchMeal(mealId: number) {
         .then((meal: MealInfo) => {
             if (meal) {
                 console.log("meal: ", meal);
-                return meal;
+                return { ...meal, createdAt: new Date(meal.createdAt) };
             } else {
                 throw new Error("No meal info received");
             }

@@ -70,7 +70,7 @@ async function MealPage() {
                                 <p
                                     className={`text-app-font-2 text-xs ${dosis.className}`}
                                 >
-                                    {meal.createdAt}
+                                    {meal.createdAt.toLocaleString()}
                                 </p>
                             </div>
                         </div>

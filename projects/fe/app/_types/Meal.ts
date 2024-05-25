@@ -11,5 +11,5 @@ export interface MealInfo {
     exercised: boolean;
     posted: boolean;
     planed: boolean;
-    createdAt: string;
+    createdAt: Date;
 }
