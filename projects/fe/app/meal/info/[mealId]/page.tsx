@@ -42,30 +42,33 @@ interface MealInfoProps {
 async function MealInfoPage({ params }: MealInfoProps) {
     const mealId = params.mealId;
     let meal = dummyMeal;
-    
+
     // if (process.env.NODE_ENV !== "development") {
-        if (mealId && !isNaN(mealId)) {
-            await fetch(`${backendUrl}/api/foods/${mealId}`, {
-                method: "GET",
-                credentials: "include",
+    if (mealId && !isNaN(mealId)) {
+        await fetch(`${backendUrl}/api/foods/${mealId}`, {
+            method: "GET",
+            credentials: "include",
+        })
+            .then((res) => {
+                console.log(res.status);
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error("Failed to get meal info");
+                }
             })
-                .then((res) => {
-                    if (res.ok) {
-                        return res.json();
-                    } else {
-                        throw new Error("Failed to get meal info");
-                    }
-                })
-                .then((data) => {
-                    if (data) {
-                        const convertedCreatedAt = new Date(data.createdAt);
-                        meal = { ...data, createdAt: convertedCreatedAt };
-                    }
-                })
-                .catch((err) => console.error(err));
-        } else {
-            return <div>잘못된 요청입니다.</div>;
-        }
+            .then((data) => {
+                if (data) {
+                    const convertedCreatedAt = new Date(data.createdAt);
+                    meal = { ...data, createdAt: convertedCreatedAt };
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    } else {
+        return <div>잘못된 요청입니다.</div>;
+    }
     // }
 
     return (
