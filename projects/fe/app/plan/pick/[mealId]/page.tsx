@@ -99,10 +99,10 @@ function PickPage() {
             return {
                 name: workout.name,
                 repeatation: workout.repeatation,
-                weight: workout.weight || null,
+                weight: workout.weight || 0,
                 expect: workout.expect,
                 set: workout.set,
-                time: workout.time || null
+                time: workout.time || 0
             };
         });
 
