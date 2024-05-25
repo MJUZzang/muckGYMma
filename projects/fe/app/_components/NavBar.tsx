@@ -18,7 +18,7 @@ const excepts = [
     "/plan-info",
     "/meal/info",
     "/plan",
-    "/prediction",
+    "/meal/prediction/pick",
     "/settings",
     "/post",
 ];

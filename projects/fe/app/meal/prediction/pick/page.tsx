@@ -9,7 +9,7 @@ import {
 } from "@/../lib/slices/predictSlice";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import ConfirmModal from "@/prediction/pick/_components/ConfirmModal";
+import ConfirmModal from "@/meal/prediction/pick/_components/ConfirmModal";
 import ArrowBack from "@/_images/ArrowBack";
 import Button from "@/_components/Button";
 import { backendUrl } from "@/_utils/urls";
