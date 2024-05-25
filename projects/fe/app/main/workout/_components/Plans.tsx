@@ -28,7 +28,7 @@ const Plans = ({ plans }: PlansProps) => {
     return (
         <div className="space-y-3 mt-3 mb-6 h-full">
             {plans.map((plan, index) => (
-                <Link key={index} className="block" href="/plan-info">
+                <Link key={index} className="block" href={`/plan/info/${plan.id}`}>
                     <Plan
                         className={`task py-6 translate-x-[100%]`}
                         plan={plan}
