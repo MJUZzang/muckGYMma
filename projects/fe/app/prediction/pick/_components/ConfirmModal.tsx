@@ -93,6 +93,7 @@ function ConfirmModal({
                                                         food.id,
                                                     ]);
                                                 }
+                                                console.log(foodsSelected);
                                             }}
                                         />
                                     </div>
