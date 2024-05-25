@@ -3,8 +3,8 @@ export interface Workout {
     repeatation: number;
     expect: number;
     set: number;
-    weight?: number;
-    time?: number;
+    weight?: number | null;
+    time?: number | null;
     completionTime?: number;
     isCompleted?: boolean;
 }

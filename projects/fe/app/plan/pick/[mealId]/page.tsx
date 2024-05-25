@@ -95,6 +95,16 @@ function PickPage() {
         }
 
         console.log(planToSubmit);
+        planToSubmit.workouts = planToSubmit.workouts.map((workout) => {
+            return {
+                name: workout.name,
+                repeatation: workout.repeatation,
+                weight: workout.weight || null,
+                expect: workout.expect,
+                set: workout.set,
+                time: workout.time || null
+            };
+        });
 
         fetch(`${backendUrl}/api/plans/add/${mealId}`, {
             credentials: "include",
