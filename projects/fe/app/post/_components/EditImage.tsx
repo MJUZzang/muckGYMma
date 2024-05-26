@@ -106,7 +106,7 @@ const EditImage = ({ imageSrc, onCrop, onClose }: EditImageProps) => {
 
     return (
         <div
-            className={`absolute bg-app-bg top-0 left-0 w-full h-[100dvh] flex flex-col animate-page-enter ${notoSansKr.className}`}
+            className={`z-[40] absolute bg-app-bg top-0 left-0 w-full h-[100dvh] flex flex-col animate-page-enter ${notoSansKr.className}`}
         >
             <div className="grid grid-cols-3 px-2 h-[55px] bg-app-bg border-b-[1px] border-b-app-bg-2">
                 <button
@@ -122,7 +122,7 @@ const EditImage = ({ imageSrc, onCrop, onClose }: EditImageProps) => {
                     사진 추가
                 </div>
                 <div className="w-full flex justify-end items-center"></div>
-            </div>
+            </div>``
 
             <div className="relative w-full aspect-square">
                 <Cropper

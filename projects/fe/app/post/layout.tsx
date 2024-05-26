@@ -19,7 +19,7 @@ function PostLayout({
                     href="/"
                     className="w-full inline-flex justify-start items-center"
                 >
-                    <XButton className="stroke-app-font-3 z-[50] cursor-pointer" size={33} />
+                    <XButton className="stroke-app-font-3 z-[10] cursor-pointer" size={33} />
                 </Link>
 
                 <div className="w-full flex items-center justify-center font-semibold text-base text-app-font-3">
