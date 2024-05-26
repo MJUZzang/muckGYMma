@@ -3,7 +3,6 @@
 import React, { use, useEffect } from "react";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
-import FoodPicture from "@/_components/FoodPicture";
 import Hash from "@/main/profile/_components/Hash";
 import Grid from "@/main/profile/_components/Grid";
 import ForkKnife from "@/main/profile/_components/ForkKnife";
@@ -11,6 +10,8 @@ import Analytics from "@/main/profile/_components/Analytics";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
+import UploadMeal from "@/_components/UploadMeal";
+import Camera from "@/_images/Camera";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });
@@ -37,14 +38,8 @@ const Page = ({
                 </div>
 
                 <div className="flex gap-5 items-center">
-                    <FoodPicture
-                        className="fill-app-font-4 cursor-pointer lg:hidden"
-                        size={23}
-                    />
-                    <FoodPicture
-                        className="fill-app-font-4 cursor-pointer hidden lg:block"
-                        size={25}
-                    />
+                    <UploadMeal className="fill-app-font-4 cursor-pointer lg:hidden" buttonContent={<Camera size={23} />} />
+                    <UploadMeal className="fill-app-font-4 cursor-pointer hidden lg:block" buttonContent={<Camera size={25} />} />
 
                     <Link href="/settings" className="w-[27px] lg:w-[30px] h-fit gap-[4px] flex flex-col cursor-pointer">
                         <div className="w-full h-[3px] lg:h-[2.7px] bg-app-font-4 rounded-full" />

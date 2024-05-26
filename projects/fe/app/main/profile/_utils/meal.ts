@@ -75,7 +75,7 @@ export async function fetchMeals() {
         })
         .catch((err) => {
             console.error(err);
-            return dummyData;
+            return [];
         });
 }
 

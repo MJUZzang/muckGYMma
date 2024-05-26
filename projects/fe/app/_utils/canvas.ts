@@ -1,5 +1,13 @@
 import { Flip, PixelCrop } from "@/_types/Canvas";
 
+export function readFile(file: File): Promise<string | ArrayBuffer | null> {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.addEventListener("load", () => resolve(reader.result), false);
+        reader.readAsDataURL(file);
+    });
+}
+
 export const ORIENTATION_TO_ANGLE: { [key: string]: number } = {
     "3": 180,
     "6": 90,

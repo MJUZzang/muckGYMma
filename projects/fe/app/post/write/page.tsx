@@ -1,14 +1,12 @@
 "use client";
 
-import AddCircle from "@/_images/AddCircle";
-import AddCircleV2 from "@/_images/AddCircleV2";
 import Camera from "@/_images/Camera";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import EditImage from "@/post/_components/EditImage";
+import EditImage from "@/_components/EditImage";
 import { getOrientation } from "get-orientation/browser";
-import { ORIENTATION_TO_ANGLE, getRotatedImage } from "@/_utils/canvas";
+import { ORIENTATION_TO_ANGLE, getRotatedImage, readFile } from "@/_utils/canvas";
 import Button from "@/_components/Button";
 import { Noto_Sans_KR } from "next/font/google";
 
@@ -17,13 +15,7 @@ const notoSansKr = Noto_Sans_KR({
     weight: "400",
 });
 
-function readFile(file: File): Promise<string | ArrayBuffer | null> {
-    return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.addEventListener("load", () => resolve(reader.result), false);
-        reader.readAsDataURL(file);
-    });
-}
+
 
 function WritePage() {
     const inputRef = useRef<HTMLInputElement>(null);

@@ -122,7 +122,7 @@ const EditImage = ({ imageSrc, onCrop, onClose }: EditImageProps) => {
                     사진 추가
                 </div>
                 <div className="w-full flex justify-end items-center"></div>
-            </div>``
+            </div>
 
             <div className="relative w-full aspect-square">
                 <Cropper
