@@ -1,4 +1,4 @@
-export const CaclLeftTime = (dueDate: Date) => {
+export const caclLeftTime = (dueDate: Date) => {
     const currentDate = new Date(); // 현재 로컬 시간
     const utcCurrent = new Date(
         Date.UTC(

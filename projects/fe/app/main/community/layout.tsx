@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 import { Noto_Sans, Dosis } from "next/font/google";
+import Image from "next/image";
 
 const notoSans = Noto_Sans({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });
@@ -35,11 +36,12 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
         <>
             <div className="flex flex-col border-b-[1px] border-b-gray-300 px-3">
                 <div className="mt-3 max-w-[835px] mx-auto w-full">
-                    <p
+                    {/* <Image src="/android-chrome-192x192.png" alt="app logo" width={60} height={60} /> */}
+                    {/* <p
                         className={`w-fit pl-1 rounded-sm text-app-font-3 text-xl font-semibold ${notoSans.className}`}
                     >
-                        
-                    </p>
+                        asd
+                    </p> */}
                 </div>
 
                 <div className="flex max-w-[835px] mx-auto w-full mt-3 gap-4">
