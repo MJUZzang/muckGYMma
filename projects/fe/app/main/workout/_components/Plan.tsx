@@ -66,7 +66,7 @@ const Plan: React.FC<PlanProps> = ({ className, plan }) => {
                         className={`w-fit mt-1 px-3 py-2 rounded-full bg-app-blue 
                             text-sm text-app-inverted-font`}
                     >
-                        {plan.time && plan.time / 60}분 소요
+                        {plan.time && (plan.time / 60).toFixed(0)}분 소요
                     </div>
                 </div>
             </div>
