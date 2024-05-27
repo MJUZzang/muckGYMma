@@ -24,7 +24,7 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
     const dispatch = useAppDispatch();
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [isEditing, setIsEditing] = useState(false);
-    console.log(imageSrc);
+
     function handleClicked() {
         inputRef.current?.click();
     }
@@ -35,6 +35,8 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
             return;
         }
         
+        console.log(src);
+
         const file = src!;
         const formData = new FormData();
         formData.append("file", file);
