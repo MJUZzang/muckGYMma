@@ -36,11 +36,9 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
             return;
         }
 
-        const file: Blob = base64ToBlob(croppedImage);
+        const { blob, fileName } = base64ToBlob(croppedImage);
         const formData = new FormData();
-        formData.append("file", file);
-
-        console.log(file);
+        formData.append("file", blob, fileName);
 
         fetch(`${backendUrl}/api/foods/predict`, {
             method: "POST",
@@ -74,6 +72,8 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         e.stopPropagation();
         if (e.currentTarget.files && e.currentTarget.files.length > 0) {
             const file = e.currentTarget.files[0];
+            console.log(file);
+
             const imageDataUrl = await readFile(file);
 
             if (typeof imageDataUrl === "string") {
