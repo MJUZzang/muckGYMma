@@ -110,7 +110,7 @@ function PickPage() {
             })
             .then((data) => {
                 if (data) {
-                    revalidatePath("/main/workout", "page");
+                    router.refresh();
                     router.push(`/`);
                 }
             })
