@@ -8,7 +8,7 @@ import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
 import EditImage from "@/_components/EditImage";
 import {
     ORIENTATION_TO_ANGLE,
-    base64ToBlob,
+    base64ToFile,
     getRotatedImage,
     readFile,
 } from "@/_utils/canvas";
@@ -36,10 +36,10 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
             return;
         }
 
-        const { file, fileName } = base64ToBlob(croppedImage);
+        const file = base64ToFile(croppedImage);
         const formData = new FormData();
-        console.log(file, fileName)
-        formData.append("file", file, fileName);
+        console.log(file)
+        formData.append("file", file);
 
         fetch(`${backendUrl}/api/foods/predict`, {
             method: "POST",
