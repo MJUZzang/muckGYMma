@@ -24,7 +24,7 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
     const dispatch = useAppDispatch();
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [isEditing, setIsEditing] = useState(false);
-
+    console.log(imageSrc);
     function handleClicked() {
         inputRef.current?.click();
     }
