@@ -198,8 +198,6 @@ function PlanPage() {
                                     }
                                 })
                                 .catch((err) => console.error(err));
-
-                            router.back();
                         }
                     }}
                 >
