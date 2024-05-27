@@ -1,5 +1,3 @@
-export const dynamic = 'force-dnymaic';
-
 import React from "react";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";

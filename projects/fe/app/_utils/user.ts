@@ -86,6 +86,7 @@ export async function FetchNickname() {
     return await fetch(`${backendUrl}/api/member/setup`, {
         method: "GET",
         credentials: "include",
+        cache: "no-cache",
         headers: {
             Cookie: cookieStore
                 .getAll()
