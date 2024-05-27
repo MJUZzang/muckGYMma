@@ -39,27 +39,12 @@ function InfoPage() {
     const [delayPromise, setDelayPromise] = useState<Promise<void> | null>(
         null
     );
-    const [firstLoaded, setFirstLoaded] = useState(false);
 
-    if (promise && delayPromise) {
-        if (!firstLoaded) {
-            const p = Promise.allSettled([delayPromise, promise]);
-            use(p);
-            setFirstLoaded(true);
-        } else {
-            use(promise);
-        }
+    if (promise) {
+
     }
 
     useEffect(() => {
-        setDelayPromise(
-            new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve();
-                }, 1000);
-            })
-        );
-
         if (!planInfo.id || planInfo.id !== Number(planId)) {
             setPromise(
                 fetch(`${backendUrl}/api/plans/${planId}`, {
