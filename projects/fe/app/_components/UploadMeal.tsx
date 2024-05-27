@@ -34,6 +34,9 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
             console.error("No image data found.");
             return;
         }
+        
+        console.log(src);
+
         const file = src!;
         const formData = new FormData();
         formData.append("file", file);
