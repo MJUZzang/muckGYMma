@@ -69,7 +69,11 @@ function InfoPage() {
                             break;
                         }
                     }
-
+                    console.log({
+                        ...plan,
+                        selectedWorkout: selectedWorkoutIdx,
+                        id: Number(planId),
+                    });
                     dispatch(
                         initPlanInfoState({
                             ...plan,
