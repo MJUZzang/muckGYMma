@@ -41,6 +41,9 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         fetch(`${backendUrl}/api/foods/predict`, {
             method: "POST",
             credentials: "include",
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
             body: formData,
         })
             .then((res) => {
