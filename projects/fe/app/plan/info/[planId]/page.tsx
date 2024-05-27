@@ -42,54 +42,53 @@ function InfoPage() {
     }
 
     useEffect(() => {
-        if (!planInfo.id || planInfo.id !== Number(planId)) {
-            setPromise(
-                fetch(`${backendUrl}/api/plans/${planId}`, {
-                    credentials: "include",
-                    method: "GET",
+        setPromise(
+            fetch(`${backendUrl}/api/plans/${planId}`, {
+                credentials: "include",
+                method: "GET",
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw new Error("Failed to fetch plan info");
+                    }
                 })
-                    .then((res) => {
-                        if (res.ok) {
-                            return res.json();
-                        } else {
-                            throw new Error("Failed to fetch plan info");
-                        }
-                    })
-                    .then((plan: PlanInfo) => {
-                        if (!plan) {
-                            throw new Error("Failed to receive plan info");
-                        }
+                .then((plan: PlanInfo) => {
+                    if (!plan) {
+                        throw new Error("Failed to receive plan info");
+                    }
 
+                    dispatch(
+                        initPlanInfoState({
+                            ...plan,
+                            selectedWorkout: 0,
+                            id: Number(planId),
+                        })
+                    );
+                })
+                .catch((err) => {
+                    console.error(err);
+                    if (process.env.NODE_ENV === "development") {
                         dispatch(
                             initPlanInfoState({
-                                ...plan,
-                                selectedWorkout: 0,
+                                ...dummyData,
+                                selectedWorkout: 1,
                                 id: Number(planId),
                             })
                         );
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                        if (process.env.NODE_ENV === "development") {
-                            dispatch(
-                                initPlanInfoState({
-                                    ...dummyData,
-                                    selectedWorkout: 1,
-                                    id: Number(planId),
-                                })
-                            );
-                        }
-                    })
-            );
-        } else {
-            setPromise(
-                new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve();
-                    }, 10);
+                    }
                 })
-            );
-        }
+        );
+
+        // setPromise(
+        //     new Promise((resolve) => {
+        //         setTimeout(() => {
+        //             resolve();
+        //         }, 10);
+        //     })
+        // );
+
         return () => {};
     }, []);
 
@@ -108,6 +107,8 @@ function InfoPage() {
 
     if (!promise) {
         return null;
+    } else if (planInfo.tasks && planInfo.tasks.every((task) => task.cleared)) {
+        window.location.href = `${frontUrl}/main/workout`;
     }
     return (
         <>
