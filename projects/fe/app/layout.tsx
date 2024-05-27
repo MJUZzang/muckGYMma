@@ -4,7 +4,6 @@ import NavBar from "@/_components/NavBar";
 import DarkMode from "@/_components/DarkMode";
 import StoreProvider from "@/_components/StoreProvider";
 
-
 const APP_NAME = "먹짐마";
 const APP_DEFAULT_TITLE = "먹짐마";
 const APP_TITLE_TEMPLATE = "%s - 다이어트&식단관리";
