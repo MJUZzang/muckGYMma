@@ -19,10 +19,7 @@ export const planInfoSlice = createSlice({
         },
 
         markWorkoutAsCompleted: (state, action: PayloadAction<number>) => {
-            if (
-                state.workouts &&
-                state.workouts.length > action.payload
-            ) {
+            if (state.workouts && state.workouts.length > action.payload) {
                 state.workouts![action.payload].cleared = true;
             }
             if (state.tasks && state.tasks.length > action.payload) {
@@ -37,23 +34,27 @@ export const planInfoSlice = createSlice({
                 completionTime: number;
             }>
         ) => {
-            state.tasks = state.tasks!.map((task, index) =>
-                index === action.payload.workoutIndex
-                    ? {
-                          ...task,
-                          doneSecond: action.payload.completionTime,
-                      }
-                    : task
-            );
+            if (state.tasks) {
+                state.tasks = state.tasks!.map((task, index) =>
+                    index === action.payload.workoutIndex
+                        ? {
+                              ...task,
+                              doneSecond: action.payload.completionTime,
+                          }
+                        : task
+                );
+            }
 
-            state.workouts = state.workouts!.map((workout, index) =>
-                index === action.payload.workoutIndex
-                    ? {
-                          ...workout,
-                          doneSecond: action.payload.completionTime,
-                      }
-                    : workout
-            );
+            if (state.workouts) {
+                state.workouts = state.workouts!.map((workout, index) =>
+                    index === action.payload.workoutIndex
+                        ? {
+                              ...workout,
+                              doneSecond: action.payload.completionTime,
+                          }
+                        : workout
+                );
+            }
         },
 
         initPlanInfoState: (state, action: PayloadAction<PlanInfoState>) => {
