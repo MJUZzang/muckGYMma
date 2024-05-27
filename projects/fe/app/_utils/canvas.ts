@@ -102,18 +102,18 @@ export async function getCroppedImg(
     );
 
     // As Base64 string
-    // return croppedCanvas.toDataURL('image/jpeg');
+    return croppedCanvas.toDataURL('image/jpeg');
 
     // As a blob
-    return new Promise((resolve, reject) => {
-        croppedCanvas.toBlob((file) => {
-            if (file) {
-                resolve(URL.createObjectURL(file));
-            } else {
-                reject(new Error("Could not create blob from canvas"));
-            }
-        }, "image/png");
-    });
+    // return new Promise((resolve, reject) => {
+    //     croppedCanvas.toBlob((file) => {
+    //         if (file) {
+    //             resolve(URL.createObjectURL(file));
+    //         } else {
+    //             reject(new Error("Could not create blob from canvas"));
+    //         }
+    //     }, "image/png");
+    // });
 }
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>
