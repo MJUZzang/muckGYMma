@@ -41,7 +41,7 @@ async function CompletedPage() {
     return (
         <>
             {sortedPlans.length === 0 && (
-                <NoData text="완료한 운동 플랜이 없습니다." />
+                <NoData text="완료된 운동 플랜이 없습니다." />
             )}
 
             {sortedPlans.length > 0 && (

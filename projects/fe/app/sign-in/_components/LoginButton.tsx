@@ -21,7 +21,7 @@ const LoginButton: React.FC<LoginButtonProps> = ({
 }) => {
     return (
         <button
-            className={`text-sm font-[500] px-4 w-full flex items-center rounded-[4px] py-2
+            className={`text-[13px] font-[500] px-4 w-full flex items-center rounded-md py-2
                 ${className} ${notoSansKr.className}`}
             onClick={onClick}
         >

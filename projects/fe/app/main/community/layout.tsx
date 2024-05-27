@@ -35,10 +35,6 @@ const CommunityLayout: React.FC<CommunityLayoutProps> = (props) => {
     return (
         <>
             <div className="flex flex-col border-b-[1px] border-b-gray-300 px-3">
-                <div className="mt-3 max-w-[835px] mx-auto w-full">
-                    <Image src="/android-chrome-192x192.png" alt="app logo" width={100} height={100} />
-                </div>
-
                 <div className="flex max-w-[835px] mx-auto w-full mt-3 gap-4">
                     {links.map((link, index) => (
                         <Link

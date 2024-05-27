@@ -33,7 +33,7 @@ function Page() {
         // </div>
 
         <>
-            <NoData text="업로드한 포스트가 없습니다." />
+            <NoData text="업로드된 포스트가 없습니다." />
 
             <div className="flex flex-col items-center gap-3">
                 {Array.from({ length: 0 }).map((_, i) => (

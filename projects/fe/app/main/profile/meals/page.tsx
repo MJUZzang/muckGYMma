@@ -22,7 +22,7 @@ async function MealPage() {
     return (
         <>
             {sortedMeals.length === 0 && (
-                <NoData text="업로드한 식단이 없습니다." />
+                <NoData text="업로드된 식단이 없습니다." />
             )}
             {sortedMeals.length > 0 && (
                 <div>
