@@ -55,12 +55,6 @@ function InfoPage() {
                     })
                     .then((plan: PlanInfo) => {
                         if (!plan) {
-                            console.error("Failed to receive plan info");
-                            initPlanInfoState({
-                                ...dummyData,
-                                selectedWorkout: 0,
-                                id: Number(planId),
-                            });
                             throw new Error("Failed to receive plan info");
                         }
 
@@ -74,6 +68,15 @@ function InfoPage() {
                     })
                     .catch((err) => {
                         console.error(err);
+                        if (process.env.NODE_ENV === "development") {
+                            dispatch(
+                                initPlanInfoState({
+                                    ...dummyData,
+                                    selectedWorkout: 1,
+                                    id: Number(planId),
+                                })
+                            );
+                        }
                     })
             );
         }
