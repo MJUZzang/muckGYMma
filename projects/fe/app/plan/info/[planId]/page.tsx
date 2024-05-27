@@ -94,7 +94,10 @@ function InfoPage() {
     }, []);
 
     function GetWorkoutBoxStyle(plan: Workout, index: number) {
-        if ((plan.cleared && (index === selectedWorkout)) || (planInfo.tasks && planInfo.tasks[index].cleared)) {
+        if (
+            (plan.cleared && index === selectedWorkout) ||
+            (planInfo.tasks && planInfo.tasks[index].cleared)
+        ) {
             return "bg-gray-700 text-app-inverted-font-4 scale-[105%]";
         }
         if (index === selectedWorkout) {
@@ -208,6 +211,12 @@ function InfoPage() {
                 className="fixed bottom-0 w-full mt-auto bg-app-bg px-3 pb-3 py-2
                 shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)]"
             >
+                {planInfo.tasks &&
+                    planInfo.tasks.every((task) => task.cleared) && (
+                        <Button className={`bg-app-blue-2`} onClick={() => {
+
+                        }}>플랜 완료</Button>
+                    )}
                 <Link href="/plan">
                     <Button className={`bg-app-blue-2`}>운동 시작</Button>
                 </Link>

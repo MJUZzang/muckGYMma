@@ -47,7 +47,7 @@ export const dummyData: PlanInfo = {
         {
             name: "벤치프레스",
             set: 7,
-            sets: 7,
+            sets: 1,
             repeatation: 12,
             expect: 113,
             weight: 60,
@@ -58,7 +58,7 @@ export const dummyData: PlanInfo = {
         {
             name: "데드리프트",
             set: 7,
-            sets: 7,
+            sets: 1,
             repeatation: 12,
             expect: 113,
             kcal: 113,
@@ -68,7 +68,7 @@ export const dummyData: PlanInfo = {
         {
             name: "레터럴레이즈",
             set: 5,
-            sets: 5,
+            sets: 1,
             repeatation: 12,
             expect: 113,
             kcal: 113,
@@ -78,7 +78,7 @@ export const dummyData: PlanInfo = {
         {
             name: "풀업",
             set: 2,
-            sets: 2,
+            sets: 1,
             repeatation: 12,
             kcal: 113,
             expect: 113,
@@ -87,7 +87,7 @@ export const dummyData: PlanInfo = {
         {
             name: "숄더프레스",
             set: 5,
-            sets: 5,
+            sets: 1,
             repeatation: 12,
             expect: 113,
             kcal: 113,
