@@ -12,15 +12,13 @@ import RestTimer from "@/plan/_components/RestTimer";
 import Play from "@/_images/Play";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
 import {
-    markWorkoutAsCompleted,
     selectPlanInfo,
     selectSelectedWorkout,
-    setDoneSecond,
-    setSelectedWorkout,
 } from "@/../lib/slices/planInfoSlice";
 import { formatTimeHour } from "@/plan/_utils/time";
 import { Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
+import { Workout } from "@/_types/Plan";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -36,11 +34,12 @@ function PlanPage() {
     const dispatch = useAppDispatch();
     const planInfo = useAppSelector(selectPlanInfo);
     const selectedWorkout = useAppSelector(selectSelectedWorkout);
-    const task = planInfo.tasks![selectedWorkout];
     const [selectedSet, setSelectedSet] = useState(0);
     const restTimerButtonRef = React.createRef<HTMLDivElement>();
     const [restTime, setRestTime] = useState(0);
-
+    
+    const task: Workout = planInfo.tasks![selectedWorkout];
+    
     useEffect(() => {
         const id = setInterval(() => {
             setTimerTime((prev) => prev + 1);

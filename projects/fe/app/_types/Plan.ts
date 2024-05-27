@@ -1,6 +1,6 @@
 export interface Workout {
     name: string;
-    repeatation: number;
+    repeatation?: number;
 
     expect?: number; // same as kcal
     kcal?: number;
@@ -33,7 +33,8 @@ export type PlanInfoState = {
 } & PlanInfo;
 
 export const emptyPlanInfo: PlanInfo = {
-
+    workouts: [{ name: "" }],
+    tasks: [{ name: "" }],
 };
 
 export const dummyData: PlanInfo = {
