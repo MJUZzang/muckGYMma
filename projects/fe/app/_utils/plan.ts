@@ -102,7 +102,7 @@ export async function fetchTodoPlans() {
 
     return await fetch(`${backendUrl}/api/plans/remain`, {
         method: "GET",
-        cache: "no-cache",
+        cache: "no-store",
         headers: {
             Cookie: cookieStore
                 .getAll()
