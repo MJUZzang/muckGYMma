@@ -29,8 +29,13 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         inputRef.current?.click();
     }
 
-    function onCrop() {
-        const file = imageSrc!;
+    function onCrop(src: string | null) {
+        if (!src) {
+            console.error("No image data found.");
+            return;
+        }
+        
+        const file = src!;
         const formData = new FormData();
         formData.append("file", file);
 
