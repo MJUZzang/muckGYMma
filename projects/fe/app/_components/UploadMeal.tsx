@@ -76,25 +76,26 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
             const imageDataUrl = await readFile(file);
 
             if (typeof imageDataUrl === "string") {
-                try {
-                    // apply rotation if needed
-                    const orientation = await getOrientation(file);
-                    const rotation = ORIENTATION_TO_ANGLE[orientation];
-                    if (rotation) {
-                        const rotatedImageDataUrl = await getRotatedImage(
-                            imageDataUrl,
-                            rotation
-                        );
-                        setImageSrc(rotatedImageDataUrl);
-                    } else {
-                        setImageSrc(imageDataUrl);
-                    }
-                    setIsEditing(true);
-                } catch (e) {
-                    console.warn("failed to detect the orientation");
-                    setImageSrc(imageDataUrl);
-                    setIsEditing(true);
-                }
+                setImageSrc(imageDataUrl);
+                // try {
+                //     // apply rotation if needed
+                //     const orientation = await getOrientation(file);
+                //     const rotation = ORIENTATION_TO_ANGLE[orientation];
+                //     if (rotation) {
+                //         const rotatedImageDataUrl = await getRotatedImage(
+                //             imageDataUrl,
+                //             rotation
+                //         );
+                //         setImageSrc(rotatedImageDataUrl);
+                //     } else {
+                //         setImageSrc(imageDataUrl);
+                //     }
+                //     setIsEditing(true);
+                // } catch (e) {
+                //     console.warn("failed to detect the orientation");
+                //     setImageSrc(imageDataUrl);
+                //     setIsEditing(true);
+                // }
             }
             e.target.value = "";
         } else {
