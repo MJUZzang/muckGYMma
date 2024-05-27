@@ -1,6 +1,6 @@
 import { Flip, PixelCrop } from "@/_types/Canvas";
 
-export function base64ToBlob(base64: string): { blob: Blob; fileName: string } {
+export function base64ToBlob(base64: string): { file: Blob; fileName: string } {
     const mimeType: string = base64.split(",")[0].split(":")[1].split(";")[0];
 
     const byteString = atob(base64.split(",")[1]);
@@ -11,12 +11,12 @@ export function base64ToBlob(base64: string): { blob: Blob; fileName: string } {
         ia[i] = byteString.charCodeAt(i);
     }
 
-    const blob = new Blob([ab], { type: mimeType });
+    const file = new Blob([ab], { type: mimeType });
 
     // 파일 이름 생성 (필요에 따라 수정 가능)
     const fileName = `file.${mimeType.split("/")[1]}`;
 
-    return { blob, fileName };
+    return { file, fileName };
 }
 
 export function readFile(file: File): Promise<string | ArrayBuffer | null> {
