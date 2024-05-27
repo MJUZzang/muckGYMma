@@ -94,14 +94,11 @@ function InfoPage() {
     }, []);
 
     function GetWorkoutBoxStyle(plan: Workout, index: number) {
-        if (plan.cleared && (index === selectedWorkout)) {
-            return "";
+        if ((plan.cleared && (index === selectedWorkout)) || (planInfo.tasks && planInfo.tasks[index].cleared)) {
+            return "bg-gray-700 text-app-inverted-font-4 scale-[105%]";
         }
         if (index === selectedWorkout) {
             return "bg-app-blue-2 scale-[105%]";
-        }
-        if (planInfo.tasks && planInfo.tasks[index].cleared) {
-            return "bg-gray-700 text-app-inverted-font-4 scale-[105%]";
         }
         return "bg-gray-400 text-app-inverted-font-4";
     }
