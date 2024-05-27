@@ -39,10 +39,16 @@ function InfoPage() {
     const [delayPromise, setDelayPromise] = useState<Promise<void> | null>(
         null
     );
+    const [firstLoaded, setFirstLoaded] = useState(false);
 
     if (promise && delayPromise) {
-        const p = Promise.all([promise, delayPromise]);
-        use(p);
+        if (!firstLoaded) {
+            const p = Promise.allSettled([delayPromise, promise]);
+            use(p);
+            setFirstLoaded(true);
+        } else {
+            use(promise);
+        }
     }
 
     useEffect(() => {
@@ -115,7 +121,7 @@ function InfoPage() {
         return "bg-gray-400 text-app-inverted-font-4";
     }
 
-    if (!promise) {
+    if (!promise || !delayPromise) {
         return null;
     }
     return (

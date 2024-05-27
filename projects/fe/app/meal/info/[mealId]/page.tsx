@@ -34,7 +34,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
                 <div className="mt-4 grid grid-cols-3">
                     <NavigateBackButton meal={meal} />
 
-                    <p className="text-lg w-full text-center font-semibold">
+                    <p className="text-base w-full text-center font-semibold text-nowrap">
                         {meal.name}
                     </p>
                 </div>
