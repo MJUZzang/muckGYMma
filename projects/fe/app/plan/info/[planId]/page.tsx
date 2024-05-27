@@ -146,7 +146,7 @@ function InfoPage() {
                                         <p className="">{task.name}</p>
                                         <div className="flex">
                                             <p className="">
-                                                {task.set}sets
+                                                {task.sets}sets
                                             </p>
                                             &nbsp;
                                             <p className="">
@@ -156,7 +156,7 @@ function InfoPage() {
                                     </div>
                                     <div className="w-full text-right pr-4">
                                         <p className="">
-                                            {task.expect}&nbsp;kcal
+                                            {task.kcal}&nbsp;kcal
                                         </p>
                                         <p
                                             className={` text-sm ${
