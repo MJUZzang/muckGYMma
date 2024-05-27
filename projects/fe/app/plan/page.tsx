@@ -20,6 +20,7 @@ import {
 } from "@/../lib/slices/planInfoSlice";
 import { formatTimeHour } from "@/plan/_utils/time";
 import { Noto_Sans_KR } from "next/font/google";
+import { backendUrl } from "@/_utils/urls";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -180,29 +181,23 @@ function PlanPage() {
                     onClose={() => {
                         // 모든 세트 완료시 /plan-info 페이지로 이동
                         if (selectedSet === task.sets) {
-                            dispatch(markWorkoutAsCompleted(selectedWorkout));
-                            dispatch(
-                                setDoneSecond({
-                                    workoutIndex: selectedWorkout,
-                                    completionTime: timerTime,
+                            fetch(`${backendUrl}/api/task/done/${planInfo.id!}`, {
+                                credentials: "include",
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    time: timerTime,
+                                }),
+                            })
+                                .then((res) => {
+                                    console.log(res.status);
+                                    if (res.ok) {
+                                        router.back();
+                                    }
                                 })
-                            );
-
-                            // let hasChangedSelectedWorkout = false;
-                            // 다음으로 진행할 수 있는 workout 인덱스 계산 후 자동 선택
-                            for (let i = 0; i < planInfo.tasks!.length; i++) {
-                                if (
-                                    !planInfo.tasks![i].cleared &&
-                                    i !== selectedWorkout
-                                ) {
-                                    dispatch(setSelectedWorkout(i));
-                                    // hasChangedSelectedWorkout = true;
-                                    break;
-                                }
-                            }
-                            // if (!hasChangedSelectedWorkout) {
-                            //     dispatch(setSelectedWorkout(-1));
-                            // }
+                                .catch((err) => console.error(err));
 
                             router.back();
                         }

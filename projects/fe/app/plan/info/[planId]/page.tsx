@@ -59,10 +59,21 @@ function InfoPage() {
                         throw new Error("Failed to receive plan info");
                     }
 
+                    let selectedWorkoutIdx = 0;
+                    for (let i = 0; i < planInfo.tasks!.length; i++) {
+                        if (
+                            !planInfo.tasks![i].cleared &&
+                            i !== selectedWorkout
+                        ) {
+                            selectedWorkoutIdx = i;
+                            break;
+                        }
+                    }
+
                     dispatch(
                         initPlanInfoState({
                             ...plan,
-                            selectedWorkout: 0,
+                            selectedWorkout: selectedWorkoutIdx,
                             id: Number(planId),
                         })
                     );
@@ -217,25 +228,25 @@ function InfoPage() {
                     <Button
                         className={`bg-red-400`}
                         onClick={() => {
-                            fetch(`${backendUrl}/api/task/done/${planId}`, {
-                                credentials: "include",
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    time: planInfo
-                                        .tasks!.map((task) => task.doneSecond!)
-                                        .reduce((acc, cur) => acc + cur, 0),
-                                }),
-                            })
-                                .then((res) => {
-                                    console.log(res.status);
-                                    if (res.ok) {
-                                        window.location.href = `${frontUrl}/main/workout`;
-                                    }
-                                })
-                                .catch((err) => console.error(err));
+                            // fetch(`${backendUrl}/api/task/done/${planId}`, {
+                            //     credentials: "include",
+                            //     method: "POST",
+                            //     headers: {
+                            //         "Content-Type": "application/json",
+                            //     },
+                            //     body: JSON.stringify({
+                            //         time: planInfo
+                            //             .tasks!.map((task) => task.doneSecond!)
+                            //             .reduce((acc, cur) => acc + cur, 0),
+                            //     }),
+                            // })
+                            //     .then((res) => {
+                            //         console.log(res.status);
+                            //         if (res.ok) {
+                            //             window.location.href = `${frontUrl}/main/workout`;
+                            //         }
+                            //     })
+                            //     .catch((err) => console.error(err));
                         }}
                     >
                         플랜 종료하기
