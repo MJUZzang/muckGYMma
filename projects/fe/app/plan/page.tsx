@@ -188,7 +188,7 @@ function PlanPage() {
                                 })
                             );
 
-                            let hasChangedSelectedWorkout = false;
+                            // let hasChangedSelectedWorkout = false;
                             // 다음으로 진행할 수 있는 workout 인덱스 계산 후 자동 선택
                             for (let i = 0; i < planInfo.tasks!.length; i++) {
                                 if (
@@ -196,13 +196,13 @@ function PlanPage() {
                                     i !== selectedWorkout
                                 ) {
                                     dispatch(setSelectedWorkout(i));
-                                    hasChangedSelectedWorkout = true;
+                                    // hasChangedSelectedWorkout = true;
                                     break;
                                 }
                             }
-                            if (!hasChangedSelectedWorkout) {
-                                dispatch(setSelectedWorkout(-1));
-                            }
+                            // if (!hasChangedSelectedWorkout) {
+                            //     dispatch(setSelectedWorkout(-1));
+                            // }
 
                             router.back();
                         }

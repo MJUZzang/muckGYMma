@@ -17,7 +17,7 @@ import { formatTimeInKor } from "@/plan/_utils/time";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import Muscle from "@/_images/Muscle";
 import { backendUrl } from "@/_utils/urls";
-import { PlanInfo, dummyData } from "@/_types/Plan";
+import { PlanInfo, Workout, dummyData } from "@/_types/Plan";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -93,7 +93,10 @@ function InfoPage() {
         return () => {};
     }, []);
 
-    function GetWorkoutBoxStyle(index: number) {
+    function GetWorkoutBoxStyle(plan: Workout, index: number) {
+        if (plan.cleared && (index === selectedWorkout)) {
+            return "";
+        }
         if (index === selectedWorkout) {
             return "bg-app-blue-2 scale-[105%]";
         }
@@ -149,43 +152,43 @@ function InfoPage() {
 
                     <div className="space-y-3 mt-6 group px-4">
                         {planInfo.tasks &&
-                            planInfo.tasks.map((task, index) => (
+                            planInfo.tasks.map((plan, index) => (
                                 <div
                                     key={index}
                                     className={`shadow-xl flex justify-between items-center p-3 rounded-lg 
                                 transition-all duration-500 ease-in-out text-app-inverted-font
-                                ${GetWorkoutBoxStyle(index)} ${
-                                        !task.cleared && "cursor-pointer"
+                                ${GetWorkoutBoxStyle(plan, index)} ${
+                                        !plan.cleared && "cursor-pointer"
                                     }`}
                                     onClick={() => {
-                                        if (!task.cleared) {
+                                        if (!plan.cleared) {
                                             dispatch(setSelectedWorkout(index));
                                         }
                                     }}
                                 >
                                     <div className="w-fit text-nowrap">
-                                        <p className="">{task.name}</p>
+                                        <p className="">{plan.name}</p>
                                         <div className="flex">
-                                            <p className="">{task.sets}sets</p>
+                                            <p className="">{plan.sets}sets</p>
                                             &nbsp;
                                             <p className="">
-                                                {task.repeatation}reps
+                                                {plan.repeatation}reps
                                             </p>
                                         </div>
                                     </div>
                                     <div className="w-full text-right pr-4">
                                         <p className="">
-                                            {task.kcal}&nbsp;kcal
+                                            {plan.kcal}&nbsp;kcal
                                         </p>
                                         <p
                                             className={` text-sm ${
-                                                !task.cleared && "invisible"
+                                                !plan.cleared && "invisible"
                                             }`}
                                         >
-                                            {task.cleared &&
-                                                task.doneSecond &&
+                                            {plan.cleared &&
+                                                plan.doneSecond &&
                                                 `${formatTimeInKor(
-                                                    task.doneSecond
+                                                    plan.doneSecond
                                                 )} 소요`}
                                         </p>
                                     </div>
@@ -194,7 +197,7 @@ function InfoPage() {
                                             width={28}
                                             height={28}
                                             className={`fill-app-blue-4 ${
-                                                !task.cleared && "opacity-0"
+                                                !plan.cleared && "opacity-0"
                                             }`}
                                         />
                                     </div>
