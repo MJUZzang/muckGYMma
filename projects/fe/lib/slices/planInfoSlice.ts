@@ -19,7 +19,18 @@ export const planInfoSlice = createSlice({
         },
 
         markWorkoutAsCompleted: (state, action: PayloadAction<number>) => {
-            state.workouts![action.payload].cleared = true;
+            if (
+                state.workouts &&
+                state.workouts.length === action.payload + 1
+            ) {
+                state.workouts![action.payload].cleared = true;
+            }
+            if (
+                state.tasks &&
+                state.tasks.length === action.payload + 1
+            ) {
+                state.tasks![action.payload].cleared = true;
+            }
         },
 
         setDoneSecond: (
@@ -29,14 +40,12 @@ export const planInfoSlice = createSlice({
                 completionTime: number;
             }>
         ) => {
-            state.workouts = state.workouts!.map((workout, index) =>
-                index === action.payload.workoutIndex
-                    ? {
-                          ...workout,
-                          doneSecond: action.payload.completionTime,
-                      }
-                    : workout
-            );
+            if (state.workouts && state.workouts.length === action.payload.workoutIndex + 1) {
+                state.workouts[action.payload.workoutIndex].doneSecond = action.payload.completionTime;
+            }
+            if (state.tasks && state.tasks.length === action.payload.workoutIndex + 1) {
+                state.tasks[action.payload.workoutIndex].doneSecond = action.payload.completionTime;
+            }
         },
 
         initPlanInfoState: (state, action: PayloadAction<PlanInfoState>) => {
