@@ -10,8 +10,7 @@ import Shycat from "@/_images/Shycat";
 import { PlanInfo } from "@/_types/Plan";
 import ConfirmModal from "@/plan/pick/[mealId]/_components/ConfirmModal";
 import { useRouter } from "next/navigation";
-import { backendUrl } from "@/_utils/urls";
-import { revalidatePath } from "next/cache";
+import { backendUrl, frontUrl } from "@/_utils/urls";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -110,8 +109,8 @@ function PickPage() {
             })
             .then((data) => {
                 if (data) {
-                    router.refresh();
-                    router.push(`/`);
+                    // router.push 사용하지 않고 webapi로 /main/workout 으로 페이지 이동
+                    window.location.href = `${frontUrl}/main/workout`;
                 }
             })
             .catch((err) => console.error(err));

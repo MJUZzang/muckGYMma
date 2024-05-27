@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic'
-
 import React from "react";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
@@ -27,7 +25,6 @@ async function WorkoutPage() {
     const nickname = await fetchNickname();
     const plans = await fetchTodoPlans();
     const sortedPlans = sortPlansByDate(plans);
-    console.log(sortedPlans);
     
     return (
         <div className="max-w-[835px] mx-auto w-full">
