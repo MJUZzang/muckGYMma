@@ -175,7 +175,7 @@ function InfoPage() {
                                             width={28}
                                             height={28}
                                             className={`fill-app-blue-4 ${
-                                                !task.cleared && "invisible"
+                                                !task.cleared && "opacity-0"
                                             }`}
                                         />
                                     </div>

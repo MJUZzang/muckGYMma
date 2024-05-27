@@ -33,13 +33,7 @@ export type PlanInfoState = {
 } & PlanInfo;
 
 export const emptyPlanInfo: PlanInfo = {
-    workouts: [],
-    name: "",
-    type: "",
-    cleared: false,
-    createdAt: new Date(),
-    time: 0,
-    total: 0,
+    
 };
 
 export const dummyData: PlanInfo = {

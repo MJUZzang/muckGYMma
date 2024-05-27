@@ -92,7 +92,7 @@ export const dummyList: PlanInfo[] = [
         name: "축구",
         time: 1804,
         cleared: false,
-        createdAt: new Date("2024-04-13T19:56:39.214108"),
+        createdAt: new Date("2024-05-25T19:56:39.214108"),
         total: 290,
     },
 ];

@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/../lib/store";
-import { PlanInfoState, dummyData } from "@/_types/Plan";
+import { PlanInfoState, dummyData, emptyPlanInfo } from "@/_types/Plan";
 
 // Define the initial state using that type
 const initialState: PlanInfoState = {
-    ...dummyData,
+    ...emptyPlanInfo,
     selectedWorkout: 0,
 };
 
