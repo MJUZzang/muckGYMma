@@ -1,5 +1,7 @@
 import { Flip, PixelCrop } from "@/_types/Canvas";
 
+
+
 export function base64ToFile(base64: string): File {
     // MIME 타입 추출
     const mimeType: string = base64.split(",")[0].split(":")[1].split(";")[0];
@@ -127,18 +129,18 @@ export async function getCroppedImg(
     );
 
     // As Base64 string
-    return croppedCanvas.toDataURL("image/jpeg");
+    // return croppedCanvas.toDataURL("image/jpeg");
 
     // As a blob
-    // return new Promise((resolve, reject) => {
-    //     croppedCanvas.toBlob((file) => {
-    //         if (file) {
-    //             resolve(URL.createObjectURL(file));
-    //         } else {
-    //             reject(new Error("Could not create blob from canvas"));
-    //         }
-    //     }, "image/png");
-    // });
+    return new Promise((resolve, reject) => {
+        croppedCanvas.toBlob((file) => {
+            if (file) {
+                resolve(URL.createObjectURL(file));
+            } else {
+                reject(new Error("Could not create blob from canvas"));
+            }
+        }, "image/png");
+    });
 }
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>
