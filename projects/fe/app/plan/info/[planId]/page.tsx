@@ -36,12 +36,9 @@ function InfoPage() {
     const params = useParams();
     const planId = params.planId as string;
     const [promise, setPromise] = useState<Promise<void> | null>(null);
-    const [delayPromise, setDelayPromise] = useState<Promise<void> | null>(
-        null
-    );
 
     if (promise) {
-
+        use(promise);
     }
 
     useEffect(() => {
@@ -106,7 +103,7 @@ function InfoPage() {
         return "bg-gray-400 text-app-inverted-font-4";
     }
 
-    if (!promise || !delayPromise) {
+    if (!promise) {
         return null;
     }
     return (
