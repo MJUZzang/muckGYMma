@@ -8,9 +8,9 @@ import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
 import EditImage from "@/_components/EditImage";
 import {
     ORIENTATION_TO_ANGLE,
-    base64ToFile,
     getRotatedImage,
     readFile,
+    urlToBlobFile,
 } from "@/_utils/canvas";
 import { getOrientation } from "get-orientation/browser";
 
@@ -30,16 +30,29 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         inputRef.current?.click();
     }
 
-    function onCrop(base64: string) {
-        if (!base64) {
+    async function onCrop(blob: string) {
+        if (!blob) {
             console.error("No image data found.");
             return;
         }
 
-        const file = base64ToFile(base64);
+        // URL로부터 Blob 데이터를 가져와서 File 객체로 변환하고 FormData에 추가하는 예제
+        const file = await urlToBlobFile(blob, "image.jpg")
+            .then((file) => {
+                return file;
+            })
+            .catch((error) => {
+                console.error("Error fetching blob from URL:", error);
+                return null;
+            });
+
+        if (!file) {
+            console.error("No file found.");
+            return;
+        }
+        console.log("file: ", file);
         const formData = new FormData();
         formData.append("file", file);
-        console.log(file)
 
         fetch(`${backendUrl}/api/foods/predict`, {
             method: "POST",

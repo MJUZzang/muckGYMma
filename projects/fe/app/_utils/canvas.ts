@@ -1,32 +1,17 @@
 import { Flip, PixelCrop } from "@/_types/Canvas";
 
-// Blob 객체를 File 객체로 변환하는 함수
-export function blobToFile(blob: Blob, fileName: string): File {
-    return new File([blob], fileName, { type: blob.type });
-}
-
-// base64 데이터를 File 객체로 변환하는 함수
-export function base64ToFile(base64: string): File {
-    // MIME 타입 추출
-    const mimeType: string = base64.split(',')[0].split(':')[1].split(';')[0];
-
-    // base64 데이터를 바이너리 데이터로 디코딩
-    const byteString = atob(base64.split(",")[1]);
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-
-    for (let i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    // Blob 객체 생성
-    const blob = new Blob([ab], { type: mimeType });
-
-    // 파일 이름 생성 (필요에 따라 수정 가능)
-    const fileName = `file.${mimeType.split('/')[1]}`;
+// URL로부터 Blob 데이터를 가져와서 File 객체로 변환하는 함수
+export async function urlToBlobFile(
+    blobUrl: string,
+    fileName: string
+): Promise<File> {
+    // fetch를 사용하여 URL로부터 Blob 데이터를 가져옴
+    const response = await fetch(blobUrl);
+    const blob = await response.blob();
 
     // Blob 객체를 File 객체로 변환
-    return blobToFile(blob, fileName);
+    const file = new File([blob], fileName, { type: blob.type });
+    return file;
 }
 
 export function readFile(file: File): Promise<string | ArrayBuffer | null> {
@@ -131,18 +116,18 @@ export async function getCroppedImg(
     );
 
     // As Base64 string
-    return croppedCanvas.toDataURL("image/jpg");
+    // return croppedCanvas.toDataURL("image/jpg");
 
     // As a blob
-    // return new Promise((resolve, reject) => {
-    //     croppedCanvas.toBlob((file) => {
-    //         if (file) {
-    //             resolve(URL.createObjectURL(file));
-    //         } else {
-    //             reject(new Error("Could not create blob from canvas"));
-    //         }
-    //     }, "image/png");
-    // });
+    return new Promise((resolve, reject) => {
+        croppedCanvas.toBlob((file) => {
+            if (file) {
+                resolve(URL.createObjectURL(file));
+            } else {
+                reject(new Error("Could not create blob from canvas"));
+            }
+        }, "image/jpeg");
+    });
 }
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>
@@ -191,6 +176,6 @@ export async function getRotatedImage(
             } else {
                 reject(new Error("Could not create blob from canvas"));
             }
-        }, "image/jpg");
+        }, "image/jpeg");
     });
 }
