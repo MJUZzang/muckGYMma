@@ -11,6 +11,7 @@ import { PlanInfo } from "@/_types/Plan";
 import ConfirmModal from "@/plan/pick/[mealId]/_components/ConfirmModal";
 import { useRouter } from "next/navigation";
 import { backendUrl } from "@/_utils/urls";
+import { revalidatePath } from "next/cache";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -109,6 +110,7 @@ function PickPage() {
             })
             .then((data) => {
                 if (data) {
+                    revalidatePath("/main/workout");
                     router.push(`/`);
                 }
             })
