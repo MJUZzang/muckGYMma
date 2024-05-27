@@ -179,7 +179,7 @@ function PlanPage() {
                     setTime={setRestTime}
                     onClose={() => {
                         // 모든 세트 완료시 /plan-info 페이지로 이동
-                        if (selectedSet === task.set) {
+                        if (selectedSet === task.sets) {
                             dispatch(markWorkoutAsCompleted(selectedWorkout));
                             dispatch(
                                 setDoneSecond({
