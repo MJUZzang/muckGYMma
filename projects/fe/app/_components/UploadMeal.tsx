@@ -7,8 +7,12 @@ import { backendUrl } from "@/_utils/urls";
 import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
 import EditImage from "@/_components/EditImage";
 import {
+    ORIENTATION_TO_ANGLE,
+    base64ToBlob,
+    getRotatedImage,
     readFile,
 } from "@/_utils/canvas";
+import { getOrientation } from "get-orientation/browser";
 
 interface UploadMealProps {
     className?: string;
@@ -32,7 +36,7 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
             return;
         }
 
-        const file = croppedImage!;
+        const file: Blob = base64ToBlob(croppedImage);
         const formData = new FormData();
         formData.append("file", file);
 
@@ -70,32 +74,28 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         e.stopPropagation();
         if (e.currentTarget.files && e.currentTarget.files.length > 0) {
             const file = e.currentTarget.files[0];
-            console.log("Uploaded: ", file);
             const imageDataUrl = await readFile(file);
 
             if (typeof imageDataUrl === "string") {
-                setImageSrc(imageDataUrl!);
-                setIsEditing(true);
-                
-                // try {
-                //     // apply rotation if needed
-                //     const orientation = await getOrientation(file);
-                //     const rotation = ORIENTATION_TO_ANGLE[orientation];
-                //     if (rotation) {
-                //         const rotatedImageDataUrl = await getRotatedImage(
-                //             imageDataUrl,
-                //             rotation
-                //         );
-                //         setImageSrc(rotatedImageDataUrl);
-                //     } else {
-                //         setImageSrc(imageDataUrl);
-                //     }
-                //     setIsEditing(true);
-                // } catch (e) {
-                //     console.warn("failed to detect the orientation");
-                //     setImageSrc(imageDataUrl);
-                //     setIsEditing(true);
-                // }
+                try {
+                    // apply rotation if needed
+                    const orientation = await getOrientation(file);
+                    const rotation = ORIENTATION_TO_ANGLE[orientation];
+                    if (rotation) {
+                        const rotatedImageDataUrl = await getRotatedImage(
+                            imageDataUrl,
+                            rotation
+                        );
+                        setImageSrc(rotatedImageDataUrl);
+                    } else {
+                        setImageSrc(imageDataUrl);
+                    }
+                    setIsEditing(true);
+                } catch (e) {
+                    console.warn("failed to detect the orientation");
+                    setImageSrc(imageDataUrl);
+                    setIsEditing(true);
+                }
             }
             e.target.value = "";
         } else {

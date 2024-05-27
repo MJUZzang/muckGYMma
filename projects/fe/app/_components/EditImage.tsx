@@ -93,8 +93,8 @@ const EditImage = ({ imageSrc, onCrop, onClose }: EditImageProps) => {
             if (croppedImage === null) {
                 console.error("failed to crop image");
             } else {
-                onClose();
                 onCrop(croppedImage);
+                onClose();
             }
         } catch (e) {
             console.error(e);
