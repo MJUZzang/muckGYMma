@@ -41,8 +41,8 @@ function InfoPage() {
     );
 
     if (promise && delayPromise) {
-        use(promise);
-        use(delayPromise);
+        const p = Promise.all([promise, delayPromise]);
+        use(p);
     }
 
     useEffect(() => {
