@@ -70,7 +70,7 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         e.stopPropagation();
         if (e.currentTarget.files && e.currentTarget.files.length > 0) {
             const file = e.currentTarget.files[0];
-
+            console.log("Uploaded: ", file);
             const imageDataUrl = await readFile(file);
 
             if (typeof imageDataUrl === "string") {
