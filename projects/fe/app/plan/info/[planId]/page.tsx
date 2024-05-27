@@ -37,64 +37,8 @@ function InfoPage() {
     const planId = params.planId as string;
     const [promise, setPromise] = useState<Promise<void> | null>(null);
 
-    if (promise) {
-        use(promise);
-    }
-
     useEffect(() => {
-        setPromise(
-            fetch(`${backendUrl}/api/plans/${planId}`, {
-                credentials: "include",
-                method: "GET",
-            })
-                .then((res) => {
-                    if (res.ok) {
-                        return res.json();
-                    } else {
-                        throw new Error("Failed to fetch plan info");
-                    }
-                })
-                .then((plan: PlanInfo) => {
-                    if (!plan) {
-                        throw new Error("Failed to receive plan info");
-                    }
-
-                    let selectedWorkoutIdx = 0;
-                    for (let i = 0; i < planInfo.tasks!.length; i++) {
-                        if (
-                            !planInfo.tasks![i].cleared &&
-                            i !== selectedWorkout
-                        ) {
-                            selectedWorkoutIdx = i;
-                            break;
-                        }
-                    }
-                    console.log({
-                        ...plan,
-                        selectedWorkout: selectedWorkoutIdx,
-                        id: Number(planId),
-                    });
-                    dispatch(
-                        initPlanInfoState({
-                            ...plan,
-                            selectedWorkout: selectedWorkoutIdx,
-                            id: Number(planId),
-                        })
-                    );
-                })
-                .catch((err) => {
-                    console.error(err);
-                    if (process.env.NODE_ENV === "development") {
-                        dispatch(
-                            initPlanInfoState({
-                                ...dummyData,
-                                selectedWorkout: 1,
-                                id: Number(planId),
-                            })
-                        );
-                    }
-                })
-        );
+        setPromise(fetchPlan());
 
         // setPromise(
         //     new Promise((resolve) => {
@@ -106,6 +50,60 @@ function InfoPage() {
 
         return () => {};
     }, []);
+
+    if (promise) {
+        use(promise);
+    }
+
+    function getSelectableWorkoutIndex() {
+        let selectedWorkoutIdx = 0;
+        for (let i = 0; i < planInfo.tasks!.length; i++) {
+            if (!planInfo.tasks![i].cleared && i !== selectedWorkout) {
+                selectedWorkoutIdx = i;
+                break;
+            }
+        }
+        return selectedWorkoutIdx;
+    }
+
+    function fetchPlan() {
+        return fetch(`${backendUrl}/api/plans/${planId}`, {
+            credentials: "include",
+            method: "GET",
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error("Failed to fetch plan info");
+                }
+            })
+            .then((plan: PlanInfo) => {
+                if (!plan) {
+                    throw new Error("Failed to receive plan info");
+                }
+
+                dispatch(
+                    initPlanInfoState({
+                        ...plan,
+                        selectedWorkout: getSelectableWorkoutIndex(),
+                        id: Number(planId),
+                    })
+                );
+            })
+            .catch((err) => {
+                console.error(err);
+                if (process.env.NODE_ENV === "development") {
+                    dispatch(
+                        initPlanInfoState({
+                            ...dummyData,
+                            selectedWorkout: 1,
+                            id: Number(planId),
+                        })
+                    );
+                }
+            });
+    }
 
     function GetWorkoutBoxStyle(plan: Workout, index: number) {
         if (
@@ -122,8 +120,6 @@ function InfoPage() {
 
     if (!promise) {
         return null;
-    } else if (planInfo.tasks && planInfo.tasks.every((task) => task.cleared)) {
-        window.location.href = `${frontUrl}/main/workout`;
     }
     return (
         <>
@@ -230,27 +226,9 @@ function InfoPage() {
                 {planInfo.tasks &&
                 planInfo.tasks.every((task) => task.cleared) ? (
                     <Button
-                        className={`bg-red-400`}
+                        className={`bg-red-500`}
                         onClick={() => {
-                            // fetch(`${backendUrl}/api/task/done/${planId}`, {
-                            //     credentials: "include",
-                            //     method: "POST",
-                            //     headers: {
-                            //         "Content-Type": "application/json",
-                            //     },
-                            //     body: JSON.stringify({
-                            //         time: planInfo
-                            //             .tasks!.map((task) => task.doneSecond!)
-                            //             .reduce((acc, cur) => acc + cur, 0),
-                            //     }),
-                            // })
-                            //     .then((res) => {
-                            //         console.log(res.status);
-                            //         if (res.ok) {
-                            //             window.location.href = `${frontUrl}/main/workout`;
-                            //         }
-                            //     })
-                            //     .catch((err) => console.error(err));
+                            window.location.href = `${frontUrl}/main/workout`;
                         }}
                     >
                         플랜 종료하기
