@@ -21,11 +21,11 @@ export const planInfoSlice = createSlice({
         markWorkoutAsCompleted: (state, action: PayloadAction<number>) => {
             if (
                 state.workouts &&
-                state.workouts.length === action.payload + 1
+                state.workouts.length > action.payload
             ) {
                 state.workouts![action.payload].cleared = true;
             }
-            if (state.tasks && state.tasks.length === action.payload + 1) {
+            if (state.tasks && state.tasks.length > action.payload) {
                 state.tasks![action.payload].cleared = true;
             }
         },
