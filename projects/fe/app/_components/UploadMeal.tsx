@@ -1,17 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import React, { FormEvent, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useAppDispatch } from "@/../lib/hooks";
 import { backendUrl } from "@/_utils/urls";
 import { PredictState, setPredict } from "@/../lib/slices/predictSlice";
 import EditImage from "@/_components/EditImage";
 import {
-    ORIENTATION_TO_ANGLE,
-    getRotatedImage,
     readFile,
 } from "@/_utils/canvas";
-import { getOrientation } from "get-orientation/browser";
 
 interface UploadMealProps {
     className?: string;
@@ -29,15 +26,17 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         inputRef.current?.click();
     }
 
-    function onCrop(src: string | null) {
-        if (!src) {
+    function onCrop(croppedImage: string) {
+        if (!croppedImage) {
             console.error("No image data found.");
             return;
         }
 
-        const file = imageSrc!;
+        const file = croppedImage!;
         const formData = new FormData();
         formData.append("file", file);
+
+        console.log(file);
 
         fetch(`${backendUrl}/api/foods/predict`, {
             method: "POST",
@@ -75,7 +74,6 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
             const imageDataUrl = await readFile(file);
 
             if (typeof imageDataUrl === "string") {
-                console.log(imageDataUrl)
                 setImageSrc(imageDataUrl!);
                 setIsEditing(true);
                 
