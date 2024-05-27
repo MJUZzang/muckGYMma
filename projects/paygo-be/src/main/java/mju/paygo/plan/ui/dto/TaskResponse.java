@@ -3,6 +3,7 @@ package mju.paygo.plan.ui.dto;
 import mju.paygo.plan.domain.Task;
 
 public record TaskResponse(
+        Long id,
         String name,
         Boolean cleared,
         Integer weight,
@@ -15,6 +16,7 @@ public record TaskResponse(
 
     public static TaskResponse from(final Task task) {
         return new TaskResponse(
+                task.getId(),
                 task.getName(),
                 task.getCleared(),
                 task.getWeight(),
