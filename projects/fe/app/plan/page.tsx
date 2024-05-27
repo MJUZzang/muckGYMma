@@ -4,7 +4,6 @@ import ArrowBack from "@/_images/ArrowBack";
 import Pause from "@/_images/Pause";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
-
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import CheckMark from "@/_images/CheckMark";
@@ -27,20 +26,17 @@ const notoSansKr = Noto_Sans_KR({
     weight: "400",
 });
 
-function Page() {
+function PlanPage() {
     const router = useRouter();
 
     const [timerTime, setTimerTime] = useState(0);
     const [timerIntervalId, setTimerIntervalId] =
         useState<NodeJS.Timeout | null>(null);
-
     const dispatch = useAppDispatch();
     const planInfo = useAppSelector(selectPlanInfo);
     const selectedWorkout = useAppSelector(selectSelectedWorkout);
     const task = planInfo.tasks![selectedWorkout];
-
     const [selectedSet, setSelectedSet] = useState(0);
-
     const restTimerButtonRef = React.createRef<HTMLDivElement>();
     const [restTime, setRestTime] = useState(0);
 
@@ -203,7 +199,7 @@ function Page() {
                                 }
                             }
 
-                            router.push("/plan-info");
+                            router.back();
                         }
                     }}
                 >
@@ -240,4 +236,4 @@ function Page() {
     );
 }
 
-export default Page;
+export default PlanPage;
