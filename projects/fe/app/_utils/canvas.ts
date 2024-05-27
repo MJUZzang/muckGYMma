@@ -191,6 +191,6 @@ export async function getRotatedImage(
             } else {
                 reject(new Error("Could not create blob from canvas"));
             }
-        }, "image/png");
+        }, "image/jpg");
     });
 }
