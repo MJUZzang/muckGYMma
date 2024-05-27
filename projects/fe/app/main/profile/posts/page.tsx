@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import React, { use, useState } from "react";
 import exampleImage from "@/_images/pooh.jpg";
 import Post from "@/main/community/following/_components/Post";
-import UploadMenu from "@/_components/UploadMenu";
-import Camera from "@/_images/Camera";
+import NoData from "@/main/profile/_components/NoData";
 
 function Page() {
     const [showUploadMenu, setShowUploadMenu] = useState(false);
@@ -35,8 +33,10 @@ function Page() {
         // </div>
 
         <>
+            <NoData text="업로드한 포스트가 없습니다." />
+
             <div className="flex flex-col items-center gap-3">
-                {Array.from({ length: 16 }).map((_, i) => (
+                {Array.from({ length: 0 }).map((_, i) => (
                     <Post key={i} postInfo={dummyPost} />
                 ))}
             </div>

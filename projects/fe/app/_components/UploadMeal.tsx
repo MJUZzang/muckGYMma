@@ -63,6 +63,7 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
     }
 
     const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.stopPropagation();
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             const imageDataUrl = await readFile(file);

@@ -106,7 +106,7 @@ const EditImage = ({ imageSrc, onCrop, onClose }: EditImageProps) => {
 
     return (
         <div
-            className={`z-[40] absolute bg-app-bg top-0 left-0 w-full h-[100dvh] flex flex-col animate-page-enter ${notoSansKr.className}`}
+            className={`fixed top-0 left-0 bg-app-bg w-full h-[100dvh] flex flex-col animate-page-enter ${notoSansKr.className}`}
         >
             <div className="grid grid-cols-3 px-2 h-[55px] bg-app-bg border-b-[1px] border-b-app-bg-2">
                 <button

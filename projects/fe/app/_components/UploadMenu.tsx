@@ -16,6 +16,9 @@ function UploadMenu({ className, isVisible }: UploadMenuProps) {
                 flex flex-col items-start ${
                     isVisible ? "opacity-100" : "opacity-0"
                 } ${className}`}
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
             >
                 <Link href="/post/write" className="text-nowrap">
                     포스트 작성
