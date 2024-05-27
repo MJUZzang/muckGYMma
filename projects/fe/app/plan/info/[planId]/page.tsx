@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -35,42 +35,47 @@ function InfoPage() {
     const selectedWorkout = useAppSelector(selectSelectedWorkout);
     const params = useParams();
     const planId = params.planId as string;
+    const [promise, setPromise] = useState<Promise<void> | null>(null);
+
+    if (promise) use(promise);
 
     useEffect(() => {
         if (!planInfo.id || planInfo.id !== Number(planId)) {
-            fetch(`${backendUrl}/api/plans/${planId}`, {
-                credentials: "include",
-                method: "GET",
-            })
-                .then((res) => {
-                    if (res.ok) {
-                        return res.json();
-                    } else {
-                        throw new Error("Failed to fetch plan info");
-                    }
+            setPromise(
+                fetch(`${backendUrl}/api/plans/${planId}`, {
+                    credentials: "include",
+                    method: "GET",
                 })
-                .then((plan: PlanInfo) => {
-                    if (!plan) {
-                        console.error("Failed to receive plan info");
-                        initPlanInfoState({
-                            ...dummyData,
-                            selectedWorkout: 0,
-                            id: Number(planId),
-                        })
-                        throw new Error("Failed to receive plan info");
-                    }
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.json();
+                        } else {
+                            throw new Error("Failed to fetch plan info");
+                        }
+                    })
+                    .then((plan: PlanInfo) => {
+                        if (!plan) {
+                            console.error("Failed to receive plan info");
+                            initPlanInfoState({
+                                ...dummyData,
+                                selectedWorkout: 0,
+                                id: Number(planId),
+                            });
+                            throw new Error("Failed to receive plan info");
+                        }
 
-                    dispatch(
-                        initPlanInfoState({
-                            ...plan,
-                            selectedWorkout: 0,
-                            id: Number(planId),
-                        })
-                    );
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
+                        dispatch(
+                            initPlanInfoState({
+                                ...plan,
+                                selectedWorkout: 0,
+                                id: Number(planId),
+                            })
+                        );
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                    })
+            );
         }
         return () => {};
     }, []);
@@ -85,6 +90,9 @@ function InfoPage() {
         return "bg-gray-400 text-app-inverted-font-4";
     }
 
+    if (!promise) {
+        return null;
+    }
     return (
         <>
             <div
@@ -145,9 +153,7 @@ function InfoPage() {
                                     <div className="w-fit text-nowrap">
                                         <p className="">{task.name}</p>
                                         <div className="flex">
-                                            <p className="">
-                                                {task.sets}sets
-                                            </p>
+                                            <p className="">{task.sets}sets</p>
                                             &nbsp;
                                             <p className="">
                                                 {task.repeatation}reps
