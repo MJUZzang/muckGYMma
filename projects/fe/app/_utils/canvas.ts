@@ -1,10 +1,14 @@
 import { Flip, PixelCrop } from "@/_types/Canvas";
 
+// Blob 객체를 File 객체로 변환하는 함수
+export function blobToFile(blob: Blob, fileName: string): File {
+    return new File([blob], fileName, { type: blob.type });
+}
 
-
+// base64 데이터를 File 객체로 변환하는 함수
 export function base64ToFile(base64: string): File {
     // MIME 타입 추출
-    const mimeType: string = base64.split(",")[0].split(":")[1].split(";")[0];
+    const mimeType: string = base64.split(',')[0].split(':')[1].split(';')[0];
 
     // base64 데이터를 바이너리 데이터로 디코딩
     const byteString = atob(base64.split(",")[1]);
@@ -19,12 +23,10 @@ export function base64ToFile(base64: string): File {
     const blob = new Blob([ab], { type: mimeType });
 
     // 파일 이름 생성 (필요에 따라 수정 가능)
-    const fileName = `file.${mimeType.split("/")[1]}`;
+    const fileName = `file.${mimeType.split('/')[1]}`;
 
-    // File 객체 생성
-    const file = new File([blob], fileName, { type: mimeType });
-
-    return file;
+    // Blob 객체를 File 객체로 변환
+    return blobToFile(blob, fileName);
 }
 
 export function readFile(file: File): Promise<string | ArrayBuffer | null> {
@@ -129,18 +131,18 @@ export async function getCroppedImg(
     );
 
     // As Base64 string
-    // return croppedCanvas.toDataURL("image/jpeg");
+    return croppedCanvas.toDataURL("image/jpeg");
 
     // As a blob
-    return new Promise((resolve, reject) => {
-        croppedCanvas.toBlob((file) => {
-            if (file) {
-                resolve(URL.createObjectURL(file));
-            } else {
-                reject(new Error("Could not create blob from canvas"));
-            }
-        }, "image/png");
-    });
+    // return new Promise((resolve, reject) => {
+    //     croppedCanvas.toBlob((file) => {
+    //         if (file) {
+    //             resolve(URL.createObjectURL(file));
+    //         } else {
+    //             reject(new Error("Could not create blob from canvas"));
+    //         }
+    //     }, "image/png");
+    // });
 }
 
 export const createImage = (url: string): Promise<HTMLImageElement> =>

@@ -30,16 +30,16 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         inputRef.current?.click();
     }
 
-    function onCrop(croppedImage: string) {
-        if (!croppedImage) {
+    function onCrop(base64: string) {
+        if (!base64) {
             console.error("No image data found.");
             return;
         }
 
-        const file = base64ToFile(croppedImage);
+        const file = base64ToFile(base64);
         const formData = new FormData();
-        console.log(file)
         formData.append("file", file);
+        console.log(file)
 
         fetch(`${backendUrl}/api/foods/predict`, {
             method: "POST",
