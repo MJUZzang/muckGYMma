@@ -16,7 +16,7 @@ import CheckMark from "@/_images/CheckMark";
 import { formatTimeInKor } from "@/plan/_utils/time";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import Muscle from "@/_images/Muscle";
-import { backendUrl } from "@/_utils/urls";
+import { backendUrl, frontUrl } from "@/_utils/urls";
 import { PlanInfo, Workout, dummyData } from "@/_types/Plan";
 
 const notoSansKr = Noto_Sans_KR({
@@ -212,14 +212,38 @@ function InfoPage() {
                 shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)]"
             >
                 {planInfo.tasks &&
-                    planInfo.tasks.every((task) => task.cleared) && (
-                        <Button className={`bg-app-blue-2`} onClick={() => {
-
-                        }}>플랜 완료</Button>
-                    )}
-                <Link href="/plan">
-                    <Button className={`bg-app-blue-2`}>운동 시작</Button>
-                </Link>
+                planInfo.tasks.every((task) => task.cleared) ? (
+                    <Button
+                        className={`bg-red-400`}
+                        onClick={() => {
+                            fetch(`${backendUrl}/api/task/done/${planId}`, {
+                                credentials: "include",
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    time: planInfo
+                                        .tasks!.map((task) => task.doneSecond!)
+                                        .reduce((acc, cur) => acc + cur, 0),
+                                }),
+                            })
+                                .then((res) => {
+                                    console.log(res.status);
+                                    if (res.ok) {
+                                        window.location.href = `${frontUrl}/main/workout`;
+                                    }
+                                })
+                                .catch((err) => console.error(err));
+                        }}
+                    >
+                        플랜 종료하기
+                    </Button>
+                ) : (
+                    <Link href="/plan">
+                        <Button className={`bg-app-blue-2`}>운동 시작</Button>
+                    </Link>
+                )}
             </div>
         </>
     );
