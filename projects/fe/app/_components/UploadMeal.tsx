@@ -69,13 +69,16 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
 
     const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.stopPropagation();
-        if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0];
+        if (e.currentTarget.files && e.currentTarget.files.length > 0) {
+            const file = e.currentTarget.files[0];
+
             const imageDataUrl = await readFile(file);
 
             if (typeof imageDataUrl === "string") {
-                setImageSrc(imageDataUrl);
+                console.log(imageDataUrl)
+                setImageSrc(imageDataUrl!);
                 setIsEditing(true);
+                
                 // try {
                 //     // apply rotation if needed
                 //     const orientation = await getOrientation(file);
