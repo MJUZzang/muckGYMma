@@ -38,6 +38,7 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
 
         const { blob, fileName } = base64ToBlob(croppedImage);
         const formData = new FormData();
+        console.log(blob, fileName)
         formData.append("file", blob, fileName);
 
         fetch(`${backendUrl}/api/foods/predict`, {
