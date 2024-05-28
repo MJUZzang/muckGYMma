@@ -88,6 +88,9 @@ export const planInfoSlice = createSlice({
             if (action.payload.selectedWorkout) {
                 state.selectedWorkout = action.payload.selectedWorkout;
             }
+            if (action.payload.clearedAt) {
+                state.clearedAt = action.payload.clearedAt;
+            }
         },
     },
 });

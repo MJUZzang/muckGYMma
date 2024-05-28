@@ -122,8 +122,6 @@ function InfoPage() {
         return null;
     }
 
-    console.log(planInfo);
-
     return (
         <>
             <div
