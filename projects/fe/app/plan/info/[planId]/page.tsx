@@ -82,7 +82,7 @@ function InfoPage() {
                 if (!plan) {
                     throw new Error("Failed to receive plan info");
                 }
-
+                console.log(plan);
                 dispatch(
                     initPlanInfoState({
                         ...plan,
