@@ -153,7 +153,7 @@ function InfoPage() {
                                 </p>
                                 &nbsp;kcal
                             </div>
-                            <p>
+                            <p className="text-app-font-2">
                                 {planInfo.clearedAt &&
                                     `완료일: ${planInfo.clearedAt}`}
                             </p>
