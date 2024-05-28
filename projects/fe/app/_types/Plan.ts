@@ -27,8 +27,8 @@ export interface PlanInfo {
     type?: string;
     time?: number;
     cleared?: boolean;
-    createdAt?: Date;
-    clearedAt?: Date;
+    createdAt?: Date | null;
+    clearedAt?: Date | null;
     total?: number;
 }
 
