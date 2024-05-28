@@ -83,7 +83,9 @@ function InfoPage() {
                     throw new Error("Failed to receive plan info");
                 }
                 console.log(plan);
-                const clearedAt = plan.clearedAt ? new Date(plan.clearedAt) : null;
+                const clearedAt = plan.clearedAt
+                    ? new Date(plan.clearedAt)
+                    : null;
                 dispatch(
                     initPlanInfoState({
                         ...plan,
@@ -182,11 +184,21 @@ function InfoPage() {
                                     <div className="w-fit text-nowrap">
                                         <p className="">{plan.name}</p>
                                         <div className="flex">
-                                            <p className="">{plan.sets}sets</p>
-                                            &nbsp;
-                                            <p className="">
-                                                {plan.repeatation}reps
-                                            </p>
+                                            {plan.time ? (
+                                                <p>
+                                                    {formatTimeInKor(plan.time)}
+                                                </p>
+                                            ) : (
+                                                <>
+                                                    <p className="">
+                                                        {plan.sets}sets
+                                                    </p>
+                                                    &nbsp;
+                                                    <p className="">
+                                                        {plan.repeatation}reps
+                                                    </p>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                     <div className="w-full text-right pr-4">
