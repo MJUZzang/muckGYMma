@@ -14,7 +14,7 @@ function UploadMenu({ className, isVisible }: UploadMenuProps) {
                 className={`bg-app-bg shadow-xl text-app-font-4 font-semibold 
                 text-base px-3 py-3 rounded-2xl transition-opacity duration-500
                 flex flex-col items-start ${
-                    isVisible ? "opacity-100" : "opacity-0"
+                    isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
                 } ${className}`}
                 onClick={(e) => {
                     e.stopPropagation();
