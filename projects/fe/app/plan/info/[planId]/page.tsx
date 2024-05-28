@@ -121,6 +121,8 @@ function InfoPage() {
     if (!promise) {
         return null;
     }
+
+    console.log(planInfo.clearedAt);
     return (
         <>
             <div
