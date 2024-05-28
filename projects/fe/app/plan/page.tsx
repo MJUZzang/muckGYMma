@@ -180,7 +180,7 @@ function PlanPage() {
                     onClose={() => {
                         // 모든 세트 완료시 /plan-info 페이지로 이동
                         if (selectedSet === task.sets) {
-                            fetch(`${backendUrl}/api/task/done/${planInfo.id!}`, {
+                            fetch(`${backendUrl}/api/task/done/${planInfo.tasks![selectedWorkout].id}`, {
                                 credentials: "include",
                                 method: "POST",
                                 headers: {
