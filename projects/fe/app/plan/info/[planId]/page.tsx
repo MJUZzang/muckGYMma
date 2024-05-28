@@ -153,12 +153,9 @@ function InfoPage() {
                                 </p>
                                 &nbsp;kcal
                             </div>
-                            {/* {!planInfo.isCompleted && (
-                            <p>
-                                {planInfo.completedAt &&
-                                    `완료일: ${planInfo.completedAt}`}
-                            </p>
-                        )} */}
+                            {!planInfo.cleared && (
+                                <p>{`완료일: ${planInfo.clearedAt}`}</p>
+                            )}
                         </div>
                     </div>
 
@@ -231,7 +228,7 @@ function InfoPage() {
                             window.location.href = `${frontUrl}/main/workout`;
                         }}
                     >
-                        플랜 종료하기
+                        플랜 완료됨
                     </Button>
                 ) : (
                     <Link href="/plan">
