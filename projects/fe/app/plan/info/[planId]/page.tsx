@@ -158,7 +158,7 @@ function InfoPage() {
                             </div>
                             <p className="text-app-font-2">
                                 {planInfo.clearedAt &&
-                                    `완료일: ${planInfo.clearedAt}`}
+                                    `완료일: ${planInfo.clearedAt.toLocaleString()}`}
                             </p>
                         </div>
                     </div>
