@@ -122,7 +122,8 @@ function InfoPage() {
         return null;
     }
 
-    console.log(planInfo.clearedAt);
+    console.log(planInfo);
+
     return (
         <>
             <div
