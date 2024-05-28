@@ -14,7 +14,7 @@ export interface Workout {
     time?: number | null;
     doneSecond?: number;
     cleared?: boolean;
-    clearedAt?: string;
+    clearedAt?: Date | null;
 }
 
 export interface PlanInfo {
@@ -28,7 +28,7 @@ export interface PlanInfo {
     time?: number;
     cleared?: boolean;
     createdAt?: Date;
-    clearedAt?: string;
+    clearedAt?: Date;
     total?: number;
 }
 

@@ -83,11 +83,13 @@ function InfoPage() {
                     throw new Error("Failed to receive plan info");
                 }
                 console.log(plan);
+                const clearedAt = plan.clearedAt ? new Date(plan.clearedAt) : null;
                 dispatch(
                     initPlanInfoState({
                         ...plan,
                         selectedWorkout: getSelectableWorkoutIndex(),
                         id: Number(planId),
+                        clearedAt: clearedAt,
                     })
                 );
             })
