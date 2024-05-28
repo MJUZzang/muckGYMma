@@ -153,10 +153,10 @@ function InfoPage() {
                                 </p>
                                 &nbsp;kcal
                             </div>
-                            {planInfo.clearedAt !== null ||
-                                planInfo.clearedAt !== undefined && (
-                                    <p>{`완료일: ${planInfo.clearedAt}`}</p>
-                                )}
+                            <p>
+                                {planInfo.clearedAt &&
+                                    `완료일: ${planInfo.clearedAt}`}
+                            </p>
                         </div>
                     </div>
 
