@@ -15,7 +15,7 @@ import {
     selectPlanInfo,
     selectSelectedWorkout,
 } from "@/../lib/slices/planInfoSlice";
-import { formatTimeHour } from "@/plan/_utils/time";
+import { formatTimeHour, formatTimeInKor } from "@/plan/_utils/time";
 import { Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
 import { Workout } from "@/_types/Plan";
@@ -37,9 +37,9 @@ function PlanPage() {
     const [selectedSet, setSelectedSet] = useState(0);
     const restTimerButtonRef = React.createRef<HTMLDivElement>();
     const [restTime, setRestTime] = useState(0);
-    
+
     const task: Workout = planInfo.tasks![selectedWorkout];
-    
+
     useEffect(() => {
         const id = setInterval(() => {
             setTimerTime((prev) => prev + 1);
@@ -154,6 +154,11 @@ function PlanPage() {
                                         {task.weight} kg
                                     </p>
                                 )}
+                                {task.time && (
+                                    <p className={`w-full text-right`}>
+                                        {formatTimeInKor(task.time)}
+                                    </p>
+                                )}
                             </div>
 
                             <div
@@ -180,16 +185,21 @@ function PlanPage() {
                     onClose={() => {
                         // 모든 세트 완료시 /plan-info 페이지로 이동
                         if (selectedSet === task.sets) {
-                            fetch(`${backendUrl}/api/task/done/${planInfo.tasks![selectedWorkout].id}`, {
-                                credentials: "include",
-                                method: "POST",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    time: timerTime,
-                                }),
-                            })
+                            fetch(
+                                `${backendUrl}/api/task/done/${
+                                    planInfo.tasks![selectedWorkout].id
+                                }`,
+                                {
+                                    credentials: "include",
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        time: timerTime,
+                                    }),
+                                }
+                            )
                                 .then((res) => {
                                     console.log(res.status);
                                     if (res.ok) {
