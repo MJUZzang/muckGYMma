@@ -2,6 +2,8 @@ package mju.paygo.plan.ui.dto;
 
 import mju.paygo.plan.domain.Task;
 
+import java.time.LocalDateTime;
+
 public record TaskResponse(
         Long id,
         String name,
@@ -11,7 +13,8 @@ public record TaskResponse(
         Integer repeatation,
         Integer kcal,
         Integer time,
-        Integer doneSecond
+        Integer doneSecond,
+        LocalDateTime clearedAt
 ) {
 
     public static TaskResponse from(final Task task) {
@@ -24,7 +27,8 @@ public record TaskResponse(
                 task.getRepeatation(),
                 task.getExpect(),
                 task.getTime(),
-                task.getDoneSecond()
+                task.getDoneSecond(),
+                task.getClearedAt()
         );
     }
 }
