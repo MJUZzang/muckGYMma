@@ -15,4 +15,5 @@ public interface BoardRepository {
     long countByMember(final Member member);
     Optional<Board> findByIdAndMemberId(final Long id, final Long memberId);
     Optional<Board> findByMealId(Long mealId);
+    List<Board> findBoardsByFollowedUsers(List<Member> followedUsers);
 }

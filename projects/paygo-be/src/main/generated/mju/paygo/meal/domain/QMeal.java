@@ -39,6 +39,8 @@ public class QMeal extends EntityPathBase<Meal> {
 
     public final mju.paygo.meal.domain.vo.QNutrient nutrient;
 
+    public final BooleanPath planed = createBoolean("planed");
+
     public final BooleanPath posted = createBoolean("posted");
 
     //inherited

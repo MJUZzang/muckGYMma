@@ -108,7 +108,7 @@ public class BoardController {
 
     // 자신이 올린 게시글만 불러오기
     @GetMapping("/my-posts")
-    public ResponseEntity<List<BoardFindResponse>> getMyPosts(@RequestBody @Valid final BoardFindRequest request) {
+    public ResponseEntity<List<BoardFindResponse>> getMyPosts(@Valid @RequestBody final BoardFindRequest request) {
         List<BoardFindResponse> boards = boardService.findAllByNickname(request.nickname());
 
         return ResponseEntity.ok(boards);
@@ -116,8 +116,16 @@ public class BoardController {
 
     // 자신이 올린 게시글을 제외한 나머지 글들만 불러오기
     @GetMapping("/other-posts")
-    public ResponseEntity<List<BoardFindResponse>> getOtherPosts(@RequestBody @Valid final BoardFindRequest request) {
+    public ResponseEntity<List<BoardFindResponse>> getOtherPosts(@Valid @RequestBody final BoardFindRequest request) {
         List<BoardFindResponse> boards = boardService.findAllExceptNickname(request.nickname());
+
+        return ResponseEntity.ok(boards);
+    }
+
+    // 팔로잉 중인 사람들의 게시글만 불러오기
+    @GetMapping("/following-posts")
+    public ResponseEntity<List<BoardFindResponse>> getFollowingPosts(@Valid @RequestBody final BoardFindRequest request) {
+        List<BoardFindResponse> boards = boardService.findAllByFollowing(request.nickname());
 
         return ResponseEntity.ok(boards);
     }

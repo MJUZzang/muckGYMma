@@ -59,4 +59,9 @@ public class BoardRepositoryImpl implements BoardRepository {
     public Optional<Board> findByMealId(Long mealId) {
         return boardJpaRepository.findByMealId(mealId);
     }
+
+    @Override
+    public List<Board> findBoardsByFollowedUsers(List<Member> followedUsers) {
+        return boardJpaRepository.findByMemberIn(followedUsers);
+    }
 }
