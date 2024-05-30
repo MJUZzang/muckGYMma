@@ -32,11 +32,16 @@ public class BoardService {
     private final MealRepository mealRepository;
     private final ApplicationEventPublisher eventPublisher;
 
-    public Board saveBoardWithMeal(Member member, Long mealId, String content) {
+    public Board saveBoard(Member member, List<String> imageUrls, String content) {
+        Board board = new Board(member, null, imageUrls, content, false);
+        return boardRepository.save(board);
+    }
+
+    public Board saveBoardWithMeal(Member member, Long mealId, String content, List<String> imageUrls) {
         Meal meal = mealRepository.findById(mealId)
                 .orElseThrow(MealNotFoundException::new);
 
-        Board board = new Board(member, meal.getImageUrl(), content, false);
+        Board board = new Board(member, meal, imageUrls, content, false);
         boardRepository.save(board);
 
         eventPublisher.publishEvent(new BoardCreatedEvent(mealId));
@@ -57,6 +62,13 @@ public class BoardService {
             throw new InvalidMemberException();
         }
         board.updateContent(content);
+    }
+
+    public void updateBoardVerifiedStatusByMealId(Long mealId, Boolean verified) {
+        Board board = boardRepository.findByMealId(mealId)
+                .orElseThrow(BoardNotFoundException::new);
+        board.setVerified(verified);
+        boardRepository.save(board);
     }
 
     public void deleteBoard(final Long boardId) {
@@ -87,12 +99,12 @@ public class BoardService {
     }
 
     private BoardFindResponse toBoardFindResponse(final Board board, final Long memberId) {
-        Meal meal = mealRepository.findByImageUrl(board.getImageUrl())
+        Meal meal = mealRepository.findByImageUrl(board.getImageUrls().get(0))
                 .orElseThrow(MealNotFoundException::new);
         return new BoardFindResponse(
                 board.getId(),
                 board.getContent(),
-                board.getImageUrl(),
+                board.getImageUrls(),
                 board.getMember().getId(),
                 board.getMember().getNickname(),
                 likesService.countLikes(board.getId()),

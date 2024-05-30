@@ -14,4 +14,5 @@ public interface BoardRepository {
     List<Board> findByMemberNickname(final String nickname);
     long countByMember(final Member member);
     Optional<Board> findByIdAndMemberId(final Long id, final Long memberId);
+    Optional<Board> findByMealId(Long mealId);
 }

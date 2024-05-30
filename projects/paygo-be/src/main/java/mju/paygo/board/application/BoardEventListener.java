@@ -13,10 +13,16 @@ import org.springframework.stereotype.Component;
 public class BoardEventListener {
 
     private final MealRepository mealRepository;
+    private final BoardService boardService;
 
     @EventListener
     public void handleBoardCreatedEvent(final BoardCreatedEvent event) {
         markMealAsPosted(event.getMealId());
+    }
+
+    @EventListener
+    public void handleBoardVerifiedEvent(final BoardCreatedEvent event) {
+        boardService.updateBoardVerifiedStatusByMealId(event.getMealId(), true);
     }
 
     private void markMealAsPosted(final Long mealId) {

@@ -26,14 +26,15 @@ public class QBoard extends EntityPathBase<Board> {
 
     public final StringPath content = createString("content");
 
-    //inherited
-    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
+    public final DateTimePath<java.time.LocalDateTime> createdAt = createDateTime("createdAt", java.time.LocalDateTime.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath imageUrl = createString("imageUrl");
+    public final ListPath<String, StringPath> imageUrls = this.<String, StringPath>createList("imageUrls", String.class, StringPath.class, PathInits.DIRECT2);
 
     public final ListPath<mju.paygo.likes.domain.Likes, mju.paygo.likes.domain.QLikes> likes = this.<mju.paygo.likes.domain.Likes, mju.paygo.likes.domain.QLikes>createList("likes", mju.paygo.likes.domain.Likes.class, mju.paygo.likes.domain.QLikes.class, PathInits.DIRECT2);
+
+    public final mju.paygo.meal.domain.QMeal meal;
 
     public final mju.paygo.member.domain.member.QMember member;
 
@@ -60,6 +61,7 @@ public class QBoard extends EntityPathBase<Board> {
 
     public QBoard(Class<? extends Board> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.meal = inits.isInitialized("meal") ? new mju.paygo.meal.domain.QMeal(forProperty("meal"), inits.get("meal")) : null;
         this.member = inits.isInitialized("member") ? new mju.paygo.member.domain.member.QMember(forProperty("member")) : null;
     }
 

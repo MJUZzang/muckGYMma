@@ -12,4 +12,5 @@ public interface BoardJpaRepository extends JpaRepository<Board, Long> {
     List<Board> findByMemberNickname(final String nickname);
     long countByMember(final Member member);
     Optional<Board> findByIdAndMemberId(final Long id, final Long memberId);
+    Optional<Board> findByMealId(Long mealId);
 }

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.util.stream.Collectors;
 
@@ -22,7 +23,8 @@ public class BoardExceptionHandler {
             BoardNotFoundException.class,
             InvalidBoardIdException.class,
             InvalidMemberIdException.class,
-            MealNotFoundException.class
+            MealNotFoundException.class,
+            MaxUploadSizeExceededException.class
     })
     public ResponseEntity<ExceptionResponse> handleBadRequestException(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)

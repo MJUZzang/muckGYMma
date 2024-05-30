@@ -1,7 +1,9 @@
 package mju.paygo.board.domain;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -16,8 +18,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mju.paygo.global.domain.BaseEntity;
 import mju.paygo.likes.domain.Likes;
+import mju.paygo.meal.domain.Meal;
 import mju.paygo.member.domain.member.Member;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -27,37 +33,52 @@ public class Board extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;    // 게시글 ID
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @Column(nullable = false)
-    private String imageUrl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "meal_id")
+    private Meal meal;
+
+    @ElementCollection
+    @CollectionTable(name = "board_images", joinColumns = @JoinColumn(name = "board_id"))
+    @Column(name = "image_url", nullable = false)
+    private List<String> imageUrls = new ArrayList<>();
 
     @Lob
     @Column(nullable = false)
-    private String content;  // 게시글 내용
+    private String content;
+
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private Boolean verified = false;  // 게시글 검증 상태
+    private Boolean verified = false;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Likes> likes;
 
-    public Board(final Member member, final String imageUrl, final String content, final Boolean verified) {
+    public Board(final Member member, final Meal meal, final List<String> imageUrls, final String content, final Boolean verified) {
         this.member = member;
-        this.imageUrl = imageUrl;
+        this.meal = meal;
+        this.imageUrls = imageUrls;
         this.content = content;
+        this.createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
         this.verified = verified;
     }
 
-    public static Board of(final Member member, final String imageUrl, final String content, final Boolean verified) {
-        return new Board(member, imageUrl, content, verified);
+    public static Board of(final Member member, final Meal meal, final List<String> imageUrls, final String content, final Boolean verified) {
+        return new Board(member, meal, imageUrls, content, verified);
     }
 
     public void updateContent(final String content) {
         this.content = content;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 }
