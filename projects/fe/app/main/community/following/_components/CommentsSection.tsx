@@ -6,9 +6,7 @@ import Like from "@/main/community/following/_images/Like";
 
 import {
     Drawer,
-    DrawerClose,
     DrawerContent,
-    DrawerDescription,
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
@@ -18,11 +16,44 @@ import {
 import { Button } from "@/_components/shadcn/ui/button";
 
 import exampleImage from "@/_images/pooh.jpg";
+import jerry from "@/main/community/following/_images/제리찌르기.jpg";
+import shin from "@/main/community/following/_images/김신.jpg";
+import gersang from "@/main/community/following/_images/거상.jpg";
 import Image from "next/image";
 import CommentSectionTextArea from "./CommentSectionTextArea";
 import { Noto_Sans_KR } from "next/font/google";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
+
+const comments = [
+    {
+        image: jerry,
+        name: "bnad",
+        date: "2주 전",
+        content: (
+            <p>그만 먹어</p>
+        ),
+        likes: "5,511",
+    },
+    {
+        image: shin,
+        name: "xoals1004",
+        date: "2주 전",
+        content: (
+            <p>나도 한 입만...</p>
+        ),
+        likes: "3",
+    },
+    {
+        image: gersang,
+        name: "byungmeo",
+        date: "2주 전",
+        content: (
+            <p>지금 너네집 감 ㅅㄱ</p>
+        ),
+        likes: "12",
+    },
+];
 
 function CommentsSection({
     children,
@@ -51,39 +82,35 @@ function CommentsSection({
                 {/* Drawber body */}
                 <div className="overflow-y-auto">
                     {/* Comments */}
-                    {Array.from({ length: 15 }).map((_, index) => (
+                    {comments.map((comment, index) => (
                         <div className="gap-3 my-3" key={index}>
                             {/* Comment */}
                             <div className="px-3 flex gap-2">
                                 {/* Avatar Image */}
-                                <div className="w-[50px] h-[50px] rounded-full overflow-clip">
                                     <Image
-                                        src={exampleImage}
+                                        src={comment.image}
                                         alt="User avatar"
-                                        width={50}
-                                        height={50}
+                                        className="w-[50px] h-[50px] rounded-full pointer-events-none"
                                     />
-                                </div>
 
                                 {/* Comment Body */}
                                 <div className="w-full">
                                     {/* User Name */}
                                     <div className=" flex gap-3 items-center">
                                         <p className="text-app-font-2">
-                                            Jehee Cheon
+                                            {comment.name}
                                         </p>
                                         <p className="text-white/60 text-[12px]">
-                                            2주 전
+                                            {comment.date}
                                         </p>
                                     </div>
 
                                     {/* Comment Content and Like button */}
                                     <div className="w-full flex">
                                         <p className="w-full text-app-font-2">
-                                            This is a comment...먹짐마 데모
-                                            코멘트 내용에 뭘 넣을까여
+                                            {comment.content}
                                         </p>
-                                        <div className="flex flex-col items-center">
+                                        <div className="flex flex-col items-center absolute right-3">
                                             <Like
                                                 onClick={() =>
                                                     setIsLiked(!isLiked)
@@ -92,7 +119,7 @@ function CommentsSection({
                                                 isLiked={isLiked}
                                             />
                                             <p className="text-app-font-4 text-[12px]">
-                                                2,462
+                                                {comment.likes}
                                             </p>
                                         </div>
                                     </div>

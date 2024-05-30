@@ -61,14 +61,12 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             </div>
 
             {/* 포스트 이미지 */}
-            <div className={`overflow-clip aspect-square`}>
-                <Image
-                    src={postInfo.image}
-                    alt="Post image"
-                    width={325}
-                    className="rounded-t-lg w-full"
-                />
-            </div>
+            <Image
+                src={postInfo.image}
+                alt="Post image"
+                width={325}
+                className="rounded-t-lg w-full"
+            />
 
             {/* 포스트 정보 */}
             <div className="flex justify-between mt-1 px-2">
@@ -101,14 +99,15 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                         className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className}`}
                     >
                         <SpoonKnife className="fill-app-font-3" />
-                        <p>322 kcal</p>
+                        <p>618 kcal</p>
                     </div>
                 </div>
             </div>
 
             {/* 포스트 내용 */}
             <p className={`mx-2 text-pretty text-sm text-app-font-1 mt-1`}>
-                {truncatedContent}
+                {/* {truncatedContent} */}
+                [토막상식] 사실 햄버거는 살 안찌는 완전 식품이랍니다! 감튀랑 콜라 안 먹었으니까 와퍼는 2개~ 매일 먹자!
             </p>
             {!showFullContent && (
                 <button

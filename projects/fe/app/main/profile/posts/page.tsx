@@ -4,6 +4,7 @@ import React, { use, useState } from "react";
 import exampleImage from "@/_images/pooh.jpg";
 import Post from "@/main/community/following/_components/Post";
 import NoData from "@/main/profile/_components/NoData";
+import exampleImage2 from "@/_images/wapper.jpg";
 
 function Page() {
     const [showUploadMenu, setShowUploadMenu] = useState(false);
@@ -14,11 +15,11 @@ function Page() {
             "Hello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello world",
         hasLiked: false,
         id: 1,
-        image: exampleImage,
+        image: exampleImage2,
         likes: 0,
         postedAt: new Date(),
         user: {
-            name: "John Doe",
+            name: "jeheecheon",
             avatar: exampleImage,
         },
     };
@@ -33,10 +34,10 @@ function Page() {
         // </div>
 
         <>
-            <NoData text="업로드된 포스트가 없습니다." />
+            {/* <NoData text="업로드된 포스트가 없습니다." /> */}
 
             <div className="flex flex-col items-center gap-3">
-                {Array.from({ length: 0 }).map((_, i) => (
+                {Array.from({ length: 1 }).map((_, i) => (
                     <Post key={i} postInfo={dummyPost} />
                 ))}
             </div>
