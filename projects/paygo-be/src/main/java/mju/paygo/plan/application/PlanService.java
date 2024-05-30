@@ -103,6 +103,7 @@ public class PlanService {
             final Meal meal) {
 
         StringBuilder builder = new StringBuilder();
+        builder.append("너는 20년 이상의 운동, 식단 생성 경력을 가진 고급 영양사이자 헬스 트레이너이다.").append("\n");
         builder.append("회원 정보는 아래와 같다.").append("\n");
         builder.append("성별: ").append(physicalProfile.getGender()).append("\n");
         builder.append("생년월일: ").append(physicalProfile.getBirth()).append("\n");
@@ -128,7 +129,7 @@ public class PlanService {
         builder.append("9. 스포츠 플랜 안에는 하나의 스포츠 종목만으로 구성할 것.").append("\n");
         builder.append("10. Plan interface의 필드명 중 \"type\" 필드의 값은 \"스포츠\" 또는 \"헬스\"로만 구성할 것.").append("\n");
         builder.append("그리고 각 workouts의 요소 당 칼로리를 얼마나 뺄 수 있게 되는지도 각 운동의 요소에 'expect' 속성에 '반드시' 넣어줘. 각 workout의 weight, set, time 등을 모두 고려하여 expect를 추산한다.").append("\n");
-        builder.append("예를 들어 테니스를 60분 간 할 경우 (name: 테니스, time: 60), expect는 728이 된다.").append("\n");
+        builder.append("예를 들어 테니스를 60분 간 할 경우 (name: 테니스, time: 3600), expect는 728이 된다. 다만 이는 음식마다 무조건 이렇게 728만큼 주는 게 아니라, 음식의 칼로리만큼만 계산할 수 있도록 해야 한다. 그럴 때는 kcal이 줄어든만큼 time도 줄어야 한다.").append("\n");
         builder.append("'expect'를 만들 때 주의할 점은, 같은 plan 안에 있는 workouts들의 expect 속성의 합이 빼야 할 칼로리보다 같거나 커야 해. 절대 합이 빼야 할 칼로리보다 작으면 안돼").append("\n");
         builder.append("'expect'의 총합이 그렇다고 너무 크면 안 돼. 빼야 할 칼로리 + 50 정도까지만 허용되게 한다. 그러기 위해서는 weight, set, time을 줄이는 방법 등도 있다.").append("\n");
         builder.append("type이 스포츠일 때 workouts들의 time은 '초' 단위여야 해. 그리고 time일 때 expect가 빼야 할 칼로리와 다른 경우가 있는데 이 점도 보완해야 해").append("\n");
@@ -145,6 +146,11 @@ public class PlanService {
                 .append("\tworkouts: Workout[];\n")
                 .append("}");
         builder.append("절대 각 plan에 있는 workouts의 expect 총합이 빼야 할 칼로리보다 작게 나오면 안 된다.").append("\n");
+        builder.append("예시로, 257kcal 정도의 칼로리를 가진 닭갈비를 먹었을 경우에는 각 workouts의 expect 총합들이 모두 257kcal에 근접해야 한다.").append("\n");
+        builder.append("이 요구사항은 헬스 말고도 스포츠에도 동일하다. 스포츠 workouts 또한 expect 총합들이 모두 음식 칼로리 (예: 닭갈비일 경우 257kcal)에 근접하도록 해야 한다.").append("\n");
+        builder.append("고급 경력을 가진 만큼, 충분히 expect들을 적절히 고려할 수 있을 것이라 생각한다. expect 총합을 최대한 음식 칼로리에 맞추도록 생성해라.").append("\n");
+        builder.append("반환할 때, json만 나오도록 해라. 겉부분에 ```json 같은 게 있으면 안 된다.").append("\n");
+        builder.append("type이 헬스일 때에는 time을 너가 예상해서 만들어줘. 예시로 벤치프레스를 20kg로 10번씩 3세트 할 경우 걸리는 시간 (초)가 있겠지? 그 값을 time으로 넣어주면 돼.").append("\n");
         return builder.toString();
     }
 
@@ -165,6 +171,9 @@ public class PlanService {
             planName = request.type();
         }
         Plan plan = Plan.of(memberId, mealId, tasks, planName);
+        Meal meal = mealRepository.findByMemberAndId(memberId, mealId)
+                .orElseThrow(MealNotFoundException::new);
+        meal.updatePlaned();
 
         return planRepository.save(plan);
     }

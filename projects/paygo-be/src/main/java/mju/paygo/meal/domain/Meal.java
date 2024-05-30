@@ -38,6 +38,9 @@ public class Meal extends BaseEntity {
     private Boolean exercised = false;
 
     @Column(nullable = false)
+    private Boolean planed = false;
+
+    @Column(nullable = false)
     private Boolean posted = false;
 
     private Meal(final Long memberId, final Nutrient nutrient, final String mealName, final String imageUrl) {
@@ -53,6 +56,10 @@ public class Meal extends BaseEntity {
 
     public void clearExercise() {
         this.exercised = true;
+    }
+
+    public void updatePlaned() {
+        this.planed = true;
     }
 
     public void clearUpload() {
