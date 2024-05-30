@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import mju.paygo.follow.domain.Follow;
 import mju.paygo.follow.domain.FollowRepository;
 import mju.paygo.follow.domain.FollowStatus;
-import mju.paygo.follow.exception.exceptions.AlreadyFollowingException;
-import mju.paygo.follow.exception.exceptions.FollowRelationshipNotFoundException;
 import mju.paygo.follow.exception.exceptions.MemberNotFoundException;
 import mju.paygo.follow.ui.dto.FollowResponse;
 import mju.paygo.member.domain.member.Member;
@@ -24,27 +22,18 @@ public class FollowService {
     private final FollowRepository followRepository;
     private final MemberRepository memberRepository;
 
-    public void follow(final Long followerId, final Long followeeId) {
+    public boolean follow(final Long followerId, final Long followeeId) {
         Member follower = findMemberById(followerId);
         Member followee = findMemberById(followeeId);
 
         if (followRepository.existsByFollowerAndFollowee(follower, followee)) {
-            throw new AlreadyFollowingException();
+            followRepository.deleteByFollowerAndFollowee(follower, followee);
+            return false; // 언팔로우
+        } else {
+            Follow follow = Follow.of(follower, followee, FollowStatus.ACCEPTED);
+            followRepository.save(follow);
+            return true; // 팔로우
         }
-
-        Follow follow = Follow.of(follower, followee, FollowStatus.ACCEPTED);
-        followRepository.save(follow);
-    }
-
-    public void unfollow(final Long followerId, final Long followeeId) {
-        Member follower = findMemberById(followerId);
-        Member followee = findMemberById(followeeId);
-
-        if (!followRepository.existsByFollowerAndFollowee(follower, followee)) {
-            throw new FollowRelationshipNotFoundException();
-        }
-
-        followRepository.deleteByFollowerAndFollowee(follower, followee);
     }
 
     public List<FollowResponse> getFollowers(final Long memberId) {

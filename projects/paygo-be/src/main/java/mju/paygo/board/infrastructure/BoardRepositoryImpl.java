@@ -26,11 +26,6 @@ public class BoardRepositoryImpl implements BoardRepository {
     }
 
     @Override
-    public List<Board> findAllExceptMemberId(final Long memberId) {
-        return boardJpaRepository.findAllByMemberIdNot(memberId);
-    }
-
-    @Override
     public Board save(final Board board) {
         return boardJpaRepository.save(board);
     }
@@ -46,11 +41,6 @@ public class BoardRepositoryImpl implements BoardRepository {
     }
 
     @Override
-    public void deleteById(final Long id) {
-        boardJpaRepository.deleteById(id);
-    }
-
-    @Override
     public List<Board> findByMemberNickname(final String nickname) {
         return boardJpaRepository.findByMemberNickname(nickname);
     }
@@ -63,5 +53,15 @@ public class BoardRepositoryImpl implements BoardRepository {
     @Override
     public Optional<Board> findByIdAndMemberId(final Long id, final Long memberId) {
         return boardJpaRepository.findByIdAndMemberId(id, memberId);
+    }
+
+    @Override
+    public Optional<Board> findByMealId(Long mealId) {
+        return boardJpaRepository.findByMealId(mealId);
+    }
+
+    @Override
+    public List<Board> findBoardsByFollowedUsers(List<Member> followedUsers) {
+        return boardJpaRepository.findByMemberIn(followedUsers);
     }
 }

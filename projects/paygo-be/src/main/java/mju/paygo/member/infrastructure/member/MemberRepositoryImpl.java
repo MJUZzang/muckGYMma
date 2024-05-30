@@ -44,4 +44,9 @@ public class MemberRepositoryImpl implements MemberRepository {
     public MemberSettingResponse viewSetting(final Long memberId) {
         return memberQueryRepository.viewSetting(memberId);
     }
+
+    @Override
+    public Optional<Member> findByNickname(String nickname) {
+        return memberJpaRepository.findByNickname(nickname);
+    }
 }

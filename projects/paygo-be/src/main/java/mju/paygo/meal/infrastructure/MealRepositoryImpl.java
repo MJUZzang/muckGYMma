@@ -33,4 +33,9 @@ public class MealRepositoryImpl implements MealRepository {
     public Optional<Meal> findByMemberAndId(final Long memberId, final Long mealId) {
         return mealJpaRepository.findByMemberAndId(memberId, mealId);
     }
+
+    @Override
+    public Optional<Meal> findByImageUrl(String imageUrl) {
+        return Optional.empty();
+    }
 }

@@ -17,4 +17,6 @@ public interface MemberRepository {
     boolean existsByNickname(final String nickname);
 
     MemberSettingResponse viewSetting(final Long memberId);
+
+    Optional<Member> findByNickname(String nickname);
 }

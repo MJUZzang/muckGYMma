@@ -13,4 +13,6 @@ public interface MealJpaRepository extends JpaRepository<Meal, Long> {
 
     @Query("SELECT m FROM Meal m WHERE m.memberId = :memberId AND m.id = :mealId")
     Optional<Meal> findByMemberAndId(Long memberId, Long mealId);
+
+    Optional<Meal> findByImageUrl(String imageUrl);
 }

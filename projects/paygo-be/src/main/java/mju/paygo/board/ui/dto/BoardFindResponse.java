@@ -1,12 +1,16 @@
 package mju.paygo.board.ui.dto;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 public record BoardFindResponse(
         Long id,
         String content,
-        String imageUrl,
+        List<String> imageUrls,
         Long memberId,
-        String memberNickname,
+        String nickname,
         Long likeCount,
         boolean isLikedByMember,
-        Long commentCount // 추가된 댓글 수
+        Long commentCount,
+        BigDecimal kcal
 ) {}
