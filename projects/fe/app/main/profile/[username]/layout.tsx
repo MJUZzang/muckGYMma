@@ -19,6 +19,7 @@ interface ProfileLayoutProps {
 
 const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
     console.log(params);
+
     return (
         <div className="mx-auto max-w-[835px] shadow-xl">
             <div className="flex items-center justify-between pr-5 pl-4 mb-4 pt-3">
@@ -29,7 +30,7 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                         className={`text-lg md:text-xl font-bold ${notoSansKr.className}
                         text-app-font-4`}
                     >
-                        jeheecheon
+                        {params.username}
                     </p>
                 </div>
 
