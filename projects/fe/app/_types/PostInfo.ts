@@ -1,13 +1,13 @@
-import { StaticImageData } from "next/image";
-import UserInfo from "@/_types/UserInfo";
-
-export default interface PostInfo {
+export interface PostInfo {
     id: number;
-    user: UserInfo;
     content: string;
-    image: StaticImageData;
-    hasLiked: boolean;
-    likes: number;
-    comments: number;
+    imageUrls: string[];
+    memberId: number;
+    nickname: string;
+    likeCount: number;
+    isLikedByMember: boolean;
+    commentCount: number;
+    kcal: number;
+    profileUrl: string;
     postedAt: Date;
 }

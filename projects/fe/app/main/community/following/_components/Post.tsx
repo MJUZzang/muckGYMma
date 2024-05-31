@@ -1,6 +1,6 @@
 "use client";
 
-import PostInfo from "@/_types/PostInfo";
+import { PostInfo } from "@/_types/PostInfo";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Like from "@/main/community/following/_images/Like";
@@ -26,7 +26,8 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ postInfo }) => {
     const [truncatedContent, setTruncatedContent] = useState<string>(
-        postInfo.content.slice(0, 80) + "..."
+        postInfo.content.slice(0, 80) +
+            `${postInfo.content.length > 80 && "..."}`
     );
     const [showFullContent, setShowFullContent] = useState<boolean>(
         postInfo.content.length <= 80
@@ -43,15 +44,17 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 {/* 유저 정보 */}
                 <div className="flex">
                     <Image
-                        src={postInfo.user.avatar}
-                        alt={postInfo.user.name}
+                        src={postInfo.profileUrl}
+                        width={325}
+                        height={325}
+                        alt={postInfo.nickname}
                         className="w-10 h-10 rounded-full pointer-events-none"
                     />
                     <div className="flex flex-col">
                         <p
                             className={`ml-2 text-app-font-2 ${notoSans.className}`}
                         >
-                            {postInfo.user.name}
+                            {postInfo.nickname}
                         </p>
                         <p className="ml-2 text-xs text-app-font-4">
                             {postInfo.postedAt.toDateString()}
@@ -63,9 +66,10 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             {/* 포스트 이미지 */}
             <div className={`overflow-clip aspect-square`}>
                 <Image
-                    src={postInfo.image}
+                    src={postInfo.imageUrls[0]}
                     alt="Post image"
                     width={325}
+                    height={325}
                     className="rounded-t-lg w-full"
                 />
             </div>
@@ -85,7 +89,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                     : "stroke-app-font-3"
                             } ${isLiked ? "fill-[#FF0000]" : "fill-none"}`}
                         />
-                        <p>{postInfo.likes}</p>
+                        <p>{postInfo.likeCount}</p>
                     </div>
 
                     <div
@@ -94,7 +98,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                         <CommentsSection>
                             <Comment className="fill-app-font-3" />
                         </CommentsSection>
-                        <p>{postInfo.comments}</p>
+                        <p>{postInfo.commentCount}</p>
                     </div>
 
                     <div
