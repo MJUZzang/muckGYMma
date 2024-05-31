@@ -1,9 +1,11 @@
 package mju.paygo.exerciseprofile.domain.vo;
 
+import lombok.Getter;
 import mju.paygo.exerciseprofile.exception.exceptions.GoalNotFoundException;
 
 import java.util.Arrays;
 
+@Getter
 public enum Goal {
 
     INCREASE_MUSCLE("근비대"),

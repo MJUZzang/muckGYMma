@@ -13,6 +13,7 @@ import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mju.paygo.member.exception.exceptions.member.BlankContainsException;
 
 @Getter
 @Builder
@@ -29,6 +30,9 @@ public class Member {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = true)
+    private String profileImageUrl;
+
     @Column(nullable = false)
     private String nickname;
 
@@ -38,6 +42,9 @@ public class Member {
 
     @Column(nullable = false)
     private Boolean initialized;
+
+    @Column(nullable = true)
+    private String profileContent;  // 프로필 소개글 내용
 
     public boolean isAdmin() {
         return this.memberRole.isAdministrator();
@@ -52,12 +59,27 @@ public class Member {
     }
 
     public static Member createWithOAuthLogin(final String email,
-                                              final String nickname) {
+                                              final String nickname,
+                                              final String url,
+                                              final String profileContent) {
         return Member.builder()
                 .email(email)
                 .nickname(nickname)
+                .profileImageUrl(url)
+                .profileContent(profileContent)
                 .memberRole(MemberRole.MEMBER)
                 .initialized(false)
                 .build();
+    }
+
+    public void updateNickname(final String nickname) {
+        if (nickname.contains(" ")) {
+            throw new BlankContainsException();
+        }
+        this.nickname = nickname;
+    }
+
+    public void updateProfileUrl(final String url) {
+        this.profileImageUrl = url;
     }
 }

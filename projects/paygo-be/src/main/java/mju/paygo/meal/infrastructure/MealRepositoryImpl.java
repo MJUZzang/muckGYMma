@@ -20,12 +20,22 @@ public class MealRepositoryImpl implements MealRepository {
     }
 
     @Override
-    public Optional<Meal> findById(final Long foodId) {
-        return mealJpaRepository.findById(foodId);
+    public Optional<Meal> findById(final Long mealId) {
+        return mealJpaRepository.findById(mealId);
     }
 
     @Override
     public List<Meal> findAllByMemberId(final Long memberId) {
         return mealJpaRepository.findAllByMemberId(memberId);
+    }
+
+    @Override
+    public Optional<Meal> findByMemberAndId(final Long memberId, final Long mealId) {
+        return mealJpaRepository.findByMemberAndId(memberId, mealId);
+    }
+
+    @Override
+    public Optional<Meal> findByImageUrl(String imageUrl) {
+        return Optional.empty();
     }
 }

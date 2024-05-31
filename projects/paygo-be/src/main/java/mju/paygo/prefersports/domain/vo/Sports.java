@@ -1,9 +1,12 @@
 package mju.paygo.prefersports.domain.vo;
 
+import lombok.Getter;
 import mju.paygo.prefersports.exception.exceptions.SportsNotFoundException;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
+@Getter
 public enum Sports {
 
     SOCCER("축구"),
@@ -43,6 +46,12 @@ public enum Sports {
                 .filter(sports -> sports.isSame(name))
                 .findAny()
                 .orElseThrow(SportsNotFoundException::new);
+    }
+
+    public static String collectAllNames() {
+        return Arrays.stream(values())
+                .map(Sports::getName)
+                .collect(Collectors.joining(", "));
     }
 
     public boolean isSame(final String name) {

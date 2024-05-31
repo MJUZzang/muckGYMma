@@ -1,9 +1,11 @@
 package mju.paygo.exerciseprofile.domain.vo;
 
+import lombok.Getter;
 import mju.paygo.exerciseprofile.exception.exceptions.FrequencyNotFoundException;
 
 import java.util.Arrays;
 
+@Getter
 public enum Frequency {
 
     ONE("주 1회"),
