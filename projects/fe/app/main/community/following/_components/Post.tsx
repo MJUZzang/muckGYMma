@@ -57,7 +57,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                             {postInfo.nickname}
                         </p>
                         <p className="ml-2 text-xs text-app-font-4">
-                            {postInfo.postedAt.toDateString()}
+                            {postInfo.postedAt.toLocaleString()}
                         </p>
                     </div>
                 </div>
