@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,14 +30,20 @@ public class FollowController {
     }
 
     @GetMapping("/followers")
-    public ResponseEntity<List<FollowResponse>> getFollowers(@AuthMember final Long memberId) {
-        List<FollowResponse> followers = followService.getFollowers(memberId);
+    public ResponseEntity<List<FollowResponse>> getFollowers(@RequestParam String nickname) {
+        List<FollowResponse> followers = followService.getFollowersByNickname(nickname);
         return ResponseEntity.ok(followers);
     }
 
     @GetMapping("/following")
-    public ResponseEntity<List<FollowResponse>> getFollowing(@AuthMember final Long memberId) {
-        List<FollowResponse> following = followService.getFollowing(memberId);
+    public ResponseEntity<List<FollowResponse>> getFollowing(@RequestParam String nickname) {
+        List<FollowResponse> following = followService.getFollowingByNickname(nickname);
         return ResponseEntity.ok(following);
+    }
+
+    @GetMapping("/is-following")
+    public ResponseEntity<Boolean> isFollowing(@AuthMember final Long memberId, @RequestParam String targetNickname) {
+        boolean isFollowing = followService.isFollowing(memberId, targetNickname);
+        return ResponseEntity.ok(isFollowing);
     }
 }
