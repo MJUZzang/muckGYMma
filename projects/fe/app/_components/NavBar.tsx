@@ -30,7 +30,7 @@ const NavBar = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [showUploadMenu, setShowUploadMenu] = useState(false);
 
-    const nickname = useAppSelector(selectNickname);
+    const nickname = useAppSelector(selectNickname) || "test";
 
     useEffect(() => {
         let temp = true;

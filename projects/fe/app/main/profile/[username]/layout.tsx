@@ -8,6 +8,7 @@ import { Noto_Sans_KR, Dosis } from "next/font/google";
 import UploadMeal from "@/_components/UploadMeal";
 import Camera from "@/_images/Camera";
 import Nav from "@/main/profile/_components/Nav";
+import Interaction from "@/main/profile/_components/Interaction";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });
@@ -18,7 +19,7 @@ interface ProfileLayoutProps {
 }
 
 const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
-    console.log(params);
+    const nickname = params.username;
 
     return (
         <div className="mx-auto max-w-[835px] shadow-xl">
@@ -144,6 +145,8 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                         </div>
                     </div>
                 </div>
+
+                <Interaction profileUsername={nickname} className="mt-2" />
 
                 <div className="mx-4 mt-5 text-app-font-2">
                     <p>jeheecheon</p>
