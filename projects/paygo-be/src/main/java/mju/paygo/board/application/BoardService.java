@@ -18,10 +18,7 @@ import mju.paygo.meal.domain.MealRepository;
 import mju.paygo.meal.domain.S3Uploader;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,7 +43,6 @@ public class BoardService {
     private final FollowRepository followRepository;
     private final MemberRepository memberRepository;
     private final S3Uploader s3Uploader;
-    private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
 
     public Board saveBoard(Member member, List<String> imageUrls, String content) {
         Board board = new Board(member, null, imageUrls, content, false);
@@ -54,7 +50,6 @@ public class BoardService {
     }
 
     public Board saveBoardWithMeal(Member member, Long mealId, String content, List<String> imageUrls) {
-        try {
             Meal meal = mealRepository.findById(mealId)
                     .orElseThrow(MealNotFoundException::new);
 
@@ -63,13 +58,7 @@ public class BoardService {
 
             eventPublisher.publishEvent(new BoardCreatedEvent(mealId));
             return board;
-        } catch (IncorrectResultSizeDataAccessException e) {
-            // 로그 추가
-            logger.error("Multiple results found for mealId: " + mealId, e);
-            throw e;
-        }
     }
-
 
     public void updateBoard(final Long boardId, final Long memberId, final String content, final List<MultipartFile> imageFiles) {
         Board board = boardRepository.findByIdAndMemberId(boardId, memberId)
@@ -90,12 +79,6 @@ public class BoardService {
         }
     }
 
-    public List<BoardFindResponse> findByMemberId(final Long memberId) {
-        return boardRepository.findByMemberId(memberId).stream()
-                .map(board -> toBoardFindResponse(board, memberId))
-                .collect(Collectors.toList());
-    }
-
     public void updateBoardVerifiedStatusByMealId(Long mealId, Boolean verified) {
         Board board = boardRepository.findByMealId(mealId)
                 .orElseThrow(BoardNotFoundException::new);
@@ -107,6 +90,12 @@ public class BoardService {
         Board board = boardRepository.findByIdAndMemberId(boardId, memberId)
                 .orElseThrow(BoardNotFoundException::new);
         boardRepository.delete(board);
+    }
+
+    public List<BoardFindResponse> findByMemberId(final Long memberId) {
+        return boardRepository.findByMemberId(memberId).stream()
+                .map(board -> toBoardFindResponse(board, memberId))
+                .collect(Collectors.toList());
     }
 
     public List<BoardFindResponse> findAllByNickname(final String nickname) {
@@ -141,7 +130,6 @@ public class BoardService {
     }
 
     public List<BoardFindResponse> findAllByFollowing(final String nickname) {
-        // MemberRepository를 통해 사용자를 nickname으로 찾습니다.
         Optional<Member> followerOpt = memberRepository.findByNickname(nickname);
 
         if (!followerOpt.isPresent()) {
@@ -159,6 +147,7 @@ public class BoardService {
                 .map(board -> toBoardFindResponse(board, board.getMember().getId()))
                 .collect(Collectors.toList());
     }
+
     public Board save(final Board board) {
         return boardRepository.save(board);
     }
@@ -175,6 +164,8 @@ public class BoardService {
                 board.getImageUrls(),
                 board.getMember().getId(),
                 board.getMember().getNickname(),
+                board.getCreatedAt(),
+                board.getMember().getProfileImageUrl(),
                 likesService.countLikes(board.getId()),
                 likesService.hasLiked(memberId, board.getId()),
                 commentRepository.countByBoard(board),

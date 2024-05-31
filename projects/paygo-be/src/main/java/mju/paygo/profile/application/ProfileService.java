@@ -27,24 +27,23 @@ public class ProfileService {
     private final FollowRepository followRepository;
     private final PlanRepository planRepository;
 
-    public ProfileResponse getProfile(final Long memberId) {
-        Member member = findMemberById(memberId);
-        String nickname = member.getNickname();
+    public ProfileResponse getProfile(String nickname) {
+        Member member = findMemberByNickname(nickname);
         String content = member.getProfileContent();
         long postCount = boardRepository.countByMember(member);
         long followingCount = followRepository.countByFollower(member);
         long followerCount = followRepository.countByFollowee(member);
 
-        List<Plan> clearedPlans = planRepository.findPlansByMemberIdAndStatus(memberId, true);
+        List<Plan> clearedPlans = planRepository.findPlansByMemberIdAndStatus(member.getId(), true);
         long totalClearDay = calculateTotalClearDay(clearedPlans);
         long longestClearDay = calculateLongestClearDay(clearedPlans);
         long nowClearDay = calculateNowClearDay(clearedPlans);
 
-        return new ProfileResponse(nickname, postCount, followingCount, followerCount, content, totalClearDay, longestClearDay, nowClearDay);
+        return new ProfileResponse(nickname, postCount, followingCount, followerCount, content, member.getProfileImageUrl(), totalClearDay, longestClearDay, nowClearDay);
     }
 
-    private Member findMemberById(final Long memberId) {
-        return memberRepository.findById(memberId)
+    private Member findMemberByNickname(String nickname) {
+        return memberRepository.findByNickname(nickname)
                 .orElseThrow(MemberNotFoundException::new);
     }
 
