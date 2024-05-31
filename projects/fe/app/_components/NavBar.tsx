@@ -121,13 +121,13 @@ const NavBar = () => {
                     </div>
 
                     <Link
-                        href="/main/community/following"
+                        href="/main/community/recent"
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <Forum
-                            isActive={pathname === "/main/community/following"}
+                            isActive={pathname.startsWith("/main/community")}
                             className={`${
-                                pathname === "/main/community/following"
+                                pathname.startsWith("/main/community")
                                     ? "fill-app-blue"
                                     : "fill-gray-600"
                             }`}
@@ -135,7 +135,7 @@ const NavBar = () => {
                         />
                         <p
                             className={`text-[0.6rem] ${
-                                pathname === "/main/community/following"
+                                pathname.startsWith("/main/community")
                                     ? "text-app-blue"
                                     : "text-gray-600"
                             } 

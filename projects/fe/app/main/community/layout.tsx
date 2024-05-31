@@ -12,16 +12,12 @@ const dosis = Dosis({ subsets: ["latin"] });
 
 const links = [
     {
+        name: "Recent",
+        href: "/main/community/recent",
+    },
+    {
         name: "Following",
         href: "/main/community/following",
-    },
-    {
-        name: "Hot",
-        href: "/main/community/hot",
-    },
-    {
-        name: "Club",
-        href: "/main/community/club",
     },
 ];
 

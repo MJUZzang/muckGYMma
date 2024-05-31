@@ -2,10 +2,11 @@ import React from "react";
 import Post from "@/main/community/following/_components/Post";
 import exampleImage from "@/_images/pooh.jpg";
 
-const Follwing = () => {
+async function FollwingPage() {
     const dummyPost = {
         comments: 0,
-        content: "Hello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello world",
+        content:
+            "Hello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello worldHello world",
         hasLiked: false,
         id: 1,
         image: exampleImage,
@@ -29,6 +30,6 @@ const Follwing = () => {
             </div>
         </>
     );
-};
+}
 
-export default Follwing;
+export default FollwingPage;
