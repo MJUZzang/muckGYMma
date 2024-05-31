@@ -6,6 +6,7 @@ import mju.paygo.board.domain.Board;
 import mju.paygo.board.domain.BoardRepository;
 import mju.paygo.board.exception.exceptions.BoardNotFoundException;
 import mju.paygo.board.exception.exceptions.InvalidMemberException;
+import mju.paygo.board.exception.exceptions.InvalidMemberIdException;
 import mju.paygo.board.exception.exceptions.MealNotFoundException;
 import mju.paygo.board.ui.dto.BoardFindResponse;
 import mju.paygo.comment.domain.CommentRepository;
@@ -14,13 +15,16 @@ import mju.paygo.follow.domain.FollowRepository;
 import mju.paygo.likes.application.LikesService;
 import mju.paygo.meal.domain.Meal;
 import mju.paygo.meal.domain.MealRepository;
+import mju.paygo.meal.domain.S3Uploader;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +42,7 @@ public class BoardService {
     private final ApplicationEventPublisher eventPublisher;
     private final FollowRepository followRepository;
     private final MemberRepository memberRepository;
+    private final S3Uploader s3Uploader;
 
     public Board saveBoard(Member member, List<String> imageUrls, String content) {
         Board board = new Board(member, null, imageUrls, content, false);
@@ -54,14 +59,14 @@ public class BoardService {
         eventPublisher.publishEvent(new BoardCreatedEvent(mealId));
         return board;
     }
-
+/*
     public List<BoardFindResponse> findByMemberId(final Long memberId) {
         return boardRepository.findByMemberId(memberId).stream()
                 .map(board -> toBoardFindResponse(board, memberId))
                 .collect(Collectors.toList());
     }
-
-    public void updateBoard(final Long boardId, final Long memberId, final String content) {
+*/
+    public void updateBoard(final Long boardId, final Long memberId, final String content, final List<MultipartFile> imageFiles) {
         Board board = boardRepository.findByIdAndMemberId(boardId, memberId)
                 .orElseThrow(BoardNotFoundException::new);
 
@@ -69,6 +74,16 @@ public class BoardService {
             throw new InvalidMemberException();
         }
         board.updateContent(content);
+
+        // 이미지 파일이 전달된 경우에만 업데이트 수행
+        if (imageFiles != null && !imageFiles.isEmpty()) {
+            List<String> imageUrls = new ArrayList<>();
+            for (MultipartFile file : imageFiles) {
+                String fileUrl = s3Uploader.outerUpload(file, memberId);
+                imageUrls.add(fileUrl);
+            }
+            board.setImageUrls(imageUrls);
+        }
     }
 
     public void updateBoardVerifiedStatusByMealId(Long mealId, Boolean verified) {
@@ -78,22 +93,36 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    public void deleteBoard(final Long boardId) {
-        Board board = boardRepository.findById(boardId)
+    public void deleteBoard(final Long memberId, final Long boardId) {
+        Board board = boardRepository.findByIdAndMemberId(boardId, memberId)
                 .orElseThrow(BoardNotFoundException::new);
         boardRepository.delete(board);
     }
 
-    public List<BoardFindResponse> findAllByNickname(final String nickname) {
-        return boardRepository.findByMemberNickname(nickname).stream()
-                .map(board -> toBoardFindResponse(board, board.getMember().getId()))
+    public List<BoardFindResponse> findAllByMemberId(final Long memberId) {
+        return boardRepository.findByMemberId(memberId).stream()
+                .map(board -> toBoardFindResponse(board, memberId))
                 .collect(Collectors.toList());
     }
 
-    public List<BoardFindResponse> findAllExceptNickname(final String nickname) {
+    public List<BoardFindResponse> findAllExceptMemberId(final Long memberId) {
         return boardRepository.findAll().stream()
-                .filter(board -> !board.getMember().getNickname().equals(nickname))
-                .map(board -> toBoardFindResponse(board, board.getMember().getId()))
+                .filter(board -> !board.getMember().getId().equals(memberId))
+                .map(board -> toBoardFindResponse(board, memberId))
+                .collect(Collectors.toList());
+    }
+
+    public List<BoardFindResponse> findAllByFollowing(final Long memberId) {
+        Member follower = memberRepository.findById(memberId)
+                .orElseThrow(InvalidMemberIdException::new);
+
+        List<Follow> followings = followRepository.findAllByFollower(follower);
+        List<Member> followingMembers = followings.stream()
+                .map(Follow::getFollowee)
+                .collect(Collectors.toList());
+
+        return boardRepository.findBoardsByFollowedUsers(followingMembers).stream()
+                .map(board -> toBoardFindResponse(board, memberId))
                 .collect(Collectors.toList());
     }
 
