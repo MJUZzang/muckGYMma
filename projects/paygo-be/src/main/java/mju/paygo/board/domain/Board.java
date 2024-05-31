@@ -81,4 +81,8 @@ public class Board extends BaseEntity {
     public void setVerified(Boolean verified) {
         this.verified = verified;
     }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
 }

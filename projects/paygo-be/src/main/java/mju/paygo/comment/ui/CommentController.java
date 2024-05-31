@@ -6,6 +6,7 @@ import mju.paygo.comment.application.CommentService;
 import mju.paygo.comment.domain.Comment;
 import mju.paygo.comment.domain.dto.CommentDeleteRequest;
 import mju.paygo.comment.domain.dto.CommentRequest;
+import mju.paygo.comment.domain.dto.GetCommentsByBoardRequest;
 import mju.paygo.comment.ui.dto.CommentResponse;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -54,10 +54,9 @@ public class CommentController {
         return ResponseEntity.ok().build();
     }
 
-    // 특정 게시글에 달린 모든 댓글 조회
-    @GetMapping("/board")
-    public ResponseEntity<List<CommentResponse>> getCommentsByBoard(@RequestParam final Long boardId) {
-        List<Comment> comments = commentService.getCommentsByBoard(boardId);
+    @GetMapping("/comments")
+    public ResponseEntity<List<CommentResponse>> getCommentsByBoard(@Valid GetCommentsByBoardRequest request) {
+        List<Comment> comments = commentService.getCommentsByBoard(request.boardId());
         List<CommentResponse> response = comments.stream()
                 .map(comment -> new CommentResponse(
                         comment.getId(),
@@ -72,4 +71,5 @@ public class CommentController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
+
 }
