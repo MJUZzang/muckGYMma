@@ -21,7 +21,7 @@ public class AuthService {
     public String login(final LoginRequest request, final OAuthProviderRequest provider) {
         String accessToken = oAuthRequester.getAccessToken(request.code(), provider);
         MemberInfoResponse memberInfoResponse = oAuthRequester.getMemberInfo(accessToken, provider);
-        Events.raise(new ValidatedLoginEvent(memberInfoResponse.email(), memberInfoResponse.name()));
+        Events.raise(new ValidatedLoginEvent(memberInfoResponse.email(), memberInfoResponse.imageUrl(), memberInfoResponse.name()));
 
         return tokenProvider.createTokenWith(memberInfoResponse.email());
     }

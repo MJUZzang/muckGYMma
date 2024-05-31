@@ -30,6 +30,9 @@ public class Member {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = true)
+    private String profileImageUrl;
+
     @Column(nullable = false)
     private String nickname;
 
@@ -57,10 +60,12 @@ public class Member {
 
     public static Member createWithOAuthLogin(final String email,
                                               final String nickname,
+                                              final String url,
                                               final String profileContent) {
         return Member.builder()
                 .email(email)
                 .nickname(nickname)
+                .profileImageUrl(url)
                 .profileContent(profileContent)
                 .memberRole(MemberRole.MEMBER)
                 .initialized(false)
@@ -72,5 +77,9 @@ public class Member {
             throw new BlankContainsException();
         }
         this.nickname = nickname;
+    }
+
+    public void updateProfileUrl(final String url) {
+        this.profileImageUrl = url;
     }
 }

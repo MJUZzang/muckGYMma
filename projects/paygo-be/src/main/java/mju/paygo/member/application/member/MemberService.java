@@ -34,9 +34,9 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
 
-    public void create(final String email, final String nickname) {
+    public void create(final String email, final String imageUrl, final String nickname) {
         if (!memberRepository.existsByEmail(email)) {
-            memberRepository.save(Member.createWithOAuthLogin(email, nickname, null));
+            memberRepository.save(Member.createWithOAuthLogin(email, nickname, imageUrl, null));
         }
     }
 

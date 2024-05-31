@@ -37,8 +37,9 @@ public class JackonJsonMapper implements JsonMapper {
         try {
             JsonNode jsonNode = objectMapper.readTree(memberInfoResponse);
             String email = getValue(memberInfoKeyWordRequest.emailKeyWord(), jsonNode);
+            String imageUrl = getValue(memberInfoKeyWordRequest.imageKeyWord(), jsonNode);
             String nickname = getValue(memberInfoKeyWordRequest.nicknameKeyWord(), jsonNode);
-            return new MemberInfoResponse(email, nickname);
+            return new MemberInfoResponse(email, imageUrl, nickname);
 
         } catch (JsonProcessingException exception) {
             throw new JsonDataInvalidException();
