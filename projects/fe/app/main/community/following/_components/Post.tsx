@@ -27,7 +27,7 @@ interface PostProps {
 const Post: React.FC<PostProps> = ({ postInfo }) => {
     const [truncatedContent, setTruncatedContent] = useState<string>(
         postInfo.content.slice(0, 80) +
-            `${postInfo.content.length > 80 && "..."}`
+            `${postInfo.content.length > 80 ? "..." : ""}`
     );
     const [showFullContent, setShowFullContent] = useState<boolean>(
         postInfo.content.length <= 80
