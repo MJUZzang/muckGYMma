@@ -24,6 +24,7 @@ async function fetchRecentPosts() {
             if (res.ok) {
                 return res.json();
             } else {
+                console.warn(res.status, res.statusText);
                 throw new Error("Server responded with an error");
             }
         })
