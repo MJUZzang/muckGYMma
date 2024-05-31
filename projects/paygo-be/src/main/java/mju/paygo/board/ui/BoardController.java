@@ -7,7 +7,6 @@ import mju.paygo.board.domain.Board;
 import mju.paygo.board.domain.dto.BoardCreateRequest;
 import mju.paygo.board.domain.dto.BoardCreateWithMealRequest;
 import mju.paygo.board.domain.dto.BoardDeleteRequest;
-import mju.paygo.board.domain.dto.BoardFindRequest;
 import mju.paygo.board.domain.dto.BoardUpdateRequest;
 import mju.paygo.board.exception.exceptions.InvalidMemberIdException;
 import mju.paygo.board.exception.exceptions.MaxFileUploadLimitExceededException;
@@ -25,6 +24,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -97,8 +97,8 @@ public class BoardController {
     }
 
     @GetMapping("/my-posts")
-    public ResponseEntity<List<BoardFindResponse>> getMyPosts(@Valid @RequestBody final BoardFindRequest request) {
-        List<BoardFindResponse> boards = boardService.findAllByNickname(request.nickname());
+    public ResponseEntity<List<BoardFindResponse>> getMyPosts(@RequestParam String nickname) {
+        List<BoardFindResponse> boards = boardService.findAllByNickname(nickname);
 
         return ResponseEntity.ok(boards);
     }

@@ -1,6 +1,5 @@
 package mju.paygo.board.application;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.board.application.event.BoardCreatedEvent;
 import mju.paygo.board.domain.Board;
@@ -19,8 +18,12 @@ import mju.paygo.meal.domain.MealRepository;
 import mju.paygo.meal.domain.S3Uploader;
 import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
@@ -43,6 +46,7 @@ public class BoardService {
     private final FollowRepository followRepository;
     private final MemberRepository memberRepository;
     private final S3Uploader s3Uploader;
+    private static final Logger logger = LoggerFactory.getLogger(BoardService.class);
 
     public Board saveBoard(Member member, List<String> imageUrls, String content) {
         Board board = new Board(member, null, imageUrls, content, false);
@@ -50,21 +54,22 @@ public class BoardService {
     }
 
     public Board saveBoardWithMeal(Member member, Long mealId, String content, List<String> imageUrls) {
-        Meal meal = mealRepository.findById(mealId)
-                .orElseThrow(MealNotFoundException::new);
+        try {
+            Meal meal = mealRepository.findById(mealId)
+                    .orElseThrow(MealNotFoundException::new);
 
-        Board board = new Board(member, meal, imageUrls, content, false);
-        boardRepository.save(board);
+            Board board = new Board(member, meal, imageUrls, content, false);
+            boardRepository.save(board);
 
-        eventPublisher.publishEvent(new BoardCreatedEvent(mealId));
-        return board;
+            eventPublisher.publishEvent(new BoardCreatedEvent(mealId));
+            return board;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            // 로그 추가
+            logger.error("Multiple results found for mealId: " + mealId, e);
+            throw e;
+        }
     }
 
-    public List<BoardFindResponse> findByMemberId(final Long memberId) {
-        return boardRepository.findByMemberId(memberId).stream()
-                .map(board -> toBoardFindResponse(board, memberId))
-                .collect(Collectors.toList());
-    }
 
     public void updateBoard(final Long boardId, final Long memberId, final String content, final List<MultipartFile> imageFiles) {
         Board board = boardRepository.findByIdAndMemberId(boardId, memberId)
@@ -75,7 +80,6 @@ public class BoardService {
         }
         board.updateContent(content);
 
-        // 이미지 파일이 전달된 경우에만 업데이트 수행
         if (imageFiles != null && !imageFiles.isEmpty()) {
             List<String> imageUrls = new ArrayList<>();
             for (MultipartFile file : imageFiles) {
@@ -84,6 +88,12 @@ public class BoardService {
             }
             board.setImageUrls(imageUrls);
         }
+    }
+
+    public List<BoardFindResponse> findByMemberId(final Long memberId) {
+        return boardRepository.findByMemberId(memberId).stream()
+                .map(board -> toBoardFindResponse(board, memberId))
+                .collect(Collectors.toList());
     }
 
     public void updateBoardVerifiedStatusByMealId(Long mealId, Boolean verified) {
@@ -149,7 +159,6 @@ public class BoardService {
                 .map(board -> toBoardFindResponse(board, board.getMember().getId()))
                 .collect(Collectors.toList());
     }
-
     public Board save(final Board board) {
         return boardRepository.save(board);
     }
