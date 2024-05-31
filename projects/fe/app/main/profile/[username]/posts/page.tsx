@@ -9,20 +9,21 @@ import { backendUrl } from "@/_utils/urls";
 async function fetchUserPosts(nickname: string) {
     const cookieStore = cookies();
 
-    return await fetch(`${backendUrl}/api/board/my-posts`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-            Cookie: cookieStore
-                .getAll()
-                .map((cookie) => {
-                    return `${cookie.name}=${cookie.value}`;
-                })
-                .join("; "),
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ nickname }),
-    })
+    return await fetch(
+        `${backendUrl}/api/board/my-posts?nickname=${nickname}`,
+        {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                Cookie: cookieStore
+                    .getAll()
+                    .map((cookie) => {
+                        return `${cookie.name}=${cookie.value}`;
+                    })
+                    .join("; "),
+            },
+        }
+    )
         .then((res) => {
             if (res.ok) {
                 return res.json();
