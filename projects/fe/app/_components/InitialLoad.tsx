@@ -28,9 +28,11 @@ function InitialLoad(props: InitialLoadProps) {
                 })
                 .then((data: userInfoState) => {
                     console.log(data);
+                    setIsLoading(false);
                 })
                 .catch((err) => {
                     console.error(err);
+                    setIsLoading(false);
                 });
         } else {
             setIsLoading(false);
