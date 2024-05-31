@@ -1,28 +1,24 @@
-"use client";
-
-import React, { use, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 import Hash from "@/main/profile/_components/Hash";
-import Grid from "@/main/profile/_components/Grid";
-import ForkKnife from "@/main/profile/_components/ForkKnife";
-import Analytics from "@/main/profile/_components/Analytics";
-import { usePathname } from "next/navigation";
+
 import Link from "next/link";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import UploadMeal from "@/_components/UploadMeal";
 import Camera from "@/_images/Camera";
+import Nav from "../_components/Nav";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });
 
-const Page = ({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) => {
-    const pathname = usePathname();
+interface ProfileLayoutProps {
+    params: { username: string };
+    children?: React.ReactNode;
+}
 
+const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
+    console.log(params);
     return (
         <div className="mx-auto max-w-[835px] shadow-xl">
             <div className="flex items-center justify-between pr-5 pl-4 mb-4 pt-3">
@@ -154,59 +150,7 @@ const Page = ({
                     <p>🔗 www.jeheecheon.com</p>
                 </div>
 
-                <div className="flex justify-between items-center mt-3">
-                    <Link
-                        className={`w-full transition-all duration-1000 border-b-2 ${
-                            pathname.includes("/profile/posts")
-                                ? "border-b-app-font-3"
-                                : "border-b-app-bg"
-                        }`}
-                        href="/main/profile/posts"
-                    >
-                        <Grid
-                            className={`w-full transition-all duration-1000 ${
-                                pathname.includes("/profile/posts")
-                                    ? "fill-app-font-3"
-                                    : "fill-app-font-5"
-                            }`}
-                            size={33}
-                        />
-                    </Link>
-                    <Link
-                        className={`w-full transition duration-1000 border-b-2 ${
-                            pathname.includes("/profile/meals")
-                                ? "border-b-app-font-3"
-                                : "border-b-white/0"
-                        }`}
-                        href="/main/profile/meals"
-                    >
-                        <ForkKnife
-                            className={`w-full transition-all duration-1000 relative top-1 ${
-                                pathname.includes("/profile/meals")
-                                    ? "fill-app-font-3"
-                                    : "fill-app-font-5"
-                            }`}
-                            size={33}
-                        />
-                    </Link>
-                    <Link
-                        className={`w-full transition duration-1000 border-b-2 ${
-                            pathname.includes("/profile/completed")
-                                ? "border-b-app-font-3"
-                                : "border-b-white/0"
-                        }`}
-                        href={`/main/profile/completed`}
-                    >
-                        <Analytics
-                            className={`w-full transition-all duration-1000 ${
-                                pathname.includes("/profile/completed")
-                                    ? "fill-app-font-3"
-                                    : "fill-app-font-5"
-                            }`}
-                            size={33}
-                        />
-                    </Link>
-                </div>
+                <Nav />
 
                 {children}
             </div>
@@ -214,4 +158,4 @@ const Page = ({
     );
 };
 
-export default Page;
+export default ProfileLayout;

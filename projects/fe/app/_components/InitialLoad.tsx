@@ -1,11 +1,10 @@
 "use client";
 
 import { backendUrl } from "@/_utils/urls";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
-
-const excepts = ["/sign-in", "/initial-setup"];
+import { userInfoState } from "../../lib/slices/userInfoSlice";
+import { useAppDispatch } from "../../lib/hooks";
 
 interface InitialLoadProps {
     children: React.ReactNode;
@@ -13,25 +12,24 @@ interface InitialLoadProps {
 
 function InitialLoad(props: InitialLoadProps) {
     const router = useRouter();
-    const pathname = usePathname();
+    const dispatch = useAppDispatch();
 
     const [isLoading, setIsLoading] = useState(true);
 
     function checkIsLogedIn() {
         if (process.env.NODE_ENV !== "development") {
-            fetch(`${backendUrl}/api/login/check`, {
+            fetch(`${backendUrl}/api/member/setup`, {
                 method: "GET",
                 credentials: "include",
-                cache: "no-store",
             })
                 .then((res) => {
-                    setIsLoading(false);
-                    if (!res.ok) {
-                        router.push("/sign-in");
-                    }
+                    if (res.ok) return res.json();
+                    throw new Error("Failed to fetch user info");
+                })
+                .then((data: userInfoState) => {
+                    console.log(data);
                 })
                 .catch((err) => {
-                    setIsLoading(false);
                     console.error(err);
                 });
         } else {
@@ -40,19 +38,7 @@ function InitialLoad(props: InitialLoadProps) {
     }
 
     useEffect(() => {
-        let shouldBeExcepted = false;
-        for (const except of excepts) {
-            if (pathname.startsWith(except)) {
-                shouldBeExcepted = true;
-                break;
-            }
-        }
-
-        if (shouldBeExcepted) {
-            setIsLoading(false);
-        } else {
-            checkIsLogedIn();
-        }
+        checkIsLogedIn();
     }, []);
 
     return (
