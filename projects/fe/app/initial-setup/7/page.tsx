@@ -9,7 +9,7 @@ import {
     setBirthDate,
     setHeight,
     setWeight,
-} from "../../../lib/slices/userInfoSlice";
+} from "@/../lib/slices/userInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 import { Noto_Sans_KR } from "next/font/google";

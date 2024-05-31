@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { backendUrl } from "./urls";
 import { cookies } from "next/headers";
-import { userInfoState } from "../../lib/slices/userInfoSlice";
+import { userInfoState } from "@/../lib/slices/userInfoSlice";
 
 export async function checkIfSignedIn(request: NextRequest) {
     // jwt토큰이 있으면 유효성 검사

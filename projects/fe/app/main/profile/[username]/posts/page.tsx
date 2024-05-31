@@ -8,8 +8,8 @@ interface PostsPageProps {
 }
 
 async function PostsPage({ params }: Readonly<PostsPageProps>) {
-    console.log(params);
-    
+    const nickname = params.username;
+        
     const dummyPost = {
         comments: 0,
         content:

@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import PlayfulCat from "@/_images/PlayfulCat";
 import { useRouter } from "next/navigation";
-import { selectUserInfo } from "../../../lib/slices/userInfoSlice";
-import { useAppSelector } from "../../../lib/hooks";
+import { selectUserInfo } from "@/../lib/slices/userInfoSlice";
+import { useAppSelector } from "@/../lib/hooks";
 import { backendUrl } from "@/_utils/urls";
 
 import { Noto_Sans_KR } from "next/font/google";

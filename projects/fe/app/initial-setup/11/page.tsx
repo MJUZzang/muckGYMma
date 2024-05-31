@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ForwardButton from "@/initial-setup/_components/ForwardButton";
 import { useAppDispatch, useAppSelector } from "@/../lib/hooks";
-import { selectUserInfo, setNickname } from "../../../lib/slices/userInfoSlice";
+import { selectUserInfo, setNickname } from "@/../lib/slices/userInfoSlice";
 import ConfirmModal from "@/initial-setup/_components/ConfirmModal";
 
 import { Noto_Sans_KR } from "next/font/google";

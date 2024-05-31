@@ -3,8 +3,8 @@
 import { backendUrl } from "@/_utils/urls";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { setUserInfo, userInfoState } from "../../lib/slices/userInfoSlice";
-import { useAppDispatch } from "../../lib/hooks";
+import { setUserInfo, userInfoState } from "@/../lib/slices/userInfoSlice";
+import { useAppDispatch } from "@/../lib/hooks";
 
 interface InitialLoadProps {
     children: React.ReactNode;

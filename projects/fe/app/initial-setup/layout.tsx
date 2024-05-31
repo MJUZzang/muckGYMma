@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
-import { userInfoState } from "../../lib/slices/userInfoSlice";
+import { userInfoState } from "@/../lib/slices/userInfoSlice";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import UploadMeal from "@/_components/UploadMeal";
 import Camera from "@/_images/Camera";
-import Nav from "../_components/Nav";
+import Nav from "@/main/profile/_components/Nav";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });

@@ -10,8 +10,8 @@ import { usePathname } from "next/navigation";
 import { Noto_Sans_KR } from "next/font/google";
 import Camera from "@/_images/Camera";
 import UploadMenu from "@/_components/UploadMenu";
-import { useAppSelector } from "../../lib/hooks";
-import { selectNickname } from "../../lib/slices/userInfoSlice";
+import { useAppSelector } from "@/../lib/hooks";
+import { selectNickname } from "@/../lib/slices/userInfoSlice";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
