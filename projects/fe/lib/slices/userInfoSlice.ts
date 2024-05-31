@@ -104,6 +104,7 @@ export const {
     setSports,
     setWeight,
     setNickname,
+    setUserInfo,
 } = userInfoSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.userInfo;

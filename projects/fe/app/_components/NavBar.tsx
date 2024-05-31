@@ -24,6 +24,8 @@ const excepts = [
 ];
 
 const NavBar = () => {
+    console.log("NavBar");
+    
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
     const [showUploadMenu, setShowUploadMenu] = useState(false);
