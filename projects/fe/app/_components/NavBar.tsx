@@ -10,6 +10,8 @@ import { usePathname } from "next/navigation";
 import { Noto_Sans_KR } from "next/font/google";
 import Camera from "@/_images/Camera";
 import UploadMenu from "@/_components/UploadMenu";
+import { useAppSelector } from "../../lib/hooks";
+import { selectNickname } from "../../lib/slices/userInfoSlice";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -24,11 +26,11 @@ const excepts = [
 ];
 
 const NavBar = () => {
-    console.log("NavBar");
-    
     const pathname = usePathname();
     const [isVisible, setIsVisible] = useState(false);
     const [showUploadMenu, setShowUploadMenu] = useState(false);
+
+    const nickname = useAppSelector(selectNickname);
 
     useEffect(() => {
         let temp = true;
@@ -144,20 +146,20 @@ const NavBar = () => {
                     </Link>
 
                     <Link
-                        href="/main/profile/posts"
+                        href={`/main/profile/${nickname}/posts`}
                         className="flex flex-col items-center justify-between basis-1/5"
                     >
                         <AccountCircle
-                            isActive={pathname.includes("/main/profile/")}
+                            isActive={pathname.startsWith("/main/profile/")}
                             className={`${
-                                pathname.includes("/main/profile/")
+                                pathname.startsWith("/main/profile/")
                                     ? "stroke-app-blue fill-app-blue"
                                     : "stroke-gray-600/75 fill-none"
                             }`}
                         />
                         <p
                             className={`text-[0.6rem] ${
-                                pathname.includes("/main/profile")
+                                pathname.startsWith("/main/profile")
                                     ? "text-app-blue"
                                     : "text-gray-600"
                             }

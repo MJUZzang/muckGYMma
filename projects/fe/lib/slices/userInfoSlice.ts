@@ -108,5 +108,6 @@ export const {
 } = userInfoSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.userInfo;
+export const selectNickname = (state: RootState) => state.userInfo.nickname;
 
 export default userInfoSlice.reducer;
