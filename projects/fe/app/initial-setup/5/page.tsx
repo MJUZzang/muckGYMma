@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/../lib/hooks";
-import { setGoal } from "../../../lib/slices/userInfoSlice";
+import { setGoal } from "@/../lib/slices/userInfoSlice";
 
 import { Noto_Sans_KR } from "next/font/google";
 
