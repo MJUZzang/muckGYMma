@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import Link from "next/link";
 import CheckMark from "@/_images/CheckMark";
-import { fetchMeals, sortMealsByDate } from "../_utils/meal";
+import { fetchMeals, sortMealsByDate } from "../../_utils/meal";
 import NoData from "@/main/profile/_components/NoData";
 
 const notoSansKr = Noto_Sans_KR({

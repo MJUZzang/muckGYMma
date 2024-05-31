@@ -38,10 +38,19 @@ const Page = ({
                 </div>
 
                 <div className="flex gap-5 items-center">
-                    <UploadMeal className="fill-app-font-4 cursor-pointer lg:hidden" buttonContent={<Camera size={23} />} />
-                    <UploadMeal className="fill-app-font-4 cursor-pointer hidden lg:block" buttonContent={<Camera size={25} />} />
+                    <UploadMeal
+                        className="fill-app-font-4 cursor-pointer lg:hidden"
+                        buttonContent={<Camera size={23} />}
+                    />
+                    <UploadMeal
+                        className="fill-app-font-4 cursor-pointer hidden lg:block"
+                        buttonContent={<Camera size={25} />}
+                    />
 
-                    <Link href="/settings" className="w-[27px] lg:w-[30px] h-fit gap-[4px] flex flex-col cursor-pointer">
+                    <Link
+                        href="/settings"
+                        className="w-[27px] lg:w-[30px] h-fit gap-[4px] flex flex-col cursor-pointer"
+                    >
                         <div className="w-full h-[3px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
                         <div className="w-full h-[3px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
                         <div className="w-full h-[3px] lg:h-[2.7px] bg-app-font-4 rounded-full" />
@@ -53,7 +62,6 @@ const Page = ({
             <div className="w-full">
                 <div className="flex gap-5 mx-4 mt-3 items-center">
                     <div className="w-fit">
-
                         <div
                             className="z-[-1] animate-spin-360-slow absolute rounded-full 
                             w-[90px] h-[90px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px]

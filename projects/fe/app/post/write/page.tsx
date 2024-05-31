@@ -6,16 +6,20 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import EditImage from "@/_components/EditImage";
 import { getOrientation } from "get-orientation/browser";
-import { ORIENTATION_TO_ANGLE, getRotatedImage, readFile } from "@/_utils/canvas";
+import {
+    ORIENTATION_TO_ANGLE,
+    getRotatedImage,
+    readFile,
+    urlToBlobFile,
+} from "@/_utils/canvas";
 import Button from "@/_components/Button";
 import { Noto_Sans_KR } from "next/font/google";
+import { backendUrl } from "@/_utils/urls";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
     weight: "400",
 });
-
-
 
 function WritePage() {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -121,7 +125,57 @@ function WritePage() {
             </div>
 
             <div className="bg-app-bg w-full pt-3 pb-6 px-3 mt-2 border-t-[1px] border-app-bg-3">
-                <Button className="bg-app-blue-1">포스트 작성완료</Button>
+                <Button
+                    className="bg-app-blue-1"
+                    onClick={async () => {
+                        // URL로부터 Blob 데이터를 가져와서 File 객체로 변환하고 FormData에 추가하는 예제
+                        const formData = new FormData();
+
+                        for (let i = 0; i < activeIndex; i++) {
+                            const file: File | null = await urlToBlobFile(
+                                imgSets[0][0]!,
+                                "image.jpg"
+                            )
+                                .then((file) => {
+                                    return file;
+                                })
+                                .catch((error) => {
+                                    console.error(
+                                        "Error fetching blob from URL:",
+                                        error
+                                    );
+                                    return null;
+                                });
+
+                            if (!file) {
+                                console.error("No file found.");
+                                return;
+                            }
+
+                            formData.append("files", file);
+                        }
+
+                        formData.append("content", text);
+
+                        fetch(`${backendUrl}/api/board/create`, {
+                            method: "POST",
+                            credentials: "include",
+                            body: formData,
+                        })
+                            .then((res) => {
+                                if (res.ok) {
+                                    console.log("Post created successfully.");
+                                } else {
+                                    throw new Error(
+                                        "Error occured while uploading image."
+                                    );
+                                }
+                            })
+                            .catch((err) => console.error(err));
+                    }}
+                >
+                    포스트 작성완료
+                </Button>
             </div>
 
             <input
