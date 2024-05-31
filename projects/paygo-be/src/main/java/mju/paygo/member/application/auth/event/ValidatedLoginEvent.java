@@ -9,5 +9,6 @@ import mju.paygo.global.event.Event;
 public class ValidatedLoginEvent extends Event {
 
     private final String email;
+    private final String imageUrl;
     private final String nickname;
 }
