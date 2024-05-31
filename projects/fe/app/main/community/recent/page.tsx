@@ -4,6 +4,7 @@ import exampleImage from "@/_images/pooh.jpg";
 import { backendUrl } from "@/_utils/urls";
 import { cookies } from "next/headers";
 import { PostInfo } from "@/_types/PostInfo";
+import { convertPostsPostedAtToDate } from "@/_utils/post";
 
 async function fetchRecentPosts() {
     const cookieStore = cookies();
@@ -30,8 +31,7 @@ async function fetchRecentPosts() {
         })
         .then((data: PostInfo[]) => {
             if (data) {
-                console.log(data);
-                return data;
+                return convertPostsPostedAtToDate(data);
             } else {
                 throw new Error("Failed to fetch recent posts");
             }
