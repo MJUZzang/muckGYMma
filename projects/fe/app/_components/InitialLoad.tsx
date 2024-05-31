@@ -17,14 +17,18 @@ function InitialLoad(props: InitialLoadProps) {
     const [isLoading, setIsLoading] = useState(true);
 
     function checkIsLogedIn() {
-        if (process.env.NODE_ENV !== "development") {
+        if (true) {
+            // if (process.env.NODE_ENV !== "development") {
             fetch(`${backendUrl}/api/member/setup`, {
                 method: "GET",
                 credentials: "include",
             })
                 .then((res) => {
-                    if (res.ok) return res.json();
-                    throw new Error("Failed to fetch user info");
+                    if (res.ok) {
+                        return res.json();
+                    } else {
+                        throw new Error("Failed to fetch user info");
+                    }
                 })
                 .then((data: userInfoState) => {
                     console.log(data);
