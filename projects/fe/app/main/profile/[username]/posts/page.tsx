@@ -4,11 +4,12 @@ import Post from "@/main/community/following/_components/Post";
 import NoData from "@/main/profile/_components/NoData";
 import { cookies } from "next/headers";
 import PostInfo from "@/_types/PostInfo";
+import { backendUrl } from "@/_utils/urls";
 
 async function fetchUserPosts(nickname: string) {
     const cookieStore = cookies();
 
-    return await fetch(`/api/board/my-posts`, {
+    return await fetch(`${backendUrl}/api/board/my-posts`, {
         method: "GET",
         credentials: "include",
         headers: {
