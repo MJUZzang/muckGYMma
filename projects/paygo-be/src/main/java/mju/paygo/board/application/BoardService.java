@@ -59,13 +59,7 @@ public class BoardService {
         eventPublisher.publishEvent(new BoardCreatedEvent(mealId));
         return board;
     }
-/*
-    public List<BoardFindResponse> findByMemberId(final Long memberId) {
-        return boardRepository.findByMemberId(memberId).stream()
-                .map(board -> toBoardFindResponse(board, memberId))
-                .collect(Collectors.toList());
-    }
-*/
+
     public void updateBoard(final Long boardId, final Long memberId, final String content, final List<MultipartFile> imageFiles) {
         Board board = boardRepository.findByIdAndMemberId(boardId, memberId)
                 .orElseThrow(BoardNotFoundException::new);
@@ -75,7 +69,6 @@ public class BoardService {
         }
         board.updateContent(content);
 
-        // 이미지 파일이 전달된 경우에만 업데이트 수행
         if (imageFiles != null && !imageFiles.isEmpty()) {
             List<String> imageUrls = new ArrayList<>();
             for (MultipartFile file : imageFiles) {
@@ -84,6 +77,12 @@ public class BoardService {
             }
             board.setImageUrls(imageUrls);
         }
+    }
+
+    public List<BoardFindResponse> findByMemberId(final Long memberId) {
+        return boardRepository.findByMemberId(memberId).stream()
+                .map(board -> toBoardFindResponse(board, memberId))
+                .collect(Collectors.toList());
     }
 
     public void updateBoardVerifiedStatusByMealId(Long mealId, Boolean verified) {
@@ -99,9 +98,9 @@ public class BoardService {
         boardRepository.delete(board);
     }
 
-    public List<BoardFindResponse> findAllByMemberId(final Long memberId) {
-        return boardRepository.findByMemberId(memberId).stream()
-                .map(board -> toBoardFindResponse(board, memberId))
+    public List<BoardFindResponse> findAllByNickname(final String nickname) {
+        return boardRepository.findByMemberNickname(nickname).stream()
+                .map(board -> toBoardFindResponse(board, board.getMember().getId()))
                 .collect(Collectors.toList());
     }
 

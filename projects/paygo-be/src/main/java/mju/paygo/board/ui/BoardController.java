@@ -7,6 +7,7 @@ import mju.paygo.board.domain.Board;
 import mju.paygo.board.domain.dto.BoardCreateRequest;
 import mju.paygo.board.domain.dto.BoardCreateWithMealRequest;
 import mju.paygo.board.domain.dto.BoardDeleteRequest;
+import mju.paygo.board.domain.dto.BoardFindRequest;
 import mju.paygo.board.domain.dto.BoardUpdateRequest;
 import mju.paygo.board.exception.exceptions.InvalidMemberIdException;
 import mju.paygo.board.exception.exceptions.MaxFileUploadLimitExceededException;
@@ -83,9 +84,8 @@ public class BoardController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<Void> updateBoard(@AuthMember final Long memberId, @Valid @RequestBody final BoardUpdateRequest updateRequest) {
-        boardService.updateBoard(updateRequest.boardId(), memberId, updateRequest.content(), updateRequest.Files());
-
+    public ResponseEntity<Void> updateBoard(@AuthMember final Long memberId, @ModelAttribute @Valid final BoardUpdateRequest updateRequest) {
+        boardService.updateBoard(updateRequest.boardId(), memberId, updateRequest.content(), updateRequest.files());
         return ResponseEntity.ok().build();
     }
 
@@ -97,8 +97,9 @@ public class BoardController {
     }
 
     @GetMapping("/my-posts")
-    public ResponseEntity<List<BoardFindResponse>> getMyPosts(@AuthMember final Long memberId) {
-        List<BoardFindResponse> boards = boardService.findAllByMemberId(memberId);
+    public ResponseEntity<List<BoardFindResponse>> getMyPosts(@Valid @RequestBody final BoardFindRequest request) {
+        List<BoardFindResponse> boards = boardService.findAllByNickname(request.nickname());
+
         return ResponseEntity.ok(boards);
     }
 

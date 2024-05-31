@@ -13,5 +13,5 @@ public record BoardUpdateRequest(
         @NotNull(message = "게시글 ID를 제공해야 합니다.")
         Long boardId,
 
-        List<MultipartFile> Files
+        List<MultipartFile> files
 ) {}
