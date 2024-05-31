@@ -81,6 +81,14 @@ export const userInfoSlice = createSlice({
         setNickname: (state, action: PayloadAction<string>) => {
             state.nickname = action.payload;
         },
+
+        setUserInfo: (state, action: PayloadAction<userInfoState>) => {
+            state.exerciseSetting = action.payload.exerciseSetting;
+            state.exercises = action.payload.exercises;
+            state.nickname = action.payload.nickname;
+            state.physicalSetting = action.payload.physicalSetting;
+            state.sports = action.payload.sports;
+        },
     },
 });
 
@@ -95,7 +103,7 @@ export const {
     setLevel,
     setSports,
     setWeight,
-    setNickname
+    setNickname,
 } = userInfoSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.userInfo;
