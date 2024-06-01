@@ -103,6 +103,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                     .then((data: { isLiked: boolean }) => {
                                         if (data) {
                                             const diff = data.isLiked ? 1 : -1;
+                                            console.log(diff + post.likeCount)
                                             setPost((prev) => {
                                                 return {
                                                     ...prev,
