@@ -7,7 +7,6 @@ import mju.paygo.board.domain.Board;
 import mju.paygo.board.domain.dto.BoardCreateRequest;
 import mju.paygo.board.domain.dto.BoardCreateWithMealRequest;
 import mju.paygo.board.domain.dto.BoardDeleteRequest;
-import mju.paygo.board.domain.dto.BoardUpdateRequest;
 import mju.paygo.board.exception.exceptions.InvalidMemberIdException;
 import mju.paygo.board.exception.exceptions.MaxFileUploadLimitExceededException;
 import mju.paygo.board.ui.dto.BoardFindResponse;
@@ -20,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,11 +81,14 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    // 수정 기능 삭제
+    /*
     @PatchMapping("/update")
     public ResponseEntity<Void> updateBoard(@AuthMember final Long memberId, @ModelAttribute @Valid final BoardUpdateRequest updateRequest) {
         boardService.updateBoard(updateRequest.boardId(), memberId, updateRequest.content(), updateRequest.files());
         return ResponseEntity.ok().build();
     }
+    */
 
     @DeleteMapping("/delete")
     public ResponseEntity<Void> deleteBoard(@AuthMember final Long memberId, @Valid @RequestBody final BoardDeleteRequest request) {

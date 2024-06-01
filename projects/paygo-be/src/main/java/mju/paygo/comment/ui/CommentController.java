@@ -4,9 +4,9 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.comment.application.CommentService;
 import mju.paygo.comment.domain.Comment;
+import mju.paygo.comment.domain.dto.CommentCreateRequest;
 import mju.paygo.comment.domain.dto.CommentDeleteRequest;
 import mju.paygo.comment.domain.dto.CommentRequest;
-import mju.paygo.comment.domain.dto.GetCommentsByBoardRequest;
 import mju.paygo.comment.ui.dto.CommentResponse;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import org.springframework.http.HttpStatus;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentRequest request) {
+    public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentCreateRequest request) {
         Comment comment = commentService.createComment(memberId, request.boardId(), request.content());
         LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
@@ -55,8 +56,8 @@ public class CommentController {
     }
 
     @GetMapping("/comments")
-    public ResponseEntity<List<CommentResponse>> getCommentsByBoard(@Valid GetCommentsByBoardRequest request) {
-        List<Comment> comments = commentService.getCommentsByBoard(request.boardId());
+    public ResponseEntity<List<CommentResponse>> getCommentsByBoard(@RequestParam Long boardId) {
+        List<Comment> comments = commentService.getCommentsByBoard(boardId);
         List<CommentResponse> response = comments.stream()
                 .map(comment -> new CommentResponse(
                         comment.getId(),
@@ -64,6 +65,7 @@ public class CommentController {
                         comment.getMember().getNickname(),
                         comment.getMember().getEmail(),
                         comment.getBoard().getId(),
+                        comment.getMember().getProfileImageUrl(),
                         comment.getContent(),
                         comment.getCreatedAt(),
                         comment.getUpdatedAt()

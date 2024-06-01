@@ -8,6 +8,7 @@ public record CommentResponse(
         String memberNickname,
         String memberEmail,
         Long boardId,
+        String profileImageUrl,
         String content,
         LocalDateTime createdAt,
         LocalDateTime updatedAt
