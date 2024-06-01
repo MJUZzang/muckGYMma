@@ -5,7 +5,7 @@ import { fetchRecentPosts } from "@/_utils/post";
 
 async function RecentPage() {
     const posts = await fetchRecentPosts();
-
+    console.log(posts);
     return (
         <>
             <div className="flex flex-col items-center pt-3 pb-6 h-full gap-3 bg-app-bg-1">
