@@ -40,6 +40,7 @@ function CommentsSection({
     const [comments, setComments] = useState<CommentInfo[]>([]);
     const [isFetching, setIsFetching] = useState(false);
 
+    const [modifyingId, setModifyingId] = useState(0);
     const myNickname = useAppSelector(selectNickname);
 
     function fetchComments() {
@@ -100,31 +101,60 @@ function CommentsSection({
     }
 
     function onSubmitComment() {
-        fetch(`${backendUrl}/api/comments/create`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                boardId: post.id,
-                content: text,
-            }),
-        })
-            .then((res) => {
-                if (res.ok) {
-                    setIsFetching(true);
-                    setText("");
-                    setTimeout(() => {
-                        fetchComments();
-                    }, 700);
-                } else {
-                    throw new Error("Failed to create comment");
-                }
+        if (modifyingId) {
+            fetch(`${backendUrl}/api/comments/update`, {
+                method: "PATCH",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    commentId: modifyingId,
+                    content: text,
+                }),
             })
-            .catch((err) => {
-                console.error(err);
-            });
+                .then((res) => {
+                    if (res.ok) {
+                        setIsFetching(true);
+                        setText("");
+                        setModifyingId(0);
+                        setTimeout(() => {
+                            fetchComments();
+                        }, 700);
+                    } else {
+                        throw new Error("Failed to update comment");
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        } else {
+            fetch(`${backendUrl}/api/comments/create`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    boardId: post.id,
+                    content: text,
+                }),
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        setIsFetching(true);
+                        setText("");
+                        setTimeout(() => {
+                            fetchComments();
+                        }, 700);
+                    } else {
+                        throw new Error("Failed to create comment");
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
     }
 
     return (
@@ -225,7 +255,14 @@ function CommentsSection({
                                                         >
                                                             <button
                                                                 className="w-full text-center px-2 text-nowrap"
-                                                                onClick={() => {}}
+                                                                onClick={() => {
+                                                                    setModifyingId(
+                                                                        comment.id
+                                                                    );
+                                                                    setText(
+                                                                        comment.content
+                                                                    );
+                                                                }}
                                                             >
                                                                 수정
                                                             </button>
