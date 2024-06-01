@@ -214,7 +214,7 @@ function CommentsSection({
                                                     )}
                                                 </p>
 
-                                                {myNickname !==
+                                                {myNickname ===
                                                     comment.memberNickname && (
                                                     <div className="ml-auto flex relative">
                                                         <ul
