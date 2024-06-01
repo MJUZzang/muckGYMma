@@ -28,7 +28,7 @@ function CommentSectionTextArea({
     }, [text]);
 
     return (
-        <div className="w-full flex gap-2 px-2 pb-1 pt-2 absolute bottom-0">
+        <div className="w-full flex gap-2 px-2 pb-1 pt-2 absolute bottom-0 bg-app-bg">
             {/* Avatar Image */}
             <div className="w-[45px] h-[45px]">
                 <div className="w-[45px] h-[45px] overflow-clip rounded-full">
