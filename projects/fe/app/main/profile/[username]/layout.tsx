@@ -4,11 +4,13 @@ import exampleImage from "@/_images/pooh.jpg";
 import Hash from "@/main/profile/_components/Hash";
 
 import Link from "next/link";
-import { Noto_Sans_KR, Dosis } from "next/font/google";
+import { Noto_Sans_KR, Dosis, Cookie } from "next/font/google";
 import UploadMeal from "@/_components/UploadMeal";
 import Camera from "@/_images/Camera";
 import Nav from "@/main/profile/_components/Nav";
 import Interaction from "@/main/profile/_components/Interaction";
+import { backendUrl } from "@/_utils/urls";
+import { cookies } from "next/headers";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });
@@ -18,8 +20,69 @@ interface ProfileLayoutProps {
     children?: React.ReactNode;
 }
 
-const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
+interface ProfileInfo {
+    nickname: string;
+    postCount: number;
+    followingCount: number;
+    followerCount: number;
+    content: string | null;
+    profileImageUrl: string;
+    totalClearDay: number;
+    longestClearDay: number;
+    nowClearDay: number;
+}
+
+async function fetchProfileInfo(username: string) {
+    const cookieStore = cookies();
+
+    return await fetch(`${backendUrl}/api/profile?nickname=${username}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            Cookie: cookieStore
+                .getAll()
+                .map((cookie) => {
+                    return `${cookie.name}=${cookie.value}`;
+                })
+                .join("; "),
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Sever responsded with an error");
+            }
+        })
+        .then((data: ProfileInfo) => {
+            if (!data) {
+                throw new Error("Failed to fetch user profile");
+            }
+            return data;
+        })
+        .catch((err) => {
+            console.error(err);
+            const dummyProfileInfo: ProfileInfo = {
+                nickname: "jeheecheon",
+                postCount: 6,
+                followingCount: 100,
+                followerCount: 123,
+                content: "jeheecheon",
+                profileImageUrl: exampleImage.src,
+                totalClearDay: 789,
+                longestClearDay: 456,
+                nowClearDay: 123,
+            };
+            return dummyProfileInfo;
+        });
+}
+
+async function ProfileLayout({
+    params,
+    children,
+}: Readonly<ProfileLayoutProps>) {
     const nickname = params.username;
+    const profile = await fetchProfileInfo(nickname);
 
     return (
         <div className="mx-auto max-w-[835px] shadow-xl">
@@ -71,8 +134,10 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                                 border-4 border-transparent"
                         >
                             <Image
-                                src={exampleImage}
+                                src={profile.profileImageUrl}
                                 alt="avatar"
+                                width={140}
+                                height={140}
                                 className="w-full"
                             />
                         </div>
@@ -84,7 +149,7 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                                 <p
                                     className={`font-semibold ${dosis.className}`}
                                 >
-                                    6
+                                    {profile.postCount}
                                 </p>
                                 <p className={`${notoSansKr.className}`}>
                                     게시글
@@ -94,7 +159,7 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                                 <p
                                     className={`font-semibold ${dosis.className}`}
                                 >
-                                    100
+                                    {profile.followingCount}
                                 </p>
                                 <p className={`${notoSansKr.className}`}>
                                     팔로잉
@@ -104,7 +169,7 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                                 <p
                                     className={`font-semibold ${dosis.className}`}
                                 >
-                                    123
+                                    {profile.followerCount}
                                 </p>
                                 <p className={`${notoSansKr.className}`}>
                                     팔로워
@@ -116,7 +181,7 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                                 <p
                                     className={`font-semibold ${dosis.className}`}
                                 >
-                                    789
+                                    {profile.totalClearDay}
                                 </p>
                                 <p className={`${notoSansKr.className}`}>
                                     달성
@@ -126,7 +191,7 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                                 <p
                                     className={`font-semibold ${dosis.className}`}
                                 >
-                                    456
+                                    {profile.longestClearDay}
                                 </p>
                                 <p className={`${notoSansKr.className}`}>
                                     최장달성
@@ -136,7 +201,7 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                                 <p
                                     className={`font-semibold ${dosis.className}`}
                                 >
-                                    123
+                                    {profile.nowClearDay}
                                 </p>
                                 <p className={`${notoSansKr.className}`}>
                                     연속달성
@@ -149,9 +214,11 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
                 <Interaction profileUsername={nickname} className="mt-2" />
 
                 <div className="mx-4 mt-5 text-app-font-2">
-                    <p>jeheecheon</p>
-                    <p>🇰🇷</p>
-                    <p>🔗 www.jeheecheon.com</p>
+                    {profile.content && (
+                        <p className={`${notoSansKr.className}`}>
+                            {profile.content}
+                        </p>
+                    )}
                 </div>
 
                 <Nav />
@@ -160,6 +227,6 @@ const ProfileLayout = ({ params, children }: Readonly<ProfileLayoutProps>) => {
             </div>
         </div>
     );
-};
+}
 
 export default ProfileLayout;
