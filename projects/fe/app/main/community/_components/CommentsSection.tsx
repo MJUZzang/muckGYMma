@@ -2,20 +2,14 @@
 
 import React, { useEffect, useState } from "react";
 
-import Like from "@/main/community/_images/Like";
-
 import {
     Drawer,
-    DrawerClose,
     DrawerContent,
-    DrawerDescription,
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
 } from "@/_components/shadcn/ui/drawer";
-
-import { Button } from "@/_components/shadcn/ui/button";
 
 import Image from "next/image";
 import CommentSectionTextArea from "./CommentSectionTextArea";
@@ -29,6 +23,8 @@ import {
     convertCommentsDatesToDate as convertCommentsDatesToDateType,
     sortCommnetsByDate,
 } from "@/_utils/comment";
+import { useAppSelector } from "../../../../lib/hooks";
+import { selectNickname } from "../../../../lib/slices/userInfoSlice";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -43,6 +39,8 @@ function CommentsSection({
     const [text, setText] = useState("");
     const [comments, setComments] = useState<CommentInfo[]>([]);
     const [isFetching, setIsFetching] = useState(false);
+
+    const myNickname = useAppSelector(selectNickname);
 
     function fetchComments() {
         fetch(`${backendUrl}/api/comments/comments?boardId=${post.id}`, {
@@ -75,6 +73,32 @@ function CommentsSection({
             });
     }
 
+    function deleteComment(commentId: number) {
+        fetch(`${backendUrl}/api/comments/delete`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                commentId,
+            }),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    setIsFetching(true);
+                    setTimeout(() => {
+                        fetchComments();
+                    }, 700);
+                } else {
+                    throw new Error("Failed to delete comment");
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+
     function onSubmitComment() {
         fetch(`${backendUrl}/api/comments/create`, {
             method: "POST",
@@ -90,6 +114,7 @@ function CommentsSection({
             .then((res) => {
                 if (res.ok) {
                     setIsFetching(true);
+                    setText("");
                     setTimeout(() => {
                         fetchComments();
                     }, 700);
@@ -101,7 +126,7 @@ function CommentsSection({
                 console.error(err);
             });
     }
-    
+
     return (
         <Drawer
             closeThreshold={0.9}
@@ -132,7 +157,9 @@ function CommentsSection({
                 </DrawerHeader>
 
                 {/* Drawber body */}
-                <div className="overflow-y-auto h-full">
+                <div
+                    className={`overflow-y-auto h-full ${notoSansKr.className}`}
+                >
                     {/* 로딩 중일 때 */}
                     {isFetching && (
                         <CatPlaceholder
@@ -186,6 +213,63 @@ function CommentsSection({
                                                         comment.createdAt
                                                     )}
                                                 </p>
+
+                                                {myNickname !==
+                                                    comment.memberNickname && (
+                                                    <div className="ml-auto flex relative">
+                                                        <ul
+                                                            className={`flex flex-col py-1 absolute right-7 rounded-xl bg-app-bg-1 text-app-font-3 gap-1 px-2 ${
+                                                                !comment.isMenuOpen &&
+                                                                "hidden"
+                                                            }`}
+                                                        >
+                                                            <button
+                                                                className="w-full text-center px-2 text-nowrap"
+                                                                onClick={() => {}}
+                                                            >
+                                                                수정
+                                                            </button>
+                                                            <div className="bg-app-bg-3 h-[2px]" />
+                                                            <button
+                                                                className="w-full text-center px-2 text-nowrap"
+                                                                onClick={() =>
+                                                                    deleteComment(
+                                                                        comment.id
+                                                                    )
+                                                                }
+                                                            >
+                                                                삭제
+                                                            </button>
+                                                        </ul>
+                                                        <div
+                                                            className="flex gap-1 cursor-pointer"
+                                                            onClick={() => {
+                                                                setComments(
+                                                                    comments.map(
+                                                                        (c) => {
+                                                                            if (
+                                                                                c.id ===
+                                                                                comment.id
+                                                                            ) {
+                                                                                return {
+                                                                                    ...c,
+                                                                                    isMenuOpen:
+                                                                                        !c.isMenuOpen,
+                                                                                };
+                                                                            } else {
+                                                                                return c;
+                                                                            }
+                                                                        }
+                                                                    )
+                                                                );
+                                                            }}
+                                                        >
+                                                            <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                                                            <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                                                            <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                                                        </div>
+                                                    </div>
+                                                )}
                                             </div>
 
                                             {/* Comment Content and Like button */}

@@ -8,13 +8,14 @@ export interface CommentInfo {
     content: string;
     createdAt: Date;
     updatedAt: Date;
+    isMenuOpen?: boolean;
 }
 
 export const dummyComments: CommentInfo[] = [
     {
         id: 1,
         memberId: 2,
-        memberNickname: "신중섭",
+        memberNickname: "test",
         memberEmail: "wndtjq0510@gmail.com",
         boardId: 1,
         profileImageUrl:
@@ -26,7 +27,7 @@ export const dummyComments: CommentInfo[] = [
     {
         id: 2,
         memberId: 2,
-        memberNickname: "신중섭",
+        memberNickname: "test",
         memberEmail: "wndtjq0510@gmail.com",
         boardId: 1,
         profileImageUrl:
@@ -38,7 +39,7 @@ export const dummyComments: CommentInfo[] = [
     {
         id: 34,
         memberId: 2,
-        memberNickname: "신중섭",
+        memberNickname: "test",
         memberEmail: "wndtjq0510@gmail.com",
         boardId: 1,
         profileImageUrl:
@@ -50,7 +51,7 @@ export const dummyComments: CommentInfo[] = [
     {
         id: 255,
         memberId: 2,
-        memberNickname: "신중섭",
+        memberNickname: "test",
         memberEmail: "wndtjq0510@gmail.com",
         boardId: 1,
         profileImageUrl:
@@ -62,7 +63,7 @@ export const dummyComments: CommentInfo[] = [
     {
         id: 3,
         memberId: 2,
-        memberNickname: "신중섭",
+        memberNickname: "test",
         memberEmail: "wndtjq0510@gmail.com",
         boardId: 1,
         profileImageUrl:
