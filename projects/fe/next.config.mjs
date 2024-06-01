@@ -15,6 +15,11 @@ export default withPWA({
                 hostname: "muckgymma.s3.ap-northeast-2.amazonaws.com",
                 port: "",
             },
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+                port: "",
+            },
         ],
     },
     async redirects() {
