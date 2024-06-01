@@ -10,6 +10,7 @@ import CommentsSection from "@/main/community/following/_components/CommentsSect
 
 import { Jua, Noto_Sans } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
+import { json } from "stream/consumers";
 
 const jua = Jua({
     subsets: ["latin"],
@@ -84,9 +85,11 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                     method: "POST",
                                     credentials: "include",
                                     headers: {
-                                        "Content-Type": "raw",
+                                        "Content-Type": "application/json",
                                     },
-                                    body: post.id.toString(),
+                                    body: JSON.stringify({
+                                        boardId: postInfo.id
+                                    }),
                                 })
                                     .then((res) => {
                                         if (res.ok) {
