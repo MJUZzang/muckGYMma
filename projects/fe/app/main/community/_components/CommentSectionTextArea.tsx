@@ -49,6 +49,7 @@ function CommentSectionTextArea({
                     {/* Hidden Text Area */}
                     <textarea
                         ref={hiddenTextArea}
+                        value={text}
                         className="min-h-[37px] absolute invisible w-full overflow-y-scroll py-2 pl-3 pr-10"
                         rows={1}
                     />
@@ -56,6 +57,7 @@ function CommentSectionTextArea({
                     {/* Input Comment */}
                     <textarea
                         ref={textArea}
+                        value={text}
                         maxLength={700}
                         onInput={(e) => setText(e.currentTarget.value)}
                         rows={1}
