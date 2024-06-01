@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.comment.application.CommentService;
 import mju.paygo.comment.domain.Comment;
+import mju.paygo.comment.domain.dto.CommentCreateRequest;
 import mju.paygo.comment.domain.dto.CommentDeleteRequest;
 import mju.paygo.comment.domain.dto.CommentRequest;
 import mju.paygo.comment.ui.dto.CommentResponse;
@@ -32,7 +33,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentRequest request) {
+    public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentCreateRequest request) {
         Comment comment = commentService.createComment(memberId, request.boardId(), request.content());
         LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
@@ -64,6 +65,7 @@ public class CommentController {
                         comment.getMember().getNickname(),
                         comment.getMember().getEmail(),
                         comment.getBoard().getId(),
+                        comment.getMember().getProfileImageUrl(),
                         comment.getContent(),
                         comment.getCreatedAt(),
                         comment.getUpdatedAt()
