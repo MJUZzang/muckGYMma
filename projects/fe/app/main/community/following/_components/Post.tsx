@@ -83,6 +83,9 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                 fetch(`${backendUrl}/api/likes`, {
                                     method: "POST",
                                     credentials: "include",
+                                    headers: {
+                                        "Content-Type": "raw",
+                                    },
                                     body: post.id.toString(),
                                 })
                                     .then((res) => {
