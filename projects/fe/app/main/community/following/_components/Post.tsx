@@ -83,7 +83,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                 fetch(`${backendUrl}/api/likes`, {
                                     method: "POST",
                                     credentials: "include",
-                                    body: JSON.stringify({ boardId: post.id }),
+                                    body: post.id.toString(),
                                 })
                                     .then((res) => {
                                         if (res.ok) {
