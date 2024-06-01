@@ -28,7 +28,10 @@ function CommentSectionTextArea({
 
         // textArea.current.style.width = hiddenTextArea.current.style.width;
 
-        dummyDiv.current!.style.height = commentsDiv.current!.scrollHeight + "px";
+        commentsDiv.current!.addEventListener("resize", () => {
+            dummyDiv.current!.style.height =
+                commentsDiv.current!.scrollHeight + "px";
+        });
     }, [text]);
 
     return (

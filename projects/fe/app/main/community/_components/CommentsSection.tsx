@@ -75,6 +75,33 @@ function CommentsSection({
             });
     }
 
+    function onSubmitComment() {
+        fetch(`${backendUrl}/api/comments/create`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                boardId: post.id,
+                content: text,
+            }),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    setIsFetching(true);
+                    setTimeout(() => {
+                        fetchComments();
+                    }, 700);
+                } else {
+                    throw new Error("Failed to create comment");
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+    
     return (
         <Drawer
             closeThreshold={0.9}
@@ -214,34 +241,7 @@ function CommentsSection({
                     <CommentSectionTextArea
                         text={text}
                         setText={setText}
-                        onSubmit={() => {
-                            fetch(`${backendUrl}/api/comments/create`, {
-                                method: "POST",
-                                credentials: "include",
-                                headers: {
-                                    "Content-Type": "application/json",
-                                },
-                                body: JSON.stringify({
-                                    boardId: post.id,
-                                    content: text,
-                                }),
-                            })
-                                .then((res) => {
-                                    if (res.ok) {
-                                        setIsFetching(true);
-                                        setTimeout(() => {
-                                            fetchComments();
-                                        }, 700);
-                                    } else {
-                                        throw new Error(
-                                            "Failed to create comment"
-                                        );
-                                    }
-                                })
-                                .catch((err) => {
-                                    console.error(err);
-                                });
-                        }}
+                        onSubmit={onSubmitComment}
                     />
                 </DrawerFooter>
             </DrawerContent>
