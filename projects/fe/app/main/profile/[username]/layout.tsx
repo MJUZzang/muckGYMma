@@ -83,7 +83,7 @@ async function ProfileLayout({
 }: Readonly<ProfileLayoutProps>) {
     const nickname = params.username;
     const profile = await fetchProfileInfo(nickname);
-
+    console.log(nickname);
     return (
         <div className="mx-auto max-w-[835px] shadow-xl">
             <div className="flex items-center justify-between pr-5 pl-4 mb-4 pt-3">
@@ -94,7 +94,7 @@ async function ProfileLayout({
                         className={`text-lg md:text-xl font-bold ${notoSansKr.className}
                         text-app-font-4`}
                     >
-                        {params.username}
+                        {nickname}
                     </p>
                 </div>
 
