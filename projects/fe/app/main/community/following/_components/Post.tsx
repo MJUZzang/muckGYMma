@@ -36,7 +36,8 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     );
 
     const [post, setPost] = useState<PostInfo>(postInfo);
-
+    console.log("like count: ", postInfo.likeCount);
+    
     return (
         <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
             <div className="mx-2 flex flex-col py-3">
@@ -88,7 +89,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                         "Content-Type": "application/json",
                                     },
                                     body: JSON.stringify({
-                                        boardId: postInfo.id
+                                        boardId: postInfo.id,
                                     }),
                                 })
                                     .then((res) => {
@@ -103,10 +104,15 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                     .then((data: { isLiked: boolean }) => {
                                         if (data) {
                                             setPost((prev) => {
-                                                console.log(prev.likeCount + (data.isLiked ? 1 : -1))
+                                                console.log(
+                                                    prev.likeCount +
+                                                        (data.isLiked ? 1 : -1)
+                                                );
                                                 return {
                                                     ...prev,
-                                                    likeCount: prev.likeCount + (data.isLiked ? 1 : -1),
+                                                    likeCount:
+                                                        prev.likeCount +
+                                                        (data.isLiked ? 1 : -1),
                                                     isLikedByMember:
                                                         data.isLiked,
                                                 };
