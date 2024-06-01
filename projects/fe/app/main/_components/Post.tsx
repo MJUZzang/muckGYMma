@@ -12,6 +12,7 @@ import { Jua, Noto_Sans, Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
 import { useAppSelector } from "../../../lib/hooks";
 import { selectNickname } from "../../../lib/slices/userInfoSlice";
+import Link from "next/link";
 
 const jua = Jua({
     subsets: ["latin"],
@@ -105,7 +106,10 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             <div className="mx-2 flex flex-col py-3">
                 {/* 유저 정보 */}
                 <div className="flex">
-                    <div className="w-[40px] h-[40px]">
+                    <Link
+                        href={`/main/profile/${post.nickname}/posts`}
+                        className="w-[40px] h-[40px]"
+                    >
                         <div className="w-[40px] h-[40px] overflow-clip rounded-full">
                             <Image
                                 src={post.profileImageUrl}
@@ -115,14 +119,15 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                 className="w-[40px] h-[40px] pointer-events-none"
                             />
                         </div>
-                    </div>
+                    </Link>
 
                     <div className="flex flex-col">
-                        <p
+                        <Link
+                            href={`/main/profile/${post.nickname}/posts`}
                             className={`ml-2 text-app-font-2 ${notoSans.className}`}
                         >
                             {post.nickname}
-                        </p>
+                        </Link>
                         <p className="ml-2 text-xs text-app-font-4">
                             {post.createdAt.toLocaleString()}
                         </p>
