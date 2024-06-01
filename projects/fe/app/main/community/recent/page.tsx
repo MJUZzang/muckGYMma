@@ -19,8 +19,8 @@ function RecentPage() {
         use(promise);
     }
 
-    async function fetchRecentPosts() {
-        fetch(`${backendUrl}/api/board/other-posts`, {
+    function fetchRecentPosts() {
+        return fetch(`${backendUrl}/api/board/other-posts`, {
             method: "GET",
             credentials: "include",
         })
