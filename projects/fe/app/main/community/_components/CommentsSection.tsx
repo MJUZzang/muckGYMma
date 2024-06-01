@@ -43,7 +43,6 @@ function CommentsSection({
     const [modifyingId, setModifyingId] = useState(0);
     const myNickname = useAppSelector(selectNickname);
 
-    console.log(modifyingId, text);
     function fetchComments() {
         fetch(`${backendUrl}/api/comments/comments?boardId=${post.id}`, {
             method: "GET",
