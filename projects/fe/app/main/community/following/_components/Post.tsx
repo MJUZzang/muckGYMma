@@ -2,7 +2,7 @@
 
 import { PostInfo } from "@/_types/PostInfo";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useState } from "react";
 import Like from "@/main/community/following/_images/Like";
 import Comment from "@/main/community/following/_images/Comment";
 import SpoonKnife from "@/main/community/following/_images/SpoonKnife";
@@ -10,7 +10,6 @@ import CommentsSection from "@/main/community/following/_components/CommentsSect
 
 import { Jua, Noto_Sans } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
-import { json } from "stream/consumers";
 
 const jua = Jua({
     subsets: ["latin"],
@@ -36,7 +35,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     );
 
     const [post, setPost] = useState<PostInfo>(postInfo);
-    console.log("like count: ", postInfo.likeCount);
+    console.log("like count: ", postInfo);
     
     return (
         <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
@@ -176,4 +175,4 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     );
 };
 
-export default React.memo(Post);
+export default Post;
