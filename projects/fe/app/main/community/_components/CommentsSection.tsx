@@ -24,6 +24,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
 import { PostInfo } from "@/_types/PostInfo";
 import { CommentInfo } from "@/_types/CommentInfo";
+import Shycat from "@/_images/Shycat";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -36,14 +37,11 @@ function CommentsSection({
     post: PostInfo;
 }>) {
     const [text, setText] = useState("");
-    const [isLiked, setIsLiked] = useState<boolean>(false);
-    const [commentsPromise, setCommentsPromise] =
-        useState<Promise<void> | null>(null);
-
     const [comments, setComments] = useState<CommentInfo[]>([]);
+    const [isFetching, setIsFetching] = useState(false);
 
     function fetchComments() {
-        return fetch(`${backendUrl}/api/comments/comments?boardId=${post.id}`, {
+        fetch(`${backendUrl}/api/comments/comments?boardId=${post.id}`, {
             method: "GET",
             credentials: "include",
         })
@@ -64,6 +62,7 @@ function CommentsSection({
             .catch((err) => {
                 console.error(err);
             });
+        setIsFetching(true);
     }
 
     return (
@@ -71,9 +70,10 @@ function CommentsSection({
             closeThreshold={0.9}
             onOpenChange={(isOpen) => {
                 if (isOpen) {
-                    setCommentsPromise(fetchComments);
+                    fetchComments();
                 } else {
-                    setCommentsPromise(null);
+                    setComments([]);
+                    setIsFetching(false);
                 }
             }}
         >
@@ -93,8 +93,30 @@ function CommentsSection({
 
                 {/* Drawber body */}
                 <div className="overflow-y-auto">
+                    {isFetching && (
+                        <div
+                            className={`absolute top-0 left-0 w-full overflow-hidden animate-page-fade-in flex items-center h-[100dvh] ${notoSansKr.className}`}
+                        >
+                            <div className="w-full flex flex-col justify-start">
+                                <div className="max-w-[400px] mx-auto w-full">
+                                    <Shycat />
+                                </div>
+
+                                <div
+                                    className="w-[80vw] max-w-[600px] text-center mx-auto text-[1.08rem] animate-pulse
+                                    text-app-font-4"
+                                >
+                                    <p>댓글을 로딩 중이에요!</p>
+                                    <p className="text-sm">
+                                        잠시만 기다려주세요!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Comments */}
-                    {comments.map((comment, index) => (
+                    {!isFetching && comments.map((comment, index) => (
                         <div className="gap-3 my-3" key={index}>
                             {/* Comment */}
                             <div className="px-3 flex gap-2">
