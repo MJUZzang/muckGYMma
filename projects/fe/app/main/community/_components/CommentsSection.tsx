@@ -126,7 +126,7 @@ function CommentsSection({
                                 <>
                                     {/* Comment */}
                                     <div
-                                        key={comment.id}
+                                        key={index}
                                         className="px-3 flex gap-2"
                                     >
                                         {/* Avatar Image */}
