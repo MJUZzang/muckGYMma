@@ -2,7 +2,7 @@
 
 import { PostInfo } from "@/_types/PostInfo";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Like from "@/main/community/following/_images/Like";
 import Comment from "@/main/community/following/_images/Comment";
 import SpoonKnife from "@/main/community/following/_images/SpoonKnife";
@@ -35,8 +35,11 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     );
 
     const [post, setPost] = useState<PostInfo>(postInfo);
-    console.log("post: ", postInfo);
 
+    useEffect(() => {
+        setPost(postInfo);
+    }, [postInfo]);
+    
     return (
         <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
             <div className="mx-2 flex flex-col py-3">
@@ -93,11 +96,23 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                 })
                                     .then((res) => {
                                         if (res.ok) {
+                                            return res.json();
                                         } else {
                                             throw new Error(
                                                 "Failed to like post"
                                             );
                                         }
+                                    })
+                                    .then((data: { isLiked: boolean }) => {
+                                        setPost((prev) => {
+                                            return {
+                                                ...prev,
+                                                isLikedByMember: data.isLiked,
+                                                likeCount:
+                                                    prev.likeCount +
+                                                    (data.isLiked ? 1 : -1),
+                                            };
+                                        });
                                     })
                                     .catch((err) => {
                                         console.error(err);
