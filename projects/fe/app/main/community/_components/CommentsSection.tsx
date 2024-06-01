@@ -55,12 +55,14 @@ function CommentsSection({
             .then((data: CommentInfo[]) => {
                 if (data) {
                     setComments(data);
+                    setIsFetching(false);
                 } else {
                     throw new Error("Failed to fetch comments");
                 }
             })
             .catch((err) => {
                 console.error(err);
+                setIsFetching(false);
             });
         setIsFetching(true);
     }
