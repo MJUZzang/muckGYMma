@@ -43,20 +43,20 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 {/* 유저 정보 */}
                 <div className="flex">
                     <Image
-                        src={postInfo.profileImageUrl}
+                        src={post.profileImageUrl}
                         width={325}
                         height={325}
-                        alt={postInfo.nickname}
+                        alt={post.nickname}
                         className="w-10 h-10 rounded-full pointer-events-none"
                     />
                     <div className="flex flex-col">
                         <p
                             className={`ml-2 text-app-font-2 ${notoSans.className}`}
                         >
-                            {postInfo.nickname}
+                            {post.nickname}
                         </p>
                         <p className="ml-2 text-xs text-app-font-4">
-                            {postInfo.createdAt.toLocaleString()}
+                            {post.createdAt.toLocaleString()}
                         </p>
                     </div>
                 </div>
@@ -65,7 +65,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             {/* 포스트 이미지 */}
             <div className={`overflow-clip aspect-square`}>
                 <Image
-                    src={postInfo.imageUrls[0]}
+                    src={post.imageUrls[0]}
                     alt="Post image"
                     width={325}
                     height={325}
@@ -88,7 +88,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                         "Content-Type": "application/json",
                                     },
                                     body: JSON.stringify({
-                                        boardId: postInfo.id,
+                                        boardId: post.id,
                                     }),
                                 })
                                     .then((res) => {
@@ -126,7 +126,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                     : "fill-none"
                             }`}
                         />
-                        <p>{postInfo.likeCount}</p>
+                        <p>{post.likeCount}</p>
                     </div>
 
                     <div
@@ -135,16 +135,16 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                         <CommentsSection>
                             <Comment className="fill-app-font-3" />
                         </CommentsSection>
-                        <p>{postInfo.commentCount}</p>
+                        <p>{post.commentCount}</p>
                     </div>
 
                     <div
                         className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${
                             notoSans.className
-                        } ${!postInfo.kcal && "invisible"}`}
+                        } ${!post.kcal && "invisible"}`}
                     >
                         <SpoonKnife className="fill-app-font-3" />
-                        <p>{postInfo.kcal} kcal</p>
+                        <p>{post.kcal} kcal</p>
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 <button
                     className={`text-app-font-4 text-xs mt-1 mx-2`}
                     onClick={() => {
-                        setTruncatedContent(postInfo.content);
+                        setTruncatedContent(post.content);
                         setShowFullContent(true);
                     }}
                 >
