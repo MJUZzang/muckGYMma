@@ -1,5 +1,5 @@
 export const getTimeAgo = (uploadedAt: Date): string => {
-    const now = new Date();
+    const now = new Date(Date.now());
     const timeDifference = now.getTime() - uploadedAt.getTime();
 
     const minute = 60 * 1000;
