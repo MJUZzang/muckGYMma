@@ -3,8 +3,6 @@ import Post from "@/main/community/following/_components/Post";
 
 import { fetchRecentPosts } from "@/_utils/post";
 
-
-
 async function RecentPage() {
     const posts = await fetchRecentPosts();
 

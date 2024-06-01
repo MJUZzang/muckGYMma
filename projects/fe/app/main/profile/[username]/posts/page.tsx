@@ -70,7 +70,6 @@ interface PostsPageProps {
 
 async function PostsPage({ params }: Readonly<PostsPageProps>) {
     const nickname = params.username;
-
     const posts = await fetchUserPosts(nickname);
 
     return (
