@@ -21,6 +21,44 @@ const dummyPosts: PostInfo[] = [
     },
 ];
 
+export async function fetchUserPosts(nickname: string) {
+    const cookieStore = cookies();
+
+    return await fetch(
+        `${backendUrl}/api/board/my-posts?nickname=${nickname}`,
+        {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                Cookie: cookieStore
+                    .getAll()
+                    .map((cookie) => {
+                        return `${cookie.name}=${cookie.value}`;
+                    })
+                    .join("; "),
+            },
+        }
+    )
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Sever responsded with an error");
+            }
+        })
+        .then((data: PostInfo[]) => {
+            if (data) {
+                return convertPostsCreatedAtToDate(data);
+            } else {
+                throw new Error("Failed to fetch user posts");
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            return dummyPosts;
+        });
+}
+
 export async function fetchFollowingPosts() {
     const cookieStore = cookies();
 
