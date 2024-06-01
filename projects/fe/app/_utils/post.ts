@@ -28,7 +28,7 @@ export async function fetchRecentPosts() {
         })
         .then((data: PostInfo[]) => {
             if (data) {
-                return convertPostsPostedAtToDate(data);
+                return convertPostsCreatedAtToDate(data);
             } else {
                 throw new Error("Failed to fetch recent posts");
             }
@@ -48,7 +48,7 @@ export async function fetchRecentPosts() {
                     isLikedByMember: false,
                     commentCount: 0,
                     kcal: 0,
-                    postedAt: new Date(),
+                    createdAt: new Date(),
                     profileUrl:
                         "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/62af530b-7986-48b1-b869-ce7d1b0a4e03_2_image.jpg",
                 },
@@ -57,11 +57,11 @@ export async function fetchRecentPosts() {
         });
 }
 
-export function convertPostsPostedAtToDate(posts: PostInfo[]): PostInfo[] {
+export function convertPostsCreatedAtToDate(posts: PostInfo[]): PostInfo[] {
     return posts.map((post) => {
         let date = new Date();
-        if (post.postedAt) {
-            date = new Date(post.postedAt);
+        if (post.createdAt) {
+            date = new Date(post.createdAt);
         }
         return {
             ...post,

@@ -5,6 +5,7 @@ import NoData from "@/main/profile/_components/NoData";
 import { cookies } from "next/headers";
 import { PostInfo } from "@/_types/PostInfo";
 import { backendUrl } from "@/_utils/urls";
+import { convertPostsCreatedAtToDate } from "@/_utils/post";
 
 async function fetchUserPosts(nickname: string) {
     const cookieStore = cookies();
@@ -34,7 +35,7 @@ async function fetchUserPosts(nickname: string) {
         .then((data: PostInfo[]) => {
             if (data) {
                 console.log(data);
-                return data;
+                return convertPostsCreatedAtToDate(data);
             } else {
                 throw new Error("Failed to fetch user posts");
             }
@@ -54,7 +55,7 @@ async function fetchUserPosts(nickname: string) {
                     isLikedByMember: false,
                     commentCount: 0,
                     kcal: 0,
-                    postedAt: new Date(),
+                    createdAt: new Date(),
                     profileUrl:
                         "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/62af530b-7986-48b1-b869-ce7d1b0a4e03_2_image.jpg",
                 },

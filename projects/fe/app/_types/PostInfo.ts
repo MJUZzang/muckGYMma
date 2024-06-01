@@ -9,5 +9,5 @@ export interface PostInfo {
     commentCount: number;
     kcal: number;
     profileUrl: string;
-    postedAt: Date;
+    createdAt: Date;
 }
