@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "@/main/community/following/_components/Post";
+import Post from "@/main/_components/Post";
 
 import { fetchFollowingPosts } from "@/_utils/post";
 

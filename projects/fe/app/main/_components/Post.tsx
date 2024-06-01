@@ -99,7 +99,6 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                             );
                                         }
                                     })
-
                                     .catch((err) => {
                                         console.error(err);
                                     });

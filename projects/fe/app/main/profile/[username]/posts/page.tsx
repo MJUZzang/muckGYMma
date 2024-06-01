@@ -1,6 +1,6 @@
 import React from "react";
 import exampleImage from "@/_images/pooh.jpg";
-import Post from "@/main/community/following/_components/Post";
+import Post from "@/main//_components/Post";
 import NoData from "@/main/profile/_components/NoData";
 import { cookies } from "next/headers";
 import { PostInfo } from "@/_types/PostInfo";
