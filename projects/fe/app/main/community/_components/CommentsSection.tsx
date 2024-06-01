@@ -23,8 +23,9 @@ import CommentSectionTextArea from "./CommentSectionTextArea";
 import { Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
 import { PostInfo } from "@/_types/PostInfo";
-import { CommentInfo } from "@/_types/CommentInfo";
+import { CommentInfo, dummyComments } from "@/_types/CommentInfo";
 import CatPlaceholder from "./CatPlaceholder";
+import { getTimeAgo } from "@/_utils/time";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -54,7 +55,7 @@ function CommentsSection({
             })
             .then((data: CommentInfo[]) => {
                 if (data) {
-                    console.log(data)
+                    console.log(data);
                     setComments(data);
                     setIsFetching(false);
                 } else {
@@ -65,9 +66,7 @@ function CommentsSection({
                 console.error(err);
                 setIsFetching(false);
                 if (process.env.NODE_ENV === "development") {
-                    setComments([
-                        
-                    ]);
+                    setComments(dummyComments);
                 }
             });
     }
@@ -120,64 +119,85 @@ function CommentsSection({
                     )}
 
                     {/* Comments */}
-                    {!isFetching &&
-                        comments.map((comment, index) => (
-                            <>
-                                {/* Comment */}
-                                <div key={comment.id} className="px-3 flex gap-2">
-                                    {/* Avatar Image */}
-                                    <div className="w-[50px] h-[50px] rounded-full overflow-clip">
+                    {!isFetching && (
+                        <div className="space-y-3">
+                            {comments.map((comment, index) => (
+                                <>
+                                    {/* Comment */}
+                                    <div
+                                        key={comment.id}
+                                        className="px-3 flex gap-2"
+                                    >
+                                        {/* Avatar Image */}
                                         <Image
                                             src={comment.profileImageUrl}
                                             alt="User avatar"
+                                            className="h-[45px] w-[45px] rounded-full"
                                             width={50}
                                             height={50}
                                         />
+
+                                        {/* Comment Body */}
+                                        <div className="w-full">
+                                            {/* User Name */}
+                                            <div className=" flex gap-3 items-center">
+                                                <p className="text-app-font-2">
+                                                    {comment.memberNickname}
+                                                </p>
+                                                <p className="text-app-font-4 text-[12px]">
+                                                    {getTimeAgo(
+                                                        comment.createdAt
+                                                    )}
+                                                </p>
+                                            </div>
+
+                                            {/* Comment Content and Like button */}
+                                            <div className="w-full flex">
+                                                <p className="w-full text-app-font-2">
+                                                    {comment.content}
+                                                </p>
+                                                {/* <div className="flex flex-col items-center">
+                                                    <Like
+                                                        onClick={() =>
+                                                            setIsLiked(!isLiked)
+                                                        }
+                                                        className="fill-red-500"
+                                                        isLiked={isLiked}
+                                                    />
+                                                    <p className="text-app-font-4 text-[12px]">
+                                                        2,462
+                                                    </p>
+                                                </div> */}
+                                            </div>
+
+                                            <div className="flex gap-5 text-xs">
+                                                <button
+                                                    className="text-app-font-4"
+                                                    onClick={() =>
+                                                        alert(
+                                                            "업데이트 예정 기능입니다."
+                                                        )
+                                                    }
+                                                >
+                                                    답글
+                                                </button>
+                                                <button
+                                                    className="text-app-font-4"
+                                                    onClick={() =>
+                                                        alert(
+                                                            "업데이트 예정 기능입니다."
+                                                        )
+                                                    }
+                                                >
+                                                    번역
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    {/* Comment Body */}
-                                    <div className="w-full">
-                                        {/* User Name */}
-                                        <div className=" flex gap-3 items-center">
-                                            <p className="text-app-font-2">
-                                                {comment.memberNickname}
-                                            </p>
-                                            <p className="text-app-font-4 text-[12px]">
-                                                2주 전
-                                            </p>
-                                        </div>
-
-                                        {/* Comment Content and Like button */}
-                                        <div className="w-full flex">
-                                            <p className="w-full text-app-font-2">
-                                                {comment.content}
-                                            </p>
-                                            {/* <div className="flex flex-col items-center">
-                                            <Like
-                                                onClick={() =>
-                                                    setIsLiked(!isLiked)
-                                                }
-                                                className="fill-red-500"
-                                                isLiked={isLiked}
-                                            />
-                                            <p className="text-app-font-4 text-[12px]">
-                                                2,462
-                                            </p>
-                                        </div> */}
-                                        </div>
-
-                                        <div className="flex gap-5 text-xs">
-                                            <button className="text-app-font-4">
-                                                답글
-                                            </button>
-                                            <button className="text-app-font-4">
-                                                번역
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </>
-                        ))}
+                                </>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 <DrawerFooter>
