@@ -120,7 +120,7 @@ function CommentsSection({
                     )}
 
                     {/* Comments */}
-                    {!isFetching && (
+                    {!isFetching && comments.length > 0 && (
                         <div className="space-y-3">
                             {comments.map((comment, index) => (
                                 <>
