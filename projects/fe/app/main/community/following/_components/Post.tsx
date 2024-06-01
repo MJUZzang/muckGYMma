@@ -32,14 +32,11 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     const [showFullContent, setShowFullContent] = useState<boolean>(
         postInfo.content.length <= 80
     );
-    const [isLiked, setIsLiked] = useState<boolean>(false);
-    const postRef = useRef<HTMLDivElement>(null);
+
+    const [post, setPost] = useState<PostInfo>(postInfo);
 
     return (
-        <div
-            ref={postRef}
-            className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2"
-        >
+        <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
             <div className="mx-2 flex flex-col py-3">
                 {/* 유저 정보 */}
                 <div className="flex">
@@ -78,22 +75,55 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             <div className="flex justify-between mt-1 px-2">
                 <div className="w-full flex py-1 gap-3">
                     <div
-                        className={`flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className}`}
+                        className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
                     >
                         <Like
-                            onClick={() => setIsLiked(!isLiked)}
-                            isLiked={isLiked}
+                            onClick={() => {
+                                fetch(`api/likes`, {
+                                    method: "POST",
+                                    credentials: "include",
+                                    body: JSON.stringify({ boardId: post.id }),
+                                })
+                                    .then((res) => {
+                                        if (res.ok) {
+                                            return res.json();
+                                        } else {
+                                            throw new Error(
+                                                "Failed to like post"
+                                            );
+                                        }
+                                    })
+                                    .then((data: { isLiked: boolean }) => {
+                                        if (data) {
+                                            setPost((prev) => {
+                                                return {
+                                                    ...prev,
+                                                    isLikedByMember:
+                                                        data.isLiked,
+                                                };
+                                            });
+                                        }
+                                    })
+                                    .catch((err) => {
+                                        console.error(err);
+                                    });
+                            }}
+                            isLiked={post.isLikedByMember}
                             className={`${
-                                isLiked
+                                post.isLikedByMember
                                     ? "stroke-[#FF0000]"
                                     : "stroke-app-font-3"
-                            } ${isLiked ? "fill-[#FF0000]" : "fill-none"}`}
+                            } ${
+                                post.isLikedByMember
+                                    ? "fill-[#FF0000]"
+                                    : "fill-none"
+                            }`}
                         />
                         <p>{postInfo.likeCount}</p>
                     </div>
 
                     <div
-                        className={`flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className}`}
+                        className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
                     >
                         <CommentsSection>
                             <Comment className="fill-app-font-3" />
@@ -102,7 +132,9 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                     </div>
 
                     <div
-                        className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className} ${!postInfo.kcal && "invisible"}`}
+                        className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${
+                            notoSans.className
+                        } ${!postInfo.kcal && "invisible"}`}
                     >
                         <SpoonKnife className="fill-app-font-3" />
                         <p>{postInfo.kcal} kcal</p>
