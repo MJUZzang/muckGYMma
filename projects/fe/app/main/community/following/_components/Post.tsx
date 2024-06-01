@@ -9,6 +9,7 @@ import SpoonKnife from "@/main/community/following/_images/SpoonKnife";
 import CommentsSection from "@/main/community/following/_components/CommentsSection";
 
 import { Jua, Noto_Sans } from "next/font/google";
+import { backendUrl } from "@/_utils/urls";
 
 const jua = Jua({
     subsets: ["latin"],
@@ -79,7 +80,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                     >
                         <Like
                             onClick={() => {
-                                fetch(`api/likes`, {
+                                fetch(`${backendUrl}/api/likes`, {
                                     method: "POST",
                                     credentials: "include",
                                     body: JSON.stringify({ boardId: post.id }),
