@@ -16,7 +16,7 @@ function InitialLoad(props: InitialLoadProps) {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    function checkIsLogedIn() {
+    function fetchUserInfo() {
         if (true) {
             // if (process.env.NODE_ENV !== "development") {
             fetch(`${backendUrl}/api/member/setup`, {
@@ -49,7 +49,7 @@ function InitialLoad(props: InitialLoadProps) {
     }
 
     useEffect(() => {
-        checkIsLogedIn();
+        fetchUserInfo();
     }, []);
 
     return (

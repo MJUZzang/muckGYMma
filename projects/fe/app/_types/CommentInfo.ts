@@ -1,8 +1,11 @@
-import type UserInfo from "@/_types/UserInfo";
-
-export default interface CommentInfo {
+export interface CommentInfo {
     id: number;
+    memberId: number;
+    memberNickname: string;
+    memberEmail: string;
+    boardId: number;
+    profileImageUrl: string;
     content: string;
-    user: UserInfo;
-    postedAt: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }

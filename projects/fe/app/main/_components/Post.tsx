@@ -34,9 +34,40 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     const [showFullContent, setShowFullContent] = useState<boolean>(
         postInfo.content.length <= 80
     );
-
     const [post, setPost] = useState<PostInfo>(postInfo);
-    console.log(post);
+
+    function handleLiked() {
+        fetch(`${backendUrl}/api/likes`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                boardId: post.id,
+            }),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error("Failed to like post");
+                }
+            })
+            .then((data: { isLiked: boolean }) => {
+                setPost((prev) => {
+                    return {
+                        ...prev,
+                        isLikedByMember: data.isLiked,
+                        likeCount: prev.likeCount + (data.isLiked ? 1 : -1),
+                    };
+                });
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+
     return (
         <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
             <div className="mx-2 flex flex-col py-3">
@@ -59,6 +90,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                             {post.createdAt.toLocaleString()}
                         </p>
                     </div>
+                    <div></div>
                 </div>
             </div>
 
@@ -80,41 +112,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                         className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
                     >
                         <Like
-                            onClick={() => {
-                                fetch(`${backendUrl}/api/likes`, {
-                                    method: "POST",
-                                    credentials: "include",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                    },
-                                    body: JSON.stringify({
-                                        boardId: post.id,
-                                    }),
-                                })
-                                    .then((res) => {
-                                        if (res.ok) {
-                                            return res.json();
-                                        } else {
-                                            throw new Error(
-                                                "Failed to like post"
-                                            );
-                                        }
-                                    })
-                                    .then((data: { isLiked: boolean }) => {
-                                        setPost((prev) => {
-                                            return {
-                                                ...prev,
-                                                isLikedByMember: data.isLiked,
-                                                likeCount:
-                                                    prev.likeCount +
-                                                    (data.isLiked ? 1 : -1),
-                                            };
-                                        });
-                                    })
-                                    .catch((err) => {
-                                        console.error(err);
-                                    });
-                            }}
+                            onClick={handleLiked}
                             isLiked={post.isLikedByMember}
                             className={`${
                                 post.isLikedByMember
@@ -132,7 +130,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                     <div
                         className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
                     >
-                        <CommentsSection>
+                        <CommentsSection onClose={() => {}} post={post}>
                             <Comment className="fill-app-font-3" />
                         </CommentsSection>
                         <p>{post.commentCount}</p>
