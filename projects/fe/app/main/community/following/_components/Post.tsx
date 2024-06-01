@@ -102,10 +102,10 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                     </div>
 
                     <div
-                        className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className}`}
+                        className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${notoSans.className} ${!postInfo.kcal && "invisible"}`}
                     >
                         <SpoonKnife className="fill-app-font-3" />
-                        <p>322 kcal</p>
+                        <p>{postInfo.kcal} kcal</p>
                     </div>
                 </div>
             </div>
