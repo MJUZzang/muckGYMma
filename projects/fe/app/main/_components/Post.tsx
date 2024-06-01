@@ -3,10 +3,10 @@
 import { PostInfo } from "@/_types/PostInfo";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import Like from "@/main/community/following/_images/Like";
-import Comment from "@/main/community/following/_images/Comment";
-import SpoonKnife from "@/main/community/following/_images/SpoonKnife";
-import CommentsSection from "@/main/community/following/_components/CommentsSection";
+import Like from "@/main/community/_images/Like";
+import Comment from "@/main/community/_images/Comment";
+import SpoonKnife from "@/main/community/_images/SpoonKnife";
+import CommentsSection from "@/main/community/_components/CommentsSection";
 
 import { Jua, Noto_Sans } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
@@ -39,7 +39,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     useEffect(() => {
         setPost(postInfo);
     }, [postInfo]);
-    
+
     return (
         <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
             <div className="mx-2 flex flex-col py-3">

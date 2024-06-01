@@ -1,8 +1,7 @@
 import { PostInfo } from "@/_types/PostInfo";
 import { backendUrl } from "@/_utils/urls";
-import { cookies } from "next/headers";
 
-const dummyPosts: PostInfo[] = [
+export const dummyPosts: PostInfo[] = [
     {
         id: 3,
         content: "ㅁㄴㅇ",
@@ -22,55 +21,9 @@ const dummyPosts: PostInfo[] = [
 ];
 
 export async function fetchFollowingPosts() {
-    const cookieStore = cookies();
-
     return await fetch(`${backendUrl}/api/board/following-posts`, {
         method: "GET",
         credentials: "include",
-        headers: {
-            Cookie: cookieStore
-                .getAll()
-                .map((cookie) => {
-                    return `${cookie.name}=${cookie.value}`;
-                })
-                .join("; "),
-        },
-    })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            } else {
-                console.warn(res.status, res.statusText);
-                throw new Error("Server responded with an error");
-            }
-        })
-        .then((data: PostInfo[]) => {
-            if (data) {
-                return convertPostsCreatedAtToDate(data);
-            } else {
-                throw new Error("Failed to fetch recent posts");
-            }
-        })
-        .catch((err) => {
-            console.error(err);
-            return dummyPosts;
-        });
-}
-
-export async function fetchRecentPosts() {
-    const cookieStore = cookies();
-
-    return await fetch(`${backendUrl}/api/board/other-posts`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-            Cookie: cookieStore
-                .getAll()
-                .map((cookie) => {
-                    return `${cookie.name}=${cookie.value}`;
-                })
-                .join("; "),
-        },
     })
         .then((res) => {
             if (res.ok) {
