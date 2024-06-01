@@ -16,7 +16,6 @@ function ArrowUp({ className }: ArrowUpProps) {
         >
             <path
                 d="M18.07 9.57L12 3.5L5.93 9.57"
-                stroke="#171717"
                 strokeWidth="1.5"
                 strokeMiterlimit={10}
                 strokeLinecap="round"
@@ -24,7 +23,6 @@ function ArrowUp({ className }: ArrowUpProps) {
             />
             <path
                 d="M12 20.5V3.67004"
-                stroke="#171717"
                 strokeWidth="1.5"
                 strokeMiterlimit={10}
                 strokeLinecap="round"

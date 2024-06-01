@@ -67,7 +67,7 @@ function CommentSectionTextArea({
                 className="absolute bottom-4 right-6 px-1 py-1 bg-app-bg rounded-lg"
                 onClick={onSubmit}
             >
-                <ArrowUp className="" />
+                <ArrowUp className="stroke-app-font-4" />
             </div>
         </div>
     );

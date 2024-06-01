@@ -130,7 +130,7 @@ function CommentsSection({
                                     {/* Comment */}
                                     <div
                                         key={comment.id}
-                                        className="px-3 flex gap-2"
+                                        className="px-3 flex gap-3"
                                     >
                                         {/* Avatar Image */}
                                         <div className="w-[45px] h-[45px]">
@@ -148,7 +148,7 @@ function CommentsSection({
                                         </div>
 
                                         {/* Comment Body */}
-                                        <div className="w-full">
+                                        <div className="w-full space-y-1">
                                             {/* User Name */}
                                             <div className=" flex gap-3 items-center">
                                                 <p className="text-app-font-2">
@@ -163,7 +163,7 @@ function CommentsSection({
 
                                             {/* Comment Content and Like button */}
                                             <div className="w-full flex">
-                                                <p className="w-full text-app-font-2">
+                                                <p className="w-full text-app-font-2 text-sm">
                                                     {comment.content}
                                                 </p>
                                                 {/* <div className="flex flex-col items-center">
