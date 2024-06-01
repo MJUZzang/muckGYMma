@@ -176,4 +176,4 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     );
 };
 
-export default Post;
+export default React.memo(Post);
