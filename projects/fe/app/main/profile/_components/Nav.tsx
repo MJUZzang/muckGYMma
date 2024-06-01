@@ -7,12 +7,13 @@ import React, { use } from "react";
 import Grid from "@/main/profile/_components/Grid";
 import ForkKnife from "@/main/profile/_components/ForkKnife";
 import Analytics from "@/main/profile/_components/Analytics";
-import { useAppSelector } from "@/../lib/hooks";
-import { selectNickname } from "@/../lib/slices/userInfoSlice";
 
-function Nav() {
+interface NavProps {
+    nickname: string;
+}
+
+function Nav({ nickname }: NavProps) {
     const pathname = usePathname();
-    const nickname = useAppSelector(selectNickname) || "test";
 
     return (
         <div className="flex justify-between items-center mt-3">

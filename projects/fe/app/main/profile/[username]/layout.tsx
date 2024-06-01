@@ -221,7 +221,7 @@ async function ProfileLayout({
                     )}
                 </div>
 
-                <Nav />
+                <Nav nickname={nickname} />
 
                 {children}
             </div>
