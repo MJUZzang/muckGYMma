@@ -26,6 +26,7 @@ import { PostInfo } from "@/_types/PostInfo";
 import { CommentInfo, dummyComments } from "@/_types/CommentInfo";
 import CatPlaceholder from "./CatPlaceholder";
 import { getTimeAgo } from "@/_utils/time";
+import { convertCommentsDatesToDate as convertCommentsDatesToDateType } from "@/_utils/comment";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -53,10 +54,10 @@ function CommentsSection({
                     throw new Error("Failed to fetch comments");
                 }
             })
-            .then((data: CommentInfo[]) => {
-                if (data) {
-                    console.log(data);
-                    setComments(data);
+            .then((comments: CommentInfo[]) => {
+                if (comments) {
+                    const converted = convertCommentsDatesToDateType(comments);
+                    setComments(converted);
                     setIsFetching(false);
                 } else {
                     throw new Error("Failed to fetch comments");
