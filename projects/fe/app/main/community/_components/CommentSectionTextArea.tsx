@@ -16,8 +16,6 @@ function CommentSectionTextArea({
 }) {
     const hiddenTextArea = useRef<HTMLTextAreaElement>(null);
     const textArea = useRef<HTMLTextAreaElement>(null);
-    const dummyDiv = useRef<HTMLDivElement>(null);
-    const commentsDiv = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!hiddenTextArea.current || !textArea.current) return;
@@ -27,19 +25,12 @@ function CommentSectionTextArea({
             hiddenTextArea.current.scrollHeight + 5 + "px";
 
         // textArea.current.style.width = hiddenTextArea.current.style.width;
-
-        commentsDiv.current!.addEventListener("resize", () => {
-            dummyDiv.current!.style.height =
-                commentsDiv.current!.scrollHeight + "px";
-        });
     }, [text]);
 
     return (
         <>
-            <div ref={dummyDiv} />
             <div
-                ref={commentsDiv}
-                className="w-full flex gap-2 px-2 pb-1 pt-2 absolute bottom-0 bg-app-bg"
+                className="w-full flex gap-2 px-2 pb-1 pt-2 bottom-0 bg-app-bg"
             >
                 {/* Avatar Image */}
                 <div className="w-[45px] h-[45px]">
@@ -66,11 +57,11 @@ function CommentSectionTextArea({
                     <textarea
                         ref={textArea}
                         maxLength={700}
-                        onChange={(e) => setText(e.target.value)}
+                        onInput={(e) => setText(e.currentTarget.value)}
                         rows={1}
-                        className="w-full min-h-[25px] py-2 rounded-xl pl-3 pr-10 bg-app-bg-2 text-app-font-3 
-                    focus:outline-none outline-none resize-none max-h-[35dvh] overflow-y-scroll
-                    duration-75 transition-all"
+                        className="w-full h-fit min-h-[25px] py-2 rounded-xl pl-3 pr-10 bg-app-bg-2 text-app-font-3 
+                        focus:outline-none outline-none resize-none max-h-[35dvh] overflow-y-scroll
+                        duration-75 transition-all"
                         placeholder="댓글을 남겨보세요!"
                     />
                 </div>

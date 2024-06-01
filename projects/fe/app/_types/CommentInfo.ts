@@ -36,6 +36,30 @@ export const dummyComments: CommentInfo[] = [
         updatedAt: new Date("2024-06-01T07:51:46.488396"),
     },
     {
+        id: 34,
+        memberId: 2,
+        memberNickname: "신중섭",
+        memberEmail: "wndtjq0510@gmail.com",
+        boardId: 1,
+        profileImageUrl:
+            "https://lh3.googleusercontent.com/a/ACg8ocIs4E8HndCWj2wEj53iY7NrCYWHOZZVSsO9Jegt771KeI3Esg=s96-c",
+        content: "짜스ㅅㄳ2",
+        createdAt: new Date("2024-06-01T07:51:46.488396"),
+        updatedAt: new Date("2024-06-01T07:51:46.488396"),
+    },
+    {
+        id: 255,
+        memberId: 2,
+        memberNickname: "신중섭",
+        memberEmail: "wndtjq0510@gmail.com",
+        boardId: 1,
+        profileImageUrl:
+            "https://lh3.googleusercontent.com/a/ACg8ocIs4E8HndCWj2wEj53iY7NrCYWHOZZVSsO9Jegt771KeI3Esg=s96-c",
+        content: "짜스ㅅㄳ2",
+        createdAt: new Date("2024-06-01T07:51:46.488396"),
+        updatedAt: new Date("2024-06-01T07:51:46.488396"),
+    },
+    {
         id: 3,
         memberId: 2,
         memberNickname: "신중섭",
