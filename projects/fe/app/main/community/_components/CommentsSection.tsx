@@ -24,7 +24,6 @@ import { Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
 import { PostInfo } from "@/_types/PostInfo";
 import { CommentInfo } from "@/_types/CommentInfo";
-import Shycat from "@/_images/Shycat";
 import CatPlaceholder from "./CatPlaceholder";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
@@ -55,6 +54,7 @@ function CommentsSection({
             })
             .then((data: CommentInfo[]) => {
                 if (data) {
+                    console.log(data)
                     setComments(data);
                     setIsFetching(false);
                 } else {
@@ -64,6 +64,11 @@ function CommentsSection({
             .catch((err) => {
                 console.error(err);
                 setIsFetching(false);
+                if (process.env.NODE_ENV === "development") {
+                    setComments([
+                        
+                    ]);
+                }
             });
     }
 
@@ -117,9 +122,9 @@ function CommentsSection({
                     {/* Comments */}
                     {!isFetching &&
                         comments.map((comment, index) => (
-                            <div className="gap-3 my-3" key={index}>
+                            <>
                                 {/* Comment */}
-                                <div className="px-3 flex gap-2">
+                                <div key={comment.id} className="px-3 flex gap-2">
                                     {/* Avatar Image */}
                                     <div className="w-[50px] h-[50px] rounded-full overflow-clip">
                                         <Image
@@ -171,7 +176,7 @@ function CommentsSection({
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </>
                         ))}
                 </div>
 
