@@ -16,7 +16,7 @@ async function PostsPage({ params }: Readonly<PostsPageProps>) {
             {posts.length > 0 ? (
                 <div className="flex flex-col items-center gap-3">
                     {posts.map((post, i) => (
-                        <Post key={i} postInfo={post} />
+                        <Post key={post.id} postInfo={post} />
                     ))}
                 </div>
             ) : (
