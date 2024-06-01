@@ -64,7 +64,6 @@ function CommentsSection({
                 console.error(err);
                 setIsFetching(false);
             });
-        setIsFetching(true);
     }
 
     return (
@@ -72,7 +71,10 @@ function CommentsSection({
             closeThreshold={0.9}
             onOpenChange={(isOpen) => {
                 if (isOpen) {
-                    fetchComments();
+                    setIsFetching(true);
+                    setTimeout(() => {
+                        fetchComments();
+                    }, 700);
                 } else {
                     setComments([]);
                     setIsFetching(false);
@@ -118,38 +120,39 @@ function CommentsSection({
                     )}
 
                     {/* Comments */}
-                    {!isFetching && comments.map((comment, index) => (
-                        <div className="gap-3 my-3" key={index}>
-                            {/* Comment */}
-                            <div className="px-3 flex gap-2">
-                                {/* Avatar Image */}
-                                <div className="w-[50px] h-[50px] rounded-full overflow-clip">
-                                    <Image
-                                        src={comment.profileImageUrl}
-                                        alt="User avatar"
-                                        width={50}
-                                        height={50}
-                                    />
-                                </div>
-
-                                {/* Comment Body */}
-                                <div className="w-full">
-                                    {/* User Name */}
-                                    <div className=" flex gap-3 items-center">
-                                        <p className="text-app-font-2">
-                                            {comment.memberNickname}
-                                        </p>
-                                        <p className="text-app-font-4 text-[12px]">
-                                            2주 전
-                                        </p>
+                    {!isFetching &&
+                        comments.map((comment, index) => (
+                            <div className="gap-3 my-3" key={index}>
+                                {/* Comment */}
+                                <div className="px-3 flex gap-2">
+                                    {/* Avatar Image */}
+                                    <div className="w-[50px] h-[50px] rounded-full overflow-clip">
+                                        <Image
+                                            src={comment.profileImageUrl}
+                                            alt="User avatar"
+                                            width={50}
+                                            height={50}
+                                        />
                                     </div>
 
-                                    {/* Comment Content and Like button */}
-                                    <div className="w-full flex">
-                                        <p className="w-full text-app-font-2">
-                                            {comment.content}
-                                        </p>
-                                        {/* <div className="flex flex-col items-center">
+                                    {/* Comment Body */}
+                                    <div className="w-full">
+                                        {/* User Name */}
+                                        <div className=" flex gap-3 items-center">
+                                            <p className="text-app-font-2">
+                                                {comment.memberNickname}
+                                            </p>
+                                            <p className="text-app-font-4 text-[12px]">
+                                                2주 전
+                                            </p>
+                                        </div>
+
+                                        {/* Comment Content and Like button */}
+                                        <div className="w-full flex">
+                                            <p className="w-full text-app-font-2">
+                                                {comment.content}
+                                            </p>
+                                            {/* <div className="flex flex-col items-center">
                                             <Like
                                                 onClick={() =>
                                                     setIsLiked(!isLiked)
@@ -161,20 +164,20 @@ function CommentsSection({
                                                 2,462
                                             </p>
                                         </div> */}
-                                    </div>
+                                        </div>
 
-                                    <div className="flex gap-5 text-xs">
-                                        <button className="text-app-font-4">
-                                            답글
-                                        </button>
-                                        <button className="text-app-font-4">
-                                            번역
-                                        </button>
+                                        <div className="flex gap-5 text-xs">
+                                            <button className="text-app-font-4">
+                                                답글
+                                            </button>
+                                            <button className="text-app-font-4">
+                                                번역
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
                 </div>
 
                 <DrawerFooter>
