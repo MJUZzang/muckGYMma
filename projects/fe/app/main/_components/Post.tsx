@@ -10,6 +10,8 @@ import CommentsSection from "@/main/community/_components/CommentsSection";
 
 import { Jua, Noto_Sans } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
+import { useAppSelector } from "../../../lib/hooks";
+import { selectNickname } from "../../../lib/slices/userInfoSlice";
 
 const jua = Jua({
     subsets: ["latin"],
@@ -35,6 +37,9 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
         postInfo.content.length <= 80
     );
     const [post, setPost] = useState<PostInfo>(postInfo);
+
+    const myNickname = useAppSelector(selectNickname);
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
     function handleLiked() {
         fetch(`${backendUrl}/api/likes`, {
@@ -73,13 +78,18 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             <div className="mx-2 flex flex-col py-3">
                 {/* 유저 정보 */}
                 <div className="flex">
-                    <Image
-                        src={post.profileImageUrl}
-                        width={325}
-                        height={325}
-                        alt={post.nickname}
-                        className="w-10 h-10 rounded-full pointer-events-none"
-                    />
+                    <div className="w-[40px] h-[40px]">
+                        <div className="w-[40px] h-[40px] overflow-clip rounded-full">
+                            <Image
+                                src={post.profileImageUrl}
+                                width={325}
+                                height={325}
+                                alt={post.nickname}
+                                className="w-[40px] h-[40px] pointer-events-none"
+                            />
+                        </div>
+                    </div>
+
                     <div className="flex flex-col">
                         <p
                             className={`ml-2 text-app-font-2 ${notoSans.className}`}
@@ -90,7 +100,36 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                             {post.createdAt.toLocaleString()}
                         </p>
                     </div>
-                    <div></div>
+
+                    {myNickname === post.nickname && (
+                        <div className="ml-auto flex relative">
+                            <ul
+                                className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg-1 text-app-font-3 gap-1 px-2 ${
+                                    !isMenuOpen && "hidden"
+                                }`}
+                            >
+                                <button
+                                    className="comment-menu w-full text-center px-3 text-nowrap"
+                                    onClick={() => {
+                                    }}
+                                >
+                                    수정하기
+                                </button>
+                                <div className="comment-menu bg-app-bg-3 h-[2px]" />
+                                <button
+                                    className="comment-menu w-full text-center px-3 text-nowrap"
+                                    onClick={() => {}}
+                                >
+                                    삭제하기
+                                </button>
+                            </ul>
+                            <div className="flex gap-1 cursor-pointer py-1">
+                                <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                                <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                                <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
 
