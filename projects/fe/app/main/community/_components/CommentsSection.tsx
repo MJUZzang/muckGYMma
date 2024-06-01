@@ -256,6 +256,9 @@ function CommentsSection({
                                                             <button
                                                                 className="w-full text-center px-2 text-nowrap"
                                                                 onClick={() => {
+                                                                    console.log(
+                                                                        "Clicked"
+                                                                    );
                                                                     setModifyingId(
                                                                         comment.id
                                                                     );
