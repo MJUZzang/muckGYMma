@@ -75,13 +75,15 @@ async function PostsPage({ params }: Readonly<PostsPageProps>) {
 
     return (
         <>
-            <NoData text="업로드된 포스트가 없습니다." />
-
-            <div className="flex flex-col items-center gap-3">
-                {posts.map((post, i) => (
-                    <Post key={i} postInfo={post} />
-                ))}
-            </div>
+            {posts.length > 0 ? (
+                <div className="flex flex-col items-center gap-3">
+                    {posts.map((post, i) => (
+                        <Post key={i} postInfo={post} />
+                    ))}
+                </div>
+            ) : (
+                <NoData text="업로드된 포스트가 없습니다." />
+            )}
         </>
     );
 }
