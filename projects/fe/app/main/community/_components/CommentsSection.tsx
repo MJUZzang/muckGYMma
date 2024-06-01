@@ -248,13 +248,13 @@ function CommentsSection({
                                                     comment.memberNickname && (
                                                     <div className="ml-auto flex relative">
                                                         <ul
-                                                            className={`flex flex-col py-1 absolute right-7 rounded-xl bg-app-bg-1 text-app-font-3 gap-1 px-2 ${
+                                                            className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg-1 text-app-font-3 gap-1 px-2 ${
                                                                 !comment.isMenuOpen &&
                                                                 "hidden"
                                                             }`}
                                                         >
                                                             <button
-                                                                className="w-full text-center px-2 text-nowrap"
+                                                                className="comment-menu w-full text-center px-3 text-nowrap"
                                                                 onClick={() => {
                                                                     setModifyingId(
                                                                         comment.id
@@ -264,22 +264,22 @@ function CommentsSection({
                                                                     );
                                                                 }}
                                                             >
-                                                                수정
+                                                                수정하기
                                                             </button>
-                                                            <div className="bg-app-bg-3 h-[2px]" />
+                                                            <div className="comment-menu bg-app-bg-3 h-[2px]" />
                                                             <button
-                                                                className="w-full text-center px-2 text-nowrap"
+                                                                className="comment-menu w-full text-center px-3 text-nowrap"
                                                                 onClick={() =>
                                                                     deleteComment(
                                                                         comment.id
                                                                     )
                                                                 }
                                                             >
-                                                                삭제
+                                                                삭제하기
                                                             </button>
                                                         </ul>
                                                         <div
-                                                            className="flex gap-1 cursor-pointer"
+                                                            className="flex gap-1 cursor-pointer py-1"
                                                             onClick={() => {
                                                                 setComments(
                                                                     comments.map(
@@ -294,7 +294,11 @@ function CommentsSection({
                                                                                         !c.isMenuOpen,
                                                                                 };
                                                                             } else {
-                                                                                return c;
+                                                                                return {
+                                                                                    ...c,
+                                                                                    isMenuOpen:
+                                                                                        false,
+                                                                                };
                                                                             }
                                                                         }
                                                                     )
