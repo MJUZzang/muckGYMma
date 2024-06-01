@@ -1,9 +1,10 @@
 import React from "react";
 import Post from "@/main/community/following/_components/Post";
 import exampleImage from "@/_images/pooh.jpg";
+import { PostInfo } from "@/_types/PostInfo";
 
 async function FollwingPage() {
-    const dummyPost = {
+    const dummyPost: PostInfo = {
         id: 3,
         content: "ㅁㄴㅇ",
         imageUrls: [
@@ -15,7 +16,7 @@ async function FollwingPage() {
         isLikedByMember: false,
         commentCount: 0,
         kcal: 0,
-        postedAt: new Date(),
+        createdAt: new Date(),
         profileUrl:
             "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/62af530b-7986-48b1-b869-ce7d1b0a4e03_2_image.jpg",
     };

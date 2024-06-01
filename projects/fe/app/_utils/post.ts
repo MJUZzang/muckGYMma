@@ -65,7 +65,7 @@ export function convertPostsCreatedAtToDate(posts: PostInfo[]): PostInfo[] {
         }
         return {
             ...post,
-            postedAt: date,
+            createdAt: date,
         };
     });
 }
