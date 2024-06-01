@@ -30,15 +30,12 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
         postInfo.content.slice(0, 80) +
             `${postInfo.content.length > 80 ? "..." : ""}`
     );
+
     const [showFullContent, setShowFullContent] = useState<boolean>(
         postInfo.content.length <= 80
     );
 
     const [post, setPost] = useState<PostInfo>(postInfo);
-
-    useEffect(() => {
-        setPost(postInfo);
-    }, [postInfo]);
 
     return (
         <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
