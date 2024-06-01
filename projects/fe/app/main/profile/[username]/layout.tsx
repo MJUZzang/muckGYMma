@@ -81,9 +81,8 @@ async function ProfileLayout({
     params,
     children,
 }: Readonly<ProfileLayoutProps>) {
-    const nickname = params.username;
+    const nickname = decodeURIComponent(params.username);
     const profile = await fetchProfileInfo(nickname);
-    console.log(decodeURIComponent(nickname));
     return (
         <div className="mx-auto max-w-[835px] shadow-xl">
             <div className="flex items-center justify-between pr-5 pl-4 mb-4 pt-3">
