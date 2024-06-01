@@ -43,7 +43,7 @@ function CommentsSection({
     const [comments, setComments] = useState<CommentInfo[]>([]);
 
     function fetchComments() {
-        return fetch(`${backendUrl}/api/comments/board?boardId=${post.id}`, {
+        return fetch(`${backendUrl}/api/comments/comments?boardId=${post.id}`, {
             method: "GET",
             credentials: "include",
         })
