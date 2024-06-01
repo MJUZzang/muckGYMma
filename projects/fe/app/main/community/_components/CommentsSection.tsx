@@ -25,6 +25,7 @@ import { backendUrl } from "@/_utils/urls";
 import { PostInfo } from "@/_types/PostInfo";
 import { CommentInfo } from "@/_types/CommentInfo";
 import Shycat from "@/_images/Shycat";
+import CatPlaceholder from "./CatPlaceholder";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -96,27 +97,21 @@ function CommentsSection({
                 </DrawerHeader>
 
                 {/* Drawber body */}
-                <div className="overflow-y-auto">
+                <div className="overflow-y-auto h-full">
+                    {/* 로딩 중일 때 */}
                     {isFetching && (
-                        <div
-                            className={`absolute top-0 left-0 w-full overflow-hidden animate-page-fade-in flex items-center h-[100dvh] ${notoSansKr.className}`}
-                        >
-                            <div className="w-full flex flex-col justify-start">
-                                <div className="max-w-[400px] mx-auto w-full">
-                                    <Shycat />
-                                </div>
+                        <CatPlaceholder
+                            text1="댓글을 로딩 중이에요!"
+                            text2="잠시만 기다려주세요..."
+                        />
+                    )}
 
-                                <div
-                                    className="w-[80vw] max-w-[600px] text-center mx-auto text-[1.08rem] animate-pulse
-                                    text-app-font-4"
-                                >
-                                    <p>댓글을 로딩 중이에요!</p>
-                                    <p className="text-sm">
-                                        잠시만 기다려주세요!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    {/* 댓글이 없을 때 */}
+                    {!isFetching && comments.length === 0 && (
+                        <CatPlaceholder
+                            text1="아직 댓글이 없어요!"
+                            text2="첫 번째 댓글을 남겨보세요!"
+                        />
                     )}
 
                     {/* Comments */}
