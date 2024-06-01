@@ -44,7 +44,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 {/* 유저 정보 */}
                 <div className="flex">
                     <Image
-                        src={postInfo.profileUrl}
+                        src={postInfo.profileImageUrl}
                         width={325}
                         height={325}
                         alt={postInfo.nickname}

@@ -34,7 +34,7 @@ async function fetchUserPosts(nickname: string) {
         })
         .then((data: PostInfo[]) => {
             if (data) {
-                console.log(data);
+                console.log("posts: ", data);
                 return convertPostsCreatedAtToDate(data);
             } else {
                 throw new Error("Failed to fetch user posts");
@@ -56,7 +56,7 @@ async function fetchUserPosts(nickname: string) {
                     commentCount: 0,
                     kcal: 0,
                     createdAt: new Date(),
-                    profileUrl:
+                    profileImageUrl:
                         "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/62af530b-7986-48b1-b869-ce7d1b0a4e03_2_image.jpg",
                 },
             ];

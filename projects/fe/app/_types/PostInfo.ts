@@ -8,6 +8,6 @@ export interface PostInfo {
     isLikedByMember: boolean;
     commentCount: number;
     kcal: number;
-    profileUrl: string;
+    profileImageUrl: string;
     createdAt: Date;
 }

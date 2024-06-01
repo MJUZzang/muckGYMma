@@ -17,7 +17,7 @@ async function FollwingPage() {
         commentCount: 0,
         kcal: 0,
         createdAt: new Date(),
-        profileUrl:
+        profileImageUrl:
             "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/62af530b-7986-48b1-b869-ce7d1b0a4e03_2_image.jpg",
     };
 
