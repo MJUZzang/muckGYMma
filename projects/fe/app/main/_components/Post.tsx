@@ -36,7 +36,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     );
 
     const [post, setPost] = useState<PostInfo>(postInfo);
-
+    console.log(post);
     return (
         <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
             <div className="mx-2 flex flex-col py-3">

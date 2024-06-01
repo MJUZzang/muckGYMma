@@ -49,7 +49,7 @@ function RecentPage() {
     if (!promise) {
         return null;
     }
-
+    console.log(posts);
     return (
         <>
             <div className="flex flex-col items-center pt-3 pb-6 h-full gap-3 bg-app-bg-1">
