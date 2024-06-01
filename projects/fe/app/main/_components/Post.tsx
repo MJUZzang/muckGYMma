@@ -8,7 +8,7 @@ import Comment from "@/main/community/_images/Comment";
 import SpoonKnife from "@/main/community/_images/SpoonKnife";
 import CommentsSection from "@/main/community/_components/CommentsSection";
 
-import { Jua, Noto_Sans } from "next/font/google";
+import { Jua, Noto_Sans, Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
 import { useAppSelector } from "../../../lib/hooks";
 import { selectNickname } from "../../../lib/slices/userInfoSlice";
@@ -18,6 +18,10 @@ const jua = Jua({
     weight: "400",
 });
 const notoSans = Noto_Sans({
+    subsets: ["latin"],
+    weight: "400",
+});
+const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
     weight: "400",
 });
@@ -40,6 +44,29 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
 
     const myNickname = useAppSelector(selectNickname);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+    function deletePost() {
+        fetch(`${backendUrl}/api/board/delete`, {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                boardId: post.id,
+            }),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    window.location.reload();
+                } else {
+                    throw new Error("Failed to delete post");
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
 
     function handleLiked() {
         fetch(`${backendUrl}/api/likes`, {
@@ -101,29 +128,35 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                         </p>
                     </div>
 
-                    {myNickname === post.nickname && (
-                        <div className="ml-auto flex relative">
+                    {myNickname !== post.nickname && (
+                        <div
+                            className={`ml-auto flex relative right-1 ${notoSansKr.className}`}
+                        >
                             <ul
-                                className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg-1 text-app-font-3 gap-1 px-2 ${
+                                className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg shadow-xl border-2 border-gray-200 text-app-font-1 gap-1 px-2 ${
                                     !isMenuOpen && "hidden"
                                 }`}
                             >
                                 <button
                                     className="comment-menu w-full text-center px-3 text-nowrap"
                                     onClick={() => {
+                                        alert("업데이트 예정된 기능입니다.");
                                     }}
                                 >
-                                    수정하기
+                                    ✍️ 수정하기
                                 </button>
                                 <div className="comment-menu bg-app-bg-3 h-[2px]" />
                                 <button
                                     className="comment-menu w-full text-center px-3 text-nowrap"
                                     onClick={() => {}}
                                 >
-                                    삭제하기
+                                    ❌ 삭제하기
                                 </button>
                             </ul>
-                            <div className="flex gap-1 cursor-pointer py-1">
+                            <div
+                                className="flex gap-1 cursor-pointer py-1"
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            >
                                 <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
                                 <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
                                 <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />

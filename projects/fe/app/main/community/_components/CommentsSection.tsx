@@ -248,7 +248,7 @@ function CommentsSection({
                                                     comment.memberNickname && (
                                                     <div className="ml-auto flex relative">
                                                         <ul
-                                                            className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg-1 text-app-font-3 gap-1 px-2 ${
+                                                            className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg shadow-xl border-2 border-gray-200 text-app-font-1 gap-1 px-2 ${
                                                                 !comment.isMenuOpen &&
                                                                 "hidden"
                                                             }`}
@@ -264,7 +264,7 @@ function CommentsSection({
                                                                     );
                                                                 }}
                                                             >
-                                                                수정하기
+                                                                ✍️ 수정하기
                                                             </button>
                                                             <div className="comment-menu bg-app-bg-3 h-[2px]" />
                                                             <button
@@ -275,7 +275,7 @@ function CommentsSection({
                                                                     )
                                                                 }
                                                             >
-                                                                삭제하기
+                                                                ❌ 삭제하기
                                                             </button>
                                                         </ul>
                                                         <div
