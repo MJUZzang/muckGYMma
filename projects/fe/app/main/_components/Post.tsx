@@ -130,7 +130,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                     <div
                         className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
                     >
-                        <CommentsSection onClose={() => {}} post={post} key={post.id}>
+                        <CommentsSection onClose={() => {}} post={post}>
                             <Comment className="fill-app-font-3" />
                         </CommentsSection>
                         <p>{post.commentCount}</p>

@@ -17,7 +17,6 @@ import {
 
 import { Button } from "@/_components/shadcn/ui/button";
 
-import exampleImage from "@/_images/pooh.jpg";
 import Image from "next/image";
 import CommentSectionTextArea from "./CommentSectionTextArea";
 import { Noto_Sans_KR } from "next/font/google";
@@ -26,7 +25,10 @@ import { PostInfo } from "@/_types/PostInfo";
 import { CommentInfo, dummyComments } from "@/_types/CommentInfo";
 import CatPlaceholder from "./CatPlaceholder";
 import { getTimeAgo } from "@/_utils/time";
-import { convertCommentsDatesToDate as convertCommentsDatesToDateType } from "@/_utils/comment";
+import {
+    convertCommentsDatesToDate as convertCommentsDatesToDateType,
+    sortCommnetsByDate,
+} from "@/_utils/comment";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -57,7 +59,8 @@ function CommentsSection({
             .then((comments: CommentInfo[]) => {
                 if (comments) {
                     const converted = convertCommentsDatesToDateType(comments);
-                    setComments(converted);
+                    const sorted = sortCommnetsByDate(converted);
+                    setComments(sorted);
                     setIsFetching(false);
                 } else {
                     throw new Error("Failed to fetch comments");
@@ -126,17 +129,23 @@ function CommentsSection({
                                 <>
                                     {/* Comment */}
                                     <div
-                                        key={index}
+                                        key={comment.id}
                                         className="px-3 flex gap-2"
                                     >
                                         {/* Avatar Image */}
-                                        <Image
-                                            src={comment.profileImageUrl}
-                                            alt="User avatar"
-                                            className="h-[45px] w-[45px] rounded-full"
-                                            width={50}
-                                            height={50}
-                                        />
+                                        <div className="w-[45px] h-[45px]">
+                                            <div className="w-[45px] h-[45px] overflow-clip rounded-full">
+                                                <Image
+                                                    src={
+                                                        comment.profileImageUrl
+                                                    }
+                                                    alt="User avatar"
+                                                    className="w-[45px] h-[45px] pointer-events-none"
+                                                    width={43}
+                                                    height={43}
+                                                />
+                                            </div>
+                                        </div>
 
                                         {/* Comment Body */}
                                         <div className="w-full">
@@ -202,19 +211,38 @@ function CommentsSection({
                 </div>
 
                 <DrawerFooter>
-                    <div className="flex mx-2 gap-2 pb-2 pt-2">
-                        {/* Avatar Image */}
-                        <div className="w-[43px] h-[43px] rounded-full overflow-clip">
-                            <Image
-                                src={exampleImage}
-                                alt="User avatar"
-                                width={43}
-                                height={43}
-                            />
-                        </div>
-
-                        <CommentSectionTextArea text={text} setText={setText} />
-                    </div>
+                    <CommentSectionTextArea
+                        text={text}
+                        setText={setText}
+                        onSubmit={() => {
+                            fetch(`${backendUrl}/api/comments/create`, {
+                                method: "POST",
+                                credentials: "include",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    boardId: post.id,
+                                    content: text,
+                                }),
+                            })
+                                .then((res) => {
+                                    if (res.ok) {
+                                        setIsFetching(true);
+                                        setTimeout(() => {
+                                            fetchComments();
+                                        }, 700);
+                                    } else {
+                                        throw new Error(
+                                            "Failed to create comment"
+                                        );
+                                    }
+                                })
+                                .catch((err) => {
+                                    console.error(err);
+                                });
+                        }}
+                    />
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>

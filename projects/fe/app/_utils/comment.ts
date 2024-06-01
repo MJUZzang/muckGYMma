@@ -9,3 +9,9 @@ export function convertCommentsDatesToDate(comment: CommentInfo[]): CommentInfo[
         }
     });
 }
+
+export function sortCommnetsByDate(comments: CommentInfo[]): CommentInfo[] {
+    return comments.sort((a, b) => {
+        return b.updatedAt.getTime() - a.updatedAt.getTime();
+    });
+}
