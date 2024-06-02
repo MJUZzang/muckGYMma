@@ -1,8 +1,6 @@
 package mju.paygo.plan.ui;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mju.paygo.plan.application.dto.MealPlanFindRequest;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import mju.paygo.plan.application.PlanService;
 import mju.paygo.plan.application.dto.PlanCreateRequest;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -68,8 +67,8 @@ public class PlanController {
     }
 
     @GetMapping("/meal")
-    public ResponseEntity<Long> findPlanIdByMeal(@AuthMember final Long memberId, @RequestBody @Valid final MealPlanFindRequest request) {
-        Long planId = planService.findPlanIdByMemberAndMeal(memberId, request.mealId());
+    public ResponseEntity<Long> findPlanIdByMeal(@AuthMember final Long memberId, @RequestParam(required = true) final Long mealId) {
+        Long planId = planService.findPlanIdByMemberAndMeal(memberId, mealId);
         return ResponseEntity.ok()
                 .body(planId);
     }
