@@ -9,6 +9,7 @@ import mju.paygo.member.domain.member.Member;
 import mju.paygo.member.domain.member.MemberRepository;
 import mju.paygo.plan.domain.Plan;
 import mju.paygo.plan.domain.PlanRepository;
+import mju.paygo.profile.ui.dto.MainProfileResponse;
 import mju.paygo.profile.ui.dto.ProfileResponse;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,12 @@ public class ProfileService {
         long nowClearDay = calculateNowClearDay(clearedPlans);
 
         return new ProfileResponse(nickname, postCount, followingCount, followerCount, content, member.getProfileImageUrl(), totalClearDay, longestClearDay, nowClearDay);
+    }
+
+    public MainProfileResponse getProfileMain(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(MemberNotFoundException::new);
+        return new MainProfileResponse(member.getNickname(), member.getProfileImageUrl());
     }
 
     private Member findMemberByNickname(String nickname) {
