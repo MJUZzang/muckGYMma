@@ -2,7 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import NavigateBackButton from "./_components/NavigateBackButton";
-import { fetchMeal, findPlanIdByMealId } from "@/main/profile/_utils/meal";
+import {
+    fetchMeal,
+    findPlanIdByMealId,
+    findPostIdByMealId,
+} from "@/main/profile/_utils/meal";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -26,16 +30,23 @@ async function MealInfoPage({ params }: MealInfoProps) {
     }
     const mealPromise = fetchMeal(mealId);
     const planIdPromise = findPlanIdByMealId(mealId);
+    const postIdPromise = findPostIdByMealId(mealId);
 
-    const [meal, planId] = await Promise.all([mealPromise, planIdPromise]);
+    const [meal, planId, postId] = await Promise.all([
+        mealPromise,
+        planIdPromise,
+        postIdPromise,
+    ]);
 
+    console.log("postId: ", postId);
+    
     function getButtonLink() {
         if (!meal.planed) {
             return `/plan/pick/${meal.id}`;
         } else if (meal.exercised && !meal.posted) {
             return `/post/write?mealId=${meal.id}&img=${meal.imageUrl}`;
         } else if (meal.posted) {
-            return `/post/${meal.id}`;
+            return `/post/${postId}`;
         } else {
             return `/plan/info/${planId}`;
         }

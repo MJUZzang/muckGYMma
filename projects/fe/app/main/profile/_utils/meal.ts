@@ -121,6 +121,40 @@ export function sortMealsByDate(meals: MealInfo[]) {
     });
 }
 
+export async function findPostIdByMealId(mealId: number) {
+    const cookieStore = cookies();
+
+    return await fetch(
+        `${backendUrl}/api/board/post-by-meal?mealId=${mealId}`,
+        {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                Cookie: cookieStore
+                    .getAll()
+                    .map((cookie) => {
+                        return `${cookie.name}=${cookie.value}`;
+                    })
+                    .join("; "),
+            },
+        }
+    )
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Failed to fetch post id");
+            }
+        })
+        .then((data: number | null) => {
+            return data;
+        })
+        .catch((err) => {
+            console.error(err);
+            return null;
+        });
+}
+
 export async function findPlanIdByMealId(mealId: number) {
     const cookieStore = cookies();
 

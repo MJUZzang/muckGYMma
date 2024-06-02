@@ -7,9 +7,12 @@ const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 
 function PostLayout({
     children,
+    params
 }: Readonly<{
     children: React.ReactNode;
+    params: { postId: number };
 }>) {
+    console.log(params);
     return (
         <>
             <div
