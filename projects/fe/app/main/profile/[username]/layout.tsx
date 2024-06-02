@@ -120,7 +120,7 @@ async function ProfileLayout({
     params,
     children,
 }: Readonly<ProfileLayoutProps>) {
-    const nickname = decodeURIComponent(params.username);
+    const nickname = params.username;
     const profile = await fetchProfileInfo(nickname);
     const isFollowing = await fetchIsFollowing(nickname);
 
