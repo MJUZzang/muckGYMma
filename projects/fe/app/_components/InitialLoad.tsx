@@ -17,8 +17,8 @@ function InitialLoad(props: InitialLoadProps) {
     const [isLoading, setIsLoading] = useState(true);
 
     function fetchUserInfo() {
-        if (true) {
-            // if (process.env.NODE_ENV !== "development") {
+        // if (true) {
+        if (process.env.NODE_ENV !== "development") {
             fetch(`${backendUrl}/api/member/setup`, {
                 method: "GET",
                 credentials: "include",
