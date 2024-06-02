@@ -24,8 +24,8 @@ public class FollowController {
     private final FollowService followService;
 
     @PostMapping
-    public ResponseEntity<Boolean> toggleFollow(@AuthMember final Long followerId, @Valid @RequestBody final FollowRequest request) {
-        boolean isFollowing = followService.follow(followerId, request.followeeId());
+    public ResponseEntity<Boolean> toggleFollow(@Valid @RequestBody final FollowRequest request) {
+        boolean isFollowing = followService.follow(request.followerNickname(), request.followeeNickname());
         return ResponseEntity.ok(isFollowing);
     }
 
