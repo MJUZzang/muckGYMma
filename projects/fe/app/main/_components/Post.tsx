@@ -195,6 +195,13 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 </div>
             </div>
 
+            <div className="flex text-sm px-3">
+                <p>{randomUserNameAmongLikes}님</p>
+                <p>&nbsp;외&nbsp;</p>
+                <p className="font-semibold text-app-font-4">여러명</p>
+                <p>이 좋아합니다</p>
+            </div>
+            
             {/* 포스트 정보 */}
             <div className="flex justify-between mt-1 px-2">
                 <div className="w-full flex py-1 gap-3">
@@ -237,12 +244,6 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 </div>
             </div>
 
-            <div className="flex text-sm px-3">
-                <p>{randomUserNameAmongLikes}님</p>
-                <p>&nbsp;외&nbsp;</p>
-                <p className="font-semibold">여러명</p>
-                <p>이 좋아합니다</p>
-            </div>
             {/* 포스트 내용 */}
             <p className={`mx-2 text-pretty text-sm text-app-font-1 mt-1`}>
                 {truncatedContent}
