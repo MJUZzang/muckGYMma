@@ -5,7 +5,8 @@ import {
     fetchFollowers,
     fetchFollowing,
 } from "@/main/profile/[username]/(follow)/_utils/follow";
-import NavMenu from "./_components/NavMenu";
+import NavMenu from "@/main/profile/[username]/(follow)/_components/NavMenu";
+import NavigateBack from "@/main/profile/[username]/(follow)/_components/NavigateBack";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -24,7 +25,7 @@ async function FollowLayout({ children, params }: FollowLayoutProps) {
             className={`absolute top-0 w-full h-[100dvh] bg-app-bg ${notoSansKr.className}`}
         >
             <div className="grid grid-cols-3 px-2 py-2">
-                <ArrowBack className="fill-app-font-2" />
+                <NavigateBack />
                 <p className="w-full text-center text-lg">{username}</p>
                 <div />
             </div>
