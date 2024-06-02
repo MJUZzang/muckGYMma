@@ -77,7 +77,7 @@ async function fetchIsFollowing(username: string) {
     const cookieStore = cookies();
 
     return await fetch(
-        `${backendUrl}/api/follow/is-following/targetNickname=${username}`,
+        `${backendUrl}/api/follow/is-following?targetNickname=${username}`,
         {
             method: "GET",
             credentials: "include",
