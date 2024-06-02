@@ -152,7 +152,10 @@ export default function Page() {
                 className={`h-full animate-page-enter ${notoSansKr.className}`}
                 onClick={() => setIsModalOpen(false)}
             >
-                <ArrowBack className="fill-app-font-4 cursor-pointer ml-3 mt-4 mb-3" />
+                <ArrowBack
+                    className="fill-app-font-4 cursor-pointer ml-3 mt-4 mb-3"
+                    onClick={() => router.back()}
+                />
 
                 <div className="mx-5">
                     <Image
