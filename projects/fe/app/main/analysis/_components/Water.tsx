@@ -47,29 +47,32 @@ function Water({ className }: WaterProps) {
 
     useEffect(() => {
         if (amountRef.current) {
-            amountRef.current.style.width = `${(amount / 2000) * 100}%`;
+            const width = (amount / 2000) * 100;
+            amountRef.current.style.width = `${width >= 100 ? 100 : width}%`;
         }
     }, [amount]);
 
     function addWater(water: number) {
-        fetch(`${backendUrl}/api/waters`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            credentials: "include",
-            body: JSON.stringify({ water }),
-        })
-            .then((res) => {
-                if (res.ok) {
-                    setAmount((prev) => prev + water);
-                } else {
-                    throw new Error("Failed to add water.");
-                }
+        if (amount + water >= 0) {
+            fetch(`${backendUrl}/api/waters`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify({ water }),
             })
-            .catch((err) => {
-                console.error(err);
-            });
+                .then((res) => {
+                    if (res.ok) {
+                        setAmount((prev) => prev + water);
+                    } else {
+                        throw new Error("Failed to add water.");
+                    }
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
     }
 
     return (
