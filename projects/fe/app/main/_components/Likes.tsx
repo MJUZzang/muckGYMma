@@ -130,7 +130,10 @@ function Likes({ likeList, setPost, isOpen, onClose = () => {} }: LikesProps) {
                                 className="flex items-center space-x-2"
                             >
                                 {/* Avatar Image */}
-                                <Link href={`/main/profile/${like.nickname}/posts`} className="w-[45px] h-[45px]">
+                                <Link
+                                    href={`/main/profile/${like.nickname}/posts`}
+                                    className="w-[45px] h-[45px]"
+                                >
                                     <div className="w-[45px] h-[45px] overflow-clip rounded-full">
                                         <Image
                                             src={like.profileImageUrl}
@@ -151,14 +154,18 @@ function Likes({ likeList, setPost, isOpen, onClose = () => {} }: LikesProps) {
                                     </p>
                                 </div>
 
-                                <button
-                                    className="text-nowrap text-sm rounded-lg px-3 py-1 border-2 z-[30]"
-                                    onClick={() => {
-                                        handleButtonClick(like);
-                                    }}
-                                >
-                                    {like.justUnfollowed ? "팔로우" : "팔로잉"}
-                                </button>
+                                {myNickname !== like.nickname && (
+                                    <button
+                                        className="text-nowrap text-sm rounded-lg px-3 py-1 border-2 z-[30]"
+                                        onClick={() => {
+                                            handleButtonClick(like);
+                                        }}
+                                    >
+                                        {like.justUnfollowed
+                                            ? "팔로우"
+                                            : "팔로잉"}
+                                    </button>
+                                )}
                             </div>
                         );
                     })}
