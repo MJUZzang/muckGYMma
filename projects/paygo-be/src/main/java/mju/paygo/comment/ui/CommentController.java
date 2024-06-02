@@ -35,7 +35,7 @@ public class CommentController {
     @PostMapping("/create")
     public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentCreateRequest request) {
         Comment comment = commentService.createComment(memberId, request.boardId(), request.content());
-        LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        LocalDateTime createdAt = LocalDateTime.now();
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

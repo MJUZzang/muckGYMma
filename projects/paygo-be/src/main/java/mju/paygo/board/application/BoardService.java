@@ -98,6 +98,13 @@ public class BoardService {
                 .collect(Collectors.toList());
     }
 
+    public List<BoardFindResponse> findAllByMemberIdAndNickname(Long memberId, String nickname) {
+        List<Board> boards = boardRepository.findByMemberNickname(nickname);
+        return boards.stream()
+                .map(board -> toBoardFindResponse(board, memberId))
+                .collect(Collectors.toList());
+    }
+
     public List<BoardFindResponse> findAllByNickname(final String nickname) {
         return boardRepository.findByMemberNickname(nickname).stream()
                 .map(board -> toBoardFindResponse(board, board.getMember().getId()))

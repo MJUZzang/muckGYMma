@@ -46,7 +46,7 @@ public class ProfileService {
     public MainProfileResponse getProfileMain(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(MemberNotFoundException::new);
-        return new MainProfileResponse(member.getNickname(), member.getProfileImageUrl());
+        return new MainProfileResponse(member.getProfileImageUrl(), member.getNickname());
     }
 
     private Member findMemberByNickname(String nickname) {
