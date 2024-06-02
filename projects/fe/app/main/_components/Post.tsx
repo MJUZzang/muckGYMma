@@ -178,7 +178,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                     </button>
                                 </ul>
                                 <div
-                                    className="flex gap-1 cursor-pointer py-1"
+                                    className="flex gap-1 cursor-pointer py-1 z-[50]"
                                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                                 >
                                     <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
