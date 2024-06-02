@@ -256,6 +256,16 @@ function CommentsSection({
                                                             <button
                                                                 className="comment-menu w-full text-center px-3 text-nowrap"
                                                                 onClick={() => {
+                                                                    setComments(comments.map((c) => {
+                                                                        if (c.id === comment.id) {
+                                                                            return {
+                                                                                ...c,
+                                                                                content: "수정 중..."
+                                                                            };
+                                                                        } else {
+                                                                            return c;
+                                                                        }
+                                                                    }))
                                                                     setModifyingId(
                                                                         comment.id
                                                                     );
