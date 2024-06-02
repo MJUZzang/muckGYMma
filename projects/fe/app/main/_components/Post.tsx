@@ -206,17 +206,26 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                     </div>
                 </div>
 
-                <div
-                    className="flex text-sm px-2 mt-1 cursor-pointer"
-                    onClick={() => {
-                        setLikesModalOpen(true);
-                    }}
-                >
-                    <p>{randomUserNameAmongLikes}님</p>
-                    <p>&nbsp;외&nbsp;</p>
-                    <p className="font-semibold text-app-font-3">여러명</p>
-                    <p>이 좋아합니다</p>
-                </div>
+                {post.likeCount > 0 && (
+                    <div
+                        className="flex text-sm px-2 mt-1 cursor-pointer"
+                        onClick={() => {
+                            setLikesModalOpen(true);
+                        }}
+                    >
+                        <p>{randomUserNameAmongLikes}님</p>
+                        {post.likeCount > 1 && (
+                            <>
+                                <p>&nbsp;외&nbsp;</p>
+                                <p className="font-semibold text-app-font-3">
+                                    여러명
+                                </p>
+                            </>
+                        )}
+
+                        <p>이 좋아합니다</p>
+                    </div>
+                )}
 
                 {/* 포스트 정보 */}
                 <div className="flex justify-between mt-1 px-2">
