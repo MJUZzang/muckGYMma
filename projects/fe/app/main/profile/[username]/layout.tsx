@@ -4,7 +4,7 @@ import exampleImage from "@/_images/pooh.jpg";
 import Hash from "@/main/profile/_components/Hash";
 
 import Link from "next/link";
-import { Noto_Sans_KR, Dosis, Cookie } from "next/font/google";
+import { Noto_Sans_KR, Dosis } from "next/font/google";
 import UploadMeal from "@/_components/UploadMeal";
 import Camera from "@/_images/Camera";
 import Nav from "@/main/profile/_components/Nav";
@@ -14,11 +14,6 @@ import { cookies } from "next/headers";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"] });
 const dosis = Dosis({ subsets: ["latin"] });
-
-interface ProfileLayoutProps {
-    params: { username: string };
-    children?: React.ReactNode;
-}
 
 interface ProfileInfo {
     nickname: string;
@@ -77,12 +72,56 @@ async function fetchProfileInfo(username: string) {
         });
 }
 
+async function fetchIsFollowing(username: string) {
+    const cookieStore = cookies();
+
+    return await fetch(
+        `${backendUrl}/api/follow/is-following/targetNickname=${username}`,
+        {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                Cookie: cookieStore
+                    .getAll()
+                    .map((cookie) => {
+                        return `${cookie.name}=${cookie.value}`;
+                    })
+                    .join("; "),
+            },
+        }
+    )
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Sever responsded with an error");
+            }
+        })
+        .then((data: { isFollowing: boolean }) => {
+            if (!data) {
+                throw new Error("Failed to fetch is-following data");
+            }
+            return data.isFollowing;
+        })
+        .catch((err) => {
+            console.error(err);
+            return true;
+        });
+}
+
+interface ProfileLayoutProps {
+    params: { username: string };
+    children?: React.ReactNode;
+}
+
 async function ProfileLayout({
     params,
     children,
 }: Readonly<ProfileLayoutProps>) {
     const nickname = decodeURIComponent(params.username);
     const profile = await fetchProfileInfo(nickname);
+    const isFollowing = await fetchIsFollowing(nickname);
+
     return (
         <div className="mx-auto max-w-[835px] shadow-xl">
             <div className="flex items-center justify-between pr-5 pl-4 mb-4 pt-3">
@@ -210,7 +249,11 @@ async function ProfileLayout({
                     </div>
                 </div>
 
-                <Interaction profileUsername={nickname} className="mt-2" />
+                <Interaction
+                    profileUsername={nickname}
+                    className="mt-2"
+                    isFollowing={isFollowing}
+                />
 
                 <div className="mx-4 mt-5 text-app-font-2">
                     {profile.content && (
