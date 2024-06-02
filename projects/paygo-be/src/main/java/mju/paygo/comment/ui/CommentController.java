@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,6 @@ public class CommentController {
     @PostMapping("/create")
     public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentCreateRequest request) {
         Comment comment = commentService.createComment(memberId, request.boardId(), request.content());
-        LocalDateTime createdAt = LocalDateTime.now();
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -43,7 +41,6 @@ public class CommentController {
     @PatchMapping("/update")
     public ResponseEntity<Void> updateComment(@AuthMember Long memberId, @Valid @RequestBody final CommentRequest request) {
         Comment comment = commentService.updateComment(memberId, request.commentId(), request.content());
-        LocalDateTime updatedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
         return ResponseEntity.ok().build();
     }

@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mju.paygo.global.domain.BaseEntity;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -27,14 +27,14 @@ public class Water extends BaseEntity {
     @Column(nullable = false)
     private Long water;
 
-    private Water(final LocalDateTime createdAt, final LocalDateTime updatedAt, final Long memberId, final Long water) {
+    private Water(final ZonedDateTime createdAt, final ZonedDateTime updatedAt, final Long memberId, final Long water) {
         super(createdAt, updatedAt);
         this.memberId = memberId;
         this.water = water;
     }
 
     public static Water createDefault(final Long memberId) {
-        return new Water(LocalDateTime.now(), LocalDateTime.now(), memberId, 0L);
+        return new Water(ZonedDateTime.now(), ZonedDateTime.now(), memberId, 0L);
     }
 
     public void addWater(final Long water) {

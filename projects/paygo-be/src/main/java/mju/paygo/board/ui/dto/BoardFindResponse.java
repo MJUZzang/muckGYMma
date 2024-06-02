@@ -1,7 +1,7 @@
 package mju.paygo.board.ui.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public record BoardFindResponse(
@@ -10,7 +10,7 @@ public record BoardFindResponse(
         List<String> imageUrls,
         Long memberId,
         String nickname,
-        LocalDateTime createdAt,
+        ZonedDateTime createdAt,
         String profileImageUrl,
         Long likeCount,
         boolean isLikedByMember,

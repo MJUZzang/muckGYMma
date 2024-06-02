@@ -27,7 +27,7 @@ public class QPlan extends EntityPathBase<Plan> {
     public final DateTimePath<java.time.LocalDateTime> clearedAt = createDateTime("clearedAt", java.time.LocalDateTime.class);
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
+    public final DateTimePath<java.time.ZonedDateTime> createdAt = _super.createdAt;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -40,7 +40,7 @@ public class QPlan extends EntityPathBase<Plan> {
     public final ListPath<Task, QTask> tasks = this.<Task, QTask>createList("tasks", Task.class, QTask.class, PathInits.DIRECT2);
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
+    public final DateTimePath<java.time.ZonedDateTime> updatedAt = _super.updatedAt;
 
     public QPlan(String variable) {
         super(Plan.class, forVariable(variable));

@@ -21,7 +21,6 @@ import mju.paygo.likes.domain.Likes;
 import mju.paygo.meal.domain.Meal;
 import mju.paygo.member.domain.member.Member;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,9 +50,6 @@ public class Board extends BaseEntity {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
     @Column(nullable = false)
     private Boolean verified = false;
 
@@ -65,7 +61,6 @@ public class Board extends BaseEntity {
         this.meal = meal;
         this.imageUrls = imageUrls;
         this.content = content;
-        this.createdAt = LocalDateTime.now();
         this.verified = verified;
     }
 

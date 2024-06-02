@@ -3,7 +3,7 @@ package mju.paygo.plan.ui.dto;
 import mju.paygo.plan.domain.Plan;
 import mju.paygo.plan.domain.Task;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public record PlanOuterResponse(
         Long id,
@@ -11,7 +11,7 @@ public record PlanOuterResponse(
         Integer total,
         Integer time,
         Boolean cleared,
-        LocalDateTime createdAt
+        ZonedDateTime createdAt
 ) {
 
     public static PlanOuterResponse from(final Plan plan) {

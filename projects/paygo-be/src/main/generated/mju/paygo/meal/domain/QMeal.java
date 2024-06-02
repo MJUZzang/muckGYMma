@@ -25,7 +25,7 @@ public class QMeal extends EntityPathBase<Meal> {
     public final mju.paygo.global.domain.QBaseEntity _super = new mju.paygo.global.domain.QBaseEntity(this);
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
+    public final DateTimePath<java.time.ZonedDateTime> createdAt = _super.createdAt;
 
     public final BooleanPath exercised = createBoolean("exercised");
 
@@ -44,7 +44,7 @@ public class QMeal extends EntityPathBase<Meal> {
     public final BooleanPath posted = createBoolean("posted");
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
+    public final DateTimePath<java.time.ZonedDateTime> updatedAt = _super.updatedAt;
 
     public QMeal(String variable) {
         this(Meal.class, forVariable(variable), INITS);

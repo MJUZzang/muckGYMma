@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,7 +77,7 @@ public class MealService {
         return mealRepository.findAllByMemberIdAndToday(memberId);
     }
 
-    public LocalDateTime lastAteEatenMeal(final Long memberId) {
+    public ZonedDateTime lastAteEatenMeal(final Long memberId) {
         Optional<Meal> meal = mealRepository.findLastAteMeal(memberId);
         if (meal.isEmpty()) {
             return null;

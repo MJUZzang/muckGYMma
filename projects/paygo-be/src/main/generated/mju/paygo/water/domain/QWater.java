@@ -22,14 +22,14 @@ public class QWater extends EntityPathBase<Water> {
     public final mju.paygo.global.domain.QBaseEntity _super = new mju.paygo.global.domain.QBaseEntity(this);
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
+    public final DateTimePath<java.time.ZonedDateTime> createdAt = _super.createdAt;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final NumberPath<Long> memberId = createNumber("memberId", Long.class);
 
     //inherited
-    public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
+    public final DateTimePath<java.time.ZonedDateTime> updatedAt = _super.updatedAt;
 
     public final NumberPath<Long> water = createNumber("water", Long.class);
 
