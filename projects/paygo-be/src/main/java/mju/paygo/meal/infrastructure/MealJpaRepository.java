@@ -18,5 +18,8 @@ public interface MealJpaRepository extends JpaRepository<Meal, Long> {
     @Query("SELECT m FROM Meal m WHERE m.memberId = :memberId AND m.createdAt BETWEEN :start AND :end")
     List<Meal> findAllByMemberIdAndToday(Long memberId, LocalDateTime start, LocalDateTime end);
 
+    @Query("SELECT m FROM Meal m WHERE m.memberId =:memberId ORDER BY m.createdAt DESC")
+    Optional<Meal> findLastAteMeal(Long memberId);
+
     Optional<Meal> findByImageUrl(String imageUrl);
 }

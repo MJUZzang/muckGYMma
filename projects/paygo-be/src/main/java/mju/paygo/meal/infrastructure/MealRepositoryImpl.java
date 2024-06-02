@@ -48,4 +48,9 @@ public class MealRepositoryImpl implements MealRepository {
     public Optional<Meal> findByImageUrl(String imageUrl) {
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Meal> findLastAteMeal(final Long memberId) {
+        return mealJpaRepository.findLastAteMeal(memberId);
+    }
 }
