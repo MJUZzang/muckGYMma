@@ -28,8 +28,6 @@ async function MealInfoPage({ params }: MealInfoProps) {
     const planIdPromise = findPlanIdByMealId(mealId);
 
     const [meal, planId] = await Promise.all([mealPromise, planIdPromise]);
-    
-    console.log("Plan id: ", planId);
 
     function getButtonLink() {
         if (!meal.planed) {
