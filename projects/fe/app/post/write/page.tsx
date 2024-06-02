@@ -15,6 +15,9 @@ import {
 import Button from "@/_components/Button";
 import { Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
+import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/../lib/hooks";
+import { selectNickname } from "@/../lib/slices/userInfoSlice";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -22,6 +25,8 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 function WritePage() {
+    const router = useRouter();
+    const nickname = useAppSelector(selectNickname);
     const inputRef = useRef<HTMLInputElement>(null);
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
     const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -165,6 +170,9 @@ function WritePage() {
                             .then((res) => {
                                 if (res.ok) {
                                     console.log("Post created successfully.");
+                                    router.push(
+                                        `/main/profile/${nickname}/posts`
+                                    );
                                 } else {
                                     throw new Error(
                                         "Error occured while uploading image."
