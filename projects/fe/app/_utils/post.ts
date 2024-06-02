@@ -93,7 +93,15 @@ export async function fetchFollowingPosts() {
         })
         .then((data: PostInfo[]) => {
             if (data) {
-                return convertPostsCreatedAtToDate(data);
+                const converted = convertPostsCreatedAtToDate(data);
+                const likeCountCalculated = converted.map((post) => {
+                    return {
+                        ...post,
+                        likeCount: post.likes ? post.likes.length : 0,
+                    };
+                });
+                console.log(likeCountCalculated);
+                return likeCountCalculated;
             } else {
                 throw new Error("Failed to fetch recent posts");
             }
@@ -129,7 +137,15 @@ export async function fetchRecentPosts() {
         })
         .then((data: PostInfo[]) => {
             if (data) {
-                return convertPostsCreatedAtToDate(data);
+                const converted = convertPostsCreatedAtToDate(data);
+                const likeCountCalculated = converted.map((post) => {
+                    return {
+                        ...post,
+                        likeCount: post.likes ? post.likes.length : 0,
+                    };
+                });
+                console.log(likeCountCalculated);
+                return likeCountCalculated;
             } else {
                 throw new Error("Failed to fetch recent posts");
             }
