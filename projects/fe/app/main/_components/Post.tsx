@@ -14,6 +14,7 @@ import { backendUrl } from "@/_utils/urls";
 import { useAppSelector } from "../../../lib/hooks";
 import { selectNickname } from "../../../lib/slices/userInfoSlice";
 import Link from "next/link";
+import Likes from "./Likes";
 
 const jua = Jua({
     subsets: ["latin"],
@@ -110,156 +111,165 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     }
 
     return (
-        <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
-            <div className="mx-2 flex flex-col py-3">
-                {/* 유저 정보 */}
-                <div className="flex">
-                    <Link
-                        href={`/main/profile/${post.nickname}/posts`}
-                        className="w-[40px] h-[40px]"
-                    >
-                        <div className="w-[40px] h-[40px] overflow-clip rounded-full">
-                            <Image
-                                src={post.profileImageUrl}
-                                width={325}
-                                height={325}
-                                alt={post.nickname}
-                                className="w-[40px] h-[40px] pointer-events-none"
-                            />
-                        </div>
-                    </Link>
-
-                    <div className="flex flex-col">
+        <>
+            <Likes
+                likeList={post.likes}
+                setPost={setPost}
+                username={post.nickname}
+            />
+            <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
+                <div className="mx-2 flex flex-col py-3">
+                    {/* 유저 정보 */}
+                    <div className="flex">
                         <Link
                             href={`/main/profile/${post.nickname}/posts`}
-                            className={`ml-2 text-app-font-2 ${notoSans.className}`}
+                            className="w-[40px] h-[40px]"
                         >
-                            {post.nickname}
-                        </Link>
-                        <p className="ml-2 text-xs text-app-font-4">
-                            {post.createdAt.toLocaleString()}
-                        </p>
-                    </div>
-
-                    {myNickname === post.nickname && (
-                        <div
-                            className={`ml-auto flex relative right-1 ${notoSansKr.className}`}
-                        >
-                            <ul
-                                className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg shadow-xl border-2 border-gray-200 text-app-font-1 gap-1 px-2 ${
-                                    !isMenuOpen && "hidden"
-                                }`}
-                            >
-                                <button
-                                    className="comment-menu w-full text-center px-3 text-nowrap"
-                                    onClick={() => {
-                                        alert("업데이트 예정된 기능입니다.");
-                                    }}
-                                >
-                                    ✍️ 수정하기
-                                </button>
-                                <div className="comment-menu bg-app-bg-3 h-[2px]" />
-                                <button
-                                    className="comment-menu w-full text-center px-3 text-nowrap"
-                                    onClick={deletePost}
-                                >
-                                    ❌ 삭제하기
-                                </button>
-                            </ul>
-                            <div
-                                className="flex gap-1 cursor-pointer py-1"
-                                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            >
-                                <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
-                                <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
-                                <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                            <div className="w-[40px] h-[40px] overflow-clip rounded-full">
+                                <Image
+                                    src={post.profileImageUrl}
+                                    width={325}
+                                    height={325}
+                                    alt={post.nickname}
+                                    className="w-[40px] h-[40px] pointer-events-none"
+                                />
                             </div>
+                        </Link>
+
+                        <div className="flex flex-col">
+                            <Link
+                                href={`/main/profile/${post.nickname}/posts`}
+                                className={`ml-2 text-app-font-2 ${notoSans.className}`}
+                            >
+                                {post.nickname}
+                            </Link>
+                            <p className="ml-2 text-xs text-app-font-4">
+                                {post.createdAt.toLocaleString()}
+                            </p>
                         </div>
-                    )}
-                </div>
-            </div>
 
-            {/* 포스트 이미지 */}
-            <div className="overflow-hidden flex flex-col" ref={emblaRef}>
-                <div className="flex">
-                    {post.imageUrls.map((url, i) => (
-                        <Image
-                            key={i}
-                            src={url}
-                            alt="Post image"
-                            width={325}
-                            height={325}
-                            className="w-full rounded-t-lg shrink-0 grow-0"
-                        />
-                    ))}
-                </div>
-            </div>
-
-            <div className="flex text-sm px-3">
-                <p>{randomUserNameAmongLikes}님</p>
-                <p>&nbsp;외&nbsp;</p>
-                <p className="font-semibold text-app-font-4">여러명</p>
-                <p>이 좋아합니다</p>
-            </div>
-            
-            {/* 포스트 정보 */}
-            <div className="flex justify-between mt-1 px-2">
-                <div className="w-full flex py-1 gap-3">
-                    <div
-                        className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
-                    >
-                        <Like
-                            onClick={handleLiked}
-                            isLiked={post.isLikedByMember}
-                            className={`${
-                                post.isLikedByMember
-                                    ? "stroke-[#FF0000]"
-                                    : "stroke-app-font-3"
-                            } ${
-                                post.isLikedByMember
-                                    ? "fill-[#FF0000]"
-                                    : "fill-none"
-                            }`}
-                        />
-                        <p>{post.likeCount}</p>
-                    </div>
-
-                    <div
-                        className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
-                    >
-                        <CommentsSection onClose={() => {}} post={post}>
-                            <Comment className="fill-app-font-3" />
-                        </CommentsSection>
-                        <p>{post.commentCount}</p>
-                    </div>
-
-                    <div
-                        className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${
-                            notoSans.className
-                        } ${!post.kcal && "invisible"}`}
-                    >
-                        <SpoonKnife className="fill-app-font-3" />
-                        <p>{post.kcal} kcal</p>
+                        {myNickname === post.nickname && (
+                            <div
+                                className={`ml-auto flex relative right-1 ${notoSansKr.className}`}
+                            >
+                                <ul
+                                    className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg shadow-xl border-2 border-gray-200 text-app-font-1 gap-1 px-2 ${
+                                        !isMenuOpen && "hidden"
+                                    }`}
+                                >
+                                    <button
+                                        className="comment-menu w-full text-center px-3 text-nowrap"
+                                        onClick={() => {
+                                            alert(
+                                                "업데이트 예정된 기능입니다."
+                                            );
+                                        }}
+                                    >
+                                        ✍️ 수정하기
+                                    </button>
+                                    <div className="comment-menu bg-app-bg-3 h-[2px]" />
+                                    <button
+                                        className="comment-menu w-full text-center px-3 text-nowrap"
+                                        onClick={deletePost}
+                                    >
+                                        ❌ 삭제하기
+                                    </button>
+                                </ul>
+                                <div
+                                    className="flex gap-1 cursor-pointer py-1"
+                                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                >
+                                    <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                                    <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                                    <div className="w-[4px] h-[4px] rounded-full bg-app-font-3" />
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-            </div>
 
-            {/* 포스트 내용 */}
-            <p className={`mx-2 text-pretty text-sm text-app-font-1 mt-1`}>
-                {truncatedContent}
-            </p>
-            {!showFullContent && (
-                <button
-                    className={`text-app-font-4 text-xs mt-1 mx-2`}
-                    onClick={() => {
-                        setTruncatedContent(post.content);
-                        setShowFullContent(true);
-                    }}
-                >
-                    더 보기...
-                </button>
-            )}
-        </div>
+                {/* 포스트 이미지 */}
+                <div className="overflow-hidden flex flex-col" ref={emblaRef}>
+                    <div className="flex">
+                        {post.imageUrls.map((url, i) => (
+                            <Image
+                                key={i}
+                                src={url}
+                                alt="Post image"
+                                width={325}
+                                height={325}
+                                className="w-full rounded-t-lg shrink-0 grow-0"
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                <div className="flex text-sm px-2 mt-1">
+                    <p>{randomUserNameAmongLikes}님</p>
+                    <p>&nbsp;외&nbsp;</p>
+                    <p className="font-semibold text-app-font-3">여러명</p>
+                    <p>이 좋아합니다</p>
+                </div>
+
+                {/* 포스트 정보 */}
+                <div className="flex justify-between mt-1 px-2">
+                    <div className="w-full flex py-1 gap-3">
+                        <div
+                            className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
+                        >
+                            <Like
+                                onClick={handleLiked}
+                                isLiked={post.isLikedByMember}
+                                className={`${
+                                    post.isLikedByMember
+                                        ? "stroke-[#FF0000]"
+                                        : "stroke-app-font-3"
+                                } ${
+                                    post.isLikedByMember
+                                        ? "fill-[#FF0000]"
+                                        : "fill-none"
+                                }`}
+                            />
+                            <p>{post.likeCount}</p>
+                        </div>
+
+                        <div
+                            className={`flex items-center gap-2 text-sm text-app-font-2 cursor-pointer ${notoSans.className}`}
+                        >
+                            <CommentsSection onClose={() => {}} post={post}>
+                                <Comment className="fill-app-font-3" />
+                            </CommentsSection>
+                            <p>{post.commentCount}</p>
+                        </div>
+
+                        <div
+                            className={`ml-auto flex items-center gap-2 text-sm text-app-font-2 ${
+                                notoSans.className
+                            } ${!post.kcal && "invisible"}`}
+                        >
+                            <SpoonKnife className="fill-app-font-3" />
+                            <p>{post.kcal} kcal</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* 포스트 내용 */}
+                <p className={`mx-2 text-pretty text-sm text-app-font-1 mt-1`}>
+                    {truncatedContent}
+                </p>
+                {!showFullContent && (
+                    <button
+                        className={`text-app-font-4 text-xs mt-1 mx-2`}
+                        onClick={() => {
+                            setTruncatedContent(post.content);
+                            setShowFullContent(true);
+                        }}
+                    >
+                        더 보기...
+                    </button>
+                )}
+            </div>
+        </>
     );
 };
 

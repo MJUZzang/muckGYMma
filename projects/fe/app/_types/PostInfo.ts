@@ -3,6 +3,7 @@ export interface LikeInfo {
     nickname: string;
     email: string;
     isFollowing: boolean;
+    justUnfollowed?: boolean;
 }
 
 export interface PostInfo {
