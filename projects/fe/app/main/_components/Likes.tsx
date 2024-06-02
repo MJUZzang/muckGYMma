@@ -89,7 +89,7 @@ function Likes({ likeList, setPost, isOpen, onClose = () => {} }: LikesProps) {
         >
             <div className="grid grid-cols-3 px-2 py-2">
                 <ArrowBack
-                    className="fill-app-font-2 z-[30]"
+                    className="fill-app-font-2 z-[50]"
                     onClick={() => {
                         onClose();
                     }}
