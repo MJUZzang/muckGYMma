@@ -26,6 +26,16 @@ async function MealInfoPage({ params }: MealInfoProps) {
     }
     const meal = await fetchMeal(mealId);
 
+    function getButtonLink() {
+        if (!meal.planed) {
+            return `/plan/pick/${meal.id}`;
+        } else if (meal.exercised && !meal.posted) {
+            return `/post/write?mealId=${meal.id}`;
+        } else {
+            return `/post/${meal.id}`;   
+        }
+    }
+
     return (
         <>
             <div
@@ -106,7 +116,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
                 <Link
                     href={
                         meal.planed
-                            ? `/post/write?mealId=${meal.id}`
+                            ? `/post/write?mealId=${meal.id}&img=${meal.imageUrl}`
                             : `/plan/pick/${meal.id}`
                     }
                     className={`inline-block text-center w-full bg-app-blue rounded-lg py-2 font-semibold text-app-inverted-font 
@@ -115,8 +125,8 @@ async function MealInfoPage({ params }: MealInfoProps) {
                     }`}
                 >
                     {!meal.planed && "운동계획 만들기"}
-                    {meal.planed && !meal.posted && "식사일기 작성하기"}
-                    {meal.planed && meal.posted && "식사일기 보러가기"}
+                    {meal.exercised && !meal.posted && "식사일기 작성하기"}
+                    {meal.posted && "식사일기 보러가기"}
                 </Link>
             </div>
         </>

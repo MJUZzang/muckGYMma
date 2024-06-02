@@ -15,7 +15,7 @@ import {
 import Button from "@/_components/Button";
 import { Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAppSelector } from "@/../lib/hooks";
 import { selectNickname } from "@/../lib/slices/userInfoSlice";
 
@@ -41,6 +41,9 @@ function WritePage() {
     const [isEditing, setIsEditing] = useState(false);
 
     const [text, setText] = useState("");
+    const searchParams = useSearchParams();
+    const mealId = searchParams.get("mealId");
+    const mealImage = searchParams.get("img");
 
     const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -76,6 +79,9 @@ function WritePage() {
         <div
             className={`flex flex-col min-h-[100dvh] absolute top-0 pt-[55px] w-full ${notoSansKr.className}`}
         >
+            {mealImage && (
+                <Image src={mealImage} layout="fill" alt="background" />
+            )}
             <div
                 ref={emblaRef}
                 className="overflow-hidden flex flex-col mt-5 w-full h-fit pb-5"
