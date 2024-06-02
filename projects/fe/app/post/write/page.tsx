@@ -25,25 +25,26 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 function WritePage() {
+    const searchParams = useSearchParams();
+    const mealId = searchParams.get("mealId");
+    const mealImage = searchParams.get("img");
+
     const router = useRouter();
     const nickname = useAppSelector(selectNickname);
     const inputRef = useRef<HTMLInputElement>(null);
     const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const imgSets = [
-        useState<string | null>(null),
+        useState<string | null>(mealImage ? mealImage : null),
         useState<string | null>(null),
         useState<string | null>(null),
         useState<string | null>(null),
         useState<string | null>(null),
     ];
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(mealId ? 1 : 0);
     const [isEditing, setIsEditing] = useState(false);
 
     const [text, setText] = useState("");
-    const searchParams = useSearchParams();
-    const mealId = searchParams.get("mealId");
-    const mealImage = searchParams.get("img");
 
     const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -79,9 +80,6 @@ function WritePage() {
         <div
             className={`flex flex-col min-h-[100dvh] absolute top-0 pt-[55px] w-full ${notoSansKr.className}`}
         >
-            {mealImage && (
-                <Image src={mealImage} layout="fill" alt="background" />
-            )}
             <div
                 ref={emblaRef}
                 className="overflow-hidden flex flex-col mt-5 w-full h-fit pb-5"
