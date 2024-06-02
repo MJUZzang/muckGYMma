@@ -20,7 +20,10 @@ function Interaction({
     profileUsername,
 }: InteractionProps) {
     const myNickname = useAppSelector(selectNickname);
-    const isMe = useMemo(() => myNickname === profileUsername, [myNickname, profileUsername])
+    const isMe = useMemo(
+        () => myNickname === profileUsername,
+        [myNickname, profileUsername]
+    );
     const [followed, setFollowed] = React.useState<boolean>(isFollowing);
 
     function handleFollowClicked() {
@@ -41,11 +44,11 @@ function Interaction({
                     throw new Error("Failed to follow");
                 }
             })
-            .then((data) => {
+            .then((data: { isFollowing: boolean }) => {
                 if (!data) {
                     throw new Error("Failed to follow");
                 } else {
-                    return data;
+                    setFollowed(data.isFollowing);
                 }
             });
     }
@@ -60,7 +63,7 @@ function Interaction({
                 onClick={handleFollowClicked}
                 className="w-full text-center py-1 bg-app-bg rounded-lg border-[1.4px] border-gray-300"
             >
-                {followed ? "Following" : "Unfollow"}
+                {followed ? "팔로잉" : "팔로우"}
             </button>
             <button
                 onClick={() => alert("업데이트 예정 기능입니다.")}
