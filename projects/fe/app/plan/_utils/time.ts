@@ -13,11 +13,11 @@ export function formatTimeInKor(seconds: number) {
 }
 
 export function remainingHour(seconds: number) {
-    return Math.floor((seconds % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
+    return Math.floor(seconds / 3600);
 }
 
 export function remainingMinute(seconds: number) {
-    return Math.floor((seconds % (60 * 60 * 1000)) / (60 * 1000));
+    return Math.floor((seconds % 3600) / 60);
 }
 
 export function formatTimeHour(seconds: number) {

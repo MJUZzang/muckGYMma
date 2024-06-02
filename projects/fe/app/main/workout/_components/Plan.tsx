@@ -8,6 +8,7 @@ import { timeUntilSevenDaysLater } from "@/main/workout/_utils/LeftTime";
 
 import { Dosis, Jua, Noto_Sans } from "next/font/google";
 import { PlanInfo } from "@/_types/Plan";
+import { remainingMinute } from "@/plan/_utils/time";
 
 const notoSans = Noto_Sans({
     subsets: ["latin"],
@@ -66,7 +67,7 @@ const Plan: React.FC<PlanProps> = ({ className, plan }) => {
                         className={`w-fit mt-1 px-3 py-2 rounded-full bg-app-blue 
                             text-sm text-app-inverted-font`}
                     >
-                        {plan.time && (plan.time / 60).toFixed(0)}분 소요
+                        {plan.time && remainingMinute(plan.time)}분 소요
                     </div>
                 </div>
             </div>
