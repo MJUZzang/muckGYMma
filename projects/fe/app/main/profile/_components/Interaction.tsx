@@ -29,27 +29,27 @@ function Interaction({
     function handleFollowClicked() {
         fetch(`${backendUrl}/api/follow`, {
             method: "POST",
-            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
+            credentials: "include",
             body: JSON.stringify({
-                nickname: profileUsername,
+                followerNickname: myNickname,
+                followeeNickname: profileUsername,
             }),
         })
             .then((res) => {
                 if (res.ok) {
                     return res.json();
                 } else {
-                    throw new Error("Failed to follow");
+                    throw new Error("Failed to fetch followers");
                 }
             })
             .then((data: { isFollowing: boolean }) => {
                 if (!data) {
-                    throw new Error("Failed to follow");
-                } else {
-                    setFollowed(data.isFollowing);
+                    throw new Error("Failed to fetch followers");
                 }
+                setFollowed(data.isFollowing);
             });
     }
 
