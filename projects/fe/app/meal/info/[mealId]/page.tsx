@@ -39,7 +39,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
     ]);
 
     console.log("postId: ", postId);
-    
+
     function getButtonLink() {
         if (!meal.planed) {
             return `/plan/pick/${meal.id}`;
@@ -139,7 +139,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
                     {!meal.planed && "운동플랜 만들기"}
                     {meal.exercised && !meal.posted && "식사일기 작성하기"}
                     {meal.posted && "식사일기 보러가기"}
-                    {!meal.exercised && "운동플랜 하러가기"}
+                    {meal.planed && !meal.exercised && "운동플랜 하러가기"}
                 </Link>
             </div>
         </>
