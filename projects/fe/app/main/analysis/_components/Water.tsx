@@ -47,18 +47,18 @@ function Water() {
         }
     }, [amount]);
 
-    function addWater() {
+    function addWater(water: number) {
         fetch(`${backendUrl}/api/waters`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             credentials: "include",
-            body: JSON.stringify({ water: 200 }),
+            body: JSON.stringify({ water }),
         })
             .then((res) => {
                 if (res.ok) {
-                    setAmount((prev) => prev + 200);
+                    setAmount((prev) => prev + water);
                 } else {
                     throw new Error("Failed to add water.");
                 }
@@ -94,13 +94,16 @@ function Water() {
                 <div
                     className="w-full bg-[#dfeaff] text-[#007aff] rounded-lg text-center 
                     h-full flex justify-center items-center gap-1"
-                    onClick={() => addWater()}
+                    onClick={() => addWater(200)}
                 >
                     <div className="text-3xl relative bottom-1">+</div>
                     <div className="text-xl">200ml</div>
                 </div>
 
-                <div className="bg-[#dfeaff] text-[#007aff] rounded-lg px-3 text-3xl h-full">
+                <div
+                    className="bg-[#dfeaff] text-[#007aff] rounded-lg px-3 text-3xl h-full"
+                    onClick={() => addWater(-200)}
+                >
                     <div className="px-1">-</div>
                 </div>
             </div>
