@@ -17,9 +17,10 @@ import { getOrientation } from "get-orientation/browser";
 interface UploadMealProps {
     className?: string;
     buttonContent: string | React.ReactNode;
+    onClick?: () => void;
 }
 
-function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
+function UploadMeal({ className, buttonContent: buttonName, onClick = () => {} }: UploadMealProps) {
     const inputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const dispatch = useAppDispatch();
@@ -121,7 +122,10 @@ function UploadMeal({ className, buttonContent: buttonName }: UploadMealProps) {
         <>
             <button
                 className={`text-nowrap ${className}`}
-                onClick={handleClicked}
+                onClick={() => {
+                    handleClicked();
+                    onClick();
+                }}
             >
                 {buttonName}
             </button>
