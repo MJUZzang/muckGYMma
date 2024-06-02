@@ -33,7 +33,8 @@ async function WorkoutPage() {
         todayEatenFoodInfoPromise
     ]);
 
-    const {nickname, profileImageUrl} = simpleUserInfo;
+    // const {nickname, profileImageUrl} = simpleUserInfo;
+    const {profileImageUrl, nickname} = simpleUserInfo;
     const sortedPlans = sortPlansByDate(plans);
 
     return (
@@ -154,7 +155,7 @@ async function WorkoutPage() {
                                 <p
                                     className={`inline-block mt-4 text-2xl font-semibold ${dosis.className}`}
                                 >
-                                    {sortedPlans.length}
+                                    {sortedPlans.reduce((acc, plan) => acc + (plan.cleared ? 0 : 1), 0)}
                                 </p>
                                 <p
                                     className={`inline-block text-xl ml-1 ${jua.className}`}
