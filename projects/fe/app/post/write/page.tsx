@@ -49,6 +49,7 @@ function WritePage() {
 
     const [text, setText] = useState("");
 
+    console.log("nickname: ", nickname);
     const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
@@ -83,7 +84,7 @@ function WritePage() {
         // URL로부터 Blob 데이터를 가져와서 File 객체로 변환하고 FormData에 추가하는 예제
         const formData = new FormData();
 
-        for (let i = (mealId ? 1 : 0); i < activeIndex; i++) {
+        for (let i = mealId ? 1 : 0; i < activeIndex; i++) {
             const file: File | null = await urlToBlobFile(
                 imgSets[i][0]!,
                 "image.jpg"
