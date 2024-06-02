@@ -171,14 +171,14 @@ async function ProfileLayout({
                         <div
                             className="inline-block overflow-clip rounded-full 
                                 w-[90px] h-[90px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px]
-                                border-4 border-transparent"
+                                border-4 border-transparent outline-4 outline-black"
                         >
                             <Image
                                 src={profile.profileImageUrl}
                                 alt="avatar"
                                 width={140}
                                 height={140}
-                                className="w-full"
+                                className="w-full border-[3.2px] border-white rounded-full"
                             />
                         </div>
                     </div>
