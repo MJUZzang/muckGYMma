@@ -106,7 +106,7 @@ async function WorkoutPage() {
                                     금일 섭취 :
                                 </p>
                                 <p className={`text-sm ${jua.className}`}>
-                                    &quot;${todayEatenFoodInfo.lastMealName}&quot;
+                                    {`${todayEatenFoodInfo.lastMealName && `"${todayEatenFoodInfo.lastMealName}"`}`}
                                 </p>
                             </div>
                         </div>
