@@ -11,7 +11,7 @@ async function PostsPage({ params }: Readonly<PostsPageProps>) {
     const nickname = decodeURIComponent(params.username);
     const posts = await fetchUserPosts(nickname);
     const sortedPosts = sortPostsByDate(posts);
-    
+    console.log(sortedPosts);
     return (
         <>
             {sortedPosts.length > 0 ? (
