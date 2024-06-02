@@ -5,9 +5,10 @@ import UploadMeal from "./UploadMeal";
 interface UploadMenuProps {
     className?: string;
     isVisible: boolean;
+    setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function UploadMenu({ className, isVisible }: UploadMenuProps) {
+function UploadMenu({ className, isVisible, setIsVisible }: UploadMenuProps) {
     return (
         <>
             <div
@@ -18,6 +19,7 @@ function UploadMenu({ className, isVisible }: UploadMenuProps) {
                 } ${className}`}
                 onClick={(e) => {
                     e.stopPropagation();
+                    setIsVisible(false);
                 }}
             >
                 <Link href="/post/write" className="text-nowrap">
