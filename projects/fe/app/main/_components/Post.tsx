@@ -133,7 +133,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                         </p>
                     </div>
 
-                    {myNickname !== post.nickname && (
+                    {myNickname === post.nickname && (
                         <div
                             className={`ml-auto flex relative right-1 ${notoSansKr.className}`}
                         >
