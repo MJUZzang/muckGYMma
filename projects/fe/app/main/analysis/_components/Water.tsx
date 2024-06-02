@@ -54,7 +54,7 @@ function Water() {
                 "Content-Type": "application/json",
             },
             credentials: "include",
-            body: JSON.stringify({ amount: 200 }),
+            body: JSON.stringify({ water: 200 }),
         })
             .then((res) => {
                 if (res.ok) {
