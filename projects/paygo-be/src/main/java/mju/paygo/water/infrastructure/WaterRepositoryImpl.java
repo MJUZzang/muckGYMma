@@ -5,8 +5,11 @@ import mju.paygo.water.domain.Water;
 import mju.paygo.water.domain.WaterRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,9 +20,23 @@ public class WaterRepositoryImpl implements WaterRepository {
 
     @Override
     public Optional<Water> findByMemberIdAndToday(final Long memberId) {
-        LocalDateTime start = LocalDateTime.now().toLocalDate().atStartOfDay();
-        LocalDateTime end = LocalDateTime.now().toLocalDate().atTime(LocalTime.MAX);
+        ZonedDateTime start = getStartOfDayZoned();
+        ZonedDateTime end = getEndOfDayZoned();
         return waterJpaRepository.findByMemberIdAndToday(memberId, start, end);
+    }
+
+    private ZonedDateTime getStartOfDayZoned() {
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfDay = today.atStartOfDay();
+        ZoneId zoneId = ZoneId.systemDefault();
+        return startOfDay.atZone(zoneId);
+    }
+
+    private ZonedDateTime getEndOfDayZoned() {
+        LocalDate today = LocalDate.now();
+        LocalDateTime endOfDay = today.atTime(LocalTime.MAX);
+        ZoneId zoneId = ZoneId.systemDefault();
+        return endOfDay.atZone(zoneId);
     }
 
     @Override
