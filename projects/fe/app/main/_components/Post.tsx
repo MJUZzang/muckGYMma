@@ -46,9 +46,10 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
 
     const myNickname = useAppSelector(selectNickname);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-    console.log(post);
 
     const [emblaRef] = useEmblaCarousel({ loop: false });
+
+    console.log("likes: ", post.likes);
 
     function deletePost() {
         fetch(`${backendUrl}/api/board/delete`, {
