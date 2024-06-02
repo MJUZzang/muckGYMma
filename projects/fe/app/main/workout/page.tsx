@@ -3,7 +3,10 @@ import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 
 import { Dosis, Jua, Noto_Sans, Noto_Serif_JP } from "next/font/google";
-import { FetchNickname as fetchNickname, fetchSimpleUserInfo } from "@/_utils/user";
+import {
+    FetchNickname as fetchNickname,
+    fetchSimpleUserInfo,
+} from "@/_utils/user";
 import Plans from "@/main/workout/_components/Plans";
 import { fetchTodoPlans, sortPlansByDate } from "@/_utils/plan";
 
@@ -22,21 +25,25 @@ const notnSerifJP = Noto_Serif_JP({
 });
 
 async function WorkoutPage() {
-    const {nickname, profileImageUrl} = await fetchSimpleUserInfo();
+    const { nickname, profileImageUrl } = await fetchSimpleUserInfo();
     const plans = await fetchTodoPlans();
     const sortedPlans = sortPlansByDate(plans);
-    
+
     return (
         <div className="max-w-[835px] mx-auto w-full">
             <div className="px-4 w-full">
                 <div className="mt-3">
                     <div className="flex justify-between">
-                        <div className="w-[68px] h-[68px] lg:w-[98px] lg:h-[98px] overflow-clip rounded-3xl">
-                            <Image
-                                src={profileImageUrl}
-                                alt="avatar"
-                                className="w-full"
-                            />
+                        <div className="w-[68px] h-[68px] lg:w-[98px] lg:h-[98px]">
+                            <div className="w-[68px] h-[68px] lg:w-[98px] lg:h-[98px] overflow-clip rounded-3xl">
+                                <Image
+                                    src={profileImageUrl}
+                                    alt="User avatar"
+                                    className="w-[68px] h-[68px] lg:w-[98px] lg:h-[98px] pointer-events-none"
+                                    width={43}
+                                    height={43}
+                                />
+                            </div>
                         </div>
 
                         <div
