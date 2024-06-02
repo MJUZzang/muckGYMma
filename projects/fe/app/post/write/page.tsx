@@ -166,24 +166,44 @@ function WritePage() {
 
                         formData.append("content", text);
 
-                        fetch(`${backendUrl}/api/board/create`, {
-                            method: "POST",
-                            credentials: "include",
-                            body: formData,
-                        })
-                            .then((res) => {
-                                if (res.ok) {
-                                    console.log("Post created successfully.");
-                                    router.push(
-                                        `/main/profile/${nickname}/posts`
-                                    );
-                                } else {
-                                    throw new Error(
-                                        "Error occured while uploading image."
-                                    );
-                                }
+                        if (mealId) {
+                            formData.append("mealId", mealId);
+                            fetch(`${backendUrl}/api/board/create-with-meal`, {
+                                method: "POST",
+                                credentials: "include",
+                                body: formData,
                             })
-                            .catch((err) => console.error(err));
+                                .then((res) => {
+                                    if (res.ok) {
+                                        router.push(
+                                            `/main/profile/${nickname}/posts`
+                                        );
+                                    } else {
+                                        throw new Error(
+                                            "Error occured while uploading image."
+                                        );
+                                    }
+                                })
+                                .catch((err) => console.error(err));
+                        } else {
+                            fetch(`${backendUrl}/api/board/create`, {
+                                method: "POST",
+                                credentials: "include",
+                                body: formData,
+                            })
+                                .then((res) => {
+                                    if (res.ok) {
+                                        router.push(
+                                            `/main/profile/${nickname}/posts`
+                                        );
+                                    } else {
+                                        throw new Error(
+                                            "Error occured while uploading image."
+                                        );
+                                    }
+                                })
+                                .catch((err) => console.error(err));
+                        }
                     }}
                 >
                     포스트 작성완료
