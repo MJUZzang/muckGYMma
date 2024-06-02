@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "@/main//_components/Post";
 import NoData from "@/main/profile/_components/NoData";
-import { fetchUserPosts } from "@/_utils/post";
+import { fetchUserPosts, sortPostsByDate } from "@/_utils/post";
 
 interface PostsPageProps {
     params: { username: string };
@@ -10,12 +10,13 @@ interface PostsPageProps {
 async function PostsPage({ params }: Readonly<PostsPageProps>) {
     const nickname = decodeURIComponent(params.username);
     const posts = await fetchUserPosts(nickname);
-
+    const sortedPosts = sortPostsByDate(posts);
+    
     return (
         <>
-            {posts.length > 0 ? (
+            {sortedPosts.length > 0 ? (
                 <div className="flex flex-col items-center gap-3">
-                    {posts.map((post, i) => (
+                    {sortedPosts.map((post, i) => (
                         <Post key={i} postInfo={post} />
                     ))}
                 </div>

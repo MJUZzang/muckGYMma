@@ -143,3 +143,9 @@ export function convertPostsCreatedAtToDate(posts: PostInfo[]): PostInfo[] {
         };
     });
 }
+
+export function sortPostsByDate(posts: PostInfo[]): PostInfo[] {
+    return posts.sort((a, b) => {
+        return b.createdAt.getTime() - a.createdAt.getTime();
+    });
+}
