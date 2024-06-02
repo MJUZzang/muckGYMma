@@ -22,9 +22,7 @@ function UploadMenu({ className, isVisible, setIsVisible }: UploadMenuProps) {
                     setIsVisible(false);
                 }}
             >
-                <Link href="/post/write" className="text-nowrap" onClick={() => {
-                    setIsVisible(false);
-                }}>
+                <Link href="/post/write" className="text-nowrap">
                     포스트 작성
                 </Link>
 
@@ -33,7 +31,7 @@ function UploadMenu({ className, isVisible, setIsVisible }: UploadMenuProps) {
                 <UploadMeal
                     buttonContent="식단 업로드"
                     onClick={() => {
-                        setIsVisible(false);
+                        // setIsVisible(false);
                     }}
                 />
             </div>
