@@ -33,8 +33,7 @@ async function WorkoutPage() {
         todayEatenFoodInfoPromise
     ]);
 
-    // const {nickname, profileImageUrl} = simpleUserInfo;
-    const {profileImageUrl, nickname} = simpleUserInfo;
+    const {nickname, profileImageUrl} = simpleUserInfo;
     const sortedPlans = sortPlansByDate(plans);
 
     return (
@@ -45,7 +44,7 @@ async function WorkoutPage() {
                         <div className="w-[68px] h-[68px] lg:w-[98px] lg:h-[98px]">
                             <div className="w-[68px] h-[68px] lg:w-[98px] lg:h-[98px] overflow-clip rounded-3xl">
                                 <Image
-                                    src={profileImageUrl}
+                                    src={nickname}
                                     alt="User avatar"
                                     className="w-[68px] h-[68px] lg:w-[98px] lg:h-[98px] pointer-events-none"
                                     width={43}
@@ -74,7 +73,7 @@ async function WorkoutPage() {
                     <p
                         className={`text-app-font-2 font-bold text-xl ${notoSans.className}`}
                     >
-                        {nickname}
+                        {profileImageUrl}
                     </p>
                 </div>
 
