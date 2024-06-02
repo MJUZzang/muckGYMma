@@ -13,10 +13,10 @@ const notoSansKr = Noto_Sans_KR({
 });
 
 function getButtonStyle(selectedGraph: string, graphName: string) {
-    return `w-1/3 h-full text-center py-1 px-3 rounded-full text-nowrap
+    return `w-1/3 h-full text-sm text-center py-[0.4rem] px-1 rounded-full text-nowrap
     ${
         selectedGraph === graphName
-            ? "bg-app-blue text-app-inverted-font-1 font-semibold"
+            ? "bg-app-blue-2 text-app-inverted-font font-semibold"
             : ""
     }`;
 }
@@ -32,10 +32,10 @@ const SummaryGraphs = () => {
     return (
         <>
             <div
-                className={`flex flex-col items-center rounded-xl bg-app-bg-1 shadow-lg ${notoSansKr.className}`}
+                className={`flex flex-col items-center rounded-xl bg-app-bg shadow-[0px_0px_9px_1px_rgba(0,0,0,0.1)] ${notoSansKr.className}`}
             >
-                <p className="inline-block text-base p-5 text-app-blue">
-                    최근 30일 요약
+                <p className="inline-block text-base p-5 text-app-font-3 font-semibold">
+                    최근 기록
                 </p>
                 <div
                     className="flex items-center rounded-full border-[1.5px] border-white/75 

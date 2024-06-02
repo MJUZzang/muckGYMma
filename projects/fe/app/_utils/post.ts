@@ -2,7 +2,7 @@ import { PostInfo } from "@/_types/PostInfo";
 import { backendUrl } from "@/_utils/urls";
 import { cookies } from "next/headers";
 
-const dummyPosts: PostInfo[] = [
+export const dummyPosts: PostInfo[] = [
     {
         id: 3,
         content: "ㅁㄴㅇ",

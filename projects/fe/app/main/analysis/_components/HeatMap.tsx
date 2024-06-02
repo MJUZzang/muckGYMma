@@ -12,8 +12,8 @@ const HeatMap = () => {
     }, []);
 
     return (
-        <div className="rounded-lg bg-app-bg-1 shadow-lg backdrop-blur-lg">
-            <p className="inline-block p-5 w-full text-center text-base pb-5 text-app-blue">
+        <div className="rounded-lg bg-app-bg shadow-[0px_0px_9px_1px_rgba(0,0,0,0.1)] backdrop-blur-lg">
+            <p className="inline-block p-5 w-full text-center text-base pb-5 text-app-font-3 font-semibold">
                 Streak Chart
             </p>
             {isClient && (

@@ -11,7 +11,11 @@ const dosis = Dosis({
     subsets: ["latin"],
 });
 
-function Water() {
+interface WaterProps {
+    className?: string;
+}
+
+function Water({ className }: WaterProps) {
     const [amount, setAmount] = useState(0);
     const amountRef = useRef<HTMLDivElement>(null);
 
@@ -69,7 +73,9 @@ function Water() {
     }
 
     return (
-        <div className={`${notoSansKr.className}`}>
+        <div
+            className={`bg-app-bg shadow-[0px_0px_9px_1px_rgba(0,0,0,0.1)] px-5 py-5 rounded-xl ${className} ${notoSansKr.className}`}
+        >
             <p className="text-app-font-1 font-semibold">물 섭취</p>
 
             <div className="mt-3 flex items-end">

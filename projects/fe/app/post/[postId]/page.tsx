@@ -1,4 +1,5 @@
 import { PostInfo } from "@/_types/PostInfo";
+import { dummyPosts } from "@/_utils/post";
 import { backendUrl } from "@/_utils/urls";
 import { FetchNickname } from "@/_utils/user";
 import Post from "@/main/_components/Post";
@@ -39,7 +40,8 @@ async function fetchPostById(id: number) {
         })
         .catch((err) => {
             console.error(err);
-            return null;
+            const [dummyPost] = dummyPosts;
+            return dummyPost;
         });
 }
 
@@ -55,14 +57,14 @@ async function PostPage({ params }: PostPageProps) {
 
     console.log("post: ", post);
 
-    if (!post) {
-        return "Failed to fetch post";
-    }
+    // if (!post) {
+    //     return "Failed to fetch post";
+    // }
     return (
         <div
             className={`fixed top-0 h-[100dvh] w-full bg-app-bg z-[30] ${notoSansKr.className}`}
         >
-            <div className="grid grid-cols-3 px-2 py-2">
+            <div className="grid grid-cols-3 px-2 py-2 border-b-[1.5px] items-center border-b-gray-200">
                 <NavigateBack />
                 <div className="w-full flex flex-col items-center justify-center">
                     <p className="text-xs text-app-font-4 font-semibold">{post.nickname}</p>

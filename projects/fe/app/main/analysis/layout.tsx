@@ -14,12 +14,12 @@ const layout: React.FC<{
     return (
         <>
             <div
-                className={`bg-app-bg fixed w-full grid grid-cols-3 items-center py-3 px-5 border-b-[1px] z-[50] ${notoSansKr.className}`}
+                className={`bg-app-bg fixed w-full grid grid-cols-3 items-center py-3 px-5 border-b-[1.5px] border-b-gray-200 z-[50] ${notoSansKr.className}`}
             >
                 <div />
 
                 <p className="text-app-font-4 text-sm font-semibold w-full text-center">
-                    내 기록 눈바디
+                    내 기록
                 </p>
 
                 <div className="w-full flex justify-end">
