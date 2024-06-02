@@ -64,9 +64,9 @@ async function PostPage({ params }: PostPageProps) {
         >
             <div className="grid grid-cols-3 px-2 py-2">
                 <NavigateBack />
-                <div className="w-full flex flex-col items-center justify-center text-lg">
+                <div className="w-full flex flex-col items-center justify-center">
                     <p className="text-xs text-app-font-4">{post.nickname}</p>
-                    <p className="text-app-font-2">게시물</p>
+                    <p className="text-xs text-app-font-2">게시물</p>
                 </div>
                 <div />
             </div>
