@@ -37,7 +37,6 @@ public class BoardController {
     private final S3Uploader s3Uploader;
     private final MemberRepository memberRepository;
 
-    // 게시글 생성(사진과 함께)
     @PostMapping("/create")
     public ResponseEntity<Void> createBoard(@ModelAttribute @Valid BoardCreateRequest request, @AuthMember final Long memberId) {
 
@@ -59,7 +58,6 @@ public class BoardController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    // 게시글 생성(Meal의 id 사용)
     @PostMapping("/create-with-meal")
     public ResponseEntity<Void> createBoardFromMeal(@AuthMember final Long memberId, @ModelAttribute @Valid BoardCreateWithMealRequest request) {
 
@@ -76,7 +74,7 @@ public class BoardController {
             fileUrls.add(fileUrl);
         }
 
-        Board board = boardService.saveBoardWithMeal(member, request.mealId(), request.content(), fileUrls);
+        Board board = boardService.saveBoardWithMeal(member, request.mealId(), request.mealImage(), request.content(), fileUrls);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -118,4 +116,15 @@ public class BoardController {
         return ResponseEntity.ok(boards);
     }
 
+    @GetMapping("/board")
+    public ResponseEntity<BoardFindResponse> getBoardById(@AuthMember final Long memberId, @RequestParam Long boardId) {
+        BoardFindResponse board = boardService.findBoardById(boardId, memberId);
+        return ResponseEntity.ok(board);
+    }
+
+    @GetMapping("/post-by-meal")
+    public ResponseEntity<Long> getPostIdByMealId(@RequestParam Long mealId) {
+        Long postId = boardService.findPostIdByMealId(mealId);
+        return ResponseEntity.ok(postId);
+    }
 }

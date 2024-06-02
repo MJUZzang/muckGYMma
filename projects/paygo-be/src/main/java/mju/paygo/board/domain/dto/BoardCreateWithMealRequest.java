@@ -16,6 +16,9 @@ public record BoardCreateWithMealRequest(
         List<MultipartFile> files,
 
         @NotBlank(message = "내용을 비워둘 수 없습니다.")
-        String content
+        String content,
+
+        @NotNull(message = "식사 이미지를 입력해 주세요.")
+        String mealImage
 ) {
 }
