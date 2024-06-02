@@ -33,7 +33,7 @@ function UploadMenu({ className, isVisible, setIsVisible }: UploadMenuProps) {
                 <UploadMeal
                     buttonContent="식단 업로드"
                     onClick={() => {
-                        // setIsVisible(false);
+                        setIsVisible(false);
                     }}
                 />
             </div>

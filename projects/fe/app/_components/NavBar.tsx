@@ -112,7 +112,7 @@ const NavBar = () => {
                         onClick={() => setShowUploadMenu(!showUploadMenu)}
                     >
                         <UploadMenu
-                            setIsVisible={setIsVisible}
+                            setIsVisible={setShowUploadMenu}
                             isVisible={showUploadMenu}
                             className={`absolute bottom-[56px]`}
                         />
