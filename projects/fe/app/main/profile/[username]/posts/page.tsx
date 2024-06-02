@@ -15,7 +15,7 @@ async function PostsPage({ params }: Readonly<PostsPageProps>) {
     return (
         <>
             {sortedPosts.length > 0 ? (
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center gap-3 bg-app-bg-1">
                     {sortedPosts.map((post, i) => (
                         <Post key={i} postInfo={post} />
                     ))}
