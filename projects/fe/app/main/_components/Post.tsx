@@ -49,6 +49,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
     const [emblaRef] = useEmblaCarousel({ loop: false });
+    const [likesModalOpen, setLikesModalOpen] = useState<boolean>(false);
 
     const randomUserNameAmongLikes =
         post.likes?.find((like) => like.nickname !== myNickname)?.nickname ||
@@ -115,7 +116,8 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             <Likes
                 likeList={post.likes}
                 setPost={setPost}
-                username={post.nickname}
+                isOpen={likesModalOpen}
+                onClose={() => setLikesModalOpen(false)}
             />
             <div className="max-w-[470px] w-full backdrop-blur-lg rounded-lg bg-app-bg pb-2">
                 <div className="mx-2 flex flex-col py-3">
@@ -204,7 +206,12 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                     </div>
                 </div>
 
-                <div className="flex text-sm px-2 mt-1">
+                <div
+                    className="flex text-sm px-2 mt-1 cursor-pointer"
+                    onClick={() => {
+                        setLikesModalOpen(true);
+                    }}
+                >
                     <p>{randomUserNameAmongLikes}님</p>
                     <p>&nbsp;외&nbsp;</p>
                     <p className="font-semibold text-app-font-3">여러명</p>

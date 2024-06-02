@@ -10,15 +10,18 @@ import { useAppSelector } from "../../../lib/hooks";
 import { selectNickname } from "../../../lib/slices/userInfoSlice";
 import Like from "../community/_images/Like";
 import CatPlaceholder from "../community/_components/CatPlaceholder";
+import ArrowBack from "@/_images/ArrowBack";
+import Link from "next/link";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"], weight: ["400", "700"] });
 interface LikesProps {
-    username: string;
     likeList?: LikeInfo[];
     setPost: React.Dispatch<React.SetStateAction<PostInfo>>;
+    isOpen?: boolean;
+    onClose?: () => void;
 }
 
-function Likes({ username, likeList, setPost }: LikesProps) {
+function Likes({ likeList, setPost, isOpen, onClose = () => {} }: LikesProps) {
     const myNickname = useAppSelector(selectNickname);
 
     function handleButtonClick(like: LikeInfo) {
@@ -80,10 +83,17 @@ function Likes({ username, likeList, setPost }: LikesProps) {
 
     return (
         <div
-            className={`absolute top-0 w-full h-[100dvh] z-[50] bg-app-bg ${notoSansKr.className}`}
+            className={`fixed top-0 w-full h-[100dvh] z-[10] bg-app-bg transition-opacity duration-700 ${
+                notoSansKr.className
+            } ${isOpen ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         >
             <div className="grid grid-cols-3 px-2 py-2">
-                <NavigateBack />
+                <ArrowBack
+                    className="fill-app-font-2 z-[30]"
+                    onClick={() => {
+                        onClose();
+                    }}
+                />
                 <p className="w-full text-center text-lg">좋아요</p>
                 <div />
             </div>
@@ -103,7 +113,7 @@ function Likes({ username, likeList, setPost }: LikesProps) {
             </div>
 
             {!likeList && (
-                <div className="flex justify-center items-center absolute top-0 left-0 w-full h-[100dvh]">
+                <div className="flex justify-center items-center fixed top-0 left-0 w-full h-[100dvh]">
                     <CatPlaceholder
                         text1="게시글에 좋아요가 없습니다"
                         text2="첫 좋아요를 남겨주세요.."
@@ -120,7 +130,7 @@ function Likes({ username, likeList, setPost }: LikesProps) {
                                 className="flex items-center space-x-2"
                             >
                                 {/* Avatar Image */}
-                                <div className="w-[45px] h-[45px]">
+                                <Link href={`/main/profile/${like.nickname}/posts`} className="w-[45px] h-[45px]">
                                     <div className="w-[45px] h-[45px] overflow-clip rounded-full">
                                         <Image
                                             src={like.profileImageUrl}
@@ -130,7 +140,7 @@ function Likes({ username, likeList, setPost }: LikesProps) {
                                             height={50}
                                         />
                                     </div>
-                                </div>
+                                </Link>
 
                                 <div className="w-full">
                                     <p className="text-app-font-2">
@@ -142,7 +152,7 @@ function Likes({ username, likeList, setPost }: LikesProps) {
                                 </div>
 
                                 <button
-                                    className="text-nowrap text-sm rounded-lg px-3 py-1 border-2"
+                                    className="text-nowrap text-sm rounded-lg px-3 py-1 border-2 z-[30]"
                                     onClick={() => {
                                         handleButtonClick(like);
                                     }}
