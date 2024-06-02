@@ -56,7 +56,7 @@ async function PostPage({ params }: PostPageProps) {
         return "Failed to fetch post";
     }
     return (
-        <div className="fixed top-0 h-[100dvh]">
+        <div className="fixed top-0 h-[100dvh] w-full bg-app-bg z-[30]">
             <div className="grid grid-cols-3 px-2 py-2">
                 <NavigateBack />
                 <p className="w-full text-center text-lg">좋아요</p>
