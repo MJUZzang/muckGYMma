@@ -1,3 +1,10 @@
+export interface LikeInfo {
+    profileImageUrl: string;
+    nickname: string;
+    email: string;
+    isFollowing: boolean;
+}
+
 export interface PostInfo {
     id: number;
     content: string;
@@ -10,4 +17,5 @@ export interface PostInfo {
     kcal: number;
     profileImageUrl: string;
     createdAt: Date;
+    likes?: LikeInfo[];
 }

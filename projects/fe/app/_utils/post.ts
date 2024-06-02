@@ -15,6 +15,7 @@ const dummyPosts: PostInfo[] = [
         isLikedByMember: false,
         commentCount: 0,
         kcal: 0,
+        
         createdAt: new Date(),
         profileImageUrl:
             "https://muckgymma.s3.ap-northeast-2.amazonaws.com/food/62af530b-7986-48b1-b869-ce7d1b0a4e03_2_image.jpg",
@@ -49,8 +50,13 @@ export async function fetchUserPosts(nickname: string) {
         .then((data: PostInfo[]) => {
             if (data) {
                 const converted = convertPostsCreatedAtToDate(data);
-                console.log(converted);
-                return converted;
+                const likeCountCalculated = converted.map((post) => {
+                    return {
+                        ...post,
+                        likeCount: post.likes.length,
+                    };
+                });
+                return likeCountCalculated;
             } else {
                 throw new Error("Failed to fetch user posts");
             }
