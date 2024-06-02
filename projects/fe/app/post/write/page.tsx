@@ -83,9 +83,9 @@ function WritePage() {
         // URL로부터 Blob 데이터를 가져와서 File 객체로 변환하고 FormData에 추가하는 예제
         const formData = new FormData();
 
-        for (let i = mealId ? 1 : 0; i < activeIndex; i++) {
+        for (let i = (mealId ? 1 : 0); i < activeIndex; i++) {
             const file: File | null = await urlToBlobFile(
-                imgSets[0][0]!,
+                imgSets[i][0]!,
                 "image.jpg"
             )
                 .then((file) => {
