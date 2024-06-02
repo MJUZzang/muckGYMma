@@ -19,11 +19,17 @@ public record PlanOuterResponse(
                 .stream()
                 .mapToInt(Task::getExpect)
                 .sum();
-        Integer time = plan.getTasks()
-                .stream()
-                .filter(task -> task.getTime() != null) // null 제외
-                .mapToInt(Task::getTime)
-                .sum();
+        int time = 0;
+        for (Task task : plan.getTasks()) {
+            if (task.getTime() == null) {
+                continue;
+            }
+            if (task.getSets() == null) {
+                time += task.getTime();
+            } else {
+                time += task.getTime() * task.getSets();
+            }
+        }
         return new PlanOuterResponse(plan.getId(), plan.getName(), total, time, plan.getCleared(), plan.getCreatedAt());
     }
 }
