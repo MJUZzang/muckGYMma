@@ -91,7 +91,10 @@ function InfoPage() {
                         ...plan,
                         selectedWorkout: getSelectableWorkoutIndex(),
                         id: Number(planId),
-                        clearedAt: clearedAt,
+                        tasks: plan.tasks?.map((task) => ({
+                            ...task,
+                            sets: task.sets || 1,
+                        })),
                     })
                 );
             })
