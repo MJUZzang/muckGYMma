@@ -1,5 +1,5 @@
 import { PostInfo } from "@/_types/PostInfo";
-import { dummyPosts } from "@/_utils/post";
+import { convertPostsCreatedAtToDate, dummyPosts } from "@/_utils/post";
 import { backendUrl } from "@/_utils/urls";
 import { FetchNickname } from "@/_utils/user";
 import Post from "@/main/_components/Post";
@@ -37,7 +37,8 @@ async function fetchPostById(id: number) {
                     ...post,
                     likeCount: post.likes?.length || 0,
                 }
-                return likeCountCalculated;
+                const [converted] = convertPostsCreatedAtToDate([likeCountCalculated]);
+                return converted;
             } else {
                 throw new Error("Failed to fetch post");
             }
