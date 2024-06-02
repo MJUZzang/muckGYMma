@@ -5,6 +5,8 @@ import mju.paygo.meal.domain.Meal;
 import mju.paygo.meal.domain.MealRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +29,14 @@ public class MealRepositoryImpl implements MealRepository {
     @Override
     public List<Meal> findAllByMemberId(final Long memberId) {
         return mealJpaRepository.findAllByMemberId(memberId);
+    }
+
+    @Override
+    public List<Meal> findAllByMemberIdAndToday(final Long memberId) {
+        LocalDateTime start = LocalDateTime.now().toLocalDate().atStartOfDay();
+        LocalDateTime end = LocalDateTime.now().toLocalDate().atTime(LocalTime.MAX);
+
+        return mealJpaRepository.findAllByMemberIdAndToday(memberId, start, end);
     }
 
     @Override

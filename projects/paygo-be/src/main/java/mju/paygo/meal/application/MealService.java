@@ -70,4 +70,8 @@ public class MealService {
         return mealRepository.findByMemberAndId(memberId, mealId)
                 .orElseThrow(MealNotFoundException::new);
     }
+
+    public List<Meal> findTodayEatenMeal(final Long memberId) {
+        return mealRepository.findAllByMemberIdAndToday(memberId);
+    }
 }

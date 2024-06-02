@@ -8,6 +8,7 @@ import mju.paygo.meal.infrastructure.dto.FoodAnalyzeResponse;
 import mju.paygo.meal.infrastructure.dto.FoodPickResponse;
 import mju.paygo.meal.ui.dto.MealHistoryResponse;
 import mju.paygo.meal.ui.dto.MealPickRequest;
+import mju.paygo.meal.ui.dto.TodayMealResponse;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,5 +65,12 @@ public class MealController {
         Meal meal = mealService.findEatenMeal(memberId, mealId);
         return ResponseEntity.ok()
                 .body(MealHistoryResponse.from(meal));
+    }
+
+    @GetMapping("/today")
+    public ResponseEntity<TodayMealResponse> todayMealHistory(@AuthMember final Long memberId) {
+        List<Meal> meals = mealService.findTodayEatenMeal(memberId);
+        return ResponseEntity.ok()
+                .body(TodayMealResponse.from(meals));
     }
 }
