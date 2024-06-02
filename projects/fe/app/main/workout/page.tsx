@@ -2,11 +2,13 @@ import React from "react";
 import Image from "next/image";
 
 import { Dosis, Jua, Noto_Sans, Noto_Serif_JP } from "next/font/google";
-import {
-    fetchSimpleUserInfo,
-} from "@/_utils/user";
+import { fetchSimpleUserInfo } from "@/_utils/user";
 import Plans from "@/main/workout/_components/Plans";
-import { fetchTodayEatenFoodInfo, fetchTodoPlans, sortPlansByDate } from "@/_utils/plan";
+import {
+    fetchTodayEatenFoodInfo,
+    fetchTodoPlans,
+    sortPlansByDate,
+} from "@/_utils/plan";
 
 const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600"] });
 const jua = Jua({
@@ -30,12 +32,16 @@ async function WorkoutPage() {
     const [simpleUserInfo, plans, todayEatenFoodInfo] = await Promise.all([
         simpleUserInfoPromise,
         todoPlansPromise,
-        todayEatenFoodInfoPromise
+        todayEatenFoodInfoPromise,
     ]);
 
-    const {nickname, profileImageUrl} = simpleUserInfo;
+    const { nickname, profileImageUrl } = simpleUserInfo;
     const sortedPlans = sortPlansByDate(plans);
-
+    const totalTime = sortedPlans.reduce(
+        (acc, plan) => acc + (plan.time ? plan.time : 0),
+        0
+    );
+    console.log(totalTime);
     return (
         <div className="max-w-[835px] mx-auto w-full">
             <div className="px-4 w-full">
@@ -106,7 +112,9 @@ async function WorkoutPage() {
                                     금일 섭취 :
                                 </p>
                                 <p className={`text-sm ${jua.className}`}>
-                                    {todayEatenFoodInfo.lastMealName ? todayEatenFoodInfo.lastMealName : "아직 빈 속"}
+                                    {todayEatenFoodInfo.lastMealName
+                                        ? todayEatenFoodInfo.lastMealName
+                                        : "아직 빈 속"}
                                 </p>
                             </div>
                         </div>
@@ -154,7 +162,11 @@ async function WorkoutPage() {
                                 <p
                                     className={`inline-block mt-4 text-2xl font-semibold ${dosis.className}`}
                                 >
-                                    {sortedPlans.reduce((acc, plan) => acc + (plan.cleared ? 0 : 1), 0)}
+                                    {sortedPlans.reduce(
+                                        (acc, plan) =>
+                                            acc + (plan.cleared ? 0 : 1),
+                                        0
+                                    )}
                                 </p>
                                 <p
                                     className={`inline-block text-xl ml-1 ${jua.className}`}
