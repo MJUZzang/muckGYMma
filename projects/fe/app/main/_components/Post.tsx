@@ -49,11 +49,11 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
 
     const [emblaRef] = useEmblaCarousel({ loop: false });
 
-    const randomUserNameAmongLikes = post.likes?.find(
-        (like) => like.nickname !== myNickname
-    )?.nickname;
+    const randomUserNameAmongLikes =
+        post.likes?.find((like) => like.nickname !== myNickname)?.nickname ||
+        myNickname;
     console.log("Randone nickname: ", randomUserNameAmongLikes);
-    
+
     function deletePost() {
         fetch(`${backendUrl}/api/board/delete`, {
             method: "DELETE",
@@ -237,6 +237,9 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 </div>
             </div>
 
+            <div className="text-sm px-3 flex">{`${randomUserNameAmongLikes}님${
+                post.likeCount > 0 ? ` 외 ${(<div>여러 명</div>)}` : ""
+            }이 좋아합니다`}</div>
             {/* 포스트 내용 */}
             <p className={`mx-2 text-pretty text-sm text-app-font-1 mt-1`}>
                 {truncatedContent}
