@@ -3,7 +3,7 @@ import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
 
 import { Dosis, Jua, Noto_Sans, Noto_Serif_JP } from "next/font/google";
-import { FetchNickname as fetchNickname } from "@/_utils/user";
+import { FetchNickname as fetchNickname, fetchSimpleUserInfo } from "@/_utils/user";
 import Plans from "@/main/workout/_components/Plans";
 import { fetchTodoPlans, sortPlansByDate } from "@/_utils/plan";
 
@@ -22,7 +22,7 @@ const notnSerifJP = Noto_Serif_JP({
 });
 
 async function WorkoutPage() {
-    const nickname = await fetchNickname();
+    const {nickname, profileImageUrl} = await fetchSimpleUserInfo();
     const plans = await fetchTodoPlans();
     const sortedPlans = sortPlansByDate(plans);
     
@@ -33,7 +33,7 @@ async function WorkoutPage() {
                     <div className="flex justify-between">
                         <div className="w-[68px] h-[68px] lg:w-[98px] lg:h-[98px] overflow-clip rounded-3xl">
                             <Image
-                                src={exampleImage}
+                                src={profileImageUrl}
                                 alt="avatar"
                                 className="w-full"
                             />

@@ -2,6 +2,7 @@ import { NextRequest } from "next/server";
 import { backendUrl } from "./urls";
 import { cookies } from "next/headers";
 import { userInfoState } from "@/../lib/slices/userInfoSlice";
+import exampleImage from "@/_images/pooh.jpg";
 
 export async function checkIfSignedIn(request: NextRequest) {
     // jwt토큰이 있으면 유효성 검사
@@ -103,5 +104,41 @@ export async function FetchNickname() {
         .catch((err) => {
             console.error(err);
             return "JohnDoe";
+        });
+}
+
+interface SimpleUserInfo {
+    profileImageUrl: string;
+    nickname: string;
+}
+
+export async function fetchSimpleUserInfo() {
+    const cookieStore = cookies();
+
+    return await fetch(`${backendUrl}/api/profile/main-profile`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            Cookie: cookieStore
+                .getAll()
+                .map((cookie) => `${cookie.name}=${cookie.value}`)
+                .join("; "),
+        },
+    })
+        .then((res) => {
+            if (res.ok) return res.json();
+            throw new Error("Failed to fetch user info");
+        })
+        .then((data: SimpleUserInfo) => {
+            return data;
+        })
+        .catch((err) => {
+            console.error(err);
+            const info: SimpleUserInfo = {
+                profileImageUrl: exampleImage.src,
+                nickname: "JohnDoe",
+            };
+
+            return info;
         });
 }
