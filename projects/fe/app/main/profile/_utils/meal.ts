@@ -94,7 +94,6 @@ export async function fetchMeal(mealId: number) {
         },
     })
         .then((res) => {
-            console.log(res.status);
             if (res.ok) {
                 return res.json();
             } else {
@@ -103,7 +102,6 @@ export async function fetchMeal(mealId: number) {
         })
         .then((meal: MealInfo) => {
             if (meal) {
-                console.log("meal: ", meal);
                 return { ...meal, createdAt: new Date(meal.createdAt) };
             } else {
                 throw new Error("No meal info received");
