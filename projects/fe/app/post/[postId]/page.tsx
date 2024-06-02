@@ -3,8 +3,11 @@ import { backendUrl } from "@/_utils/urls";
 import { FetchNickname } from "@/_utils/user";
 import Post from "@/main/_components/Post";
 import NavigateBack from "@/main/profile/[username]/(follow)/_components/NavigateBack";
+import { Noto_Sans_KR } from "next/font/google";
 import { cookies } from "next/headers";
 import React, { useEffect } from "react";
+
+const notoSansKr = Noto_Sans_KR({ subsets: ["latin"], weight: ["400", "700"] });
 
 async function fetchPostById(id: number) {
     const cookieStore = cookies();
@@ -56,10 +59,15 @@ async function PostPage({ params }: PostPageProps) {
         return "Failed to fetch post";
     }
     return (
-        <div className="fixed top-0 h-[100dvh] w-full bg-app-bg z-[30]">
+        <div
+            className={`fixed top-0 h-[100dvh] w-full bg-app-bg z-[30] ${notoSansKr.className}`}
+        >
             <div className="grid grid-cols-3 px-2 py-2">
                 <NavigateBack />
-                <p className="w-full text-center text-lg">좋아요</p>
+                <div className="w-full flex flex-col items-center justify-center text-lg">
+                    <p className="text-xs text-app-font-4">{post.nickname}</p>
+                    <p className="text-app-font-2">게시물</p>
+                </div>
                 <div />
             </div>
 
