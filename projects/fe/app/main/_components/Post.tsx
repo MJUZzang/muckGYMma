@@ -185,7 +185,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                             alt="Post image"
                             width={325}
                             height={325}
-                            className="w-full rounded-t-lg"
+                            className="w-full rounded-t-lg shrink-0 grow-0"
                         />
                     ))}
                 </div>
