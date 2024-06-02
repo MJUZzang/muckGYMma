@@ -191,8 +191,8 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                 </div>
 
                 {/* 포스트 이미지 */}
-                <div className="overflow-hidden flex flex-col" ref={emblaRef}>
-                    <div className="flex">
+                <div className="overflow-hidden flex flex-col z-[0]" ref={emblaRef}>
+                    <div className="flex z-[0]">
                         {post.imageUrls.map((url, i) => (
                             <Image
                                 key={i}
@@ -200,7 +200,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                 alt="Post image"
                                 width={325}
                                 height={325}
-                                className="w-full rounded-t-lg shrink-0 grow-0"
+                                className="w-full rounded-t-lg shrink-0 grow-0 z-[0]"
                             />
                         ))}
                     </div>
