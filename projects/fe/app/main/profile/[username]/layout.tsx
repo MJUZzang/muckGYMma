@@ -193,7 +193,10 @@ async function ProfileLayout({
                                     게시글
                                 </p>
                             </div>
-                            <div className="w-full flex flex-col items-center">
+                            <Link
+                                href={`/main/profile/${nickname}/following`}
+                                className="w-full flex flex-col items-center"
+                            >
                                 <p
                                     className={`font-semibold ${dosis.className}`}
                                 >
@@ -202,8 +205,11 @@ async function ProfileLayout({
                                 <p className={`${notoSansKr.className}`}>
                                     팔로잉
                                 </p>
-                            </div>
-                            <div className="w-full flex flex-col items-center">
+                            </Link>
+                            <Link
+                                href={`/main/profile/${nickname}/followers`}
+                                className="w-full flex flex-col items-center"
+                            >
                                 <p
                                     className={`font-semibold ${dosis.className}`}
                                 >
@@ -212,7 +218,7 @@ async function ProfileLayout({
                                 <p className={`${notoSansKr.className}`}>
                                     팔로워
                                 </p>
-                            </div>
+                            </Link>
                         </div>
                         <div className="flex justify-between w-full">
                             <div className="w-full flex flex-col items-center">

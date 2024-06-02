@@ -12,7 +12,6 @@ interface FollowersPageProps {
 async function FollowingPage({ params }: FollowersPageProps) {
     const { username } = params;
     const followings = await fetchFollowing(username);
-    console.log(followings);
 
     return <FollowingList followings={followings} />;
 }

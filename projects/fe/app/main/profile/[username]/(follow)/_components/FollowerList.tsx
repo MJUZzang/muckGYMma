@@ -1,25 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
-import { FollowingInfo } from "../_types/follow";
-import Image from "next/image";
+import { FollowerInfo } from "@/main/profile/[username]/(follow)/_types/follow";
 import { Noto_Sans_KR } from "next/font/google";
+import Image from "next/image";
+import { backendUrl } from "@/_utils/urls";
 import { useAppSelector } from "@/../lib/hooks";
 import { selectNickname } from "@/../lib/slices/userInfoSlice";
-import { backendUrl } from "@/_utils/urls";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"], weight: ["400", "700"] });
 
-interface FollowingListProps {
-    followings: FollowingInfo[];
+interface FollowerListProps {
+    followers: FollowerInfo[];
 }
 
-function FollowingList({ followings }: FollowingListProps) {
-    const [followingList, setFollowingList] =
-        useState<FollowingInfo[]>(followings);
+function FollowerList({ followers }: FollowerListProps) {
+    const [followerList, setFollowerList] = useState<FollowerInfo[]>(followers);
     const myNickname = useAppSelector(selectNickname);
 
-    function handleButtonClick(following: FollowingInfo) {
+    function handleButtonClick(follower: FollowerInfo) {
         fetch(`${backendUrl}/api/follow`, {
             method: "POST",
             headers: {
@@ -28,58 +27,42 @@ function FollowingList({ followings }: FollowingListProps) {
             credentials: "include",
             body: JSON.stringify({
                 followerNickname: myNickname,
-                followeeNickname: following.nickname,
+                followeeNickname: follower.nickname,
             }),
         })
             .then((res) => {
                 if (res.ok) {
                     return res.json();
                 } else {
-                    throw new Error("Failed to fetch followers");
+                    throw new Error("Failed to unfollow the user");
                 }
             })
             .then((data: { isFollowing: boolean }) => {
                 if (!data) {
-                    throw new Error("Failed to fetch followers");
+                    throw new Error("Failed to unfollow the user");
                 }
-                if (data.isFollowing) {
-                    setFollowingList((prev) => {
-                        return prev.map((prevFollowing) => {
-                            if (prevFollowing.nickname === following.nickname) {
-                                return {
-                                    ...prevFollowing,
-                                    justUnfollowed: false,
-                                };
-                            }
-                            return prevFollowing;
+                if (!data.isFollowing) {
+                    setFollowerList((prev) => {
+                        return prev.filter((prevFollower) => {
+                            return prevFollower.nickname !== follower.nickname;
                         });
                     });
                 } else {
-                    setFollowingList((prev) => {
-                        return prev.map((prevFollowing) => {
-                            if (prevFollowing.nickname === following.nickname) {
-                                return {
-                                    ...prevFollowing,
-                                    justUnfollowed: true,
-                                };
-                            }
-                            return prevFollowing;
-                        });
-                    });
+                    throw new Error("Failed to unfollow the user");
                 }
             });
     }
 
     return (
         <div className={`space-y-2 px-3 pt-2 ${notoSansKr.className}`}>
-            {followingList.map((following, index) => {
+            {followers.map((follower, index) => {
                 return (
                     <div key={index} className="flex items-center space-x-2">
                         {/* Avatar Image */}
                         <div className="w-[45px] h-[45px]">
                             <div className="w-[45px] h-[45px] overflow-clip rounded-full">
                                 <Image
-                                    src={following.profileImageUrl}
+                                    src={follower.profileImageUrl}
                                     alt="User avatar"
                                     className="w-[45px] h-[45px] pointer-events-none"
                                     width={50}
@@ -90,20 +73,20 @@ function FollowingList({ followings }: FollowingListProps) {
 
                         <div className="w-full">
                             <p className="text-app-font-2">
-                                {following.nickname}
+                                {follower.nickname}
                             </p>
                             <p className="text-xs text-app-font-4">
-                                {following.email}
+                                {follower.email}
                             </p>
                         </div>
 
                         <button
                             className="text-nowrap text-sm rounded-lg px-3 py-1 border-2"
                             onClick={() => {
-                                handleButtonClick(following);
+                                handleButtonClick(follower);
                             }}
                         >
-                            {following.justUnfollowed ? "팔로우" : "팔로잉"}
+                            삭제
                         </button>
                     </div>
                 );
@@ -112,4 +95,4 @@ function FollowingList({ followings }: FollowingListProps) {
     );
 }
 
-export default FollowingList;
+export default FollowerList;
