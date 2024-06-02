@@ -48,7 +48,8 @@ export async function fetchUserPosts(nickname: string) {
         })
         .then((data: PostInfo[]) => {
             if (data) {
-                return convertPostsCreatedAtToDate(data);
+                const converted = convertPostsCreatedAtToDate(data);
+                return converted;
             } else {
                 throw new Error("Failed to fetch user posts");
             }
