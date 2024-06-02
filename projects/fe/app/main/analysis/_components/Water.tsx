@@ -93,7 +93,7 @@ function Water() {
                     className="w-full bg-[#dfeaff] text-[#007aff] rounded-lg text-center 
                     h-full flex justify-center items-center gap-1"
                 >
-                    <div className="text-3xl relative bottom-1">+</div>
+                    <div className="text-3xl relative bottom-1" onClick={() => addWater()}>+</div>
                     <div className="text-xl">200ml</div>
                 </div>
 
