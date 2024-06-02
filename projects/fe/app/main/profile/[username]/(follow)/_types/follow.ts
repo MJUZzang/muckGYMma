@@ -5,4 +5,6 @@ interface FollowInfo {
 }
 
 export interface FollowerInfo extends FollowInfo {}
-export interface FollowingInfo extends FollowInfo {}
+export interface FollowingInfo extends FollowInfo {
+    justUnfollowed?: boolean;
+}

@@ -1,7 +1,11 @@
 import ArrowBack from "@/_images/ArrowBack";
 import { Noto_Sans_KR } from "next/font/google";
 import React from "react";
-import { fetchFollowers } from "./_utils/follow";
+import {
+    fetchFollowers,
+    fetchFollowing,
+} from "@/main/profile/[username]/(follow)/_utils/follow";
+import NavMenu from "./_components/NavMenu";
 
 const notoSansKr = Noto_Sans_KR({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -13,9 +17,8 @@ interface FollowLayoutProps {
 async function FollowLayout({ children, params }: FollowLayoutProps) {
     const { username } = params;
     const followers = await fetchFollowers(username);
-    // const following = await fetchFollowing(username);
+    const following = await fetchFollowing(username);
 
-    console.log(followers)
     return (
         <div
             className={`absolute top-0 w-full h-[100dvh] bg-app-bg ${notoSansKr.className}`}
@@ -26,7 +29,13 @@ async function FollowLayout({ children, params }: FollowLayoutProps) {
                 <div />
             </div>
 
-            {children}
+            <NavMenu
+                username={username}
+                followersCount={followers.length}
+                followingCount={following.length}
+            />
+
+            <div className="pb-[90px]">{children}</div>
         </div>
     );
 }

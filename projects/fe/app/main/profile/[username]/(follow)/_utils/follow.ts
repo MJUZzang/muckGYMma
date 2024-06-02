@@ -2,22 +2,25 @@ import { backendUrl } from "@/_utils/urls";
 import { cookies } from "next/headers";
 import { FollowerInfo, FollowingInfo } from "../_types/follow";
 
-export const dummyFollowers: FollowerInfo[] = [
-    {
+export const dummyFollowing: FollowingInfo[] = Array.from(
+    { length: 20 },
+    (_, index) => ({
         nickname: "test",
         email: "jeheecheon@gmail.com",
         profileImageUrl:
             "https://lh3.googleusercontent.com/a/ACg8ocIOWmHdc4ui5vWFDdcszL0AObeD-DiwbtAFEkVFSAyuZtKaodm6=s96-c",
-    },
-];
-export const dummyFollowing: FollowingInfo[] = [
-    {
+    })
+);
+
+export const dummyFollowers: FollowerInfo[] = Array.from(
+    { length: 20 },
+    (_, index) => ({
         nickname: "test",
         email: "jeheecheon@gmail.com",
         profileImageUrl:
             "https://lh3.googleusercontent.com/a/ACg8ocIOWmHdc4ui5vWFDdcszL0AObeD-DiwbtAFEkVFSAyuZtKaodm6=s96-c",
-    },
-];
+    })
+);
 
 export async function fetchFollowers(username: string) {
     const cookieStore = cookies();
@@ -90,6 +93,6 @@ export async function fetchFollowing(username: string) {
         })
         .catch((err) => {
             console.error(err);
-            return dummyFollowers;
+            return dummyFollowing;
         });
 }
