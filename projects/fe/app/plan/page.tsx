@@ -39,7 +39,7 @@ function PlanPage() {
     const [restTime, setRestTime] = useState(0);
 
     const task: Workout = planInfo.tasks![selectedWorkout];
-
+    console.log(planInfo);
     useEffect(() => {
         const id = setInterval(() => {
             setTimerTime((prev) => prev + 1);
