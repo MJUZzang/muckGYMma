@@ -19,7 +19,6 @@ function UploadMenu({ className, isVisible, setIsVisible }: UploadMenuProps) {
                 } ${className}`}
                 onClick={(e) => {
                     e.stopPropagation();
-                    setIsVisible(false);
                 }}
             >
                 <Link href="/post/write" className="text-nowrap">
