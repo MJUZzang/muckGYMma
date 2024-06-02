@@ -46,6 +46,7 @@ async function fetchProfileInfo(username: string) {
             if (res.ok) {
                 return res.json();
             } else {
+                console.error(res.status);
                 throw new Error("Sever responsded with an error");
             }
         })
@@ -94,6 +95,7 @@ async function fetchIsFollowing(username: string) {
             if (res.ok) {
                 return res.json();
             } else {
+                console.error(res.status);
                 throw new Error("Sever responsded with an error");
             }
         })
