@@ -76,7 +76,7 @@ function CommentsSection({
 
     function deleteComment(commentId: number) {
         fetch(`${backendUrl}/api/comments/delete`, {
-            method: "POST",
+            method: "DELETE",
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
