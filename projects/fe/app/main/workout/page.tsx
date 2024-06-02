@@ -28,7 +28,7 @@ async function WorkoutPage() {
     const { nickname, profileImageUrl } = await fetchSimpleUserInfo();
     const plans = await fetchTodoPlans();
     const sortedPlans = sortPlansByDate(plans);
-
+    console.log(profileImageUrl);
     return (
         <div className="max-w-[835px] mx-auto w-full">
             <div className="px-4 w-full">
