@@ -155,7 +155,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                 className={`ml-auto flex relative right-1 ${notoSansKr.className}`}
                             >
                                 <ul
-                                    className={`comment-menu flex text-sm flex-col py-2 absolute right-7 rounded-xl bg-app-bg shadow-xl border-2 border-gray-200 text-app-font-1 gap-1 px-2 ${
+                                    className={`comment-menu flex text-sm flex-col py-2 absolute right-7 bottom-5 rounded-xl bg-app-bg shadow-xl border-2 border-gray-200 text-app-font-1 gap-1 px-2 ${
                                         !isMenuOpen && "hidden"
                                     }`}
                                 >
