@@ -3,7 +3,7 @@ package mju.paygo.meal.ui.dto;
 import mju.paygo.meal.domain.Meal;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public record MealHistoryResponse(
         Long id,
@@ -18,7 +18,7 @@ public record MealHistoryResponse(
         Boolean exercised,
         Boolean posted,
         Boolean planed,
-        LocalDateTime createdAt
+        ZonedDateTime createdAt
 ) {
 
     public static MealHistoryResponse from(final Meal meal) {

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -76,8 +76,8 @@ public class MealController {
     }
 
     @GetMapping("/last")
-    public ResponseEntity<LocalDateTime> timeFromLastAte(@AuthMember final Long memberId) {
-        LocalDateTime time = mealService.lastAteEatenMeal(memberId);
+    public ResponseEntity<ZonedDateTime> timeFromLastAte(@AuthMember final Long memberId) {
+        ZonedDateTime time = mealService.lastAteEatenMeal(memberId);
         return ResponseEntity.ok()
                 .body(time);
     }

@@ -1,6 +1,6 @@
 package mju.paygo.comment.ui.dto;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public record CommentResponse(
         Long id,
@@ -10,7 +10,7 @@ public record CommentResponse(
         Long boardId,
         String profileImageUrl,
         String content,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt
+        ZonedDateTime createdAt,
+        ZonedDateTime updatedAt
 ) {
 }
