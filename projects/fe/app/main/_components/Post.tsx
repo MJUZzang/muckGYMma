@@ -153,7 +153,7 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
                                 <div className="comment-menu bg-app-bg-3 h-[2px]" />
                                 <button
                                     className="comment-menu w-full text-center px-3 text-nowrap"
-                                    onClick={() => {}}
+                                    onClick={deletePost}
                                 >
                                     ❌ 삭제하기
                                 </button>
