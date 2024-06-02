@@ -53,9 +53,10 @@ export async function fetchUserPosts(nickname: string) {
                 const likeCountCalculated = converted.map((post) => {
                     return {
                         ...post,
-                        likeCount: post.likes?.length,
+                        likeCount: post.likes ? post.likes.length : 0,
                     };
                 });
+                console.log(likeCountCalculated);
                 return likeCountCalculated;
             } else {
                 throw new Error("Failed to fetch user posts");
