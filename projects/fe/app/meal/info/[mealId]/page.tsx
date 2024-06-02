@@ -130,9 +130,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
                 <Link
                     href={getButtonLink()}
                     className={`inline-block text-center w-full bg-app-blue rounded-lg py-2 font-semibold text-app-inverted-font 
-                    active:scale-90 transition-all ${
-                        meal.planed && meal.posted && "pointer-events-none"
-                    }`}
+                    active:scale-90 transition-all`}
                 >
                     {!meal.planed && "운동플랜 만들기"}
                     {meal.exercised && !meal.posted && "식사일기 작성하기"}
