@@ -73,7 +73,9 @@ function Water() {
             <p className="text-app-font-1 font-semibold">물 섭취</p>
 
             <div className="mt-3 flex items-end">
-                <p className="text-3xl font-semibold text-app-font-2">{amount / 1000}</p>
+                <p className="text-3xl font-semibold text-app-font-2">
+                    {amount / 1000}
+                </p>
                 <p className="">/ 2L</p>
             </div>
 
@@ -92,8 +94,9 @@ function Water() {
                 <div
                     className="w-full bg-[#dfeaff] text-[#007aff] rounded-lg text-center 
                     h-full flex justify-center items-center gap-1"
+                    onClick={() => addWater()}
                 >
-                    <div className="text-3xl relative bottom-1" onClick={() => addWater()}>+</div>
+                    <div className="text-3xl relative bottom-1">+</div>
                     <div className="text-xl">200ml</div>
                 </div>
 
