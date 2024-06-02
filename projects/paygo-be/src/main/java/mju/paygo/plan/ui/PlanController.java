@@ -1,6 +1,8 @@
 package mju.paygo.plan.ui;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import mju.paygo.plan.application.dto.MealPlanFindRequest;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import mju.paygo.plan.application.PlanService;
 import mju.paygo.plan.application.dto.PlanCreateRequest;
@@ -63,5 +65,12 @@ public class PlanController {
         });
         return ResponseEntity.ok()
                 .body(responses);
+    }
+
+    @GetMapping("/meal")
+    public ResponseEntity<Long> findPlanIdByMeal(@AuthMember final Long memberId, @RequestBody @Valid final MealPlanFindRequest request) {
+        Long planId = planService.findPlanIdByMemberAndMeal(memberId, request.mealId());
+        return ResponseEntity.ok()
+                .body(planId);
     }
 }

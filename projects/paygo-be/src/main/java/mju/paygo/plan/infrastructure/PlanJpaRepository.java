@@ -25,4 +25,7 @@ public interface PlanJpaRepository extends JpaRepository<Plan, Long> {
 
     @Query("SELECT count(p.id) > 0 FROM Plan p WHERE p.memberId = :memberId AND p.mealId = :mealId")
     boolean isAlreadyExisted(Long memberId, Long mealId);
+
+    @Query("SELECT p FROM Plan p WHERE p.memberId = :memberId AND p.mealId =:mealId")
+    Optional<Plan> findPlanByMemberAndMeal(Long memberId, Long mealId);
 }

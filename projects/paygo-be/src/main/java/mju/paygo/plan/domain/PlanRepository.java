@@ -11,4 +11,5 @@ public interface PlanRepository {
     List<Plan> findPlansByMemberIdAndStatus(Long memberId, Boolean status);
     List<Plan> findAllByMemberId(Long memberId);
     Boolean isAlreadyExisted(Long memberId, Long mealId);
+    Optional<Plan> findPlanByMemberAndMeal(Long memberId, Long mealId);
 }
