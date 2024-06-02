@@ -41,7 +41,7 @@ async function MealPage() {
                                 >
                                     <div
                                         className="w-[85px] h-[85px] sm:w-[105px] sm:h-[105px] 
-                            overflow-clip rounded-2xl shrink-0 "
+                                    overflow-clip rounded-2xl shrink-0 "
                                     >
                                         <Image
                                             src={meal.imageUrl}
@@ -56,7 +56,7 @@ async function MealPage() {
                                         className={`py-[6px] w-full flex flex-col justify-start`}
                                     >
                                         <p
-                                            className={`text-app-font-2 text-lg ${notoSansKr.className}`}
+                                            className={`text-app-font-2 text-base ${notoSansKr.className}`}
                                         >
                                             {meal.name}
                                         </p>
@@ -86,8 +86,8 @@ async function MealPage() {
                                     <div className="ml-auto my-auto">
                                         <button
                                             className={`text-nowrap bg-app-blue rounded-full px-4 py-2 
-                                text-sm text-app-inverted-font
-                                ${notoSansKr.className}`}
+                                            text-sm text-app-inverted-font
+                                            ${notoSansKr.className}`}
                                         >
                                             상세 정보
                                         </button>

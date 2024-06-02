@@ -7,6 +7,7 @@ import Like from "@/main/community/_images/Like";
 import Comment from "@/main/community/_images/Comment";
 import SpoonKnife from "@/main/community/_images/SpoonKnife";
 import CommentsSection from "@/main/community/_components/CommentsSection";
+import useEmblaCarousel from "embla-carousel-react";
 
 import { Jua, Noto_Sans, Noto_Sans_KR } from "next/font/google";
 import { backendUrl } from "@/_utils/urls";
@@ -46,7 +47,9 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
     const myNickname = useAppSelector(selectNickname);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
     console.log(post);
-    
+
+    const [emblaRef] = useEmblaCarousel({ loop: false });
+
     function deletePost() {
         fetch(`${backendUrl}/api/board/delete`, {
             method: "DELETE",
@@ -173,14 +176,19 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
             </div>
 
             {/* 포스트 이미지 */}
-            <div className={`overflow-clip aspect-square`}>
-                <Image
-                    src={post.imageUrls[0]}
-                    alt="Post image"
-                    width={325}
-                    height={325}
-                    className="rounded-t-lg w-full"
-                />
+            <div className="overflow-hidden flex flex-col" ref={emblaRef}>
+                <div className="flex">
+                    {post.imageUrls.map((url, i) => (
+                        <Image
+                            key={i}
+                            src={url}
+                            alt="Post image"
+                            width={325}
+                            height={325}
+                            className="w-full rounded-t-lg"
+                        />
+                    ))}
+                </div>
             </div>
 
             {/* 포스트 정보 */}
