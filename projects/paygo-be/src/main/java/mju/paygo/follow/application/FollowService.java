@@ -22,9 +22,9 @@ public class FollowService {
     private final FollowRepository followRepository;
     private final MemberRepository memberRepository;
 
-    public boolean follow(final Long followerId, final Long followeeId) {
-        Member follower = findMemberById(followerId);
-        Member followee = findMemberById(followeeId);
+    public boolean follow(final String followerId, final String followeeId) {
+        Member follower = findMemberByNickname(followerId);
+        Member followee = findMemberByNickname(followeeId);
 
         if (followRepository.existsByFollowerAndFollowee(follower, followee)) {
             followRepository.deleteByFollowerAndFollowee(follower, followee);
