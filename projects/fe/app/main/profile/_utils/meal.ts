@@ -141,6 +141,7 @@ export async function findPostIdByMealId(mealId: number) {
     )
         .then((res) => {
             if (res.ok) {
+                console.log("asd", res.status);
                 return res.json();
             } else {
                 throw new Error("Failed to fetch post id");

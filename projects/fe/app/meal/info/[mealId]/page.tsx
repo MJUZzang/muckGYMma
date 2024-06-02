@@ -38,6 +38,8 @@ async function MealInfoPage({ params }: MealInfoProps) {
         postIdPromise,
     ]);
 
+    console.log(postId);
+    
     function getButtonLink() {
         if (!meal.planed) {
             return `/plan/pick/${meal.id}`;
