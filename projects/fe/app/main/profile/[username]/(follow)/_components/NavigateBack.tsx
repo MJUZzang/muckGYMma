@@ -1,3 +1,5 @@
+"use client";
+
 import ArrowBack from "@/_images/ArrowBack";
 import { useRouter } from "next/navigation";
 import React from "react";
