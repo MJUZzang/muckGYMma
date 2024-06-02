@@ -3,8 +3,7 @@ import { cookies } from "next/headers";
 
 import img1 from "@/_images/닭갈비.jpg";
 import img2 from "@/_images/삼겹살.jpg";
-import img3 from "@/_images/떡볶이.jpg";
-import img4 from "@/_images/버거.jpg";
+
 import { MealInfo } from "@/_types/Meal";
 
 const dummyData: MealInfo[] = [
@@ -120,4 +119,35 @@ export function sortMealsByDate(meals: MealInfo[]) {
     return meals.sort((a, b) => {
         return b.createdAt.getTime() - a.createdAt.getTime();
     });
+}
+
+export async function findPlanIdByMealId(mealId: number) {
+    const cookieStore = cookies();
+
+    return await fetch(`${backendUrl}/api/plans/meal?mealId=${mealId}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            Cookie: cookieStore
+                .getAll()
+                .map((cookie) => {
+                    return `${cookie.name}=${cookie.value}`;
+                })
+                .join("; "),
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Failed to fetch plan id");
+            }
+        })
+        .then((data: number | null) => {
+            return data;
+        })
+        .catch((err) => {
+            console.error(err);
+            return null;
+        });
 }

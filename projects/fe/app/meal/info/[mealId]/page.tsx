@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Noto_Sans_KR, Dosis } from "next/font/google";
 import NavigateBackButton from "./_components/NavigateBackButton";
-import { fetchMeal } from "@/main/profile/_utils/meal";
+import { fetchMeal, findPlanIdByMealId } from "@/main/profile/_utils/meal";
 
 const notoSansKr = Noto_Sans_KR({
     subsets: ["latin"],
@@ -24,7 +24,12 @@ async function MealInfoPage({ params }: MealInfoProps) {
     if (!mealId || isNaN(mealId)) {
         return <div>잘못된 요청입니다.</div>;
     }
-    const meal = await fetchMeal(mealId);
+    const mealPromise = fetchMeal(mealId);
+    const planIdPromise = findPlanIdByMealId(mealId);
+
+    const [meal, planId] = await Promise.all([mealPromise, planIdPromise]);
+    
+    console.log("Plan id: ", planId);
 
     function getButtonLink() {
         if (!meal.planed) {
@@ -34,7 +39,7 @@ async function MealInfoPage({ params }: MealInfoProps) {
         } else if (meal.posted) {
             return `/post/${meal.id}`;
         } else {
-            return `/plan/info/${meal.id}`; // plan id로 수정해야함
+            return `/plan/info/${planId}`;
         }
     }
 
