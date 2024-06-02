@@ -49,8 +49,11 @@ const Post: React.FC<PostProps> = ({ postInfo }) => {
 
     const [emblaRef] = useEmblaCarousel({ loop: false });
 
-    console.log("likes: ", post.likes);
-
+    const randomUserNameAmongLikes = post.likes?.find(
+        (like) => like.nickname !== myNickname
+    )?.nickname;
+    console.log("Randone nickname: ", randomUserNameAmongLikes);
+    
     function deletePost() {
         fetch(`${backendUrl}/api/board/delete`, {
             method: "DELETE",
