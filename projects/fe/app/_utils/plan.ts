@@ -188,3 +188,48 @@ export function sortPlansByDate(plans: PlanInfo[]) {
         );
     });
 }
+
+interface TodayEatenFoodInfo {
+    todayKcal: number;
+    lastMealName: string;
+}
+
+export async function fetchTodayEatenFoodInfo() {
+    const cookieStore = cookies();
+
+    return await fetch(`${backendUrl}/api/foods/today`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+            Cookie: cookieStore
+                .getAll()
+                .map((cookie) => {
+                    return `${cookie.name}=${cookie.value}`;
+                })
+                .join("; "),
+        },
+    })
+        .then((res) => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error(
+                    `${res.status}: Failed to fetch today eaten food info`
+                );
+            }
+        })
+        .then((data: TodayEatenFoodInfo) => {
+            if (!data) {
+                throw new Error("data is null");
+            }
+            return data;
+        })
+        .catch((err) => {
+            console.error(err);
+            const dummyData = {
+                todayKcal: 0,
+                lastMealName: "",
+            };
+            return dummyData;
+        });
+}

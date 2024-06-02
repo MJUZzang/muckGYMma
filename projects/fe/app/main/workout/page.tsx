@@ -1,14 +1,12 @@
 import React from "react";
 import Image from "next/image";
-import exampleImage from "@/_images/pooh.jpg";
 
 import { Dosis, Jua, Noto_Sans, Noto_Serif_JP } from "next/font/google";
 import {
-    FetchNickname as fetchNickname,
     fetchSimpleUserInfo,
 } from "@/_utils/user";
 import Plans from "@/main/workout/_components/Plans";
-import { fetchTodoPlans, sortPlansByDate } from "@/_utils/plan";
+import { fetchTodayEatenFoodInfo, fetchTodoPlans, sortPlansByDate } from "@/_utils/plan";
 
 const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600"] });
 const jua = Jua({
@@ -25,11 +23,19 @@ const notnSerifJP = Noto_Serif_JP({
 });
 
 async function WorkoutPage() {
-    const { nickname, profileImageUrl } = await fetchSimpleUserInfo();
-    const plans = await fetchTodoPlans();
+    const simpleUserInfoPromise = fetchSimpleUserInfo();
+    const todoPlansPromise = fetchTodoPlans();
+    const todayEatenFoodInfoPromise = fetchTodayEatenFoodInfo();
+
+    const [simpleUserInfo, plans, todayEatenFoodInfo] = await Promise.all([
+        simpleUserInfoPromise,
+        todoPlansPromise,
+        todayEatenFoodInfoPromise
+    ]);
+
+    const {nickname, profileImageUrl} = simpleUserInfo;
     const sortedPlans = sortPlansByDate(plans);
-    console.log(profileImageUrl);
-    console.log(nickname);
+
     return (
         <div className="max-w-[835px] mx-auto w-full">
             <div className="px-4 w-full">
@@ -81,7 +87,7 @@ async function WorkoutPage() {
                                 <p
                                     className={`inline-block text-3xl ${dosis.className}`}
                                 >
-                                    620
+                                    {todayEatenFoodInfo.todayKcal}
                                 </p>
                                 <p
                                     className={`inline-block text-xl ${notoSans.className}`}
@@ -100,7 +106,7 @@ async function WorkoutPage() {
                                     금일 섭취 :
                                 </p>
                                 <p className={`text-sm ${jua.className}`}>
-                                    &quot;비빔면, 삼겹살&quot;
+                                    &quot;${todayEatenFoodInfo.lastMealName}&quot;
                                 </p>
                             </div>
                         </div>
