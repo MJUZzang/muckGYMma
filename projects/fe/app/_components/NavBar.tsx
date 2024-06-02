@@ -56,7 +56,7 @@ const NavBar = () => {
                 }`}
             >
                 <div
-                    className={`fixed bg-app-bg bottom-0 w-full flex boxshadow h-[65px] pb-4 justify-between items-center
+                    className={`fixed z-[50] bg-app-bg bottom-0 w-full flex boxshadow h-[65px] pb-4 justify-between items-center
                     shadow-[-1px_0px_6px_1px_rgba(0,0,0,0.1)]`}
                 >
                     <Link
