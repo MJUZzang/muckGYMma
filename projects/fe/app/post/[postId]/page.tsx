@@ -33,7 +33,11 @@ async function fetchPostById(id: number) {
         })
         .then((post: PostInfo) => {
             if (post) {
-                return post;
+                const likeCountCalculated: PostInfo = {
+                    ...post,
+                    likeCount: post.likes?.length || 0,
+                }
+                return likeCountCalculated;
             } else {
                 throw new Error("Failed to fetch post");
             }
@@ -55,11 +59,9 @@ async function PostPage({ params }: PostPageProps) {
     const postId = params.postId;
     const post = await fetchPostById(postId);
 
-    console.log("post: ", post);
-
-    // if (!post) {
-    //     return "Failed to fetch post";
-    // }
+    if (!post) {
+        return "Failed to fetch post";
+    }
     return (
         <div
             className={`fixed top-0 h-[100dvh] w-full bg-app-bg z-[30] ${notoSansKr.className}`}
