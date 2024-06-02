@@ -9,6 +9,7 @@ import {
     fetchTodoPlans,
     sortPlansByDate,
 } from "@/_utils/plan";
+import { remainingHour, remainingMinute } from "@/plan/_utils/time";
 
 const dosis = Dosis({ subsets: ["latin"], weight: ["400", "600"] });
 const jua = Jua({
@@ -37,11 +38,16 @@ async function WorkoutPage() {
 
     const { nickname, profileImageUrl } = simpleUserInfo;
     const sortedPlans = sortPlansByDate(plans);
+
+    const todoPlansCount = sortedPlans.reduce(
+        (acc, plan) => acc + (plan.cleared ? 0 : 1),
+        0
+    );
     const totalTime = sortedPlans.reduce(
         (acc, plan) => acc + (plan.time ? plan.time : 0),
         0
     );
-    console.log(totalTime);
+
     return (
         <div className="max-w-[835px] mx-auto w-full">
             <div className="px-4 w-full">
@@ -136,7 +142,7 @@ async function WorkoutPage() {
                                 <p
                                     className={`${dosis.className} inline-block text-2xl font-semibold`}
                                 >
-                                    2
+                                    {remainingHour(totalTime)}
                                 </p>
                                 <p
                                     className={`${notoSans.className} inline-block font-semibold text-xl`}
@@ -146,7 +152,7 @@ async function WorkoutPage() {
                                 <p
                                     className={`${dosis.className} ml-1 inline-block text-2xl font-semibold`}
                                 >
-                                    15
+                                    {remainingMinute(totalTime)}
                                 </p>
                                 <p
                                     className={`${notoSans.className} inline-block font-semibold text-xl`}
@@ -162,11 +168,7 @@ async function WorkoutPage() {
                                 <p
                                     className={`inline-block mt-4 text-2xl font-semibold ${dosis.className}`}
                                 >
-                                    {sortedPlans.reduce(
-                                        (acc, plan) =>
-                                            acc + (plan.cleared ? 0 : 1),
-                                        0
-                                    )}
+                                    {todoPlansCount}
                                 </p>
                                 <p
                                     className={`inline-block text-xl ml-1 ${jua.className}`}

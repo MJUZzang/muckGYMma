@@ -7,7 +7,16 @@ export function formatTime(seconds: number) {
 export function formatTimeInKor(seconds: number) {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${minutes}분 ${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}초`;
+    return `${minutes}분 ${
+        remainingSeconds < 10 ? "0" : ""
+    }${remainingSeconds}초`;
+}
+export function remainingHour(seconds: number) {
+    return Math.floor(seconds / 3600);
+}
+
+export function remainingMinute(seconds: number) {
+    return Math.floor((seconds % 3600) / 60);
 }
 
 export function formatTimeHour(seconds: number) {
