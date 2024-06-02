@@ -1,5 +1,7 @@
+import { PostInfo } from "@/_types/PostInfo";
 import { backendUrl } from "@/_utils/urls";
 import { FetchNickname } from "@/_utils/user";
+import Post from "@/main/_components/Post";
 import { cookies } from "next/headers";
 import React, { useEffect } from "react";
 
@@ -24,7 +26,7 @@ async function fetchPostById(id: number) {
                 throw new Error("Server responded with an error");
             }
         })
-        .then((post) => {
+        .then((post: PostInfo) => {
             if (post) {
                 return post;
             } else {
@@ -45,10 +47,18 @@ interface PostPageProps {
 
 async function PostPage({ params }: PostPageProps) {
     const postId = params.postId;
-    console.log("postId: ", postId);
     const post = await fetchPostById(postId);
+
     console.log("post: ", post);
-    return <div>Page</div>;
+
+    if (!post) {
+        return "Failed to fetch post";
+    }
+    return (
+        <div>
+            <Post postInfo={post} />
+        </div>
+    );
 }
 
 export default PostPage;
