@@ -22,7 +22,6 @@ import mju.paygo.meal.domain.Meal;
 import mju.paygo.member.domain.member.Member;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +65,7 @@ public class Board extends BaseEntity {
         this.meal = meal;
         this.imageUrls = imageUrls;
         this.content = content;
-        this.createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
+        this.createdAt = LocalDateTime.now();
         this.verified = verified;
     }
 

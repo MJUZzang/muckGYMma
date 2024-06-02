@@ -98,8 +98,8 @@ public class BoardController {
     }
 
     @GetMapping("/my-posts")
-    public ResponseEntity<List<BoardFindResponse>> getMyPosts(@RequestParam String nickname) {
-        List<BoardFindResponse> boards = boardService.findAllByNickname(nickname);
+    public ResponseEntity<List<BoardFindResponse>> getMyPosts(@AuthMember final Long memberId, @RequestParam String nickname) {
+        List<BoardFindResponse> boards = boardService.findAllByMemberIdAndNickname(memberId, nickname);
 
         return ResponseEntity.ok(boards);
     }
