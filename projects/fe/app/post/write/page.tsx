@@ -28,6 +28,9 @@ function WritePage() {
     const searchParams = useSearchParams();
     const mealId = searchParams.get("mealId");
     const mealImage = searchParams.get("img");
+    if ((mealId && !mealImage) || (!mealId && mealImage)) {
+        throw new Error("Invalid query parameters");
+    }
 
     const router = useRouter();
     const nickname = useAppSelector(selectNickname);
@@ -75,6 +78,66 @@ function WritePage() {
             e.target.value = "";
         }
     };
+
+    async function handleSubmit() {
+        // URL로부터 Blob 데이터를 가져와서 File 객체로 변환하고 FormData에 추가하는 예제
+        const formData = new FormData();
+
+        for (let i = mealId ? 1 : 0; i < activeIndex; i++) {
+            const file: File | null = await urlToBlobFile(
+                imgSets[0][0]!,
+                "image.jpg"
+            )
+                .then((file) => {
+                    return file;
+                })
+                .catch((error) => {
+                    console.error("Error fetching blob from URL:", error);
+                    return null;
+                });
+
+            if (!file) {
+                console.error("No file found.");
+                return;
+            }
+
+            formData.append("files", file);
+        }
+
+        formData.append("content", text);
+
+        if (mealId) {
+            formData.append("mealId", mealId);
+            formData.append("mealImage", mealImage!);
+            fetch(`${backendUrl}/api/board/create-with-meal`, {
+                method: "POST",
+                credentials: "include",
+                body: formData,
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        router.push(`/main/profile/${nickname}/posts`);
+                    } else {
+                        throw new Error("Error occured while uploading image.");
+                    }
+                })
+                .catch((err) => console.error(err));
+        } else {
+            fetch(`${backendUrl}/api/board/create`, {
+                method: "POST",
+                credentials: "include",
+                body: formData,
+            })
+                .then((res) => {
+                    if (res.ok) {
+                        router.push(`/main/profile/${nickname}/posts`);
+                    } else {
+                        throw new Error("Error occured while uploading image.");
+                    }
+                })
+                .catch((err) => console.error(err));
+        }
+    }
 
     return (
         <div
@@ -134,78 +197,7 @@ function WritePage() {
             </div>
 
             <div className="bg-app-bg w-full pt-3 pb-6 px-3 mt-2 border-t-[1px] border-app-bg-3">
-                <Button
-                    className="bg-app-blue-1"
-                    onClick={async () => {
-                        // URL로부터 Blob 데이터를 가져와서 File 객체로 변환하고 FormData에 추가하는 예제
-                        const formData = new FormData();
-
-                        for (let i = 0; i < activeIndex; i++) {
-                            const file: File | null = await urlToBlobFile(
-                                imgSets[0][0]!,
-                                "image.jpg"
-                            )
-                                .then((file) => {
-                                    return file;
-                                })
-                                .catch((error) => {
-                                    console.error(
-                                        "Error fetching blob from URL:",
-                                        error
-                                    );
-                                    return null;
-                                });
-
-                            if (!file) {
-                                console.error("No file found.");
-                                return;
-                            }
-
-                            formData.append("files", file);
-                        }
-
-                        formData.append("content", text);
-
-                        if (mealId) {
-                            formData.append("mealId", mealId);
-                            fetch(`${backendUrl}/api/board/create-with-meal`, {
-                                method: "POST",
-                                credentials: "include",
-                                body: formData,
-                            })
-                                .then((res) => {
-                                    if (res.ok) {
-                                        router.push(
-                                            `/main/profile/${nickname}/posts`
-                                        );
-                                    } else {
-                                        throw new Error(
-                                            "Error occured while uploading image."
-                                        );
-                                    }
-                                })
-                                .catch((err) => console.error(err));
-                        } else {
-                            fetch(`${backendUrl}/api/board/create`, {
-                                method: "POST",
-                                credentials: "include",
-                                body: formData,
-                            })
-                                .then((res) => {
-                                    if (res.ok) {
-                                        router.push(
-                                            `/main/profile/${nickname}/posts`
-                                        );
-                                    } else {
-                                        throw new Error(
-                                            "Error occured while uploading image."
-                                        );
-                                    }
-                                })
-                                .catch((err) => console.error(err));
-                        }
-                    }}
-                >
+                <Button className="bg-app-blue-1" onClick={handleSubmit}>
                     포스트 작성완료
                 </Button>
             </div>
