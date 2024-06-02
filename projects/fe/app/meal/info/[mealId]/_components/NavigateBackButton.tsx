@@ -16,7 +16,7 @@ function NavigateBackButton({ className, meal }: NavigateBackButtonProps) {
     return (
         <div
             onClick={() => {
-                router.push("/main/profile/meals");
+                router.back();
             }}
             className={`w-full justify-start cursor-pointer ${className}`}
         >

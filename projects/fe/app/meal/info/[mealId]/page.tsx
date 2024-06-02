@@ -26,13 +26,28 @@ async function MealInfoPage({ params }: MealInfoProps) {
     }
     const meal = await fetchMeal(mealId);
 
+    {
+        !meal.planed && "운동플랜 만들기";
+    }
+    {
+        meal.exercised && !meal.posted && "식사일기 작성하기";
+    }
+    {
+        meal.posted && "식사일기 보러가기";
+    }
+    {
+        !meal.exercised && "운동플랜 하러가기";
+    }
+
     function getButtonLink() {
         if (!meal.planed) {
             return `/plan/pick/${meal.id}`;
         } else if (meal.exercised && !meal.posted) {
             return `/post/write?mealId=${meal.id}`;
+        } else if (meal.posted) {
+            return `/post/${meal.id}`;
         } else {
-            return `/post/${meal.id}`;   
+            return `/plan/info/${meal.id}`; // plan id로 수정해야함
         }
     }
 
@@ -114,19 +129,16 @@ async function MealInfoPage({ params }: MealInfoProps) {
 
             <div className="fixed bottom-0 w-full px-3 pb-3">
                 <Link
-                    href={
-                        meal.planed
-                            ? `/post/write?mealId=${meal.id}&img=${meal.imageUrl}`
-                            : `/plan/pick/${meal.id}`
-                    }
+                    href={getButtonLink()}
                     className={`inline-block text-center w-full bg-app-blue rounded-lg py-2 font-semibold text-app-inverted-font 
                     active:scale-90 transition-all ${
                         meal.planed && meal.posted && "pointer-events-none"
                     }`}
                 >
-                    {!meal.planed && "운동계획 만들기"}
+                    {!meal.planed && "운동플랜 만들기"}
                     {meal.exercised && !meal.posted && "식사일기 작성하기"}
                     {meal.posted && "식사일기 보러가기"}
+                    {!meal.exercised && "운동플랜 하러가기"}
                 </Link>
             </div>
         </>
