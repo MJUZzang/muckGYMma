@@ -50,6 +50,7 @@ function WritePage() {
     const [text, setText] = useState("");
 
     console.log("nickname: ", nickname);
+    
     const onFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
