@@ -65,14 +65,14 @@ function Page() {
                                 if (!res.ok) {
                                     throw new Error("Failed to set up");
                                 }
+
+                                setTimeout(() => {
+                                    router.push("/");
+                                }, 500);
                             })
                             .catch((err) => {
                                 console.error(err);
                             });
-
-                        setTimeout(() => {
-                            router.push("/");
-                        }, 500);
                     }}
                 />
             </div>
