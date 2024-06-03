@@ -118,7 +118,7 @@ function WritePage() {
             })
                 .then((res) => {
                     if (res.ok) {
-                        router.push(`/main/profile/${nickname}/posts`);
+                        window.location.replace(`/main/profile/${nickname}/posts`);
                     } else {
                         throw new Error("Error occured while uploading image.");
                     }

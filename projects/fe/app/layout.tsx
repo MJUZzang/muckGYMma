@@ -142,6 +142,7 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body className={`max-h-[100dvh] bg-app-bg`}>
+                <div className="fixed w-screen h-screen bg-app-bg -z-10" />
                 <StoreProvider>
                     <InitialLoad>
                         <div className="overflow-hidden">{children}</div>
@@ -149,6 +150,7 @@ export default async function RootLayout({
                         <DarkMode />
                     </InitialLoad>
                 </StoreProvider>
+                <div className="fixed w-screen h-screen bg-app-bg -z-10" />
             </body>
         </html>
     );

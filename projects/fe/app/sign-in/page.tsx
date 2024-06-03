@@ -18,7 +18,7 @@ const jua = Jua({
 const page = () => {
     return (
         <main
-            className={`absolute w-screen h-screen bg-app-bg z-10 ${notoSansKr.className}`}
+            className={`absolute w-screen h-[100dvh] bg-app-bg z-30 ${notoSansKr.className}`}
         >
             <div className="px-4 max-w-[500px] w-full h-full mx-auto">
                 <div className="h-1/2 flex flex-col justify-end pb-[6vh]">
