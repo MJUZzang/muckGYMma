@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from "react";
 import ArrowUp from "../_images/ArrowUp";
 import Image from "next/image";
 import exampleImage from "@/_images/pooh.jpg";
+import { backendUrl } from "@/_utils/urls";
+import { SimpleUserInfo } from "@/_utils/user";
 
 function CommentSectionTextArea({
     text,
@@ -16,6 +18,10 @@ function CommentSectionTextArea({
 }) {
     const hiddenTextArea = useRef<HTMLTextAreaElement>(null);
     const textArea = useRef<HTMLTextAreaElement>(null);
+    const [userInnfo, setUserInfo] = React.useState<SimpleUserInfo>({
+        profileImageUrl: exampleImage.src,
+        nickname: "",
+    });
 
     useEffect(() => {
         if (!hiddenTextArea.current || !textArea.current) return;
@@ -25,18 +31,40 @@ function CommentSectionTextArea({
             hiddenTextArea.current.scrollHeight + 5 + "px";
 
         // textArea.current.style.width = hiddenTextArea.current.style.width;
+
+        fetch(`${backendUrl}/api/profile/main-profile`, {
+            method: "GET",
+            credentials: "include",
+        })
+            .then((res) => {
+                if (res.ok) return res.json();
+                throw new Error("Failed to fetch user info");
+            })
+            .then((data: SimpleUserInfo) => {
+                if (data) {
+                    setUserInfo(data);
+                } else {
+                    throw new Error("Failed to fetch user info");
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+                const info: SimpleUserInfo = {
+                    profileImageUrl: exampleImage.src,
+                    nickname: "JohnDoe",
+                };
+                setUserInfo(info);
+            });
     }, [text]);
 
     return (
         <>
-            <div
-                className="w-full flex gap-2 px-2 pb-1 pt-2 bottom-0 bg-app-bg"
-            >
+            <div className="w-full flex gap-2 px-2 pb-1 pt-2 bottom-0 bg-app-bg">
                 {/* Avatar Image */}
                 <div className="w-[45px] h-[45px]">
                     <div className="w-[45px] h-[45px] overflow-clip rounded-full">
                         <Image
-                            src={exampleImage}
+                            src={userInnfo.profileImageUrl}
                             alt="User avatar"
                             className="w-[45px] h-[45px] pointer-events-none"
                             width={43}

@@ -107,7 +107,7 @@ export async function FetchNickname() {
         });
 }
 
-interface SimpleUserInfo {
+export interface SimpleUserInfo {
     profileImageUrl: string;
     nickname: string;
 }

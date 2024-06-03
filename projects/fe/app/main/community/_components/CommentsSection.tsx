@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import {
     Drawer,
@@ -39,7 +39,6 @@ function CommentsSection({
     const [text, setText] = useState("");
     const [comments, setComments] = useState<CommentInfo[]>([]);
     const [isFetching, setIsFetching] = useState(false);
-
     const [modifyingId, setModifyingId] = useState(0);
     const myNickname = useAppSelector(selectNickname);
 
@@ -256,16 +255,26 @@ function CommentsSection({
                                                             <button
                                                                 className="comment-menu w-full text-center px-3 text-nowrap"
                                                                 onClick={() => {
-                                                                    setComments(comments.map((c) => {
-                                                                        if (c.id === comment.id) {
-                                                                            return {
-                                                                                ...c,
-                                                                                content: "수정 중..."
-                                                                            };
-                                                                        } else {
-                                                                            return c;
-                                                                        }
-                                                                    }))
+                                                                    setComments(
+                                                                        comments.map(
+                                                                            (
+                                                                                c
+                                                                            ) => {
+                                                                                if (
+                                                                                    c.id ===
+                                                                                    comment.id
+                                                                                ) {
+                                                                                    return {
+                                                                                        ...c,
+                                                                                        content:
+                                                                                            "수정 중...",
+                                                                                    };
+                                                                                } else {
+                                                                                    return c;
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    );
                                                                     setModifyingId(
                                                                         comment.id
                                                                     );
