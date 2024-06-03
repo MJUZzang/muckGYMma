@@ -61,7 +61,7 @@ public class BoardController {
     @PostMapping("/create-with-meal")
     public ResponseEntity<Void> createBoardFromMeal(@AuthMember final Long memberId, @ModelAttribute @Valid BoardCreateWithMealRequest request) {
 
-        if (request.files().size() > 10) {
+        if (request.files() != null && request.files().size() > 10) {
             throw new MaxFileUploadLimitExceededException();
         }
 
@@ -69,12 +69,14 @@ public class BoardController {
                 .orElseThrow(InvalidMemberIdException::new);
 
         List<String> fileUrls = new ArrayList<>();
-        for (MultipartFile file : request.files()) {
-            String fileUrl = s3Uploader.outerUpload(file, memberId);
-            fileUrls.add(fileUrl);
+        if (request.files() != null) {
+            for (MultipartFile file : request.files()) {
+                String fileUrl = s3Uploader.outerUpload(file, memberId);
+                fileUrls.add(fileUrl);
+            }
         }
 
-        Board board = boardService.saveBoardWithMeal(member, request.mealId(), request.mealImage(), request.content(), fileUrls);
+        boardService.saveBoardWithMeal(member, request.mealId(), request.mealImage(), request.content(), fileUrls);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
