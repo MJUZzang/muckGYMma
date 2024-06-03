@@ -37,7 +37,7 @@ const page = () => {
                             <div className="w-full border-t-[1px] border-app-font-5" />
                         </div>
                         <div className="space-y-4">
-                            {/* <KakaoLoginButton /> */}
+                            <KakaoLoginButton />
                             <GoogleLoginButton />
                         </div>
                     </div>
