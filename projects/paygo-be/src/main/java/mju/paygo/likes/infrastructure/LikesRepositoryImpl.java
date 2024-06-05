@@ -8,6 +8,7 @@ import mju.paygo.member.domain.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -35,5 +36,10 @@ public class LikesRepositoryImpl implements LikesRepository {
     @Override
     public Likes save(final Likes likes) {
         return likesJpaRepository.save(likes);
+    }
+
+    @Override
+    public List<Likes> findLikesByBoardId(Long boardId) {
+        return likesJpaRepository.findByBoardId(boardId);
     }
 }

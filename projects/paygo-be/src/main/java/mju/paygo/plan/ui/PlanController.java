@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -63,5 +64,12 @@ public class PlanController {
         });
         return ResponseEntity.ok()
                 .body(responses);
+    }
+
+    @GetMapping("/meal")
+    public ResponseEntity<Long> findPlanIdByMeal(@AuthMember final Long memberId, @RequestParam(required = true) final Long mealId) {
+        Long planId = planService.findPlanIdByMemberAndMeal(memberId, mealId);
+        return ResponseEntity.ok()
+                .body(planId);
     }
 }

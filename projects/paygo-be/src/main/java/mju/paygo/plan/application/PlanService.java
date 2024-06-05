@@ -35,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
@@ -220,5 +221,13 @@ public class PlanService {
 
     public List<Plan> allPlans(final Long memberId) {
         return planRepository.findAllByMemberId(memberId);
+    }
+
+    public Long findPlanIdByMemberAndMeal(final Long memberId, final Long mealId) {
+        Optional<Plan> plan = planRepository.findPlanByMemberAndMeal(memberId, mealId);
+        if (plan.isEmpty()) {
+            return null;
+        }
+        return plan.get().getId();
     }
 }

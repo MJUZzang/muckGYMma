@@ -12,4 +12,5 @@ public interface CommentRepository {
     List<Comment> findByBoard(final Board board);
     long countByBoard(final Board board);
     void delete(final Comment comment);
+    List<Comment> findCommentsByBoardId(Long boardId);
 }

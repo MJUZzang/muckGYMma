@@ -3,7 +3,9 @@ package mju.paygo.follow.infrastructure;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.follow.domain.Follow;
 import mju.paygo.follow.domain.FollowRepository;
+import mju.paygo.follow.exception.exceptions.MemberNotFoundException;
 import mju.paygo.member.domain.member.Member;
+import mju.paygo.member.domain.member.MemberRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class FollowRepositoryImpl implements FollowRepository {
 
     private final FollowJpaRepository followJpaRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     public boolean existsByFollowerAndFollowee(final Member follower, final Member followee) {
@@ -63,5 +66,17 @@ public class FollowRepositoryImpl implements FollowRepository {
     @Override
     public long countByFollowee(final Member followee) {
         return followJpaRepository.countByFollowee(followee);
+    }
+
+    @Override
+    public boolean existsByFollowerAndFolloweeId(final Long memberId, final Long id) {
+        Member follower = findMemberById(memberId);
+        Member followee = findMemberById(id);
+        return followJpaRepository.existsByFollowerAndFollowee(follower, followee);
+    }
+
+    private Member findMemberById(Long memberId) {
+        return memberRepository.findById(memberId)
+                .orElseThrow(MemberNotFoundException::new);
     }
 }

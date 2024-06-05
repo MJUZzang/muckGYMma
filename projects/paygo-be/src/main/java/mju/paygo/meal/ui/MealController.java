@@ -8,6 +8,7 @@ import mju.paygo.meal.infrastructure.dto.FoodAnalyzeResponse;
 import mju.paygo.meal.infrastructure.dto.FoodPickResponse;
 import mju.paygo.meal.ui.dto.MealHistoryResponse;
 import mju.paygo.meal.ui.dto.MealPickRequest;
+import mju.paygo.meal.ui.dto.TodayMealResponse;
 import mju.paygo.member.ui.auth.support.auth.AuthMember;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -64,5 +66,19 @@ public class MealController {
         Meal meal = mealService.findEatenMeal(memberId, mealId);
         return ResponseEntity.ok()
                 .body(MealHistoryResponse.from(meal));
+    }
+
+    @GetMapping("/today")
+    public ResponseEntity<TodayMealResponse> todayMealHistory(@AuthMember final Long memberId) {
+        List<Meal> meals = mealService.findTodayEatenMeal(memberId);
+        return ResponseEntity.ok()
+                .body(TodayMealResponse.from(meals));
+    }
+
+    @GetMapping("/last")
+    public ResponseEntity<ZonedDateTime> timeFromLastAte(@AuthMember final Long memberId) {
+        ZonedDateTime time = mealService.lastAteEatenMeal(memberId);
+        return ResponseEntity.ok()
+                .body(time);
     }
 }

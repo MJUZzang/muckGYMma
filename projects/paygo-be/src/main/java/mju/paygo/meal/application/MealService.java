@@ -17,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
@@ -69,5 +71,17 @@ public class MealService {
     public Meal findEatenMeal(final Long memberId, final Long mealId) {
         return mealRepository.findByMemberAndId(memberId, mealId)
                 .orElseThrow(MealNotFoundException::new);
+    }
+
+    public List<Meal> findTodayEatenMeal(final Long memberId) {
+        return mealRepository.findAllByMemberIdAndToday(memberId);
+    }
+
+    public ZonedDateTime lastAteEatenMeal(final Long memberId) {
+        Optional<Meal> meal = mealRepository.findLastAteMeal(memberId);
+        if (meal.isEmpty()) {
+            return null;
+        }
+        return meal.get().getCreatedAt();
     }
 }

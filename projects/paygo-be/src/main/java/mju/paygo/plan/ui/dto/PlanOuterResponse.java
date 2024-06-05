@@ -3,7 +3,7 @@ package mju.paygo.plan.ui.dto;
 import mju.paygo.plan.domain.Plan;
 import mju.paygo.plan.domain.Task;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public record PlanOuterResponse(
         Long id,
@@ -11,7 +11,7 @@ public record PlanOuterResponse(
         Integer total,
         Integer time,
         Boolean cleared,
-        LocalDateTime createdAt
+        ZonedDateTime createdAt
 ) {
 
     public static PlanOuterResponse from(final Plan plan) {
@@ -19,11 +19,17 @@ public record PlanOuterResponse(
                 .stream()
                 .mapToInt(Task::getExpect)
                 .sum();
-        Integer time = plan.getTasks()
-                .stream()
-                .filter(task -> task.getTime() != null) // null 제외
-                .mapToInt(Task::getTime)
-                .sum();
+        int time = 0;
+        for (Task task : plan.getTasks()) {
+            if (task.getTime() == null) {
+                continue;
+            }
+            if (task.getSets() == null) {
+                time += task.getTime();
+            } else {
+                time += task.getTime() * task.getSets();
+            }
+        }
         return new PlanOuterResponse(plan.getId(), plan.getName(), total, time, plan.getCleared(), plan.getCreatedAt());
     }
 }

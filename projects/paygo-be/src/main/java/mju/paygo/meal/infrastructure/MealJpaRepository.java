@@ -4,6 +4,7 @@ import mju.paygo.meal.domain.Meal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,12 @@ public interface MealJpaRepository extends JpaRepository<Meal, Long> {
 
     @Query("SELECT m FROM Meal m WHERE m.memberId = :memberId AND m.id = :mealId")
     Optional<Meal> findByMemberAndId(Long memberId, Long mealId);
+
+    @Query("SELECT m FROM Meal m WHERE m.memberId = :memberId AND m.createdAt BETWEEN :start AND :end")
+    List<Meal> findAllByMemberIdAndToday(Long memberId, ZonedDateTime start, ZonedDateTime end);
+
+    @Query("SELECT m FROM Meal m WHERE m.memberId =:memberId ORDER BY m.createdAt DESC")
+    Optional<Meal> findLastAteMeal(Long memberId);
 
     Optional<Meal> findByImageUrl(String imageUrl);
 }

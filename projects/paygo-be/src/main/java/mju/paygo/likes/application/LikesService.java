@@ -13,6 +13,7 @@ import mju.paygo.member.domain.member.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -64,6 +65,10 @@ public class LikesService {
     private Board findBoardById(final Long boardId) {
         return boardRepository.findById(boardId)
                 .orElseThrow(BoardNotFoundException::new);
+    }
+
+    public List<Likes> findLikesByBoardId(Long boardId) {
+        return likesRepository.findLikesByBoardId(boardId);
     }
 }
 

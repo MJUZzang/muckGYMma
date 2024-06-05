@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mju.paygo.comment.application.CommentService;
 import mju.paygo.comment.domain.Comment;
+import mju.paygo.comment.domain.dto.CommentCreateRequest;
 import mju.paygo.comment.domain.dto.CommentDeleteRequest;
 import mju.paygo.comment.domain.dto.CommentRequest;
 import mju.paygo.comment.ui.dto.CommentResponse;
@@ -20,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,9 +32,8 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentRequest request) {
+    public ResponseEntity<Void> createComment(@AuthMember Long memberId, @Valid @RequestBody final CommentCreateRequest request) {
         Comment comment = commentService.createComment(memberId, request.boardId(), request.content());
-        LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -42,7 +41,6 @@ public class CommentController {
     @PatchMapping("/update")
     public ResponseEntity<Void> updateComment(@AuthMember Long memberId, @Valid @RequestBody final CommentRequest request) {
         Comment comment = commentService.updateComment(memberId, request.commentId(), request.content());
-        LocalDateTime updatedAt = LocalDateTime.now(ZoneId.of("Asia/Seoul"));
 
         return ResponseEntity.ok().build();
     }
@@ -54,9 +52,8 @@ public class CommentController {
         return ResponseEntity.ok().build();
     }
 
-    // 특정 게시글에 달린 모든 댓글 조회
-    @GetMapping("/board")
-    public ResponseEntity<List<CommentResponse>> getCommentsByBoard(@RequestParam final Long boardId) {
+    @GetMapping("/comments")
+    public ResponseEntity<List<CommentResponse>> getCommentsByBoard(@RequestParam Long boardId) {
         List<Comment> comments = commentService.getCommentsByBoard(boardId);
         List<CommentResponse> response = comments.stream()
                 .map(comment -> new CommentResponse(
@@ -65,6 +62,7 @@ public class CommentController {
                         comment.getMember().getNickname(),
                         comment.getMember().getEmail(),
                         comment.getBoard().getId(),
+                        comment.getMember().getProfileImageUrl(),
                         comment.getContent(),
                         comment.getCreatedAt(),
                         comment.getUpdatedAt()
@@ -72,4 +70,5 @@ public class CommentController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
+
 }

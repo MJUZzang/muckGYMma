@@ -43,4 +43,9 @@ public class PlanRepositoryImpl implements PlanRepository {
     public Boolean isAlreadyExisted(final Long memberId, final Long mealId) {
         return planJpaRepository.isAlreadyExisted(memberId, mealId);
     }
+
+    @Override
+    public Optional<Plan> findPlanByMemberAndMeal(final Long memberId, final Long mealId) {
+        return planJpaRepository.findPlanByMemberAndMeal(memberId, mealId);
+    }
 }

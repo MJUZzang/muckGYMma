@@ -33,7 +33,7 @@ public class Member {
     @Column(nullable = true)
     private String profileImageUrl;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String nickname;
 
     @Enumerated(value = EnumType.STRING)

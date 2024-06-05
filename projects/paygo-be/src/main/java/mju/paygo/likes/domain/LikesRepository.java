@@ -3,6 +3,7 @@ package mju.paygo.likes.domain;
 import mju.paygo.board.domain.Board;
 import mju.paygo.member.domain.member.Member;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface LikesRepository {
@@ -10,4 +11,5 @@ public interface LikesRepository {
     void deleteByMemberAndBoard(final Member member, final Board board);
     long countByBoard(final Board board);
     Likes save(final Likes likes);
+    List<Likes> findLikesByBoardId(Long boardId);
 }

@@ -6,6 +6,7 @@ public record ProfileResponse (
         long followingCount,
         long followerCount,
         String content,
+        String profileImageUrl,
         long totalClearDay,
         long longestClearDay,
         long nowClearDay

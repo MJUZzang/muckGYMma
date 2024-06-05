@@ -16,4 +16,6 @@ public interface FollowRepository {
     Optional<Follow> findByFollowerAndFollowee(final Member follower, final Member followee);
     long countByFollower(final Member follower);
     long countByFollowee(final Member followee);
+
+    boolean existsByFollowerAndFolloweeId(Long memberId, Long id);
 }
