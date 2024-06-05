@@ -1,4 +1,5 @@
-# 캡스톤디자인 muckGYMma (식단&피트니스 웹앱)
+# 캡스톤디자인 
+## muckGYMma (식단&피트니스 웹앱)
 ### 영상 링크: https://youtu.be/lX7CzpYh6HU
 
 주요기능
