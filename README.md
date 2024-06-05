@@ -20,3 +20,8 @@ Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 
   
 # 백엔드 주요 기술 스택
 - spring boot
+- mysql
+- docker
+- querydsl
+- gradle
+- elasticbeanstal
