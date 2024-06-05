@@ -25,4 +25,4 @@ Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 
 - docker
 - querydsl
 - gradle
-- elasticbeanstal
+- elastic beanstalk
