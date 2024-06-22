@@ -11,9 +11,6 @@
 - 식사 일기 (커뮤니티 포스팅)
 - 피드 조회 및 부가 커뮤니티 기능 (댓글, 팔로잉, 좋아요)
 
-# 📹최종 결과물 영상
-유튜브 영상: <a href="https://youtu.be/lX7CzpYh6HU">링크 클릭</a>  
-
 # 📜프로젝트 구조
 Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 위치함
 - projects/fe (프론트 프로젝트)
@@ -34,6 +31,9 @@ Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 
 - querydsl
 - gradle
 - elastic beanstalk
+
+# 📹최종 결과물 영상
+유튜브 영상: <a href="https://youtu.be/lX7CzpYh6HU">링크 클릭</a>  
 
 ## 😎프로젝트 결과
 <img 
