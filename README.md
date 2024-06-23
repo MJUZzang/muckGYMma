@@ -1,28 +1,36 @@
 # 캡스톤디자인 
-# ✍️먹짐마
+## ✍️먹짐마
 먹짐마라는 프로젝트 이름을 갖고 개발에 착수.  
 팀인원 총 4명 (프론트 2명, 백엔드 2명)
+<br/><br/>
 
-# 🙃프로젝트 아이디어
+## 🛠개발기간
+2024-03 ~ 2024-05 말
+<br/><br/>
+
+## 🙃프로젝트 아이디어
 - (식단관리, 피트니스, 커뮤니티) 웹앱
 - 섭취한 음식 사진 업로드 후 AI를 통한 영양성분 분석
 - 섭취한 칼로리를 소모할 운동플랜 자동 생성 및 추천
 - 운동플랜 재생 기능
 - 식사 일기 (커뮤니티 포스팅)
 - 피드 조회 및 부가 커뮤니티 기능 (댓글, 팔로잉, 좋아요)
+<br/><br/>
 
-# 📜프로젝트 구조
+## 📜프로젝트 구조
 Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 위치함
 - projects/fe (프론트 프로젝트)
 - projects/paygo-be (백엔드 프로젝트)
+<br/><br/>
 
-# 🎨프론트 주요 기술 스택
+## 🎨프론트 주요 기술 스택
 - next.js
 - typescript
 - tailwindcss
 - shadcn
 - apexchart
 - react-easy-crop
+<br/><br/>
   
 ## 🖥️백엔드 주요 기술 스택
 - spring boot
@@ -31,9 +39,11 @@ Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 
 - querydsl
 - gradle
 - elastic beanstalk
+<br/><br/>
 
-# 📹최종 결과물 영상
+## 📹최종 결과물 영상
 유튜브 영상: <a href="https://youtu.be/lX7CzpYh6HU">링크 클릭</a>  
+<br/><br/>
 
 ## 😎프로젝트 결과
 <img 
@@ -41,6 +51,7 @@ Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 
   alt="상장사진"
   style="width: 50vw;"
 />
+<br/><br/>
 
 ## 부록
 커밋메시지에 관한 팀 컨벤션을 지킬 수 없었다.  
