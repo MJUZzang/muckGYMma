@@ -25,12 +25,6 @@
 <br/>
 <br/>
 
-## 📜프로젝트 구조
-Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 위치함
-- projects/fe (프론트 프로젝트)
-- projects/paygo-be (백엔드 프로젝트)
-<br/><br/>
-
 ## 기술 스택
 ### 🎨프론트
 - next.js
@@ -39,7 +33,6 @@ Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 
 - shadcn
 - apexchart
 - react-easy-crop
-<br/>
 
 ### 🖥️백엔드
 - spring boot
@@ -48,6 +41,13 @@ Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 
 - querydsl
 - gradle
 - elastic beanstalk
+<br/>
+<br/>
+
+## 📜프로젝트 구조
+Repository의 root에 위치한 projects 폴더에 부프로젝트 폴더들이 위치함
+- projects/fe (프론트 프로젝트)
+- projects/paygo-be (백엔드 프로젝트)
 <br/>
 <br/>
 
